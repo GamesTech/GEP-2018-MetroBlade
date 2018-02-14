@@ -53,6 +53,9 @@
     <Filter Include="Core\Scene Manager">
       <UniqueIdentifier>{b9fbcb84-4228-428e-ab17-76d6ec6369fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Scene Manager\Scenes">
+      <UniqueIdentifier>{fc6c4e6c-78e6-4fbb-89b8-19fe20aedc05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -121,6 +124,9 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Core\Scene Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Core\Scene Manager\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject2D.cpp">
@@ -176,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Core\Scene Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Core\Scene Manager\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
