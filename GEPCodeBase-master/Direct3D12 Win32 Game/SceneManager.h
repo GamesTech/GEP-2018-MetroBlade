@@ -48,12 +48,17 @@ public:
 	void Render(ID3D12GraphicsCommandList* command_list);
 
 	void loadScene(string scene_name);
+	void loadScene(Scene* scene_name);
 	void clearScene();
 
 	// Camera Viewports
 	void setMainCamera(Camera* viewport_camera);
 
+	bool					new_scene = false;
+
 private:
+
+	void waitForGPU();
 
 	//// Object Buffers
 	//std::vector<GameObject3D*> m_3DObjects; //

@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "RenderData.h"
 #include "GameStateData.h"
+#include "Scene.h"
 
 extern void ExitGame();
 
@@ -170,7 +171,20 @@ void Game::Update(DX::StepTimer const& timer)
 
 	if (m_keyboard->GetState().P)
 	{
-	   scene.clearScene();
+		Scene*  newScene = new Scene;
+		scene.clearScene();
+
+		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		scene.setMainCamera(camera);
+		newScene->add3DGameObjectToScene(camera);
+		//m_3DObjects.push_back(camera);
+
+		TestPBGO3D* test3d = new TestPBGO3D();
+		test3d->SetScale(5.0f);
+		test3d->Init();
+		newScene->add3DGameObjectToScene(test3d);
+
+		scene.loadScene(newScene);
 	}
 
 	ReadInput();
@@ -199,15 +213,22 @@ void Game::Update(DX::StepTimer const& timer)
 //GEP:: Draws the scene.
 void Game::Render()
 {
+	if (scene.new_scene)
+	{
+		WaitForGpu();
+		scene.new_scene = false;
+	}
+
+
     // Don't try to render anything before the first Update.
-    if (m_timer.GetFrameCount() == 0)
+    if (m_timer.GetFrameCount() == 0/* || scene.new_scene*/)
     {
+		// scene.new_scene = false;
         return;
     }
 
     // Prepare the command list to render a new frame.
     Clear();
-
 
 //draw each type of 3D objects
 	scene.Render(m_commandList.Get());
