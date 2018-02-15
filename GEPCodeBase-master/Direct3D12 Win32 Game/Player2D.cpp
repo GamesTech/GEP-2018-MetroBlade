@@ -14,12 +14,35 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData * _GSD)
 {
-	AddForce(10*gravity*Vector2::UnitY);
-	SetDrive(1000.0f);
+
+	setGravity(1000.0f);
+	AddForce(gravity*Vector2::UnitY);
+	int game_state = GROUNDED;
+	switch (game_state)
+	{
+	case GROUNDED:
+	{
+		setGravity(0.0f);
+		break;
+	}
+	case JUMPING:
+	{
+		setGravity(0.0f);
+		break;
+	}
+
+	case FALLING:
+	{
+		setGravity(1000.0f);
+		break;
+	}
+	}
+
 //Push the guy around in the directions for the key presses
 	if (_GSD->m_keyboardState.Space)
 	{
-		AddForce(-jump_force * Vector2::UnitY);
+		game_state = JUMPING;
+		AddForce(-jump_force * Vector2::UnitY);	
 	}
 	if (_GSD->m_keyboardState.A)
 	{
@@ -47,7 +70,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (m_pos.y < 0.0f)
 	{
 		m_pos.y = 1.0f;
-		
+		game_state = GROUNDED;
 	}
 
 	if (m_pos.x > m_limit.x)
@@ -57,7 +80,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	}
 	if (m_pos.y > m_limit.y)
 	{
-		m_pos.y = m_limit.y - 1.0f;
-		
+		m_pos.y = m_limit.y - 1.0f;	
 	}
+	
 }

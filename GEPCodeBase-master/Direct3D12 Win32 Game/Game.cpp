@@ -180,8 +180,9 @@ void Game::Initialize(HWND window, int width, int height)
 	m_2DObjects.push_back(test2);
 
 	Player2D* testPlay = new Player2D(m_RD,"gens");
-	testPlay->SetDrive(100.0f);
+	testPlay->SetDrive(1000.0f);
 	testPlay->SetDrag(0.5f);
+	testPlay->SetPos(Vector2(0, 500));
 	m_2DObjects.push_back(testPlay);
 
 	SDKMeshGO3D *test3 = new SDKMeshGO3D(m_RD, "cup");
