@@ -14,15 +14,12 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData * _GSD)
 {
-
+	AddForce(10*gravity*Vector2::UnitY);
+	SetDrive(1000.0f);
 //Push the guy around in the directions for the key presses
-	if (_GSD->m_keyboardState.W)
+	if (_GSD->m_keyboardState.Space)
 	{
-		AddForce(-m_drive * Vector2::UnitY);
-	}
-	if (_GSD->m_keyboardState.S)
-	{
-		AddForce(m_drive * Vector2::UnitY);
+		AddForce(-jump_force * Vector2::UnitY);
 	}
 	if (_GSD->m_keyboardState.A)
 	{
@@ -44,23 +41,23 @@ void Player2D::Tick(GameStateData * _GSD)
 //after that as updated my position let's lock it inside my limits
 	if (m_pos.x < 0.0f)
 	{
-		m_pos.x *= -1.0f;
-		m_vel.x *= -1.0f; // yea, not a nice bounce for works okay for a first pass
+		m_pos.x = 1.0f;
+		
 	}
 	if (m_pos.y < 0.0f)
 	{
-		m_pos.y *= -1.0f;
-		m_vel.y *= -1.0f;
+		m_pos.y = 1.0f;
+		
 	}
 
 	if (m_pos.x > m_limit.x)
 	{
-		m_pos.x = 2.0f * m_limit.x - m_pos.x;
-		m_vel.x *= -1.0f;
+		m_pos.x =  m_limit.x - 2.0f;
+		
 	}
 	if (m_pos.y > m_limit.y)
 	{
-		m_pos.y = 2.0f * m_limit.y - m_pos.y;
-		m_vel.y *= -1.0f;
+		m_pos.y = m_limit.y - 1.0f;
+		
 	}
 }
