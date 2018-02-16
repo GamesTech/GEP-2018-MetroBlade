@@ -9,7 +9,7 @@ class Player2D :
 public:
 
 	//TODO: add a 3d player and modes to switch between different views and basic physics
-	Player2D(RenderData* _RD, string _filename);
+	Player2D(RenderData* _RD, string _filename, int gamepadID);
 	virtual ~Player2D();
 
 	virtual void Tick(GameStateData* _GSD);
@@ -22,7 +22,8 @@ public:
 
 protected:
 	float m_drive = 1.0f;
-
+	std::unique_ptr<DirectX::GamePad> m_gamePad;
+	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 600);
 };
 

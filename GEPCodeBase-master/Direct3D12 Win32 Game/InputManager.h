@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Keyboard.h"
 #include "GamePad.h"
 #include <vector>
