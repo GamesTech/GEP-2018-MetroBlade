@@ -9,7 +9,6 @@
 
 #include "StepTimer.h"
 #include "Audio.h"
-#include "Sprite.h"
 #include <vector>
 using std::vector;
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Physics2D.h"
-#include "Sprite.h"
+
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Player2D :
@@ -10,7 +10,7 @@ class Player2D :
 public:
 
 	//TODO: add a 3d player and modes to switch between different views and basic physics
-	Player2D(RenderData* _RD, string _filename, Sprite so);
+	Player2D(RenderData* _RD, string _filename);
 	virtual ~Player2D();
 
 	virtual void Tick(GameStateData* _GSD);
@@ -26,6 +26,6 @@ protected:
 
 	Vector2 m_limit = Vector2(800, 600);
 private:
-	Sprite sprite_object;
+	
 };
 

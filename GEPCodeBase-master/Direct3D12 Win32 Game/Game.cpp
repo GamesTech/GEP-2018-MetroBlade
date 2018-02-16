@@ -179,9 +179,8 @@ void Game::Initialize(HWND window, int width, int height)
 
 	Text2D * test2 = new Text2D("testing text");
 	m_2DObjects.push_back(test2);
-
-	Sprite test_sprite = new Sprite(true);
-	Player2D* testPlay = new Player2D(m_RD,"gens", test_sprite);
+    
+	Player2D* testPlay = new Player2D(m_RD,"gens");
 	testPlay->SetDrive(100.0f);
 	testPlay->SetDrag(0.5f);
 	m_2DObjects.push_back(testPlay);
