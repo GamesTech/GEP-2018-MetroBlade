@@ -160,6 +160,7 @@ void Game::Initialize(HWND window, int width, int height)
 	test3d->Init();
 	m_3DObjects.push_back(test3d);
 
+	
 	GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
 	test3d2->SetPos(10.0f*Vector3::Forward+5.0f*Vector3::Right+Vector3::Down);
 	test3d2->SetScale(5.0f);
@@ -179,7 +180,8 @@ void Game::Initialize(HWND window, int width, int height)
 	Text2D * test2 = new Text2D("testing text");
 	m_2DObjects.push_back(test2);
 
-	Player2D* testPlay = new Player2D(m_RD,"gens");
+	Sprite test_sprite = new Sprite(true);
+	Player2D* testPlay = new Player2D(m_RD,"gens", test_sprite);
 	testPlay->SetDrive(100.0f);
 	testPlay->SetDrag(0.5f);
 	m_2DObjects.push_back(testPlay);
