@@ -33,6 +33,19 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 	render_data = render_structure;
 }
 
+void SceneManager::assignGPUControlObjects(ID3D12CommandQueue * command_queue, 
+										   ID3D12Fence * fence, 
+										   UINT* backbuffer_index, 
+										   Microsoft::WRL::Wrappers::Event * fence_event, 
+										   UINT64* fence_values)
+{
+	gpu_reset_object.gpu_command_queue = command_queue;
+	gpu_reset_object.gpu_fence = fence;
+	gpu_reset_object.backbuffer_index = backbuffer_index;
+	gpu_reset_object.fence_events = fence_event;
+	gpu_reset_object.fence_values = fence_values;
+}
+
 void SceneManager::Init()
 {
 	current_scene = new Scene;
@@ -49,10 +62,10 @@ void SceneManager::Init()
 	//current_scene->add3DGameObjectToScene(test3d);
 	////m_3DObjects.push_back(test3d);
 
-	//GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
-	//test3d2->SetPos(10.0f*Vector3::Forward + 5.0f*Vector3::Right + Vector3::Down);
-	//test3d2->SetScale(5.0f);
-	//current_scene->add3DGameObjectToScene(test3d2);//m_3DObjects.push_back(test3d2);
+	GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
+	test3d2->SetPos(10.0f*Vector3::Forward + 5.0f*Vector3::Right + Vector3::Down);
+	test3d2->SetScale(5.0f);
+	current_scene->add3DGameObjectToScene(test3d2);//m_3DObjects.push_back(test3d2);
 
 	//ImageGO2D *test = new ImageGO2D(render_data, "twist");
 	//test->SetOri(45);
@@ -79,23 +92,13 @@ void SceneManager::Init()
 	//current_scene->add3DGameObjectToScene(test3); //m_3DObjects.push_back(test3);
 }
 
-void SceneManager::Update(GameStateData* game_state)
+void SceneManager::Update(GameStateData * game_state)
 {
-	if (current_scene) 
+
+	if (current_scene)
 	{
 		current_scene->Update(game_state);
 	}
-
-	////Add your game logic here.
-	//for (std::vector<GameObject3D *>::iterator it = m_3DObjects.begin(); it != m_3DObjects.end(); it++)
-	//{
-	//	(*it)->Tick(game_state);
-	//}
-
-	//for (std::vector<GameObject2D *>::iterator it = m_2DObjects.begin(); it != m_2DObjects.end(); it++)
-	//{
-	//	(*it)->Tick(game_state);
-	//}
 }
 
 void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
@@ -162,22 +165,8 @@ void SceneManager::clearScene()
 		current_scene = nullptr;
 	    setMainCamera(nullptr);
 		new_scene = true;
+		waitForGPU(); // Have the GPU complete all work and flush command buffers.
 	}
-
-	
-
-	////delete the GO2Ds
-	//for (std::vector<GameObject2D *>::iterator it = m_2DObjects.begin(); it != m_2DObjects.end(); it++)
-	//{
-	//	delete (*it);
-	//}
-	//m_2DObjects.clear();
-	////delete the GO3Ds
-	//for (std::vector<GameObject3D *>::iterator it = m_3DObjects.begin(); it != m_3DObjects.end(); it++)
-	//{
-	//	delete (*it);
-	//}
-	//m_3DObjects.clear();
 }
 
 void SceneManager::setMainCamera(Camera* viewport_camera)
@@ -186,7 +175,23 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 	render_data->m_cam = main_camera;
 }
 
-void SceneManager::waitForGPU()
+void SceneManager::waitForGPU() noexcept
 {
+	// Here we wait for the GPU
+	if (gpu_reset_object.gpu_command_queue && gpu_reset_object.gpu_fence && gpu_reset_object.fence_events->IsValid())
+	{
+		// Schedule a Signal command in the GPU queue.
+		UINT64 fenceValue = gpu_reset_object.fence_values[*gpu_reset_object.backbuffer_index];
+		if (SUCCEEDED(gpu_reset_object.gpu_command_queue->Signal(gpu_reset_object.gpu_fence, fenceValue)))
+		{
+			// Wait until the Signal has been processed.
+			if (SUCCEEDED(gpu_reset_object.gpu_fence->SetEventOnCompletion(fenceValue, gpu_reset_object.fence_events)))
+			{
+				WaitForSingleObjectEx(gpu_reset_object.fence_events, INFINITE, FALSE);
 
+				// Increment the fence value for the current frame.
+				gpu_reset_object.fence_values[*gpu_reset_object.backbuffer_index]++;
+			}
+		}
+	}
 }

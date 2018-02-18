@@ -56,6 +56,9 @@
     <Filter Include="Core\Scene Manager\Scenes">
       <UniqueIdentifier>{fc6c4e6c-78e6-4fbb-89b8-19fe20aedc05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GPU">
+      <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -126,6 +129,9 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Core\Scene Manager\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GPUCommand.h">
+      <Filter>Core\GPU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

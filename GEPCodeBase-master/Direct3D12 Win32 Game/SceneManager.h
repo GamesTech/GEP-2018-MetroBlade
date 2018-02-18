@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "Scene.h"
+#include "GPUCommand.h"
 
 namespace DX {
 	class StepTimer;
@@ -43,6 +44,12 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
+	void assignGPUControlObjects(ID3D12CommandQueue* command_queue,
+		ID3D12Fence*   fence,
+		UINT*			backbuffer_index,
+		Microsoft::WRL::Wrappers::Event*   fence_event,
+		UINT64*								fence_values);
+
 	void Init();
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
@@ -58,7 +65,7 @@ public:
 
 private:
 
-	void waitForGPU();
+	void waitForGPU() noexcept;
 
 	//// Object Buffers
 	//std::vector<GameObject3D*> m_3DObjects; //
@@ -71,4 +78,7 @@ private:
 	RenderData*			render_data = nullptr;
 
 	Scene*				current_scene = nullptr;
+
+	// GPU Command Controllers.
+	GPUCommandObject		  gpu_reset_object;
 };
