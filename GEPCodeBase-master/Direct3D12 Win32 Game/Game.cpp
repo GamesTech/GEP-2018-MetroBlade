@@ -206,6 +206,14 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.loadScene(newScene);
 	}
 
+	if (m_keyboard->GetState().T) 
+	{
+		// Instantiation test.
+		GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
+		test3d2->SetPos(10.0f*Vector3::Forward + 5.0f*Vector3::Right + Vector3::Down);
+		test3d2->SetScale(5.0f);
+		scene.getScene()->add3DGameObjectToScene(test3d2);
+	}
 
 	scene.Update(m_GSD);
 }
@@ -213,12 +221,6 @@ void Game::Update(DX::StepTimer const& timer)
 //GEP:: Draws the scene.
 void Game::Render()
 {
-	if (scene.hasSceneTransitioned())
-	{
-		WaitForGpu();
-		scene.sceneTransitioned();
-	}
-
     // Don't try to render anything before the first Update.
     if (m_timer.GetFrameCount() == 0)
     {
@@ -275,6 +277,7 @@ void Game::Present()
     // The first argument instructs DXGI to block until VSync, putting the application
     // to sleep until the next VSync. This ensures we don't waste any cycles rendering
     // frames that will never be displayed to the screen.
+	WaitForGpu();
     HRESULT hr = m_swapChain->Present(1, 0);
 
     // If the device was reset we must completely reinitialize the renderer.

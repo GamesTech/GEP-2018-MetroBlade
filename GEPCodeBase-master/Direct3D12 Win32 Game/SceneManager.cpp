@@ -95,7 +95,6 @@ void SceneManager::Init()
 
 void SceneManager::Update(GameStateData * game_state)
 {
-
 	if (current_scene)
 	{
 		current_scene->Update(game_state);
@@ -116,6 +115,11 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 	}
 }
 
+Scene * SceneManager::getScene()
+{
+	return current_scene;
+}
+
 void SceneManager::loadScene(string scene_name)
 {
 	// TODO - Add Code to load diffrent Scenes into the game.
@@ -134,7 +138,6 @@ void SceneManager::clearScene()
 		current_scene = nullptr;
 	    setMainCamera(nullptr);
 		new_scene = true;
-		waitForGPU(); // Have the GPU complete all work and flush command buffers.
 	}
 }
 

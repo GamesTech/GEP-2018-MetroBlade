@@ -54,6 +54,8 @@ public:
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
 
+	Scene*   getScene(); // Test routiene. 
+
 	void loadScene(string scene_name);
 	void loadScene(Scene* scene_name);
 	void clearScene();
