@@ -198,13 +198,12 @@ void Game::Update(DX::StepTimer const& timer)
 		newScene->add3DGameObjectToScene(camera);
 		//m_3DObjects.push_back(camera);
 
-		TestPBGO3D* test3d = new TestPBGO3D();
-		test3d->SetScale(5.0f);
-		test3d->Init();
-		newScene->add3DGameObjectToScene(test3d);
+		Player2D* testPlay = new Player2D(m_RD, "gens");
+		testPlay->SetDrive(100.0f);
+		testPlay->SetDrag(0.5f);
+		newScene->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
 
 		scene.loadScene(newScene);
-
 	}
 
 

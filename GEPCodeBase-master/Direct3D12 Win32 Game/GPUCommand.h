@@ -10,7 +10,8 @@
 *  @brief Contains all GPU information needed for GPU sheduling and management.
 *
 *  @section Description
-*		  GPUCommand contains a set of D3D12 Data structures that are used for managing the GPU commands and calls.
+*	 GPUCommand contains a set of D3D12 Data structures that are used for managing the GPU commands and calls. This is utalised by the 
+*    scene manager for clearing and flushing the GPU.
 *  
 */
 
