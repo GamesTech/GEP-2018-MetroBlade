@@ -61,24 +61,17 @@ public:
 	// Camera Viewports
 	void setMainCamera(Camera* viewport_camera);
 
-	bool					new_scene = false;
+	bool hasSceneTransitioned() const;
+	void sceneTransitioned();
 
 private:
-
 	void waitForGPU() noexcept;
 
-	//// Object Buffers
-	//std::vector<GameObject3D*> m_3DObjects; //
-	//std::vector<GameObject2D*> m_2DObjects;
-	//std::vector<Sound*> m_sounds;
-
-	Camera*				main_camera = nullptr;
-	
-	// retrieved from gamestate.
-	RenderData*			render_data = nullptr;
-
 	Scene*				current_scene = nullptr;
+	Camera*				main_camera = nullptr;
+	RenderData*			render_data = nullptr;
 
 	// GPU Command Controllers.
 	GPUCommandObject		  gpu_reset_object;
+	bool					 new_scene = false;
 };

@@ -175,6 +175,16 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 	render_data->m_cam = main_camera;
 }
 
+bool SceneManager::hasSceneTransitioned() const
+{
+	return new_scene;
+}
+
+void SceneManager::sceneTransitioned()
+{
+	new_scene = false;
+}
+
 void SceneManager::waitForGPU() noexcept
 {
 	// Here we wait for the GPU
