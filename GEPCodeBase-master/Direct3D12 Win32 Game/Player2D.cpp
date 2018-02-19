@@ -56,12 +56,12 @@ void Player2D::Tick(GameStateData * _GSD)
 
 	if (m_pos.x > m_limit.x)
 	{
-		m_pos.x =  m_limit.x- 2.0f;
+		m_pos.x = m_limit.x;
 		
 	}
 	if (m_pos.y >= m_limit.y)
 	{
-		m_pos.y = m_limit.y - 1.0f;	
+		m_pos.y = m_limit.y;
 		game_states = GROUNDED;
 	}
 	

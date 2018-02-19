@@ -199,7 +199,7 @@ void Game::Update(DX::StepTimer const& timer)
 		//m_3DObjects.push_back(camera);
 
 		Player2D* testPlay = new Player2D(m_RD, "gens");
-		testPlay->SetDrive(100.0f);
+		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		newScene->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
 
@@ -210,9 +210,10 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		// Instantiation test.
 		Player2D* testPlay = new Player2D(m_RD, "gens");
-		testPlay->SetDrive(100.0f);
+		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.getScene()->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
+		testPlay->SetPos(Vector2(800, 500));
 	}
 
 	scene.Update(m_GSD);
