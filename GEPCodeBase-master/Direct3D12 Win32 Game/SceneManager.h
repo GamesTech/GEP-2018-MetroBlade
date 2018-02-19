@@ -57,14 +57,17 @@ public:
 	Scene*   getScene(); // Test routiene. 
 
 	void loadScene(string scene_name);
-	void loadScene(Scene* scene_name);
+	void loadScene(Scene* scene_name); // TODO - Move to a private variable.
 	void clearScene();
 
 	// Camera Viewports
 	void setMainCamera(Camera* viewport_camera);
 
-	bool hasSceneTransitioned() const;
-	void sceneTransitioned();
+	// Game World Operations
+	void instanciate2DObject(GameObject2D*  new_object);
+	void instanciate3DObject(GameObject3D*  new_object);
+
+
 
 private:
 	void waitForGPU() noexcept;
@@ -77,5 +80,4 @@ private:
 
 	// GPU Command Controllers.
 	GPUCommandObject		  gpu_reset_object;
-	bool					 new_scene = false;
 };

@@ -49,48 +49,12 @@ void SceneManager::assignGPUControlObjects(ID3D12CommandQueue * command_queue,
 
 void SceneManager::Init()
 {
+	// Create a basic scene and set up all of the scene manager systems.
 	current_scene = new Scene;
 
-	// Currently in test mode only
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 	setMainCamera(camera);
 	current_scene->add3DGameObjectToScene(camera);
-	//m_3DObjects.push_back(camera);
-
-	TestPBGO3D* test3d = new TestPBGO3D();
-	test3d->SetScale(5.0f);
-	test3d->Init();
-	current_scene->add3DGameObjectToScene(test3d);
-	//m_3DObjects.push_back(test3d);
-
-	GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
-	test3d2->SetPos(10.0f*Vector3::Forward + 5.0f*Vector3::Right + Vector3::Down);
-	test3d2->SetScale(5.0f);
-	current_scene->add3DGameObjectToScene(test3d2);//m_3DObjects.push_back(test3d2);
-
-	ImageGO2D *test = new ImageGO2D(render_data, "twist");
-	test->SetOri(45);
-	test->SetPos(Vector2(300, 300));
-	test->CentreOrigin();
-	current_scene->add2DGameObjectToScene(test);//m_2DObjects.push_back(test);
-	test = new ImageGO2D(render_data, "guides_logo");
-	test->SetPos(Vector2(100, 100));
-	test->SetScale(Vector2(1.0f, 0.5f));
-	test->SetColour(Color(1, 0, 0, 1));
-	current_scene->add2DGameObjectToScene(test);//m_2DObjects.push_back(test);
-
-	Text2D * test2 = new Text2D("testing text");
-	current_scene->add2DGameObjectToScene(test2);//m_2DObjects.push_back(test2);
-
-	//Player2D* testPlay = new Player2D(render_data, "gens");
-	//testPlay->SetDrive(100.0f);
-	//testPlay->SetDrag(0.5f);
-	//current_scene->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
-
-	SDKMeshGO3D *test3 = new SDKMeshGO3D(render_data, "cup");
-	test3->SetPos(12.0f*Vector3::Forward + 5.0f*Vector3::Left + Vector3::Down);
-	test3->SetScale(5.0f);
-	current_scene->add3DGameObjectToScene(test3); //m_3DObjects.push_back(test3);
 }
 
 void SceneManager::Update(GameStateData * game_state)
@@ -127,6 +91,7 @@ void SceneManager::loadScene(string scene_name)
 
 void SceneManager::loadScene(Scene * scene_name)
 {
+	clearScene();
 	current_scene = scene_name;
 }
 
@@ -138,7 +103,6 @@ void SceneManager::clearScene()
 		delete current_scene;
 		current_scene = nullptr;
 	    setMainCamera(nullptr);
-		new_scene = true;
 	}
 }
 
@@ -148,14 +112,14 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 	render_data->m_cam = main_camera;
 }
 
-bool SceneManager::hasSceneTransitioned() const
+void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
-	return new_scene;
+	current_scene->add2DGameObjectToScene(new_object);
 }
 
-void SceneManager::sceneTransitioned()
+void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
-	new_scene = false;
+	current_scene->add3DGameObjectToScene(new_object);
 }
 
 void SceneManager::waitForGPU() noexcept
