@@ -134,6 +134,7 @@ void SceneManager::clearScene()
 {
 	if (current_scene) 
 	{
+		resetRenderState();
 		delete current_scene;
 		current_scene = nullptr;
 	    setMainCamera(nullptr);
@@ -176,4 +177,10 @@ void SceneManager::waitForGPU() noexcept
 			}
 		}
 	}
+}
+
+void SceneManager::resetRenderState()
+{
+	// Add any other resetting routienes here.
+	render_data->m_resourceCount = 0;
 }

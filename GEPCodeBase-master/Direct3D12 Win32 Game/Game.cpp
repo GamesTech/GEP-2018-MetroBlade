@@ -88,7 +88,7 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_resourceDescriptors = std::make_unique<DescriptorHeap>(m_d3dDevice.Get(),
 		D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
 		D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE,
-		100);
+		1000);
 
 	//stuff for SDKMeshGO3D renderer
 	m_RD->m_states = std::make_unique<CommonStates>(m_d3dDevice.Get());
@@ -209,10 +209,10 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().T) 
 	{
 		// Instantiation test.
-		GPGO3D* test3d2 = new GPGO3D(GP_TEAPOT);
-		test3d2->SetPos(10.0f*Vector3::Forward + 5.0f*Vector3::Right + Vector3::Down);
-		test3d2->SetScale(5.0f);
-		scene.getScene()->add3DGameObjectToScene(test3d2);
+		Player2D* testPlay = new Player2D(m_RD, "gens");
+		testPlay->SetDrive(100.0f);
+		testPlay->SetDrag(0.5f);
+		scene.getScene()->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
 	}
 
 	scene.Update(m_GSD);
@@ -278,7 +278,7 @@ void Game::Present()
     // to sleep until the next VSync. This ensures we don't waste any cycles rendering
     // frames that will never be displayed to the screen.
 	WaitForGpu();
-    HRESULT hr = m_swapChain->Present(1, 0);
+    HRESULT hr = m_swapChain->Present(0, 0);
 
     // If the device was reset we must completely reinitialize the renderer.
     if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)

@@ -69,6 +69,8 @@ public:
 private:
 	void waitForGPU() noexcept;
 
+	void resetRenderState();
+
 	Scene*				current_scene = nullptr;
 	Camera*				main_camera = nullptr;
 	RenderData*			render_data = nullptr;
