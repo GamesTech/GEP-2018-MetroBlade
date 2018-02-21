@@ -18,7 +18,7 @@ public:
 	virtual ~ImageGO2D();
 
 	void Render(RenderData* _RD);
-	void ChangeRectPos(RECT const* new_rect);
+	void ChangeRectPos();
 	void CentreOrigin();
 
 protected:

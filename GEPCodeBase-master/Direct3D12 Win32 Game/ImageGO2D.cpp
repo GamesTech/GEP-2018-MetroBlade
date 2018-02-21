@@ -38,6 +38,7 @@ void ImageGO2D::Render(RenderData* _RD)
 {
 	if (sheet_total > 0)
 	{
+		ChangeRectPos();
 		_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
 			GetTextureSize(m_texture.Get()),
 			m_pos, src_rect, m_colour, m_orientation, m_origin, m_scale);
@@ -52,10 +53,14 @@ void ImageGO2D::Render(RenderData* _RD)
 	//TODO::example stuff for sprite sheet
 }
 
-void ImageGO2D::ChangeRectPos(RECT const* new_rect)
+void ImageGO2D::ChangeRectPos()
 {
-	
-	src_rect = new_rect;
+	RECT *r1;
+	r1->left = 0;
+	r1->top = 0;
+	r1->right = 10;
+	r1->bottom = 5;
+	src_rect = r1;
 }
 void ImageGO2D::CentreOrigin()
 {
