@@ -7,11 +7,6 @@ class Player2D :
 	public Physics2D
 {
 public:
-	//Collision Functions;
-	bool isColliding(float x, float y);
-	bool isInside(const tagRECT& rht);
-	void rangeCheck(float min, float max, float value);
-
 	//TODO: add a 3d player and modes to switch between different views and basic physics
 	Player2D(RenderData* _RD, string _filename);
 	virtual ~Player2D();
