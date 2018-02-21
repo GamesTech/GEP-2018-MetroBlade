@@ -18,12 +18,13 @@ public:
 	virtual ~ImageGO2D();
 
 	void Render(RenderData* _RD);
-
+	void ChangeRectPos(RECT const* new_rect);
 	void CentreOrigin();
 
 protected:
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
 	int m_resourceNum = -1;
-
+	RECT const* src_rect;
+	int sheet_total = 0;
 };
 

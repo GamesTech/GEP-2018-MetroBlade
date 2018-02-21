@@ -36,13 +36,27 @@ ImageGO2D::~ImageGO2D()
 
 void ImageGO2D::Render(RenderData* _RD)
 {
-	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
-		GetTextureSize(m_texture.Get()),
-		m_pos, nullptr, m_colour, m_orientation, m_origin, m_scale);
+	if (sheet_total > 0)
+	{
+		_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
+			GetTextureSize(m_texture.Get()),
+			m_pos, src_rect, m_colour, m_orientation, m_origin, m_scale);
+	}
+	else
+	{
+		_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
+			GetTextureSize(m_texture.Get()),
+			m_pos, nullptr, m_colour, m_orientation, m_origin, m_scale);
+	}
 	//TODO::add sprite effects & layer Depth
 	//TODO::example stuff for sprite sheet
 }
 
+void ImageGO2D::ChangeRectPos(RECT const* new_rect)
+{
+	
+	src_rect = new_rect;
+}
 void ImageGO2D::CentreOrigin()
 {
 	XMUINT2 size = GetTextureSize(m_texture.Get());
