@@ -59,6 +59,9 @@
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameComponent">
+      <UniqueIdentifier>{37adc79b-1474-4b0e-91c0-776a67463d5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -133,6 +136,9 @@
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
     </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>Core\GameComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject2D.cpp">
@@ -191,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Scene Manager\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>Core\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
