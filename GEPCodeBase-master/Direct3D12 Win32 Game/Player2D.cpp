@@ -4,6 +4,10 @@
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
 	src_rect.reset(new RECT);
+	src_rect->left = 0;
+	src_rect->top = 0;
+	src_rect->right = 128;
+	src_rect->bottom = 128;
 	CentreOrigin();
 }
 
@@ -53,7 +57,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	Physics2D::Tick(_GSD);
 
 //after that as updated my position let's lock it inside my limits
-	if (m_pos.x < 0.0f)
+	if (m_pos.x < 50.0f)
 	{
 		m_pos.x = 1.0f;
 		
