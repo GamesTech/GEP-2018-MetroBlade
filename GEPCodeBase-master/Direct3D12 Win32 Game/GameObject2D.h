@@ -14,6 +14,8 @@ public:
 	GameObject2D();
 	virtual ~GameObject2D();
 
+	RECT getBoundingBox();
+
 	Vector2 GetPos() { return m_pos; }
 	Vector2 GetOrigin() { return m_origin; }
 	float GetOri() { return m_orientation; }
