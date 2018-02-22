@@ -25,6 +25,8 @@ ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
 	auto uploadResourcesFinished = resourceUpload.End(_RD->m_commandQueue.Get());
 
 	uploadResourcesFinished.wait();
+
+	
 }
 
 
@@ -33,33 +35,28 @@ ImageGO2D::~ImageGO2D()
 	m_texture.Reset();
 }
 
+void ImageGO2D::Tick(GameStateData * _GSD)
+{
+	printf("Hello world");
+}
+
 void ImageGO2D::Render(RenderData* _RD)
 {
-	if (sheet_total > 0)
-	{
-		ChangeRectPos();
-		_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
-			GetTextureSize(m_texture.Get()),
-			m_pos, src_rect, m_colour, m_orientation, m_origin, m_scale);
-	}
-	else
-	{
-		_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
-			GetTextureSize(m_texture.Get()),
-			m_pos, nullptr, m_colour, m_orientation, m_origin, m_scale);
-	}
+
+	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
+		GetTextureSize(m_texture.Get()),
+		m_pos, src_rect.get(), m_colour, m_orientation, m_origin, m_scale);
+	
 	//TODO::add sprite effects & layer Depth
 	//TODO::example stuff for sprite sheet
 }
 
 void ImageGO2D::ChangeRectPos()
 {
-	RECT *r1;
-	r1->left = 0;
-	r1->top = 0;
-	r1->right = 10;
-	r1->bottom = 5;
-	src_rect = r1;
+	src_rect->left = 0;
+	src_rect->top = 0;
+	src_rect->right = 5;
+	src_rect->bottom = 5;
 }
 void ImageGO2D::CentreOrigin()
 {

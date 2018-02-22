@@ -3,6 +3,7 @@
 #include "GameStateData.h"
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
+	src_rect.reset(new RECT);
 	CentreOrigin();
 }
 
@@ -10,7 +11,13 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 Player2D::~Player2D()
 {
 }
-
+void Player2D::ChangeRectPos()
+{
+	src_rect->left = 0;
+	src_rect->top = 0;
+	src_rect->right = 64;
+	src_rect->bottom = 64;
+}
 void Player2D::Tick(GameStateData * _GSD)
 {
 
@@ -34,6 +41,10 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
+	}
+	if (_GSD->m_keyboardState.U)
+	{
+		ChangeRectPos();
 	}
 
 	
