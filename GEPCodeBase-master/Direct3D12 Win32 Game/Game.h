@@ -7,9 +7,13 @@
 
 #pragma once
 
+#include <vector>
+
 #include "StepTimer.h"
 #include "Audio.h"
-#include <vector>
+
+#include "SceneManager.h"
+
 using std::vector;
 
 struct RenderData;
@@ -99,7 +103,7 @@ private:
 
 	GameStateData* m_GSD;
 
-	//GEP:: Keyboard and Mouse Abstractions for basic input system
+	//GEP:: Keyboard and Mouse Abstractions for basic input systemGame
 	void ReadInput();
 	std::unique_ptr<DirectX::Keyboard> m_keyboard;
 	std::unique_ptr<DirectX::Mouse> m_mouse;
@@ -107,4 +111,5 @@ private:
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 
+	SceneManager scene;
 };
