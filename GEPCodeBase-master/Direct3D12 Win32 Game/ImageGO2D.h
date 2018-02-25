@@ -19,7 +19,7 @@ public:
 
 	void Tick(GameStateData *_GSD) override;
 	void Render(RenderData* _RD) override;
-	virtual void ChangeRectPos();
+	virtual void ChangeRectPos(int pos1, int pos2, int pos3, int pos4);
 	void CentreOrigin();
 
 protected:

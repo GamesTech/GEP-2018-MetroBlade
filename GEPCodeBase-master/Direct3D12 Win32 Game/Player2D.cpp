@@ -15,12 +15,12 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 Player2D::~Player2D()
 {
 }
-void Player2D::ChangeRectPos()
+void Player2D::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 {
-	src_rect->left = 0;
-	src_rect->top = 0;
-	src_rect->right = 64;
-	src_rect->bottom = 64;
+	src_rect->left = pos1;
+	src_rect->top = pos2;
+	src_rect->right = pos3;
+	src_rect->bottom = pos4;
 }
 void Player2D::Tick(GameStateData * _GSD)
 {
@@ -46,10 +46,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	{
 		AddForce(m_drive * Vector2::UnitX);
 	}
-	if (_GSD->m_keyboardState.U)
-	{
-		ChangeRectPos();
-	}
+	
 
 	
 //GEP:: Lets go up the inheritence and share our functionality
