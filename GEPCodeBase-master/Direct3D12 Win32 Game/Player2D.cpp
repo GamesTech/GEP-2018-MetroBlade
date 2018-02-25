@@ -27,6 +27,7 @@ void Player2D::Tick(GameStateData * _GSD)
 
 	if (game_states == GROUNDED)
 	{
+		ChangeRectPos(0, 0, 128, 128);
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
@@ -34,6 +35,10 @@ void Player2D::Tick(GameStateData * _GSD)
 			game_states = JUMPING;
 			AddForce(-jump_force * Vector2::UnitY);
 		}
+	}
+	if (game_states == JUMPING)
+	{
+		ChangeRectPos(128, 0, 256, 256);
 	}
 	AddForce(gravity*Vector2::UnitY);
 //Push the guy around in the directions for the key presses
