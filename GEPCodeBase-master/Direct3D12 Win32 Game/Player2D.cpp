@@ -22,6 +22,18 @@ void Player2D::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 	src_rect->right = pos3;
 	src_rect->bottom = pos4;
 }
+
+void Player2D::PlayAnimation(int anim_type)
+{
+	switch (anim_type)
+	{
+		case 0:
+			break;
+		case 1:
+			break;
+	}
+};
+
 void Player2D::Tick(GameStateData * _GSD)
 {
 
@@ -46,10 +58,18 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (_GSD->m_keyboardState.A)
 	{
 		AddForce(-m_drive * Vector2::UnitX);
+		if (game_states == GROUNDED)
+		{
+			
+		}
 	}
 	if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
+		if (game_states == GROUNDED)
+		{
+			
+		}
 	}
 	
 

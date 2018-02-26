@@ -18,6 +18,7 @@ public:
 	void SetDrive(float _drive) { m_drive = _drive; }
 	float GetDrive() { return m_drive; }
 	void ChangeRectPos(int pos1, int pos2, int pos3, int pos4) override;
+	void PlayAnimation(int anim_type);
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
 
@@ -27,7 +28,11 @@ protected:
 	float gravity = 9.8f;
 	float vertical_velocity;
 	void setGravity(float gravity) { this->gravity = gravity; }
-	enum GameStates { GROUNDED,JUMPING,	FALLING };
+	enum GameStates { 
+		GROUNDED,
+		JUMPING,
+		FALLING
+	};
 	int game_states;
 
 	Vector2 m_limit = Vector2(800, 500);
