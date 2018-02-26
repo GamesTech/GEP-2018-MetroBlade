@@ -1,12 +1,16 @@
 #pragma once
 #include "pch.h"
 
+// #include "GameComponent.h"
+
 //GEP:: Base class for all 2-D objects
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 struct RenderData;
 struct GameStateData;
+class GameComponent;
+
 
 class GameObject2D
 {
@@ -26,11 +30,14 @@ public:
 	void SetColour(Color _col) { m_colour = _col; }
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 
-
 	virtual void CentreOrigin() = 0;
 
 	virtual void Tick(GameStateData* _GSD) {};
 	virtual void Render(RenderData* _RD) = 0;
+
+
+	template<typename T>
+	T*     getComponentByType();
 
 protected:
 	Vector2 m_pos = Vector2::Zero;
@@ -39,5 +46,19 @@ protected:
 	Color m_colour = Colors::White;
 	Vector2 m_scale = Vector2::One;
 
+	std::vector<GameComponent*>    game_components;
+
 };
 
+template<typename T>
+inline T * GameObject2D::getComponentByType()
+{
+	T*    component_ptr = nullptr;
+
+	for (auto& component : game_components) 
+	{
+		component_ptr = dynamic_cast<T>(component);
+	}
+
+	return component_ptr;
+}
