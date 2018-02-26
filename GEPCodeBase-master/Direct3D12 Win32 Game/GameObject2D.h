@@ -36,7 +36,7 @@ public:
 	virtual void Render(RenderData* _RD) = 0;
 
 
-	template<typename T>
+	template<class T>
 	T*     getComponentByType();
 
 protected:
@@ -50,14 +50,14 @@ protected:
 
 };
 
-template<typename T>
+template<class T>
 inline T * GameObject2D::getComponentByType()
 {
 	T*    component_ptr = nullptr;
 
-	for (auto& component : game_components) 
+	for (auto component : game_components)
 	{
-		component_ptr = dynamic_cast<T>(component);
+		component_ptr = dynamic_cast<T*>(component);
 	}
 
 	return component_ptr;
