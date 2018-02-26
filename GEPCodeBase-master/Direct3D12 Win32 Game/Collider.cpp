@@ -11,16 +11,16 @@ Collider::~Collider()
 
 }
 
-Vector2 Collider::getBoundingBox(RECT& collision_box)
+RECT Collider::getBoundingBox()
 {
-	Vector2 bounding_box;
+	RECT bounding_box;
 
-	bounding_box.x = xPos;
-	bounding_box.y = yPos;
-	collision_box.top = bounding_box.y;
-	collision_box.left = bounding_box.x;
-	collision_box.bottom = width;
-	collision_box.right = height;
+	box_dimentions.x = xPos;
+	box_dimentions.y = yPos;
+	bounding_box.top = box_dimentions.y;
+	bounding_box.left = box_dimentions.x;
+	bounding_box.bottom = width;
+	bounding_box.right = height;
 
 	/*bounding_box.top = yPos;
 	bounding_box.left = xPos;

@@ -17,11 +17,11 @@ public:
 	void setXPos();
 	void setYPos();
 
-	Vector2 getBoundingBox(RECT& collision_box);
-
+	//Vector2 getBoundingBox(RECT& collision_box);
+	RECT getBoundingBox();
 	
 private:
-	Vector2  box_dimenstions = Vector2(0,0);
+	Vector2  box_dimentions = Vector2(0,0);
 	float height = 0;
 	float width = 0;
 	float xPos = 0;
