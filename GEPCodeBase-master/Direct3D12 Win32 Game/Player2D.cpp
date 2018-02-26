@@ -5,6 +5,7 @@
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
 	CentreOrigin();
+	rd = _RD;
 }
 
 
@@ -35,6 +36,13 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
+	}
+	if (_GSD->m_keyboardState.R) 
+	{
+		Player2D* testPlay = new Player2D(rd, "gens"); // test object
+		testPlay->SetDrive(1000.0f);
+		testPlay->SetDrag(0.5f);
+		current_world.spawn2DObject(testPlay);
 	}
 
 	

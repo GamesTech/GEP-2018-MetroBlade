@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "WorldEvent.h"
 
 //GEP:: Base class for all 2-D objects
 
@@ -7,6 +8,7 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 struct RenderData;
 struct GameStateData;
+
 
 class GameObject2D
 {
@@ -26,18 +28,22 @@ public:
 	void SetColour(Color _col) { m_colour = _col; }
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 
+	void attachWorldEventListener(WorldEvent   event_system) { current_world = event_system; }; // Test code do not keep. 
 
 	virtual void CentreOrigin() = 0;
 
 	virtual void Tick(GameStateData* _GSD) {};
 	virtual void Render(RenderData* _RD) = 0;
 
+
 protected:
+
 	Vector2 m_pos = Vector2::Zero;
 	Vector2 m_origin = Vector2::Zero;
 	float m_orientation = 0.0f;
 	Color m_colour = Colors::White;
 	Vector2 m_scale = Vector2::One;
 
+	WorldEvent				current_world;
 };
 

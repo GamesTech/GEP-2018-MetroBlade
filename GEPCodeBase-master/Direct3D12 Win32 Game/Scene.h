@@ -35,6 +35,8 @@ public:
 	void add2DGameObjectToScene(GameObject2D* new_object);
 	void add3DGameObjectToScene(GameObject3D* new_object);
 
+	void clearScene() { printf("Hello world"); }
+
 private:
 	/* Metadata */
 	std::string scene_name = "NULL";

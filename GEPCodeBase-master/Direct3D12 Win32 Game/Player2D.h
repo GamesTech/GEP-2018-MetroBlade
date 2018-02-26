@@ -29,6 +29,8 @@ protected:
 	enum GameStates { GROUNDED,JUMPING,	FALLING };
 	int game_states;
 
+	RenderData*			rd;
+
 	Vector2 m_limit = Vector2(800, 500);
 };
 

@@ -82,12 +82,13 @@ void Scene::Render(RenderData * render_data, ID3D12GraphicsCommandList * command
 	render_data->m_spriteBatch->End();
 }
 
-void Scene::add2DGameObjectToScene(GameObject2D * new_object)
+void Scene::add2DGameObjectToScene(GameObject2D* new_object)
 {
+	new_object->attachWorldEventListener(this);
 	m_2DObjects.push_back(new_object);
 }
 
-void Scene::add3DGameObjectToScene(GameObject3D * new_object)
+void Scene::add3DGameObjectToScene(GameObject3D* new_object)
 {
 	m_3DObjects.push_back(new_object);
 }

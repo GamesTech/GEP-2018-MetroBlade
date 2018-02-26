@@ -59,6 +59,9 @@
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{f2b8cb6b-7b5a-4244-914e-c6f13f3bf757}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -133,6 +136,15 @@
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
     </ClInclude>
+    <ClInclude Include="EventData.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldEvent.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject2D.cpp">
@@ -192,6 +204,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Scene Manager\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="WorldEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

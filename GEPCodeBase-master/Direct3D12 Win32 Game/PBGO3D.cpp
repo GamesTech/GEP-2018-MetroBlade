@@ -8,7 +8,6 @@ PBGO3D::PBGO3D()
 	m_type = GO3D_RT_PRIM;
 }
 
-
 PBGO3D::~PBGO3D()
 {
 	if (m_vertices)
