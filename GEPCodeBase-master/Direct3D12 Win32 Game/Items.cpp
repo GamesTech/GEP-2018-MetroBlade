@@ -2,7 +2,7 @@
 #include "Items.h"
 Items::Items(RenderData* _RD, string _filename) :Physics2D(_RD, _filename)
 {
-	
+	CentreOrigin();
 }
 
 void Items::Tick(GameStateData * _GSD)

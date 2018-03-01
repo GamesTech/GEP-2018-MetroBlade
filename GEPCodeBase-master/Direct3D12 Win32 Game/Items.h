@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObject2D.h"
 #include "Physics2D.h"
-class Items : Physics2D
+class Items
+	: public Physics2D
 {
 public:
 	Items(RenderData* _RD, string _filename);

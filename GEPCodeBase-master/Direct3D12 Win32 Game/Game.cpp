@@ -7,6 +7,7 @@
 #include "RenderData.h"
 #include "GameStateData.h"
 #include "Scene.h"
+#include "Items.h"
 
 extern void ExitGame();
 
@@ -198,7 +199,6 @@ void Game::Update(DX::StepTimer const& timer)
 		newScene->add3DGameObjectToScene(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* item = new Player2D(m_RD, "gens");
 
 		Player2D* testPlay = new Player2D(m_RD, "gens");
 		testPlay->SetDrive(1000.0f);
@@ -216,6 +216,10 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrag(0.5f);
 		scene.getScene()->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
+
+		Items* testItem = new Items(m_RD, "gens");
+		scene.getScene()->add2DGameObjectToScene(testItem);//m_2DObjects.push_back(testPlay);
+		testItem->SetPos(Vector2(500, 500));
 	}
 
 	scene.Update(m_GSD);
