@@ -198,6 +198,8 @@ void Game::Update(DX::StepTimer const& timer)
 		newScene->add3DGameObjectToScene(camera);
 		//m_3DObjects.push_back(camera);
 
+		Player2D* item = new Player2D(m_RD, "gens");
+
 		Player2D* testPlay = new Player2D(m_RD, "gens");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);

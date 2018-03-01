@@ -133,6 +133,9 @@
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
     </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject2D.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Scene Manager\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
