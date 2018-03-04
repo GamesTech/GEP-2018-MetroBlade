@@ -132,7 +132,7 @@ void Player2D::Tick(GameStateData* _GSD)
 			
 		}
 	}
-	if (_GSD->m_keyboardState.D)
+	else if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
 		if (game_states == GROUNDED)
@@ -140,6 +140,12 @@ void Player2D::Tick(GameStateData* _GSD)
 			
 		}
 	}
+	else if(game_states == GROUNDED)
+	{
+		Vector2 test_vel = Vector2(0, 0);
+		SetVel(test_vel);
+	}
+	
 	
 
 	
