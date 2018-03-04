@@ -58,6 +58,7 @@ void ImageGO2D::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 	src_rect->right = pos3;
 	src_rect->bottom = pos4;
 }
+
 void ImageGO2D::CentreOrigin()
 {
 	XMUINT2 size = GetTextureSize(m_texture.Get());

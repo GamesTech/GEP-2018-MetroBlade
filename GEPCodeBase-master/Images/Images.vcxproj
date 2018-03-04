@@ -135,6 +135,9 @@
   <ItemGroup>
     <ImageContentTask Include="gens_ss.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Fighter_1_ss.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

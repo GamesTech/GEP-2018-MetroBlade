@@ -209,7 +209,7 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().T) 
 	{
 		// Instantiation test.
-		Player2D* testPlay = new Player2D(m_RD, "gens_ss");
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.getScene()->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);

@@ -23,23 +23,76 @@ void Player2D::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 	src_rect->bottom = pos4;
 }
 
-void Player2D::PlayAnimation(int anim_type)
+void Player2D::PlayAnimation(GameStateData* _GSD)
 {
-	switch (anim_type)
+	anim_time += _GSD->m_dt;
+	switch (current_anim)
 	{
-		case 0:
+		case IDLE_ANIM:
+			
+			if (anim_time < 0.5f)
+			{
+				ChangeRectPos(0, 0, 100, 126);
+			}
+			else if (anim_time > 0.5f && anim_time < 1.0f)
+			{
+				ChangeRectPos(100, 0, 199, 126);
+			}
+			else if(anim_time > 1.0f)
+			{
+				anim_time = 0.0f;
+			}
+
 			break;
-		case 1:
+		case MOVE_ANIM:
+			if (anim_time < 0.25f)
+			{
+				ChangeRectPos(442, 0, 536, 126);
+			}
+			else if (anim_time > 0.0f && anim_time < 0.2f)
+			{
+				ChangeRectPos(536, 0, 630, 126);
+			}
+			else if (anim_time > 0.2f && anim_time < 0.4f)
+			{
+				ChangeRectPos(630, 0, 724, 126);
+			}
+			else if (anim_time > 0.4f && anim_time < 0.6f)
+			{
+				ChangeRectPos(724, 0, 818, 126);
+			}
+			else if (anim_time > 0.6f && anim_time < 0.8f)
+			{
+				ChangeRectPos(630, 0, 724, 126);
+			}
+			else if (anim_time > 0.8f && anim_time < 1.0f)
+			{
+				ChangeRectPos(536, 0, 630, 126);
+			}
+			else if (anim_time > 1.0f && anim_time < 1.2f)
+			{
+				ChangeRectPos(442, 0, 536, 126);
+			}
+			else if (anim_time > 1.2f)
+			{
+				anim_time = 0.0f;
+			}
+			break;
+		case JUMP_ANIM:
+			ChangeRectPos(1006, 0, 1101, 126);
+			anim_time = 0.0f;
+			break;
+		case ATTACK_ANIM:
 			break;
 	}
 };
 
-void Player2D::Tick(GameStateData * _GSD)
+void Player2D::Tick(GameStateData* _GSD)
 {
-
+	PlayAnimation(_GSD);
 	if (game_states == GROUNDED)
 	{
-		ChangeRectPos(0, 0, 128, 128);
+		current_anim = MOVE_ANIM;
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
@@ -48,9 +101,25 @@ void Player2D::Tick(GameStateData * _GSD)
 			AddForce(-jump_force * Vector2::UnitY);
 		}
 	}
-	if (game_states == JUMPING)
+
+	if (_GSD->m_keyboardState.J)
 	{
-		ChangeRectPos(128, 0, 256, 256);
+		Vector2 test_vel = Vector2(0, 0);
+		SetVel(test_vel);
+	}
+
+	//change anim depending on gamestate - testing purposes
+	if (GetVel() == Vector2(0,0) && game_states == GROUNDED)
+	{
+		current_anim = IDLE_ANIM;
+	}
+	else if(GetVel() != Vector2(0, 0) && game_states == GROUNDED)
+	{
+		current_anim = MOVE_ANIM;
+	}
+	else if (game_states == JUMPING)
+	{
+		current_anim = JUMP_ANIM;
 	}
 	AddForce(gravity*Vector2::UnitY);
 //Push the guy around in the directions for the key presses
