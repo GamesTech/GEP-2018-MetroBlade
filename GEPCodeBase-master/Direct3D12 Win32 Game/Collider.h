@@ -3,27 +3,18 @@
 
 class Collider
 {
-public: 
-	Collider() = default;
-	~Collider();
+public:
+	Collider();
+	Collider(Vector2  origin, Vector2 dimensions, bool trigger = false);
+	~Collider() = default;
 
-	void getHeight();
-	void getWidth();
-	void getXPos();
-	void getYPos();
+	float getMaxX();
+	float getMaxY();
 
-	void setHeight();
-	void setWidth();
-	void setXPos();
-	void setYPos();
 
-	//Vector2 getBoundingBox(RECT& collision_box);
-	RECT getBoundingBox();
-	
 private:
-	Vector2  box_dimentions = Vector2(0,0);
-	float height = 0;
-	float width = 0;
-	float xPos = 0;
-	float yPos = 0;
+	Vector2  box_dimensions;
+	Vector2  box_origin;
+	Vector2  max_values;
+	bool is_trigger = false;
 };

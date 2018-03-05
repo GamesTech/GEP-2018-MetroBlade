@@ -1,31 +1,26 @@
 #include "GameObject2D.h"
 #include "Collider.h"
 
+
+
 Collider::Collider()
 {
-
 }
 
-Collider::~Collider()
+Collider::Collider(Vector2 origin, Vector2 dimensions, bool trigger)
+	:box_origin(origin),
+	box_dimensions(dimensions),
+	is_trigger(trigger)
 {
-
+	max_values = box_origin + box_dimensions;
 }
 
-RECT Collider::getBoundingBox()
+float Collider::getMaxX()
 {
-	RECT bounding_box;
+	return max_values.x;
+}
 
-	box_dimentions.x = xPos;
-	box_dimentions.y = yPos;
-	bounding_box.top = box_dimentions.y;
-	bounding_box.left = box_dimentions.x;
-	bounding_box.bottom = width;
-	bounding_box.right = height;
-
-	/*bounding_box.top = yPos;
-	bounding_box.left = xPos;
-	bounding_box.bottom = width;
-	bounding_box.right = height;*/
-
-	return bounding_box;
+float Collider::getMaxY()
+{
+	return max_values.y;
 }
