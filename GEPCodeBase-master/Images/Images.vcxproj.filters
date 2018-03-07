@@ -10,4 +10,7 @@
   <ItemGroup>
     <Text Include="READ_ME.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Fighter_2_ss.png" />
+  </ItemGroup>
 </Project>

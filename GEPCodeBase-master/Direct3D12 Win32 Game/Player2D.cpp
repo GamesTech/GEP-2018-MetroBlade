@@ -21,7 +21,6 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData* _GSD)
 {
-	sprite->PlayAnimation(_GSD);
 	if (game_states == GROUNDED)
 	{
 		sprite->SetAnimation(IDLE_ANIM);
@@ -85,6 +84,8 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	Physics2D::Tick(_GSD);
 
+	//Update sprite animation
+	sprite->PlayAnimation(_GSD);
 //after that as updated my position let's lock it inside my limits
 	if (m_pos.x < 50.0f)
 	{
