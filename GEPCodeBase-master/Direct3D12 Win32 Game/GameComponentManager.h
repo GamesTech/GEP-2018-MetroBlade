@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include <vector>
-
 #include "GameComponent.h"
 
 class GameComponentManager 

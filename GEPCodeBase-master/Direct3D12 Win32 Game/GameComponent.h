@@ -19,7 +19,7 @@
 #pragma once
 
 struct GameStateData;
-class  RenderData;
+struct RenderData;
 
 class GameComponent
 {
@@ -33,15 +33,6 @@ public:
 	std::string getTag() const;
 	void		setTag(std::string new_tag);
 
-private:
+protected:
 	std::string				tag;
-};
-
-class TestComp : GameComponent 
-{
-public:
-	TestComp() {};
-	~TestComp() {};
-	void tickComponent(GameStateData*  _GSD) override {};
-	void renderComponent(RenderData*     _RD) override {};
 };

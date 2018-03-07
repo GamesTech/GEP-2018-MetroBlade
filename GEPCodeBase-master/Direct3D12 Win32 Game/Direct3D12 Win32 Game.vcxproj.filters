@@ -216,6 +216,9 @@
     <ClCompile Include="GameComponentManager.cpp">
       <Filter>Core\GameComponent\Component Manager</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>Core\GameComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

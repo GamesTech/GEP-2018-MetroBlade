@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Player2D.h"
 #include "GameStateData.h"
-#include "GameComponent.h"
 
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
@@ -37,11 +36,6 @@ void Player2D::Tick(GameStateData * _GSD)
 	{
 		AddForce(m_drive * Vector2::UnitX);
 	}
-	if (_GSD->m_keyboardState.X) 
-	{
-		getComponentByType<TestComp>();
-	}
-
 	
 //GEP:: Lets go up the inheritence and share our functionality
 

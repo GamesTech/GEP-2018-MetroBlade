@@ -1,6 +1,7 @@
 #pragma once
-#include "GameObject2D.h"
 #include <string>
+
+#include "GameObject2D.h"
 
 using std::string;
 struct RenderData;

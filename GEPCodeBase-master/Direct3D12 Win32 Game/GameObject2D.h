@@ -1,15 +1,11 @@
 #pragma once
-#include "pch.h"
 
-// #include "GameComponent.h"
+#include "GameComponentManager.h"
 
 //GEP:: Base class for all 2-D objects
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
-struct RenderData;
-struct GameStateData;
-class GameComponent;
 
 
 class GameObject2D
@@ -32,33 +28,16 @@ public:
 
 	virtual void CentreOrigin() = 0;
 
-	virtual void Tick(GameStateData* _GSD) {};
+	virtual void Tick(GameStateData* _GSD) = 0;
 	virtual void Render(RenderData* _RD) = 0;
 
 
-	template<class T>
-	T*     getComponentByType();
-
 protected:
+	GameComponentManager		object_components;
+
 	Vector2 m_pos = Vector2::Zero;
 	Vector2 m_origin = Vector2::Zero;
 	float m_orientation = 0.0f;
 	Color m_colour = Colors::White;
 	Vector2 m_scale = Vector2::One;
-
-	std::vector<GameComponent*>    game_components;
-
 };
-
-template<class T>
-inline T * GameObject2D::getComponentByType()
-{
-	T*    component_ptr = nullptr;
-
-	for (auto component : game_components)
-	{
-		component_ptr = dynamic_cast<T*>(component);
-	}
-
-	return component_ptr;
-}
