@@ -1,6 +1,8 @@
 #pragma once
 #include "pch.h"
 
+#include "GameComponentManager.h"
+
 //Base 3D Game Object
 
 using namespace DirectX;
@@ -44,6 +46,9 @@ public:
 	GO3D_Render_Type GetType() { return m_type; }
 
 protected:
+
+	GameComponentManager		object_components;
+
 	Vector3 m_pos	= Vector3::Zero;
 	Vector3 m_scale = Vector3::One;
 	float m_pitch	= 0.0f;

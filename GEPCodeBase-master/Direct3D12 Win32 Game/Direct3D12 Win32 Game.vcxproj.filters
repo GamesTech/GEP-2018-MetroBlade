@@ -59,6 +59,21 @@
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameComponent">
+      <UniqueIdentifier>{37adc79b-1474-4b0e-91c0-776a67463d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Base">
+      <UniqueIdentifier>{bd8d177b-0bd3-4472-9d33-c1d2e7a8a770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Base\2D">
+      <UniqueIdentifier>{dee484d5-de5a-4e2f-952e-fbc1a5cf3a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Base\3D">
+      <UniqueIdentifier>{02bdaaa3-5f04-43b0-89e7-fc71e83e5639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Component Manager">
+      <UniqueIdentifier>{d8f0cda2-7500-4097-bc53-749deab960d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -70,17 +85,11 @@
     <ClInclude Include="GameObjectList.h">
       <Filter>Core\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="ImageGO2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Text2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject3D.h">
-      <Filter>Core\GameObjects\3D\Headers</Filter>
     </ClInclude>
     <ClInclude Include="PBGO3D.h">
       <Filter>Core\GameObjects\3D\Headers</Filter>
@@ -133,19 +142,25 @@
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
     </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>Core\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject2D.h">
+      <Filter>Core\GameObjects\Base\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject3D.h">
+      <Filter>Core\GameObjects\Base\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponentManager.h">
+      <Filter>Core\GameComponent\Component Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject2D.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="Text2D.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject3D.cpp">
-      <Filter>Core\GameObjects\3D\Source</Filter>
     </ClCompile>
     <ClCompile Include="PBGO3D.cpp">
       <Filter>Core\GameObjects\3D\Source</Filter>
@@ -191,6 +206,18 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Core\Scene Manager\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject2D.cpp">
+      <Filter>Core\GameObjects\Base\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject3D.cpp">
+      <Filter>Core\GameObjects\Base\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponentManager.cpp">
+      <Filter>Core\GameComponent\Component Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>Core\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

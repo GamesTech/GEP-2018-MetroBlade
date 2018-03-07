@@ -61,14 +61,10 @@ public:
 	void instanciate2DObject(GameObject2D*  new_object);
 	void instanciate3DObject(GameObject3D*  new_object);
 
-
-
 private:
 	void resetRenderState();
 
 	std::unique_ptr<Scene>   current_scene;
-
-	//Scene*				current_scene = nullptr;
-	Camera*				main_camera = nullptr;
-	RenderData*			render_data = nullptr;
+	Camera*					 main_camera = nullptr;
+	RenderData*				 render_data = nullptr;
 };

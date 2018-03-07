@@ -171,6 +171,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="GameComponentManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Physics2D.h" />
@@ -197,6 +199,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameComponent.cpp" />
+    <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Physics2D.cpp" />
     <ClCompile Include="Player2D.cpp" />
