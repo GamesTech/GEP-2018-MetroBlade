@@ -34,23 +34,10 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 	render_data = render_structure;
 }
 
-void SceneManager::assignGPUControlObjects(ID3D12CommandQueue * command_queue, 
-										   ID3D12Fence * fence, 
-										   UINT* backbuffer_index, 
-										   Microsoft::WRL::Wrappers::Event * fence_event, 
-										   UINT64* fence_values)
-{
-	gpu_reset_object.gpu_command_queue = command_queue;
-	gpu_reset_object.gpu_fence = fence;
-	gpu_reset_object.backbuffer_index = backbuffer_index;
-	gpu_reset_object.fence_events = fence_event;
-	gpu_reset_object.fence_values = fence_values;
-}
-
 void SceneManager::Init()
 {
 	// Create a basic scene and set up all of the scene manager systems.
-	current_scene = new Scene;
+	current_scene.reset(new Scene);
 
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 	setMainCamera(camera);
@@ -81,7 +68,7 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 
 Scene * SceneManager::getScene()
 {
-	return current_scene;
+	return current_scene.get();
 }
 
 void SceneManager::loadScene(string scene_name)
@@ -92,7 +79,7 @@ void SceneManager::loadScene(string scene_name)
 void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
-	current_scene = scene_name;
+	current_scene.reset(scene_name);
 }
 
 void SceneManager::clearScene()
@@ -100,8 +87,7 @@ void SceneManager::clearScene()
 	if (current_scene) 
 	{
 		resetRenderState();
-		delete current_scene;
-		current_scene = nullptr;
+		current_scene.reset(nullptr);
 	    setMainCamera(nullptr);
 	}
 }
@@ -120,27 +106,6 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
 	current_scene->add3DGameObjectToScene(new_object);
-}
-
-void SceneManager::waitForGPU() noexcept
-{
-	// Here we wait for the GPU
-	if (gpu_reset_object.gpu_command_queue && gpu_reset_object.gpu_fence && gpu_reset_object.fence_events->IsValid())
-	{
-		// Schedule a Signal command in the GPU queue.
-		UINT64 fenceValue = gpu_reset_object.fence_values[*gpu_reset_object.backbuffer_index];
-		if (SUCCEEDED(gpu_reset_object.gpu_command_queue->Signal(gpu_reset_object.gpu_fence, fenceValue)))
-		{
-			// Wait until the Signal has been processed.
-			if (SUCCEEDED(gpu_reset_object.gpu_fence->SetEventOnCompletion(fenceValue, gpu_reset_object.fence_events)))
-			{
-				WaitForSingleObjectEx(gpu_reset_object.fence_events, INFINITE, FALSE);
-
-				// Increment the fence value for the current frame.
-				gpu_reset_object.fence_values[*gpu_reset_object.backbuffer_index]++;
-			}
-		}
-	}
 }
 
 void SceneManager::resetRenderState()

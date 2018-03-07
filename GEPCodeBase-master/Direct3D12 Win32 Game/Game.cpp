@@ -564,9 +564,6 @@ void Game::CreateResources()
     dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
     m_d3dDevice->CreateDepthStencilView(m_depthStencil.Get(), &dsvDesc, m_dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
-
-    // TODO: Initialize windows-size dependent objects here.
-	scene.assignGPUControlObjects(m_commandQueue.Get(), m_fence.Get(), &m_backBufferIndex, &m_fenceEvent, m_fenceValues);
 }
 
 void Game::WaitForGpu() noexcept

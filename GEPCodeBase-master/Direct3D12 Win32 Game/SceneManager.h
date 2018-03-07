@@ -44,12 +44,6 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
-	void assignGPUControlObjects(ID3D12CommandQueue* command_queue,
-		ID3D12Fence*   fence,
-		UINT*			backbuffer_index,
-		Microsoft::WRL::Wrappers::Event*   fence_event,
-		UINT64*								fence_values);
-
 	void Init();
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
@@ -70,14 +64,11 @@ public:
 
 
 private:
-	void waitForGPU() noexcept;
-
 	void resetRenderState();
 
-	Scene*				current_scene = nullptr;
+	std::unique_ptr<Scene>   current_scene;
+
+	//Scene*				current_scene = nullptr;
 	Camera*				main_camera = nullptr;
 	RenderData*			render_data = nullptr;
-
-	// GPU Command Controllers.
-	GPUCommandObject		  gpu_reset_object;
 };
