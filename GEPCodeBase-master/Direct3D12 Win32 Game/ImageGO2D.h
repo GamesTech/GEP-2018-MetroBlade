@@ -25,7 +25,7 @@ public:
 protected:
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
 	int m_resourceNum = -1;
-	std::unique_ptr<RECT>   src_rect;
+	std::shared_ptr<RECT>   src_rect;
 	int sheet_total = 0;
 };
 
