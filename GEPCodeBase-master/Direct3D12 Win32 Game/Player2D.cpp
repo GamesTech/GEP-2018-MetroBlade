@@ -64,5 +64,11 @@ void Player2D::Tick(GameStateData * _GSD)
 		m_pos.y = m_limit.y;
 		game_states = GROUNDED;
 	}
-	
+
+	/*col->getCollider(col);*/
+}
+
+void Player2D::collision()
+{
+
 }

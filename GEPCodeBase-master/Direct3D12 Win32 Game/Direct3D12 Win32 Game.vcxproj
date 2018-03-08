@@ -172,6 +172,8 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionEvent.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Physics2D.h" />
@@ -199,6 +201,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Physics2D.cpp" />
     <ClCompile Include="Player2D.cpp" />

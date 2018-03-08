@@ -1,7 +1,9 @@
 #pragma once
 #include "GameObject2D.h"
+#include "CollisionManager.h"
 
 class Collider
+	:public CollisionManager
 {
 public:
 	Collider();

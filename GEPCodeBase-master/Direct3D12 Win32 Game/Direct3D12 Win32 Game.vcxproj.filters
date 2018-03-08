@@ -59,6 +59,9 @@
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\CollisionManager">
+      <UniqueIdentifier>{669b5121-3dd9-46e2-8f37-3361ea282c7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -136,6 +139,12 @@
     <ClInclude Include="Collider.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionEvent.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Core\CollisionManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject2D.cpp">
@@ -198,6 +207,7 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
