@@ -6,8 +6,20 @@ Sprite::Sprite(bool animated)
 {
 	is_animated = animated;
 
-	idle_anim_data->anim_name = "test";
+	//testing animation data structure
+	idle_anim_data.reset(new AnimationData);
+	idle_anim_data->anim_name = "Idle";
+	idle_anim_data->anim_rect.resize(2);
 	
+	idle_anim_data->anim_rect[0].left = 0;
+	idle_anim_data->anim_rect[0].top = 0;
+	idle_anim_data->anim_rect[0].right = 100;
+	idle_anim_data->anim_rect[0].bottom = 126;
+
+	idle_anim_data->anim_rect[1].left = 100;
+	idle_anim_data->anim_rect[1].top = 0;
+	idle_anim_data->anim_rect[1].right = 199;
+	idle_anim_data->anim_rect[1].bottom = 126;
 	
 }
 
@@ -19,9 +31,9 @@ void Sprite::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 	sprite_src_rect->bottom = pos4;
 }
 
-void Sprite::TestFunc(RECT* new_rect)
+void Sprite::TestFunc(RECT new_rect)
 {
-
+	*sprite_src_rect = new_rect;
 }
 
 void Sprite::PlayAnimation(GameStateData* _GSD)
@@ -33,11 +45,11 @@ void Sprite::PlayAnimation(GameStateData* _GSD)
 
 		if (anim_time < 0.5f)
 		{
-			ChangeRectPos(0, 0, 100, 126);
+			TestFunc(idle_anim_data->anim_rect[0]);
 		}
 		else if (anim_time > 0.5f && anim_time < 1.0f)
 		{
-			ChangeRectPos(100, 0, 199, 126);
+			TestFunc(idle_anim_data->anim_rect[1]);
 		}
 		else if (anim_time > 1.0f)
 		{

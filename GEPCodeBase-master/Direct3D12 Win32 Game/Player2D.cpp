@@ -24,7 +24,7 @@ void Player2D::Tick(GameStateData* _GSD)
 {
 	if (game_states == GROUNDED)
 	{
-		sprite->SetAnimation(IDLE_ANIM);
+		
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
