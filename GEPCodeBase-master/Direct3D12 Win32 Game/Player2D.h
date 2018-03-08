@@ -36,4 +36,3 @@ protected:
 
 	Vector2 m_limit = Vector2(800, 500);
 };
-
