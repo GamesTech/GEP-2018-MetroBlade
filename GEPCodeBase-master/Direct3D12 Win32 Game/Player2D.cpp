@@ -36,6 +36,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	{
 		AddForce(m_drive * Vector2::UnitX);
 	}
+
 	
 //GEP:: Lets go up the inheritence and share our functionality
 

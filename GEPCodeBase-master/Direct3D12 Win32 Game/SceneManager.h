@@ -44,6 +44,12 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
+	void assignGPUControlObjects(ID3D12CommandQueue* command_queue,
+		ID3D12Fence*   fence,
+		UINT*			backbuffer_index,
+		Microsoft::WRL::Wrappers::Event*   fence_event,
+		UINT64*								fence_values);
+
 	void Init();
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
@@ -51,20 +57,25 @@ public:
 	Scene*   getScene(); // Test routiene. 
 
 	void loadScene(string scene_name);
-	void loadScene(Scene* scene_name); // TODO - Move to a private variable.
+	void loadScene(Scene* scene_name);
 	void clearScene();
 
 	// Camera Viewports
 	void setMainCamera(Camera* viewport_camera);
 
-	// Game World Operations
-	void instanciate2DObject(GameObject2D*  new_object);
-	void instanciate3DObject(GameObject3D*  new_object);
+	bool hasSceneTransitioned() const;
+	void sceneTransitioned();
 
 private:
+	void waitForGPU() noexcept;
+
 	void resetRenderState();
 
-	std::unique_ptr<Scene>   current_scene;
-	Camera*					 main_camera = nullptr;
-	RenderData*				 render_data = nullptr;
+	Scene*				current_scene = nullptr;
+	Camera*				main_camera = nullptr;
+	RenderData*			render_data = nullptr;
+
+	// GPU Command Controllers.
+	GPUCommandObject		  gpu_reset_object;
+	bool					 new_scene = false;
 };
