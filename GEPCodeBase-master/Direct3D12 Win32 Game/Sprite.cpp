@@ -1,9 +1,14 @@
 #include "Sprite.h"
 #include "pch.h"
 #include "GameStateData.h"
+
 Sprite::Sprite(bool animated)
 {
 	is_animated = animated;
+
+	idle_anim_data->anim_name = "test";
+	
+	
 }
 
 void Sprite::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
@@ -12,6 +17,11 @@ void Sprite::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
 	sprite_src_rect->top = pos2;
 	sprite_src_rect->right = pos3;
 	sprite_src_rect->bottom = pos4;
+}
+
+void Sprite::TestFunc(RECT* new_rect)
+{
+
 }
 
 void Sprite::PlayAnimation(GameStateData* _GSD)

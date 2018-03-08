@@ -10,7 +10,8 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 	src_rect->right = 128;
 	src_rect->bottom = 128;
 	CentreOrigin();
-	sprite.reset(new Sprite(true));
+	object_components.addComponent(new Sprite(true));
+	sprite = object_components.getComponentByType<Sprite>();
 	sprite->SetRECT(src_rect);
 }
 

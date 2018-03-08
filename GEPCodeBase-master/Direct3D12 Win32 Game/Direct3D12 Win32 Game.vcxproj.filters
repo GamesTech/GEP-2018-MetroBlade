@@ -157,6 +157,7 @@
     <ClInclude Include="Sprite.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="AnimationData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">

@@ -23,7 +23,6 @@ class GameComponentManager
 public:
 	GameComponentManager() = default;
 	~GameComponentManager() = default;
-
 	void addComponent(GameComponent*  new_component);
 
 	// Component Manager Utilities
@@ -44,7 +43,7 @@ inline T* GameComponentManager::getComponentByType()
 
 	for (auto& component : component_list) 
 	{
-		return_component = dynamic_cast<T*>(component);
+		return_component = dynamic_cast<T*>(component.get());
 		if (return_component) 
 		{
 			break;
@@ -63,7 +62,7 @@ inline std::vector<T*> GameComponentManager::getComponentsByType()
 
 	for (auto& component : component_list) 
 	{
-		component_refrence = dynamic_cast<T*>(component);
+		component_refrence = dynamic_cast<T*>(component.get());
 		if (component_refrence) 
 		{
 			object_components.push_back(component_refrence);

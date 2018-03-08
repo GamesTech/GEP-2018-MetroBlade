@@ -21,7 +21,8 @@ public:
 	Vector2 GetLimit() { return m_limit; }
 
 protected:
-	std::unique_ptr<Sprite> sprite;
+	Sprite*				sprite;
+//	std::unique_ptr<Sprite> sprite;
 	float m_drive = 1.0f;
 	float jump_force = 25000.0f;
 	float gravity = 9.8f;
