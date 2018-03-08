@@ -2,8 +2,6 @@
 #include "Player2D.h"
 #include "GameStateData.h"
 
-#include "TestComponent.h"
-
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
 	CentreOrigin();
