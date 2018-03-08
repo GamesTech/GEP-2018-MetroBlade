@@ -47,6 +47,7 @@ public:
 	void Init();
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
+	bool shouldQuit() const;
 
 	Scene*   getScene(); // Test routiene. 
 
@@ -67,4 +68,6 @@ private:
 	std::unique_ptr<Scene>   current_scene;
 	Camera*					 main_camera = nullptr;
 	RenderData*				 render_data = nullptr;
+
+	bool					 quit = false;
 };

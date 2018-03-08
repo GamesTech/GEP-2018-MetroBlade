@@ -168,6 +168,11 @@ void Game::Tick()
 //GEP:: Updates all the Game Object Structures
 void Game::Update(DX::StepTimer const& timer)
 {
+	if (scene.shouldQuit()) 
+	{
+		PostQuitMessage(0);
+	}
+
 	ReadInput();
     m_GSD->m_dt = float(timer.GetElapsedSeconds());
 

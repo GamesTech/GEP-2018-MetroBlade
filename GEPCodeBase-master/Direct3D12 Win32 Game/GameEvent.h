@@ -1,6 +1,6 @@
 #pragma once
 
-struct  SceneEvent
+struct  GameEvent
 {
-
+	// TODO - Add Any common Data here.
 };

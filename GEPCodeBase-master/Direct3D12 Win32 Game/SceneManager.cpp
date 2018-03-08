@@ -66,6 +66,11 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 	}
 }
 
+bool SceneManager::shouldQuit() const
+{
+	return quit;
+}
+
 Scene * SceneManager::getScene()
 {
 	return current_scene.get();
