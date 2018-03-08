@@ -192,6 +192,7 @@
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="TestComponent.h" />
     <ClInclude Include="TestPBGO3D.h" />
     <ClInclude Include="TestSound.h" />
     <ClInclude Include="Text2D.h" />
