@@ -71,8 +71,17 @@
     <Filter Include="Core\GameObjects\Base\3D">
       <UniqueIdentifier>{02bdaaa3-5f04-43b0-89e7-fc71e83e5639}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameComponent\Component Manager">
+    <Filter Include="Core\GameComponent\Game components">
+      <UniqueIdentifier>{678e8ab6-8d13-4062-a412-8a6b9bc9bd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Base">
+      <UniqueIdentifier>{90b7c0fc-94f9-469e-bbce-5fe650d2486a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Base\Component Manager">
       <UniqueIdentifier>{d8f0cda2-7500-4097-bc53-749deab960d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Game components\Test">
+      <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +151,6 @@
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponent.h">
-      <Filter>Core\GameComponent</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject2D.h">
       <Filter>Core\GameObjects\Base\2D</Filter>
     </ClInclude>
@@ -152,7 +158,13 @@
       <Filter>Core\GameObjects\Base\3D</Filter>
     </ClInclude>
     <ClInclude Include="GameComponentManager.h">
-      <Filter>Core\GameComponent\Component Manager</Filter>
+      <Filter>Core\GameComponent\Base\Component Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>Core\GameComponent\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TestComponent.h">
+      <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
@@ -218,10 +230,10 @@
       <Filter>Core\GameObjects\Base\3D</Filter>
     </ClCompile>
     <ClCompile Include="GameComponentManager.cpp">
-      <Filter>Core\GameComponent\Component Manager</Filter>
+      <Filter>Core\GameComponent\Base\Component Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameComponent.cpp">
-      <Filter>Core\GameComponent</Filter>
+      <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
