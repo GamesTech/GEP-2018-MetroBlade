@@ -20,6 +20,7 @@ public:
 	Vector2 GetLimit() { return m_limit; }
 
 protected:
+
 	float m_drive = 1.0f;
 	float jump_force = 250000.0f;
 	float gravity = 9.8f;
@@ -30,4 +31,3 @@ protected:
 
 	Vector2 m_limit = Vector2(800, 500);
 };
-

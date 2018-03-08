@@ -9,6 +9,7 @@ GameObject2D::GameObject2D()
 
 GameObject2D::~GameObject2D()
 {
+<<<<<<< HEAD
 }
 
 
@@ -21,3 +22,6 @@ RECT GameObject2D::getBoundingBox()
 
 }
 
+=======
+}
+>>>>>>> origin/development
