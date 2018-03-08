@@ -166,6 +166,7 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
+    <ClInclude Include="FileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -231,6 +232,7 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
+    <ClCompile Include="FileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
