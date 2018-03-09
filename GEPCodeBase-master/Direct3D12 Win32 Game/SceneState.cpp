@@ -21,3 +21,8 @@ void SceneState::exitGame()
 {
 	world_event_data->event_flag = SceneEventFlags::EVENT_SIGEXIT;
 }
+
+void SceneState::panic()
+{
+	world_event_data->event_flag = SceneEventFlags::EVENT_SIGKILL;
+}

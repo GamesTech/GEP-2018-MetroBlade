@@ -43,6 +43,8 @@
 #include <exception>
 #include <memory>
 #include <stdexcept>
+#include <string>
+#include <iostream>
 
 #ifdef _DEBUG
 #include <dxgidebug.h>

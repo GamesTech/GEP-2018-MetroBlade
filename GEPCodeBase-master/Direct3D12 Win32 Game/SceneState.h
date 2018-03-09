@@ -16,6 +16,8 @@ public:
 	void pauseGame();
 	void exitGame();
 
+	void panic();  ///< Call this if an error in a game critical component occurs.
+
 private:
 	std::shared_ptr<SceneEvent>		world_event_data;
 };

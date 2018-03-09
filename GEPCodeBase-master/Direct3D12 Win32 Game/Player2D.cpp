@@ -38,7 +38,8 @@ void Player2D::Tick(GameStateData * _GSD)
 	
 	if (_GSD->m_keyboardState.Escape) 
 	{
-		world.exitGame();
+		// Testing for error components. 
+		world.panic();
 	}
 
 //GEP:: Lets go up the inheritence and share our functionality

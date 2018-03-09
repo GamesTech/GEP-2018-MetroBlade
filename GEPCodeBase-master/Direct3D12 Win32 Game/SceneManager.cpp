@@ -125,7 +125,18 @@ void SceneManager::processSceneEvents()
 			quit = true;
 			break;
 		}
+		case SceneEventFlags::EVENT_SIGKILL:
+		{
+			std::cout << "Critical Error - Game Killed by EVENT_SIGKILL" << std::endl;
+		
+#ifdef _DEBUG
+			OutputDebugString(L"Critical Error - Game Killed by event SIGKILL");
+#endif 
+
+			break;
+		}
 	}
+	scene_event_listener->event_flag = EVENT_SIGNONE;
 }
 
 void SceneManager::resetRenderState()
