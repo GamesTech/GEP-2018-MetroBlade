@@ -83,6 +83,18 @@
     <Filter Include="Core\GameComponent\Game components\Test">
       <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{c608e1f8-fc7b-4371-9a7c-cd156d575d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events\Scene Events">
+      <UniqueIdentifier>{25bef321-2fc8-4e68-b89c-32881737c0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events\Base">
+      <UniqueIdentifier>{658994ec-46b9-4ab8-a7e1-5bacba59e65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scene Manager\Scene State">
+      <UniqueIdentifier>{f9e1b9b3-9b94-4485-bc84-45983b0ad33e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -166,6 +178,15 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
+    <ClInclude Include="SceneEvent.h">
+      <Filter>Core\Events\Scene Events</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>Core\Events\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneState.h">
+      <Filter>Core\Scene Manager\Scene State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -230,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneState.cpp">
+      <Filter>Core\Scene Manager\Scene State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

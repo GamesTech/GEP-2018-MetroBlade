@@ -13,7 +13,8 @@ public:
 
 	// Interface
 	void changeScene(std::string   new_scene_name);
-
+	void pauseGame();
+	void exitGame();
 
 private:
 	std::shared_ptr<SceneEvent>		world_event_data;

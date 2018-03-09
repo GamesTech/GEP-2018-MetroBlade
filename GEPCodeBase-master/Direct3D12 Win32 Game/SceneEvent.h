@@ -11,6 +11,7 @@ enum SceneEventFlags
 	EVENT_SIGCHANGE,
 	EVENT_SIGINSTANCIATE,
 	EVENT_SIGEXIT,
+	EVENT_SIGKILL
 };
 
 struct SceneEvent : public GameEvent 

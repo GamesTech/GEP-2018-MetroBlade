@@ -708,10 +708,5 @@ void Game::ReadInput()
 
 	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
 	m_GSD->m_keyboardState= m_keyboard->GetState();
-
-	//Quit if press Esc
-	if (m_GSD->m_keyboardState.Escape)
-		PostQuitMessage(0);
-
 	m_GSD->m_mouseState = m_mouse->GetState();
 }

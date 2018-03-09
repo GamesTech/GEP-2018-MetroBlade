@@ -50,6 +50,7 @@ void SceneManager::Update(GameStateData * game_state)
 	{
 		current_scene->Update(game_state);
 	}
+	processSceneEvents();
 }
 
 void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
@@ -105,12 +106,26 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
+	new_object->assignWorldEventListener(scene_event_listener);
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
 void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
+	new_object->assignWorldEventLisener(scene_event_listener);
 	current_scene->add3DGameObjectToScene(new_object);
+}
+
+void SceneManager::processSceneEvents()
+{
+	switch (scene_event_listener->event_flag) 
+	{
+		case SceneEventFlags::EVENT_SIGEXIT:
+		{
+			quit = true;
+			break;
+		}
+	}
 }
 
 void SceneManager::resetRenderState()

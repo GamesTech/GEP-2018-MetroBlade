@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameComponentManager.h"
+#include "SceneState.h"
 
 //GEP:: Base class for all 2-D objects
 
@@ -31,8 +32,11 @@ public:
 	virtual void Tick(GameStateData* _GSD) = 0;
 	virtual void Render(RenderData* _RD) = 0;
 
+	void assignWorldEventListener(std::shared_ptr<SceneEvent>   world_event_listener);
 
 protected:
+	SceneState					world; 
+
 	GameComponentManager		object_components;
 
 	Vector2 m_pos = Vector2::Zero;

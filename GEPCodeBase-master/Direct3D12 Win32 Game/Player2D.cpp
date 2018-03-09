@@ -36,6 +36,11 @@ void Player2D::Tick(GameStateData * _GSD)
 		AddForce(m_drive * Vector2::UnitX);
 	}
 	
+	if (_GSD->m_keyboardState.Escape) 
+	{
+		world.exitGame();
+	}
+
 //GEP:: Lets go up the inheritence and share our functionality
 
 	Physics2D::Tick(_GSD);

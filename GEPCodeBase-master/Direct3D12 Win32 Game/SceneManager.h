@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "Scene.h"
+#include "SceneEvent.h"
 #include "GPUCommand.h"
 
 namespace DX {
@@ -63,6 +64,8 @@ public:
 	void instanciate3DObject(GameObject3D*  new_object);
 
 private:
+	void processSceneEvents();
+
 	void resetRenderState();
 
 	std::unique_ptr<Scene>   current_scene;
@@ -70,4 +73,5 @@ private:
 	RenderData*				 render_data = nullptr;
 
 	bool					 quit = false;
+	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
 };
