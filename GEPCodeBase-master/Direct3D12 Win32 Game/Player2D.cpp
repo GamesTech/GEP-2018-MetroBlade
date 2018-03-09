@@ -2,7 +2,6 @@
 #include "Player2D.h"
 #include "GameStateData.h"
 
-#include "TestComponent.h"
 
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
@@ -16,6 +15,7 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData * _GSD)
 {
+
 	if (game_states == GROUNDED)
 	{
 		setGravity(0.0f);

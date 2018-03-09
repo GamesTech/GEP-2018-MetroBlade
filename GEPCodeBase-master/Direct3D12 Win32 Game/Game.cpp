@@ -202,6 +202,10 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		
+
+
+		
 	}
 
 	if (m_keyboard->GetState().T) 
@@ -212,6 +216,10 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
+
+		Collider * col = new Collider(Vector2(500, 500), Vector2(20, 20), false);
+		collider.addCollider(*col);
+
 	}
 
 	scene.Update(m_GSD);

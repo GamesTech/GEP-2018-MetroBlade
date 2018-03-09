@@ -13,6 +13,7 @@
 #include "Audio.h"
 
 #include "SceneManager.h"
+#include "CollisionManager.h"
 
 using std::vector;
 
@@ -112,4 +113,5 @@ private:
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 
 	SceneManager scene;
+	CollisionManager collider;
 };
