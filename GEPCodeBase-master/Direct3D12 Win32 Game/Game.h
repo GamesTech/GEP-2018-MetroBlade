@@ -14,6 +14,7 @@
 
 #include "SceneManager.h"
 #include "CollisionManager.h"
+#include "Physics2D.h"
 
 using std::vector;
 
@@ -98,7 +99,6 @@ private:
 	vector<GameObject3D*> m_3DObjects;
 	vector<GameObject2D*> m_2DObjects;
 	vector<Sound*> m_sounds;
-
 	RenderData* m_RD;
 	Camera* m_cam;
 
@@ -114,4 +114,5 @@ private:
 
 	SceneManager scene;
 	CollisionManager collider;
+
 };

@@ -3,12 +3,7 @@
 #include "Collider.h"
 
 
-
-Collider::Collider()
-{
-}
-
-Collider::Collider(Vector2 origin, Vector2 dimensions, bool trigger)
+Collider::Collider(Vector2 &origin, Vector2 dimensions, bool trigger)
 	:box_origin(origin),
 	box_dimensions(dimensions),
 	is_trigger(trigger)
@@ -24,5 +19,19 @@ float Collider::getMaxX()
 float Collider::getMaxY()
 {
 	return max_values.y;
+}
+
+Vector2 Collider::getBoxOrigin()
+{
+	return box_origin;
+}
+
+void Collider::setBoxOrigin(Vector2 box_origin)
+{
+	this->box_origin = box_origin;
+}
+Vector2 Collider::getMaxValues()
+{
+	return max_values;
 }
 
