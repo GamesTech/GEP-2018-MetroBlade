@@ -8,7 +8,7 @@ Collider::Collider(Vector2 &origin, Vector2 dimensions, bool trigger)
 	box_dimensions(dimensions),
 	is_trigger(trigger)
 {
-	max_values = box_origin + box_dimensions;
+	
 }
 
 float Collider::getMaxX()
@@ -32,6 +32,7 @@ void Collider::setBoxOrigin(Vector2 box_origin)
 }
 Vector2 Collider::getMaxValues()
 {
+	max_values = box_origin + box_dimensions;
 	return max_values;
 }
 

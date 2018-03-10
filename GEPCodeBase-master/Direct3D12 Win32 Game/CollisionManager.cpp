@@ -21,7 +21,9 @@ bool CollisionManager::checkCollisions()
 			{
 				if (i != j)
 				{
-					if (colliders[j].getBoxOrigin().x <= colliders[i].getMaxValues().x
+					if (colliders[j].getBoxOrigin().x <= colliders[i].getMaxValues().x 
+						&& colliders[j].getBoxOrigin().x >= colliders[i].getBoxOrigin().x
+						&&colliders[j].getBoxOrigin().y >= colliders[i].getBoxOrigin().y
 						&& colliders[j].getBoxOrigin().y <= colliders[i].getMaxValues().y)
 					{
 						return true;

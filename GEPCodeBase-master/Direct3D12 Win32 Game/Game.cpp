@@ -217,10 +217,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 		collider.addCollider(testPlay->getCollider());
-		if (collider.checkCollisions())
-		{
-			testPlay->SetPos(Vector2(0, 500));
-		}
+
 		m_2DObjects.push_back(testPlay);
 	}
 	if (!m_2DObjects.empty())
@@ -229,6 +226,11 @@ void Game::Update(DX::StepTimer const& timer)
 		{
 			collider.updateColliders(m_2DObjects[i]->GetPos(), i);
 		}
+	}
+
+	if (collider.checkCollisions())
+	{
+		m_2DObjects[0]->SetPos(Vector2(0,0));
 	}
 	scene.Update(m_GSD);
 
