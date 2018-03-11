@@ -225,16 +225,11 @@ void Game::Update(DX::StepTimer const& timer)
 		for (int i = 0; i < m_2DObjects.size(); i++)
 		{
 			collider.updateColliders(m_2DObjects[i]->GetPos(), i);
+			m_2DObjects[0]->SetPos(m_2DObjects[0]->GetPos() + collider.collide());
 		}
 	}
 
-	if (collider.checkCollisions())
-	{
-		m_2DObjects[0]->SetPos(Vector2(0,0));
-	}
 	scene.Update(m_GSD);
-
-
 }
 
 //GEP:: Draws the scene.

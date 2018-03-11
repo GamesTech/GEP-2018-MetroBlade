@@ -73,7 +73,3 @@ Collider Player2D::getCollider()
 	return *col;
 }
 
-void Player2D::Test(Vector2 &origin)
-{
-
-}

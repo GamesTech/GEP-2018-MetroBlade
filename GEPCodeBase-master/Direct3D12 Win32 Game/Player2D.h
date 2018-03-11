@@ -28,10 +28,12 @@ protected:
 	float jump_force = 250000.0f;
 	float gravity = 9.8f;
 	float vertical_velocity;
+
 	void setGravity(float gravity) { this->gravity = gravity; }
+
 	enum GameStates { GROUNDED,JUMPING,	FALLING };
+
 	int game_states;
 
-	void Test(Vector2 & origin);
 	Vector2 m_limit = Vector2(800, 500);
 };

@@ -5,7 +5,10 @@ class CollisionManager
 {
 private:
 	std::vector<Collider> colliders;
-	/*std::unique_ptr<Collider>  current_collider;*/
+	Vector2 left;
+	Vector2 right;
+	Vector2 top;
+	Vector2 bottom;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
@@ -13,7 +16,9 @@ public:
 	void init();
 
 	void addCollider(Collider collider);
-	bool checkCollisions();
+	bool boundingBox(Vector2 wallType, int rect2ID);
 	void updateColliders(Vector2 position, int id);
 	void update();
+	int checkCollisions();
+	Vector2 collide();
 };

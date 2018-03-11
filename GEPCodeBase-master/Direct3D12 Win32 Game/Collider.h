@@ -16,6 +16,7 @@ public:
 	Vector2 getMaxValues();
 
 private:
+
 	Vector2  box_dimensions;
 	Vector2  box_origin;
 	Vector2  max_values;
