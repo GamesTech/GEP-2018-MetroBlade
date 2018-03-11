@@ -68,9 +68,9 @@ private:
 
 	void resetRenderState();
 
-	std::unique_ptr<Scene>   current_scene;
-	Camera*					 main_camera = nullptr;
-	RenderData*				 render_data = nullptr;
+	std::unique_ptr<Scene>			current_scene;
+	Camera*							main_camera = nullptr;
+	RenderData*						render_data = nullptr;
 
 	bool							quit = false;
 	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
