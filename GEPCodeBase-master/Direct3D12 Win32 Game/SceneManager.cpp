@@ -36,6 +36,7 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 
 void SceneManager::Init()
 {
+	game_manager.init();
 	// Create a basic scene and set up all of the scene manager systems.
 	current_scene.reset(new Scene);
 
@@ -46,6 +47,7 @@ void SceneManager::Init()
 
 void SceneManager::Update(GameStateData * game_state)
 {
+	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
 		current_scene->Update(game_state);

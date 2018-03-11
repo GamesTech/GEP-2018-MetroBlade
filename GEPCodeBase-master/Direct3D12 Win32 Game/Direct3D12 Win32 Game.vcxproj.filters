@@ -95,6 +95,12 @@
     <Filter Include="Core\Scene Manager\Scene State">
       <UniqueIdentifier>{f9e1b9b3-9b94-4485-bc84-45983b0ad33e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Game Management">
+      <UniqueIdentifier>{6b882ec3-e593-4163-9a1a-6a19a7f6c330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Game Management\Data">
+      <UniqueIdentifier>{16b67cf6-3c4d-43f4-8c59-fe4174d41050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -187,6 +193,15 @@
     <ClInclude Include="SceneState.h">
       <Filter>Core\Scene Manager\Scene State</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Core\Game Management</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Core\Game Management\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Core\Game Management\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -254,6 +269,9 @@
     </ClCompile>
     <ClCompile Include="SceneState.cpp">
       <Filter>Core\Scene Manager\Scene State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Core\Game Management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@
 
 #include "Scene.h"
 #include "SceneEvent.h"
-#include "GPUCommand.h"
+#include "GameManager.h"
 
 namespace DX {
 	class StepTimer;
@@ -74,4 +74,6 @@ private:
 
 	bool							quit = false;
 	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
+	
+	GameManager						game_manager;
 };

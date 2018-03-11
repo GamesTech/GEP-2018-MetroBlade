@@ -173,11 +173,14 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameComponentManager.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Physics2D.h" />
     <ClInclude Include="Player2D.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneEvent.h" />
     <ClInclude Include="SceneManager.h" />
@@ -205,6 +208,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Physics2D.cpp" />
     <ClCompile Include="Player2D.cpp" />
