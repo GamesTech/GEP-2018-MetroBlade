@@ -37,7 +37,7 @@ public:
 	void registerPlayer(Player2D*	 new_player);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
-	std::vector<PlayerData> getPlayerDataArray() const; // TODO - Consider returning a refrence. 
+	std::vector<PlayerData> getPlayerDataArray() const; // TODO - Consider returning a refrence to the array instead. 
 	void addPlayerData(PlayerData new_player_data);
 
 	GameData getGameModeData() const;
@@ -45,6 +45,8 @@ public:
 
 	// Game Manager Event Handlers. 
 	void startGame();
+
+	void resetManager();
 
 private:
 	void endCurrentGame();
@@ -55,6 +57,8 @@ private:
 	SceneState						world;
 	GameData						game_mode;
 	bool							game_active = false;
+	bool							time_limit = true;
+
 
 	float							game_time;
 };

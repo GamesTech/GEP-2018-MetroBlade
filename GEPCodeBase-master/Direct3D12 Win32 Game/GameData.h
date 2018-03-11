@@ -11,7 +11,7 @@
 *
 *  @section Description
 *
-*  Defines the GameData structure which is risponcable for managing the 
+*  Defines the GameData structure which is risponcable for managing the game configuration such as the length of the game.
 */
 
 
@@ -25,7 +25,7 @@ constexpr int GAME_INFINATE_TIME = -1;
 struct GameData 
 {
 	// TODO - Add any additional settings to the field here. 
-	float game_length = 3000.0f;
+	float game_length = GAME_INFINATE_TIME; ///< Game Length In Secounds
 	int game_speed_multiplier = 1;
 	int game_knockback_multiplier = 1;
 	int lives_count = GAME_INFINATE_LIVES;

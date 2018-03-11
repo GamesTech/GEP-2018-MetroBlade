@@ -39,6 +39,7 @@ void SceneManager::Init()
 	// Create a basic scene and set up all of the scene manager systems.
 	game_manager.init();
 	game_manager.addWorldEventListener(scene_event_listener);
+	game_manager.startGame();
 	current_scene.reset(new Scene);
 
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -88,6 +89,7 @@ void SceneManager::loadScene(string scene_name)
 void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
+	game_manager.resetManager();
 	current_scene.reset(scene_name);
 }
 
