@@ -43,11 +43,8 @@ public:
 	GameData getGameModeData() const;
 	void	 setGameModeData(GameData new_game_data);
 
-
 	// Game Manager Event Handlers. 
 	void startGame();
-
-
 
 private:
 	void endCurrentGame();
