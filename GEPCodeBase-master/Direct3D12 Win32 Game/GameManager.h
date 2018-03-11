@@ -55,4 +55,6 @@ private:
 	SceneState						world;
 	GameData						game_mode;
 	bool							game_active = false;
+
+	float							game_time;
 };

@@ -101,6 +101,9 @@
     <Filter Include="Core\Game Management\Data">
       <UniqueIdentifier>{16b67cf6-3c4d-43f4-8c59-fe4174d41050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameComponent\Players">
+      <UniqueIdentifier>{bec5be17-523c-4b25-88fb-960d5dd0c993}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -202,6 +205,9 @@
     <ClInclude Include="GameData.h">
       <Filter>Core\Game Management\Data</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>Core\GameComponent\Players</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -273,6 +279,7 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Core\Game Management</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

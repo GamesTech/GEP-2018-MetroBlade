@@ -36,8 +36,9 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 
 void SceneManager::Init()
 {
-	game_manager.init();
 	// Create a basic scene and set up all of the scene manager systems.
+	game_manager.init();
+	game_manager.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);
 
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -109,6 +110,10 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
 	new_object->assignWorldEventListener(scene_event_listener);
+	if (dynamic_cast<Player2D*>(new_object)) 
+	{
+		game_manager.registerPlayer((Player2D*)new_object);
+	}
 	current_scene->add2DGameObjectToScene(new_object);
 }
 

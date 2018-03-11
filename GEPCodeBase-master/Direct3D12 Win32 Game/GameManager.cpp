@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "GameManager.h"
 #include "GameStateData.h"
+#include "Player2D.h"
+#include "PlayerStatus.h"
 
 constexpr int MAX_PLAYERS = 8;
 
@@ -12,16 +14,18 @@ void GameManager::init()
 
 void GameManager::tickGameManager(GameStateData* _GSD)
 {
-	if (!level_players.empty()) 
+	if ((!level_players.empty()) && game_active) 
 	{
 		// Here we check the state of the game. 
 	}
-
-	// Do Stuff Here. 
 }
 
 void GameManager::registerPlayer(Player2D* new_player)
 {
+	// Setup player stats according to game mode and then register the player for checking every frame.
+	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(3);
+	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setScore(0);
 	level_players.push_back(new_player);
 }
 
@@ -48,6 +52,11 @@ GameData GameManager::getGameModeData() const
 void GameManager::setGameModeData(GameData new_game_data)
 {
 	game_mode = new_game_data;
+}
+
+void GameManager::startGame()
+{
+	game_active = true;
 }
 
 void GameManager::endCurrentGame()

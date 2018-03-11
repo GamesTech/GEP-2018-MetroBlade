@@ -181,6 +181,7 @@
     <ClInclude Include="Physics2D.h" />
     <ClInclude Include="Player2D.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneEvent.h" />
     <ClInclude Include="SceneManager.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Physics2D.cpp" />
     <ClCompile Include="Player2D.cpp" />
+    <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneState.cpp" />

@@ -17,10 +17,16 @@
 
 #pragma once
 
+
+// Game Constants
+constexpr int GAME_INFINATE_LIVES = -1;
+constexpr int GAME_INFINATE_TIME = -1;
+
 struct GameData 
 {
 	// TODO - Add any additional settings to the field here. 
-	int game_length = 3000;
+	float game_length = 3000.0f;
 	int game_speed_multiplier = 1;
 	int game_knockback_multiplier = 1;
+	int lives_count = GAME_INFINATE_LIVES;
 };

@@ -34,6 +34,8 @@ public:
 
 	void assignWorldEventListener(std::shared_ptr<SceneEvent>   world_event_listener);
 
+	GameComponentManager* getComponentManager();
+
 protected:
 	SceneState					world; 
 
