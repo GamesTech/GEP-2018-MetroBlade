@@ -6,7 +6,7 @@
 class SpriteFileManager : public FileManager
 {
 public:
-	void LoadFile(std::string file_name, std::vector<RECT> test_vec, std::string anim_type);
+	void LoadFile(std::string file_name, std::vector<RECT> test_vec);
 	void SaveFile(std::string file_name) override;
 private:
 	std::fstream anim_file;
