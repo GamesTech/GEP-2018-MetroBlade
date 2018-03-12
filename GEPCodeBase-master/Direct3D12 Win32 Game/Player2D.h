@@ -20,6 +20,9 @@ public:
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
 
+	bool			isDead() const;
+	Player2D*		getKiller() const;
+
 protected:
 
 	float m_drive = 1.0f;
@@ -29,6 +32,10 @@ protected:
 	void setGravity(float gravity) { this->gravity = gravity; }
 	enum GameStates { GROUNDED,JUMPING,	FALLING };
 	int game_states;
+
+	bool				dead = true;
+	Player2D*			killer = nullptr;
+
 
 	Vector2 m_limit = Vector2(800, 500);
 };

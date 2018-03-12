@@ -2,6 +2,7 @@
 #include "pch.h"
 
 #include "GameComponentManager.h"
+#include "SceneState.h"
 
 //Base 3D Game Object
 
@@ -45,7 +46,10 @@ public:
 	Matrix GetOri() { return m_rot; }
 	GO3D_Render_Type GetType() { return m_type; }
 
+	void   assignWorldEventLisener(std::shared_ptr<SceneEvent>	scene_event_listener);
+
 protected:
+	SceneState					world;
 
 	GameComponentManager		object_components;
 
