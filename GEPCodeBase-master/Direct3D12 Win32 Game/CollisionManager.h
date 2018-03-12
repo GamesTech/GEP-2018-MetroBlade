@@ -18,7 +18,8 @@ public:
 	void addCollider(Collider collider);
 	bool boundingBox(Vector2 wallType, int rect2ID);
 	void updateColliders(Vector2 position, int id);
+	void updateBoundingBox(int id);
 	void update();
-	int checkCollisions();
+	bool checkCollisions(int id);
 	Vector2 collide();
 };

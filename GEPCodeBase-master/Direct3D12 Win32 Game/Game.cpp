@@ -217,19 +217,21 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 		collider.addCollider(testPlay->getCollider());
-
-		m_2DObjects.push_back(testPlay);
+		m_stuff.push_back(testPlay);
 	}
-	if (!m_2DObjects.empty())
+	if (!m_stuff.empty())
 	{
-		for (int i = 0; i < m_2DObjects.size(); i++)
+		for (int i = 0; i < m_stuff.size(); i++)
 		{
-			collider.updateColliders(m_2DObjects[i]->GetPos(), i);
-			m_2DObjects[0]->SetPos(m_2DObjects[0]->GetPos() + collider.collide());
+			collider.updateColliders(m_stuff[i]->GetPos(), i);
+			/*m_2DObjects[i]->SetPos(m_2DObjects[i]->GetPos() + collider.checkCollisions(i));*/
+			if (collider.checkCollisions(i))
+			{
+				m_stuff[i]->SetVel(m_stuff[i]->GetVel()*-1);
+			}
 		}
+		scene.Update(m_GSD);
 	}
-
-	scene.Update(m_GSD);
 }
 
 //GEP:: Draws the scene.

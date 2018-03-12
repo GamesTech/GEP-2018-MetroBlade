@@ -83,7 +83,7 @@
     <Filter Include="Core\GameComponent\Game components\Test">
       <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameObjects\2D\Collision Manager">
+    <Filter Include="Core\Collision Manager">
       <UniqueIdentifier>{92fea116-d5f7-47d3-84e3-a9ce939424fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -173,7 +173,7 @@
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Core\GameObjects\2D\Collision Manager</Filter>
+      <Filter>Core\Collision Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,7 +244,7 @@
       <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Core\GameObjects\2D\Collision Manager</Filter>
+      <Filter>Core\Collision Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
