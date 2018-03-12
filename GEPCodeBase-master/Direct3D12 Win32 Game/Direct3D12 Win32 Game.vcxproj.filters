@@ -296,6 +296,7 @@
     </ClCompile>
     <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

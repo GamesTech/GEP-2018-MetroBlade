@@ -31,7 +31,13 @@ public:
 
 	void addUIObject(UIObject*  new_object);
 
+	void tickUIObjects(GameStateData*    _GSD);
+	void renderUIObjects(RenderData*      _RD);
+
+	void addWorldEventListener(std::shared_ptr<SceneEvent>  world_event_listener);
+
 private:
 	std::vector<std::unique_ptr<UIObject>>	ui_objects;
+	std::shared_ptr<SceneEvent>         event_listener;
 	SceneState									 world;
 };
