@@ -1,6 +1,6 @@
 #include "SpriteFileManager.h"
 
-void SpriteFileManager::LoadFile(std::string file_name, std::vector<RECT> test_vec)
+void SpriteFileManager::LoadFile(std::string file_name, std::vector<RECT> test_vec, std::string anim_type)
 {
 	anim_file.open(file_name, std::ios_base::in);
 
