@@ -21,18 +21,19 @@ public:
 	Vector2 GetLimit() { return m_limit; }
 
 protected:
+
+	enum GameStates {
+		GROUNDED,
+		JUMPING,
+		FALLING,
+	};
+
 	Sprite*				sprite;
-//	std::unique_ptr<Sprite> sprite;
 	float m_drive = 1.0f;
 	float jump_force = 25000.0f;
 	float gravity = 9.8f;
 	float vertical_velocity;
 	void setGravity(float gravity) { this->gravity = gravity; }
-	enum GameStates { 
-		GROUNDED,
-		JUMPING,
-		FALLING
-	};
 	int game_states;
 
 	Vector2 m_limit = Vector2(800, 500);

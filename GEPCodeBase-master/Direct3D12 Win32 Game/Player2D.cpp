@@ -5,10 +5,6 @@
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
 	src_rect.reset(new RECT);
-	src_rect->left = 0;
-	src_rect->top = 0;
-	src_rect->right = 128;
-	src_rect->bottom = 128;
 	CentreOrigin();
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
@@ -22,6 +18,12 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData* _GSD)
 {
+
+	switch (game_states)
+	{
+	
+
+	}
 	if (game_states == GROUNDED)
 	{
 		
