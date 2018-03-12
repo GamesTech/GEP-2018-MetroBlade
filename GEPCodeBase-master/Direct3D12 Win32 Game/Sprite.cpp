@@ -7,20 +7,22 @@ Sprite::Sprite(bool animated)
 	is_animated = animated;
 
 	//testing animation data structure
-	idle_anim_data.reset(new AnimationData);
-	idle_anim_data->anim_name = "Idle";
 
-	idle_anim_data->anim_rect.resize(2);
-	idle_anim_data->interval_time = 0.5f;
-	idle_anim_data->anim_rect[0].left = 0;
-	idle_anim_data->anim_rect[0].top = 0;
-	idle_anim_data->anim_rect[0].right = 100;
-	idle_anim_data->anim_rect[0].bottom = 126;
+	anim_vector.resize(1);
+	anim_vector[0].anim_name = "Idle";
+	anim_vector[0].anim_rect.resize(2);
 
-	idle_anim_data->anim_rect[1].left = 100;
-	idle_anim_data->anim_rect[1].top = 0;
-	idle_anim_data->anim_rect[1].right = 199;
-	idle_anim_data->anim_rect[1].bottom = 126;
+	anim_vector[0].interval_time = 0.5f;
+	anim_vector[0].anim_rect[0].left = 0;
+	anim_vector[0].anim_rect[0].top = 0;
+	anim_vector[0].anim_rect[0].right = 100;
+	anim_vector[0].anim_rect[0].bottom = 126;
+
+	anim_vector[0].anim_rect[1].left = 100;
+	anim_vector[0].anim_rect[1].top = 0;
+	anim_vector[0].anim_rect[1].right = 199;
+	anim_vector[0].anim_rect[1].bottom = 126;
+
 	
 }
 
@@ -46,14 +48,14 @@ void Sprite::PlayAnimation(GameStateData* _GSD)
 	switch (current_anim)
 	{
 	case IDLE_ANIM:
-		anim_time = idle_anim_data->interval_time;
+		anim_time = anim_vector[0].interval_time;
 		if (total_time < anim_time)
 		{
-			TestFunc(idle_anim_data->anim_rect[0]);
+			TestFunc(anim_vector[0].anim_rect[0]);
 		}
 		else if (total_time > anim_time && total_time < 1.0f)
 		{
-			TestFunc(idle_anim_data->anim_rect[1]);
+			TestFunc(anim_vector[0].anim_rect[1]);
 		}
 		else if (total_time > 1.0f)
 		{

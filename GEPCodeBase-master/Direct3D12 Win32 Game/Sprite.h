@@ -26,5 +26,5 @@ private:
 	animation current_anim = IDLE_ANIM;
 	float total_time = 0.0f;
 	std::shared_ptr<RECT>   sprite_src_rect;
-	std::unique_ptr<AnimationData> idle_anim_data;
+	std::vector<AnimationData> anim_vector;
 };
