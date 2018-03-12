@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "FileManager.h"
 
 void FileManager::LoadFile(std::string file_name)

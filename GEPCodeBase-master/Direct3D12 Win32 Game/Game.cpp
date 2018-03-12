@@ -7,6 +7,7 @@
 #include "RenderData.h"
 #include "GameStateData.h"
 #include "Scene.h"
+#include "SpriteFileManager.h"
 
 extern void ExitGame();
 

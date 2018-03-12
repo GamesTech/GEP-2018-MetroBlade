@@ -13,7 +13,7 @@
 #include "Audio.h"
 
 #include "SceneManager.h"
-
+#include "SpriteFileManager.h"
 using std::vector;
 
 struct RenderData;

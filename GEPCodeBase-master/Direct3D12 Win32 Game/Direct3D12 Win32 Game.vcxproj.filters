@@ -83,6 +83,9 @@
     <Filter Include="Core\GameComponent\Game components\Test">
       <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\FileManagers">
+      <UniqueIdentifier>{6cb7941c-f307-4217-b2f6-1c04d72a831e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -166,7 +169,12 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FileManager.h">
+      <Filter>Core\FileManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFileManager.h">
+      <Filter>Core\FileManagers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -232,7 +240,12 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Core\FileManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteFileManager.cpp">
+      <Filter>Core\FileManagers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
