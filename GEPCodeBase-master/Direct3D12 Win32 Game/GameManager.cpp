@@ -17,7 +17,7 @@ void GameManager::tickGameManager(GameStateData* _GSD)
 	if ((!level_players.empty()) && game_active) 
 	{
 		// Here we check the state of the game. 
-		if (game_mode.game_length != GAME_INFINATE_TIME)
+		if (game_mode.game_length != GAME_INFINITE_TIME)
 		{
 			// Tick time and if it reaches 0 then end the game. 
 			game_time -= _GSD->m_dt;
@@ -71,6 +71,7 @@ void GameManager::setupGame()
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(3);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
 	}
+	game_time = game_mode.game_length;
 }
 
 void GameManager::startGame()
@@ -85,7 +86,7 @@ void GameManager::resetManager()
 
 void GameManager::checkPlayerLifeStatus()
 {
-	if (game_mode.number_of_lives != GAME_INFINATE_LIVES) 
+	if (game_mode.number_of_lives != GAME_INFINITE_LIVES) 
 	{
 		for (auto& player : level_players)
 		{
@@ -100,5 +101,5 @@ void GameManager::checkPlayerLifeStatus()
 
 void GameManager::endCurrentGame()
 {
-	world.changeScene("gm_results_screen");
+	world.changeScene("gm_results");
 }
