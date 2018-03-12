@@ -32,7 +32,6 @@ public:
 	virtual void CentreOrigin() override;
 
 	virtual void Tick(GameStateData * _GSD) override;
-
 	virtual void Render(RenderData * _RD) override;
 
 private:

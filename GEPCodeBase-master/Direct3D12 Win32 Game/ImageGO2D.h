@@ -18,7 +18,8 @@ public:
 	ImageGO2D(RenderData* _RD, string _filename);
 	virtual ~ImageGO2D();
 
-	void Render(RenderData* _RD);
+	void Tick(GameStateData* _GSD) override {};
+	void Render(RenderData* _RD) override;
 
 	void CentreOrigin();
 

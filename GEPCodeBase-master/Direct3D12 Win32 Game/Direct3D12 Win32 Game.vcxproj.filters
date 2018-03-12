@@ -113,6 +113,9 @@
     <Filter Include="Core\UI\Base Object">
       <UniqueIdentifier>{61077468-25bf-41de-94b8-f83d5123eeb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\Test Object">
+      <UniqueIdentifier>{954bae20-35e9-4487-a0ef-aa8cd8a1131c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -223,6 +226,9 @@
     <ClInclude Include="UIObject.h">
       <Filter>Core\UI\Base Object</Filter>
     </ClInclude>
+    <ClInclude Include="UITest.h">
+      <Filter>Core\UI\Test Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -295,8 +301,15 @@
       <Filter>Core\Game Management</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStatus.cpp" />
-    <ClCompile Include="UIObject.cpp" />
-    <ClCompile Include="UICanvas.cpp" />
+    <ClCompile Include="UITest.cpp">
+      <Filter>Core\UI\Test Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Core\UI\Base Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UICanvas.cpp">
+      <Filter>Core\UI\Canvas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -8,6 +8,8 @@
 #include "GameStateData.h"
 #include "Scene.h"
 
+#include "UITest.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -207,6 +209,9 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+
+		UITest*  testUI = new UITest(m_RD);
+		scene.instanciateUIObject(testUI);
 	}
 
 	if (m_keyboard->GetState().T) 
