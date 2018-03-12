@@ -43,12 +43,15 @@ public:
 	GameData getGameModeData() const;
 	void	 setGameModeData(GameData new_game_data);
 
-	// Game Manager Event Handlers. 
+	// Game Manager Event Handlers.
+	void setupGame();
 	void startGame();
 
 	void resetManager();
 
 private:
+	void checkPlayerLifeStatus();
+
 	void endCurrentGame();
 
 	std::vector<Player2D*>			level_players;

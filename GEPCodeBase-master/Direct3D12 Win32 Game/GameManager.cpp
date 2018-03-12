@@ -17,7 +17,7 @@ void GameManager::tickGameManager(GameStateData* _GSD)
 	if ((!level_players.empty()) && game_active) 
 	{
 		// Here we check the state of the game. 
-		if (time_limit)
+		if (game_mode.game_length != GAME_INFINATE_TIME)
 		{
 			// Tick time and if it reaches 0 then end the game. 
 			game_time -= _GSD->m_dt;
@@ -28,7 +28,7 @@ void GameManager::tickGameManager(GameStateData* _GSD)
 		}
 
 		// check for lives of the players. 
-
+		checkPlayerLifeStatus();
 	}
 }
 
@@ -36,9 +36,6 @@ void GameManager::registerPlayer(Player2D* new_player)
 {
 	// Setup player stats according to game mode and then register the player for checking every frame.
 	// TODO - Move [layer setup to when the game starts. 
-	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(3);
-	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
-	new_player->getComponentManager()->getComponentByType<PlayerStatus>()->setScore(0);
 	level_players.push_back(new_player);
 }
 
@@ -67,19 +64,38 @@ void GameManager::setGameModeData(GameData new_game_data)
 	game_mode = new_game_data;
 }
 
+void GameManager::setupGame()
+{
+	for (auto& player : level_players) 
+	{
+		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(3);
+		player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+	}
+}
+
 void GameManager::startGame()
 {
 	game_active = true;
-	game_time = game_mode.game_length;
-	if (game_time == -1) 
-	{
-		time_limit = false;
-	}
 }
 
 void GameManager::resetManager()
 {
 	level_players.clear();
+}
+
+void GameManager::checkPlayerLifeStatus()
+{
+	if (game_mode.number_of_lives != GAME_INFINATE_LIVES) 
+	{
+		for (auto& player : level_players)
+		{
+			if (player->isDead()) 
+			{
+				// change the score accordingly.
+				OutputDebugString(L"Im dead mate \n");
+			}
+		}
+	}
 }
 
 void GameManager::endCurrentGame()

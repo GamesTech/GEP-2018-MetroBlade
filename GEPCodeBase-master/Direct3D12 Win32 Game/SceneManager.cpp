@@ -141,7 +141,6 @@ void SceneManager::processSceneEvents()
 #ifdef _DEBUG
 			OutputDebugString(L"Critical Error - Game Killed by event SIGKILL");
 #endif 
-
 			break;
 		}
 	}

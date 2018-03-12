@@ -17,7 +17,6 @@
 
 #pragma once
 
-
 // Game Constants
 constexpr int GAME_INFINATE_LIVES = -1;
 constexpr int GAME_INFINATE_TIME = -1;
@@ -28,5 +27,5 @@ struct GameData
 	float game_length = GAME_INFINATE_TIME; ///< Game Length In Secounds
 	int game_speed_multiplier = 1;
 	int game_knockback_multiplier = 1;
-	int lives_count = GAME_INFINATE_LIVES;
+	int number_of_lives = GAME_INFINATE_LIVES;
 };

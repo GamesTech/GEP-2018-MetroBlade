@@ -72,3 +72,13 @@ void Player2D::Tick(GameStateData * _GSD)
 	}
 	
 }
+
+bool Player2D::isDead() const
+{
+	return dead;
+}
+
+Player2D* Player2D::getKiller() const
+{
+	return killer;
+}
