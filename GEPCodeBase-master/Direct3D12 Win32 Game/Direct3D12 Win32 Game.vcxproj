@@ -171,6 +171,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameComponentManager.h" />
     <ClInclude Include="GameData.h" />
@@ -207,6 +209,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />

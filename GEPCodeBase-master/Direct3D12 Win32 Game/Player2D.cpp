@@ -16,6 +16,7 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData * _GSD)
 {
+
 	if (game_states == GROUNDED)
 	{
 		setGravity(0.0f);
@@ -70,7 +71,8 @@ void Player2D::Tick(GameStateData * _GSD)
 		m_pos.y = m_limit.y;
 		game_states = GROUNDED;
 	}
-	
+
+
 }
 
 bool Player2D::isDead() const
@@ -82,3 +84,9 @@ Player2D* Player2D::getKiller() const
 {
 	return killer;
 }
+
+Collider Player2D::getCollider()
+{
+	return *col;
+}
+

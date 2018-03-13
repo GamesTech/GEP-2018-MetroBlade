@@ -83,6 +83,9 @@
     <Filter Include="Core\GameComponent\Game components\Test">
       <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Collision Manager">
+      <UniqueIdentifier>{92fea116-d5f7-47d3-84e3-a9ce939424fe}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\Events">
       <UniqueIdentifier>{c608e1f8-fc7b-4371-9a7c-cd156d575d5f}</UniqueIdentifier>
     </Filter>
@@ -187,6 +190,12 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Core\Collision Manager</Filter>
+    </ClInclude>
     <ClInclude Include="SceneEvent.h">
       <Filter>Core\Events\Scene Events</Filter>
     </ClInclude>
@@ -272,6 +281,12 @@
     </ClCompile>
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Core\GameObjects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Core\Collision Manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneState.cpp">
       <Filter>Core\Scene Manager\Scene State</Filter>
