@@ -235,8 +235,9 @@ void Game::Update(DX::StepTimer const& timer)
 				m_physics_object[i]->SetVel(m_physics_object[i]->GetVel()*-1);
 			}
 		}
-		scene.Update(m_GSD);
+		
 	}
+	scene.Update(m_GSD);
 }
 
 //GEP:: Draws the scene.
