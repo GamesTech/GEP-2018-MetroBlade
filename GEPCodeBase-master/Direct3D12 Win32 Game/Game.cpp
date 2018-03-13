@@ -217,17 +217,17 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 		collider.addCollider(testPlay->getCollider());
-		m_physics_object.push_back(testPlay);
+		m_stuff.push_back(testPlay);
 	}
-	if (!m_physics_object.empty())
+	if (!m_stuff.empty())
 	{
-		for (int i = 0; i < m_physics_object.size(); i++)
+		for (int i = 0; i < m_stuff.size(); i++)
 		{
-			collider.updateColliders(m_physics_object[i]->GetPos(), i);
+			collider.updateColliders(m_stuff[i]->GetPos(), i);
 			/*m_2DObjects[i]->SetPos(m_2DObjects[i]->GetPos() + collider.checkCollisions(i));*/
 			if (collider.checkCollisions(i))
 			{
-				m_physics_object[i]->SetVel(m_physics_object[i]->GetVel()*-1);
+				m_stuff[i]->SetVel(m_stuff[i]->GetVel()*-1);
 			}
 		}
 		scene.Update(m_GSD);
