@@ -16,9 +16,10 @@ Player2D::~Player2D()
 {
 }
 
-void Player2D::CheckInput()
+void Player2D::CheckInput(GameStateData* _GSD)
 {
-	if (_GSD->m_keyboardState.Space)
+	//temp place for input
+	if (_GSD->m_keyboardState.Space && phys_state == GROUNDED)
 	{
 		action_state = JUMPING;
 		phys_state = AIR;
@@ -26,67 +27,66 @@ void Player2D::CheckInput()
 	//Push the guy around in the directions for the key presses
 	if (_GSD->m_keyboardState.A)
 	{
-		AddForce(-m_drive * Vector2::UnitX);
+		SetVel(Vector2(-250, m_vel.y));
 		action_state = MOVING;
 	}
 	else if (_GSD->m_keyboardState.D)
 	{
-		AddForce(m_drive * Vector2::UnitX);
+		
+		SetVel(Vector2(250, m_vel.y));
 		action_state = MOVING;
 	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
-		//if no keys are pressed stop moving
-		Vector2 zero_vel = Vector2(0, 0);
-		SetVel(zero_vel);
+		action_state = IDLE;
+		SetVel(Vector2(0, 0));
 	}
 }
 void Player2D::Tick(GameStateData* _GSD)
 {
+	
+	CheckInput(_GSD);
 
+	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 	switch (phys_state)
 	{
 	case GROUNDED:
+
 		setGravity(0.0f);
 		break;
+
 	case AIR:
+
 		break;
 	}
-
+	//action state determines the players action such as attacking, jumping, moving etc
 	switch (action_state)
 	{
 	case IDLE:
+
 		sprite->SetAnimation(IDLE_ANIM);
 		break;
+
 	case MOVING:
+
 		if (phys_state == GROUNDED)
 		{
 			sprite->SetAnimation(MOVE_ANIM);
 		}
 		break;
+
 	case JUMPING:
-		
+
 		sprite->SetAnimation(JUMP_ANIM);
 		setGravity(1000.0f);
 		AddForce(-jump_force * Vector2::UnitY);
 		break;
+
 	case ATTACKING:
+
 		break;
 	}
 	
-	//TEMP PLACE FOR INPUT WHILE INPUTMANAGER IS IN WORKS
-		
-
-
-	//change anim depending on gamestate - testing purposes
-	if (GetVel() == Vector2(0,0) && phys_state == GROUNDED)
-	{
-		action_state = IDLE;
-	}
-	else if(GetVel() != Vector2(0, 0) && phys_state == GROUNDED)
-	{
-		action_state = MOVING;
-	}
 
 	//GRAVITY
 	AddForce(gravity*Vector2::UnitY);
@@ -106,7 +106,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 	if (m_pos.y <= 0.0f)
 	{
-		m_pos.y = 0.0f;
+		m_pos.y = 0.1f;
 		
 	}
 
