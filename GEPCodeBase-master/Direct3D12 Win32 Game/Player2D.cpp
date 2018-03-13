@@ -24,15 +24,15 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		action_state = JUMPING;
 		phys_state = AIR;
 	}
-	//Push the guy around in the directions for the key presses
-	if (_GSD->m_keyboardState.A)
+	else if (_GSD->m_keyboardState.A)
 	{
+		m_effects = SpriteEffects_FlipHorizontally;
 		SetVel(Vector2(-250, m_vel.y));
 		action_state = MOVING;
 	}
 	else if (_GSD->m_keyboardState.D)
 	{
-		
+		m_effects = SpriteEffects_None;
 		SetVel(Vector2(250, m_vel.y));
 		action_state = MOVING;
 	}
@@ -51,7 +51,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	switch (phys_state)
 	{
 	case GROUNDED:
-
+		SetVel(Vector2(m_vel.x, 0));
 		setGravity(0.0f);
 		break;
 
@@ -59,6 +59,7 @@ void Player2D::Tick(GameStateData* _GSD)
 
 		break;
 	}
+
 	//action state determines the players action such as attacking, jumping, moving etc
 	switch (action_state)
 	{
@@ -115,10 +116,12 @@ void Player2D::Tick(GameStateData* _GSD)
 		m_pos.x = m_limit.x;
 		
 	}
-	if (m_pos.y >= m_limit.y)
+	if (m_pos.y > m_limit.y)
 	{
 		m_pos.y = m_limit.y;
 		phys_state = GROUNDED;
 	}
+
+	
 	
 }

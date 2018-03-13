@@ -35,6 +35,7 @@ protected:
 	};
 
 	Sprite*				sprite;
+	bool flipped = false;
 	float m_drive = 1.0f;
 	float jump_force = 25000.0f;
 	float gravity = 9.8f;
