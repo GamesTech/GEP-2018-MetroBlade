@@ -7,6 +7,8 @@
     <ImageContentTask Include="gens_ss.png" />
     <ImageContentTask Include="Fighter_1_ss.png" />
     <ImageContentTask Include="Fighter_2_ss.png" />
+    <ImageContentTask Include="Fighter_3_ss.png" />
+    <ImageContentTask Include="Fighter_4_ss.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />
