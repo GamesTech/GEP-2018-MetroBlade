@@ -14,7 +14,7 @@ public:
 	virtual ~Player2D();
 
 	virtual void Tick(GameStateData* _GSD);
-
+	void CheckInput(GameStateData* _GSD);
 	void SetDrive(float _drive) { m_drive = _drive; }
 	float GetDrive() { return m_drive; }
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
@@ -22,10 +22,16 @@ public:
 
 protected:
 
-	enum GameStates {
+	enum PhysicalStates {
 		GROUNDED,
-		JUMPING,
-		FALLING,
+		AIR,
+		COLLISION
+	};
+	enum PlayerActions {
+		IDLE,
+		MOVING,
+		ATTACKING,
+		JUMPING
 	};
 
 	Sprite*				sprite;
@@ -34,7 +40,7 @@ protected:
 	float gravity = 9.8f;
 	float vertical_velocity;
 	void setGravity(float gravity) { this->gravity = gravity; }
-	int game_states;
-
+	PhysicalStates phys_state = GROUNDED;
+	PlayerActions action_state = IDLE;
 	Vector2 m_limit = Vector2(800, 500);
 };
