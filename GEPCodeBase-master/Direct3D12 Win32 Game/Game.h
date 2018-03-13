@@ -94,8 +94,6 @@ private:
 
 	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 
-	vector<GameObject3D*> m_3DObjects;
-	vector<GameObject2D*> m_2DObjects;
 	vector<Sound*> m_sounds;
 
 	RenderData* m_RD;

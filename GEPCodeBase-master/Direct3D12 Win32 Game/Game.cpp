@@ -168,6 +168,11 @@ void Game::Tick()
 //GEP:: Updates all the Game Object Structures
 void Game::Update(DX::StepTimer const& timer)
 {
+	if (scene.shouldQuit()) 
+	{
+		PostQuitMessage(0);
+	}
+
 	ReadInput();
     m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
@@ -331,8 +336,8 @@ void Game::OnWindowSizeChanged(int width, int height)
 void Game::GetDefaultSize(int& width, int& height) const
 {
     // TODO: Change to desired default window size (note minimum size is 320x200).
-    width = 800;
-    height = 600;
+    width = 1920;
+    height = 1080;
 }
 
 // These are the resources that depend on the device.
@@ -703,10 +708,5 @@ void Game::ReadInput()
 
 	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
 	m_GSD->m_keyboardState= m_keyboard->GetState();
-
-	//Quit if press Esc
-	if (m_GSD->m_keyboardState.Escape)
-		PostQuitMessage(0);
-
 	m_GSD->m_mouseState = m_mouse->GetState();
 }
