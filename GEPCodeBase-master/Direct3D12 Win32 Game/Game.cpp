@@ -210,6 +210,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		m_physics_object.clear();
 
 	}
 
