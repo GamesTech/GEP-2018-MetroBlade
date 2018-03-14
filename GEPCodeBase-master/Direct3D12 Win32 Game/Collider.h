@@ -10,6 +10,7 @@ public:
 
 	float getMaxX();
 	float getMaxY();
+	bool getTrigger();
 
 	Vector2 getBoxOrigin();
 	void setBoxOrigin(Vector2 box_origin);

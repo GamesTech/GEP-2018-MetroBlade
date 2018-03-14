@@ -210,7 +210,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
-		m_physics_object.clear();
+		m_physics_objects.clear();
 
 	}
 
@@ -218,22 +218,29 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		// Instantiation test.
 		Player2D* testPlay = new Player2D(m_RD, "gens");
+		Physics2D* punch_box = new Physics2D(m_RD, "gens");
+
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		scene.instanciate2DObject(testPlay);
+		scene.instanciate2DObject(punch_box);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 		collider.addCollider(testPlay->getCollider());
-		m_physics_object.push_back(testPlay);
+		collider.addCollider(punch_box->getCollider());
+		m_physics_objects.push_back(testPlay);
+		m_physics_objects.push_back(punch_box);
 	}
-	if (!m_physics_object.empty())
+	if (!m_physics_objects.empty())
 	{
-		for (int i = 0; i < m_physics_object.size(); i++)
+		for (int i = 0; i < m_physics_objects.size(); i++)
 		{
-			collider.updateColliders(m_physics_object[i]->GetPos(), i);
-			/*m_2DObjects[i]->SetPos(m_2DObjects[i]->GetPos() + collider.checkCollisions(i));*/
+			collider.updateColliders(m_physics_objects[i]->GetPos(), i);
 			if (collider.checkCollisions(i))
 			{
-				m_physics_object[i]->SetVel(m_physics_object[i]->GetVel()*-1);
+				if (!collider.checkTrigger(i))
+				{
+					m_physics_objects[i]->SetVel(m_physics_objects[i]->GetVel()*-1);
+				}
 			}
 		}
 		

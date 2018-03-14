@@ -21,6 +21,11 @@ float Collider::getMaxY()
 	return max_values.y;
 }
 
+bool Collider::getTrigger()
+{
+	return is_trigger;
+}
+
 Vector2 Collider::getBoxOrigin()
 {
 	return box_origin;

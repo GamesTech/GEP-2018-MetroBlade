@@ -25,3 +25,9 @@ void Physics2D::Tick(GameStateData * _GSD)
 	m_vel = newVel;
 	m_acc = Vector2::Zero;
 }
+
+Collider Physics2D::getCollider()
+{
+	return *punch_collider;
+}
+

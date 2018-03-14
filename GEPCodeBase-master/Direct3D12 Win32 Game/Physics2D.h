@@ -1,6 +1,7 @@
 #pragma once
 #include "ImageGO2D.h"
 
+
 //GEP:: Euler Integration Solve for VERY Basic 2D physics
 class Physics2D :
 	public ImageGO2D
@@ -8,6 +9,7 @@ class Physics2D :
 public:
 	Physics2D(RenderData* _RD, string _filename);
 	~Physics2D();
+
 
 	void AddForce(Vector2 _push) { m_acc += _push / m_mass; }
 
@@ -20,11 +22,12 @@ public:
 	float GetDrag() { return m_drag; }
 
 	virtual void Tick(GameStateData* _GSD);
-
+	Collider getCollider();
 protected:
 	Vector2 m_vel;
 	Vector2 m_acc;
 
 	float m_mass = 1.0f;
 	float m_drag = 0.0f;
+	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
 };

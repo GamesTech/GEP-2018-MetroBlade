@@ -33,11 +33,18 @@ bool CollisionManager::checkCollisions(int id)
 	return false;
 }
 
+bool CollisionManager::checkTrigger(int id)
+{
+		if (colliders[id].getTrigger())
+		{
+			return true;
+		}
+	return false;
+}
 
 void CollisionManager::updateColliders(Vector2 position, int id)
 {
 	colliders[id].setBoxOrigin(position);
-
 }
 
 void CollisionManager::update()
