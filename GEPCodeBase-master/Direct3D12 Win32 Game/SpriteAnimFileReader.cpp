@@ -44,7 +44,7 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 				}
 				else if (temp[0] == 62) 
 				{
-					
+					temp.erase(temp.begin());
 					temp_data.time_step = (1 / (float)std::atof(temp.c_str()));
 				}
 				else 
@@ -62,6 +62,11 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 			{
 				break;
 			}
+		}
+
+		if (temp_data.anim_state_name != "null_state") 
+		{
+			anim_data_buffer.push_back(temp_data);
 		}
 	}
 
@@ -85,7 +90,7 @@ void SpriteAnimFileReader::getAnimStateName(AnimationData& anim_buffer, std::str
 void SpriteAnimFileReader::getAnimFrameData(AnimationData& anim_buffer, std::string & temp)
 {
 	float rect_bounds[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	int i = 0;
+	int i = 0, j = 0;
 	std::string  rect_value;
 
 	for (auto& string_char : temp) 
@@ -107,10 +112,12 @@ void SpriteAnimFileReader::getAnimFrameData(AnimationData& anim_buffer, std::str
 		}
 	}
 
+	rect_bounds[i] = (float)std::stof(rect_value);
+
 	RECT   new_rect;
-	new_rect.top    = rect_bounds[0];
-	new_rect.left   = rect_bounds[1];
-	new_rect.bottom = rect_bounds[2];
-	new_rect.right  = rect_bounds[3];
+	new_rect.left  = rect_bounds[0];
+	new_rect.top = rect_bounds[1];
+	new_rect.right = rect_bounds[2];
+	new_rect.bottom = rect_bounds[3];
 	anim_buffer.anim_frames.push_back(new_rect);
 }
