@@ -26,9 +26,10 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 
 		for (int i = 0; i < file_buffer.length(); i++) 
 		{
+			// At the end of the line check the data. 
 			if (file_buffer[i] == '\n') 
 			{
-				// TODO - consider mobing to a seperate function.
+				// Here we check the start of the line to work out if the information is meta info or frame info. (TODO - consider moving to a seperate function.)
 				if ((97 <= (int)temp[0]) && ((int)temp[0] <= 122)) 
 				{
 					if (temp_data.anim_state_name != "null_state") 
@@ -40,6 +41,7 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 				}
 				else if ((48 <= temp[0]) && (temp[0] <= 57)) 
 				{
+					temp += ' ';
 					getAnimFrameData(temp_data, temp);
 				}
 				else if (temp[0] == 62) 
@@ -64,7 +66,7 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 			}
 		}
 
-		if (temp_data.anim_state_name != "null_state") 
+		if (temp_data.anim_state_name != "null_state") // If we have got to the end and have created an animation state with some data then add the state. 
 		{
 			anim_data_buffer.push_back(temp_data);
 		}
@@ -90,7 +92,7 @@ void SpriteAnimFileReader::getAnimStateName(AnimationData& anim_buffer, std::str
 void SpriteAnimFileReader::getAnimFrameData(AnimationData& anim_buffer, std::string & temp)
 {
 	float rect_bounds[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-	int i = 0, j = 0;
+	int i = 0;
 	std::string  rect_value;
 
 	for (auto& string_char : temp) 
@@ -112,7 +114,7 @@ void SpriteAnimFileReader::getAnimFrameData(AnimationData& anim_buffer, std::str
 		}
 	}
 
-	rect_bounds[i] = (float)std::stof(rect_value);
+	// rect_bounds[i] = (float)std::stof(rect_value);
 
 	RECT   new_rect;
 	new_rect.left  = rect_bounds[0];
