@@ -24,12 +24,13 @@
 class FileReaderBase 
 {
 public:
-	FileReaderBase() = delete; 
+	FileReaderBase() = default;
 	virtual ~FileReaderBase() = default;
 
 	bool readFile(std::string  file_path);
 
-private:
+
+protected:
 	// storage for file data.
 	std::string			  file_buffer; 
 };

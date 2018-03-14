@@ -113,6 +113,12 @@
     <Filter Include="Core\Sprite Animation">
       <UniqueIdentifier>{dae7578c-4c76-4f53-9fdd-35248ca50bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\File IO\Base">
+      <UniqueIdentifier>{9276d140-20a3-44be-af12-3c612e9e465c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO\Sprite Animation">
+      <UniqueIdentifier>{b93d1c55-8a8d-4f04-a46d-777a69c32c12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -223,11 +229,14 @@
     <ClInclude Include="PlayerStatus.h">
       <Filter>Core\GameComponent\Game components\Players</Filter>
     </ClInclude>
-    <ClInclude Include="FileReaderBase.h">
-      <Filter>Core\File IO</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationData.h">
       <Filter>Core\Sprite Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReaderBase.h">
+      <Filter>Core\File IO\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimFileReader.h">
+      <Filter>Core\File IO\Sprite Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,12 +315,13 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Core\Game Management</Filter>
     </ClCompile>
-    <ClCompile Include="FileReaderBase.cpp">
-      <Filter>Core\File IO</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerStatus.cpp">
       <Filter>Core\GameComponent\Game components\Players</Filter>
     </ClCompile>
+    <ClCompile Include="FileReaderBase.cpp">
+      <Filter>Core\File IO\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimFileReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
