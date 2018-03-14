@@ -21,15 +21,15 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 	if (!error)
 	{
 		anim_data_buffer.reserve(10);
-		AnimationData	temp_data;
+		AnimationData  temp_data;
 		std::string    temp;
 
-		for (int i = 0; i < file_buffer.length; i++) 
+		for (int i = 0; i < file_buffer.length(); i++) 
 		{
-			if (file_buffer[i] == '/n') 
+			if (file_buffer[i] == '\n') 
 			{
 				// TODO - consider mobing to a seperate function.
-				if ((97 <= temp[0]) && (temp[0] >= 122)) 
+				if ((97 <= (int)temp[0]) && ((int)temp[0] <= 122)) 
 				{
 					if (temp_data.anim_state_name != "null_state") 
 					{
@@ -38,12 +38,13 @@ bool SpriteAnimFileReader::parseFile(std::vector<AnimationData>& anim_data_buffe
 					}
 					getAnimStateName(temp_data, temp);
 				}
-				else if ((48 <= temp[0]) && (temp[0] >= 57)) 
+				else if ((48 <= temp[0]) && (temp[0] <= 57)) 
 				{
 					getAnimFrameData(temp_data, temp);
 				}
 				else if (temp[0] == 62) 
 				{
+					
 					temp_data.time_step = (1 / (float)std::atof(temp.c_str()));
 				}
 				else 

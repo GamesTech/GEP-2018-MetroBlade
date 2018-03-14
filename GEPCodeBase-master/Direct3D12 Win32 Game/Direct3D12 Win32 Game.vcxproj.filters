@@ -321,7 +321,9 @@
     <ClCompile Include="FileReaderBase.cpp">
       <Filter>Core\File IO\Base</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimFileReader.cpp" />
+    <ClCompile Include="SpriteAnimFileReader.cpp">
+      <Filter>Core\File IO\Sprite Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
