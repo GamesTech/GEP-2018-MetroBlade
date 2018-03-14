@@ -22,7 +22,7 @@
     <RootNamespace>Direct3D12_Win32_Game</RootNamespace>
     <ProjectGuid>{48d1b087-0658-4dcc-a845-655543ce48a4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -170,9 +170,11 @@
     </FXCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationData.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="FileReaderBase.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameComponentManager.h" />
     <ClInclude Include="GameData.h" />
@@ -211,6 +213,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="FileReaderBase.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />

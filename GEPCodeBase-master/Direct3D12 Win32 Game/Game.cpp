@@ -8,6 +8,8 @@
 #include "GameStateData.h"
 #include "Scene.h"
 
+#include "FileReaderBase.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
