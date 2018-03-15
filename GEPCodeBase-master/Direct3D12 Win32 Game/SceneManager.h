@@ -21,7 +21,8 @@
 #include <vector>
 
 #include "Scene.h"
-#include "GPUCommand.h"
+#include "SceneEvent.h"
+#include "GameManager.h"
 
 namespace DX {
 	class StepTimer;
@@ -47,6 +48,7 @@ public:
 	void Init();
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
+	bool shouldQuit() const;
 
 	Scene*   getScene(); // Test routiene. 
 
@@ -62,9 +64,16 @@ public:
 	void instanciate3DObject(GameObject3D*  new_object);
 
 private:
+	void processSceneEvents();
+
 	void resetRenderState();
 
-	std::unique_ptr<Scene>   current_scene;
-	Camera*					 main_camera = nullptr;
-	RenderData*				 render_data = nullptr;
+	std::unique_ptr<Scene>			current_scene;
+	Camera*							main_camera = nullptr;
+	RenderData*						render_data = nullptr;
+
+	bool							quit = false;
+	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
+	
+	GameManager						game_manager;
 };
