@@ -39,5 +39,5 @@ private:
 	std::vector<AnimationData> anim_vector;
 	int						   frame_index = 0;
 	bool					   loop = false;
-	AnimationData&			   current_anim_state;  // the current anim state.
+	AnimationData			   current_anim_state;  // the current anim state.
 };
