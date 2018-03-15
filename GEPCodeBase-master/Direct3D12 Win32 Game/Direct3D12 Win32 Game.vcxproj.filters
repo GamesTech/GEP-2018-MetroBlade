@@ -119,6 +119,9 @@
     <Filter Include="Core\File IO\Sprite Animation">
       <UniqueIdentifier>{b93d1c55-8a8d-4f04-a46d-777a69c32c12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameComponent\Game components\Backgrounds">
+      <UniqueIdentifier>{76ac2aee-e731-4084-a1be-0b3c08a16173}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -238,6 +241,9 @@
     <ClInclude Include="SpriteAnimFileReader.h">
       <Filter>Core\File IO\Sprite Animation</Filter>
     </ClInclude>
+    <ClInclude Include="Scrolling.h">
+      <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -323,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="SpriteAnimFileReader.cpp">
       <Filter>Core\File IO\Sprite Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Scrolling.cpp">
+      <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
