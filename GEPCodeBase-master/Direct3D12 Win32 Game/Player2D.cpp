@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Player2D.h"
 #include "GameStateData.h"
+#include "PlayerStatus.h"
+
 #include "Sprite.h"
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
@@ -10,6 +12,7 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 	src_rect->right = 128;
 	src_rect->bottom = 128;
 	CentreOrigin();
+	object_components.addComponent(new PlayerStatus);
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->SetRECT(src_rect);
@@ -22,6 +25,7 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData* _GSD)
 {
+
 	if (game_states == GROUNDED)
 	{
 		
@@ -78,6 +82,12 @@ void Player2D::Tick(GameStateData* _GSD)
 		SetVel(test_vel);
 	}
 	
+	if (_GSD->m_keyboardState.Escape) 
+	{
+		// Testing for error components. 
+		world.exitGame();
+	}
+
 	
 
 	
@@ -109,5 +119,22 @@ void Player2D::Tick(GameStateData* _GSD)
 		m_pos.y = m_limit.y;
 		game_states = GROUNDED;
 	}
-	
+
+
 }
+
+bool Player2D::isDead() const
+{
+	return dead;
+}
+
+Player2D* Player2D::getKiller() const
+{
+	return killer;
+}
+
+Collider Player2D::getCollider()
+{
+	return *col;
+}
+

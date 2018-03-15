@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameComponentManager.h"
+#include "SceneState.h"
 
 //GEP:: Base class for all 2-D objects
 
@@ -20,6 +21,7 @@ public:
 	Color GetColour() { return m_colour; }
 	Vector2 GetScale() { return m_scale; }
 
+	
 	void SetPos(Vector2 _pos) { m_pos = _pos; }
 	void SetOrigin(Vector2 _origin) { m_origin = _origin; }
 	void SetOri(float _ori) { m_orientation = _ori; }
@@ -31,8 +33,13 @@ public:
 	virtual void Tick(GameStateData* _GSD) = 0;
 	virtual void Render(RenderData* _RD) = 0;
 
+	void assignWorldEventListener(std::shared_ptr<SceneEvent>   world_event_listener);
+
+	GameComponentManager* getComponentManager();
 
 protected:
+	SceneState					world; 
+
 	GameComponentManager		object_components;
 
 	Vector2 m_pos = Vector2::Zero;

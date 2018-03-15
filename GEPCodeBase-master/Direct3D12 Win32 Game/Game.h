@@ -13,6 +13,8 @@
 #include "Audio.h"
 
 #include "SceneManager.h"
+#include "CollisionManager.h"
+#include "Physics2D.h"
 
 using std::vector;
 
@@ -96,8 +98,8 @@ private:
 
 	vector<GameObject3D*> m_3DObjects;
 	vector<GameObject2D*> m_2DObjects;
+	vector<Physics2D*> m_physics_object;
 	vector<Sound*> m_sounds;
-
 	RenderData* m_RD;
 	Camera* m_cam;
 
@@ -112,4 +114,6 @@ private:
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 
 	SceneManager scene;
+	CollisionManager collider;
+
 };

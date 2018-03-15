@@ -19,3 +19,8 @@ void GameObject3D::Tick(GameStateData* _GSD)
 
 	m_world = scale * m_rot * trans;
 }
+
+void GameObject3D::assignWorldEventLisener(std::shared_ptr<SceneEvent> scene_event_listener)
+{
+	world.assignSceneManagerListener(scene_event_listener);
+}
