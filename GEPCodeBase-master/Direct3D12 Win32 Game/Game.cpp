@@ -74,11 +74,12 @@ void Game::Initialize(HWND window, int width, int height)
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
+	m_inputManager.reset(new InputManager);
 	m_keyboard = std::make_unique<Keyboard>();
 	m_mouse = std::make_unique<Mouse>();
 	m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
 	m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
-
+	//m_gamePad = std::make_unique<DirectX::GamePad>();
 	m_RD = new RenderData;
 
 	m_RD->m_d3dDevice = m_d3dDevice;
@@ -202,6 +203,11 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(100.0f);
 		testPlay->SetDrag(0.5f);
 		newScene->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
+
+		Player2D* testPlay2 = new Player2D(m_RD, "gens", 1);
+		testPlay2->SetDrive(100.0f);
+		testPlay2->SetDrag(0.5f);
+		newScene->add2DGameObjectToScene(testPlay2);
 
 		scene.loadScene(newScene);
 	}

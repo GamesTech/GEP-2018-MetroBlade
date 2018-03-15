@@ -7,7 +7,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 {
 	CentreOrigin();
 	controller_id = gamepadID;
-	m_gamePad = std::make_unique<DirectX::GamePad>();
+	
 }
 
 
@@ -18,7 +18,7 @@ Player2D::~Player2D()
 void Player2D::Tick(GameStateData * _GSD)
 {
 	//temporary gamepad input
-	DirectX::GamePad::State controller_state = m_gamePad->GetState(controller_id);
+	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
 	
 	float stick_x = controller_state.thumbSticks.leftX;
 	float stick_y = controller_state.thumbSticks.leftY;

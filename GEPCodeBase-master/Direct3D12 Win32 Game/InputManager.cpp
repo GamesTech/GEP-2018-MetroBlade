@@ -3,7 +3,7 @@
 
 void InputManager::init()
 {
-	m_gamePad = std::make_unique<DirectX::GamePad>();
+	
 }
 void InputManager::LoadInputSettings()
 {

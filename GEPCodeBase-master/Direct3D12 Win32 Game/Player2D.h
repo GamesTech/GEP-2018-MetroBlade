@@ -1,6 +1,6 @@
 #pragma once
 #include "Physics2D.h"
-
+#include "InputManager.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Player2D :
@@ -22,8 +22,8 @@ public:
 
 protected:
 	float m_drive = 1.0f;
-	std::unique_ptr<DirectX::GamePad> m_gamePad;
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 600);
+	InputManager* m_input;
 };
 
