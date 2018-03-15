@@ -9,21 +9,43 @@ Sprite::Sprite(bool animated)
 	//testing animation data structure
 
 	anim_vector.resize(1);
-	anim_vector[0].anim_name = "Idle";
-	anim_vector[0].anim_rect.resize(2);
+	//anim_vector[0].anim_name = "Idle";
+	//anim_vector[0].anim_rect.resize(2);
 
-	anim_vector[0].interval_time = 0.5f;
-	anim_vector[0].anim_rect[0].left = 0;
-	anim_vector[0].anim_rect[0].top = 0;
-	anim_vector[0].anim_rect[0].right = 100;
-	anim_vector[0].anim_rect[0].bottom = 126;
+	//anim_vector[0].interval_time = 0.5f;
+	//anim_vector[0].anim_rect[0].left = 0;
+	//anim_vector[0].anim_rect[0].top = 0;
+	//anim_vector[0].anim_rect[0].right = 100;
+	//anim_vector[0].anim_rect[0].bottom = 126;
 
-	anim_vector[0].anim_rect[1].left = 100;
-	anim_vector[0].anim_rect[1].top = 0;
-	anim_vector[0].anim_rect[1].right = 199;
-	anim_vector[0].anim_rect[1].bottom = 126;
+	//anim_vector[0].anim_rect[1].left = 100;
+	//anim_vector[0].anim_rect[1].top = 0;
+	//anim_vector[0].anim_rect[1].right = 199;
+	//anim_vector[0].anim_rect[1].bottom = 126;
 
 	
+}
+
+void Sprite::tickComponent(GameStateData * _GSD)
+{
+	total_time += _GSD->m_dt;
+
+	if (total_time >= current_anim_state.time_step) 
+	{
+		if (frame_index + 1 > current_anim_state.anim_frames.size() - 1) 
+		{
+			if (loop) { frame_index = 0; }
+		}
+		else 
+		{
+			frame_index++;
+		}
+	}
+}
+
+void Sprite::renderComponent(RenderData * _RD)
+{
+	// TODO - draw sprite based on the frame information. 
 }
 
 void Sprite::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
@@ -45,7 +67,7 @@ void Sprite::PlayAnimation(GameStateData* _GSD)
 	total_time += _GSD->m_dt;
 
 	float anim_time = 0;
-	switch (current_anim)
+	/*switch (current_anim)
 	{
 	case IDLE_ANIM:
 		anim_time = anim_vector[0].interval_time;
@@ -103,5 +125,17 @@ void Sprite::PlayAnimation(GameStateData* _GSD)
 		break;
 	case ATTACK_ANIM:
 		break;
+	}*/
+}
+
+void Sprite::setAnimationState(std::string new_animation_state)
+{
+	for (auto& anim_state : anim_vector) 
+	{
+		if (anim_state.anim_state_name == new_animation_state) 
+		{
+			current_anim_state = anim_state;
+			frame_index = 0;
+		}
 	}
-};
+}
