@@ -24,6 +24,7 @@ public:
 	Vector2 GetLimit() { return m_limit; }
 	Collider getCollider();
 
+
 	bool			isDead() const;
 	Player2D*		getKiller() const;
 

@@ -218,6 +218,7 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
+		testPlay->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		m_physics_object.clear();
 
@@ -230,7 +231,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
-		testPlay->SetPos(Vector2(800, 500));
+   	testPlay->SetPos(Vector2(800, 500));
 		collider.addCollider(testPlay->getCollider());
 		m_physics_object.push_back(testPlay);
 	}

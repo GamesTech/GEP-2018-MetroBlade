@@ -4,18 +4,19 @@
 #include "PlayerStatus.h"
 
 #include "Sprite.h"
+#include "SpriteAnimFileReader.h"
+
+
 Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 {
 	src_rect.reset(new RECT);
-	src_rect->left = 0;
-	src_rect->top = 0;
-	src_rect->right = 128;
-	src_rect->bottom = 128;
 	CentreOrigin();
 	object_components.addComponent(new PlayerStatus);
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
-	sprite->SetRECT(src_rect);
+	sprite->setSpriteRECT(src_rect);
+	sprite->setSpriteAnimationFile("Fighter_1_animations");
+	sprite->setAnimationState("idle");
 }
 
 
@@ -32,7 +33,7 @@ void Player2D::Tick(GameStateData* _GSD)
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
-			setGravity(1000.0f);
+			setGravity(100.0f);
 			game_states = JUMPING;
 			AddForce(-jump_force * Vector2::UnitY);
 		}
@@ -47,15 +48,18 @@ void Player2D::Tick(GameStateData* _GSD)
 	//change anim depending on gamestate - testing purposes
 	if (GetVel() == Vector2(0,0) && game_states == GROUNDED)
 	{
-		sprite->SetAnimation(IDLE_ANIM);
+		sprite->setAnimationState("idle");
+		//sprite->SetAnimation(IDLE_ANIM);
 	}
 	else if(GetVel() != Vector2(0, 0) && game_states == GROUNDED)
 	{
-		sprite->SetAnimation(MOVE_ANIM);
+		sprite->setAnimationState("move");
+		//sprite->SetAnimation(MOVE_ANIM);
 	}
 	else if (game_states == JUMPING)
 	{
-		sprite->SetAnimation(JUMP_ANIM);
+		sprite->setAnimationState("jump");
+		//sprite->SetAnimation(JUMP_ANIM);
 	}
 	AddForce(gravity*Vector2::UnitY);
 //Push the guy around in the directions for the key presses
@@ -89,14 +93,13 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 
 	
-
-	
 //GEP:: Lets go up the inheritence and share our functionality
 
 	Physics2D::Tick(_GSD);
 
 	//Update sprite animation
-	sprite->PlayAnimation(_GSD);
+	sprite->tickComponent(_GSD);
+
 //after that as updated my position let's lock it inside my limits
 	if (m_pos.x < 50.0f)
 	{
