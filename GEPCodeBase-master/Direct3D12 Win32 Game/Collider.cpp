@@ -11,6 +11,16 @@ Collider::Collider(Vector2 &origin, Vector2 dimensions, bool trigger)
 	
 }
 
+int Collider::getTag()
+{
+	return m_tag;
+}
+
+void Collider::setTag(int tag)
+{
+	m_tag = tag;
+}
+
 float Collider::getMaxX()
 {
 	return max_values.x;

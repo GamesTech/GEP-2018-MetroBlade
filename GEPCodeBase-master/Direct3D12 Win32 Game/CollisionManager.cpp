@@ -11,6 +11,10 @@ void CollisionManager::addCollider(Collider collider)
 	colliders.push_back(collider);
 }
 
+int CollisionManager::GetSize()
+{
+	return colliders.size();
+}
 
 bool CollisionManager::checkCollisions(int id)
 {

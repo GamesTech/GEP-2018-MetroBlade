@@ -22,12 +22,11 @@ public:
 	float GetDrag() { return m_drag; }
 
 	virtual void Tick(GameStateData* _GSD);
-	Collider getCollider();
 protected:
 	Vector2 m_vel;
 	Vector2 m_acc;
 
 	float m_mass = 1.0f;
 	float m_drag = 0.0f;
-	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
+	
 };

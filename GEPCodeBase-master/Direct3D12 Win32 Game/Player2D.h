@@ -19,13 +19,19 @@ public:
 
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
-	Collider getCollider();
+	Collider* getCollider(int id);
 
 	bool			isDead() const;
 	Player2D*		getKiller() const;
+	void setTag(int tag) { player_tag = tag; }
 
 protected:
+
+	int player_tag;
+
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
+	
 
 	float m_drive = 1.0f;
 	float jump_force = 250000.0f;
@@ -34,7 +40,7 @@ protected:
 
 	void setGravity(float gravity) { this->gravity = gravity; }
 
-	enum GameStates { GROUNDED,JUMPING,	FALLING };
+	enum GameStates { GROUNDED, JUMPING, FALLING };
 
 	int game_states;
 

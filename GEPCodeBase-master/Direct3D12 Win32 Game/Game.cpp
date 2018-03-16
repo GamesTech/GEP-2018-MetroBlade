@@ -218,17 +218,21 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		// Instantiation test.
 		Player2D* testPlay = new Player2D(m_RD, "gens");
-		Physics2D* punch_box = new Physics2D(m_RD, "gens");
 
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		scene.instanciate2DObject(testPlay);
-		scene.instanciate2DObject(punch_box);//m_2DObjects.push_back(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
-		collider.addCollider(testPlay->getCollider());
-		collider.addCollider(punch_box->getCollider());
+
+		collider.addCollider(*(testPlay->getCollider(0)));
+		collider.addCollider(*(testPlay->getCollider(1)));
+
+		testPlay->getCollider(0)->setTag(m_physics_objects.size());
+		testPlay->getCollider(1)->setTag(m_physics_objects.size());
+
 		m_physics_objects.push_back(testPlay);
-		m_physics_objects.push_back(punch_box);
+
+
 	}
 	if (!m_physics_objects.empty())
 	{

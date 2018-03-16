@@ -12,6 +12,7 @@ public:
 	void init();
 
 	void addCollider(Collider collider);
+	int GetSize();
 	void updateColliders(Vector2 position, int id);
 	void update();
 	bool checkCollisions(int id);

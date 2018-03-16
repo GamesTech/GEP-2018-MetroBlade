@@ -88,8 +88,17 @@ Player2D* Player2D::getKiller() const
 	return killer;
 }
 
-Collider Player2D::getCollider()
+Collider* Player2D::getCollider(int id)
 {
-		return *col;
+
+	switch (id)
+	{
+	case 0:
+		return col;
+		break;
+	case 1:
+		return punch_collider;
+		break;
+	}
 }
 
