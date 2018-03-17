@@ -21,6 +21,7 @@ public:
 	Color GetColour() { return m_colour; }
 	Vector2 GetScale() { return m_scale; }
 
+	
 	void SetPos(Vector2 _pos) { m_pos = _pos; }
 	void SetOrigin(Vector2 _origin) { m_origin = _origin; }
 	void SetOri(float _ori) { m_orientation = _ori; }
