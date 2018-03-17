@@ -23,11 +23,8 @@ public:
 
 	bool			isDead() const;
 	Player2D*		getKiller() const;
-	void setTag(int tag) { player_tag = tag; }
 
 protected:
-
-	int player_tag;
 
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);

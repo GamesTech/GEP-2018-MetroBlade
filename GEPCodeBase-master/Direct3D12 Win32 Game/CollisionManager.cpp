@@ -16,7 +16,7 @@ int CollisionManager::GetSize()
 	return colliders.size();
 }
 
-bool CollisionManager::checkCollisions(int id)
+int CollisionManager::checkCollisions(int id)
 {
 	if (!colliders.empty())
 	{
@@ -29,20 +29,23 @@ bool CollisionManager::checkCollisions(int id)
 					colliders[id].getBoxOrigin().y <= colliders[i].getMaxValues().y &&
 					colliders[id].getMaxValues().y >= colliders[i].getBoxOrigin().y)
 				{
-					return  true;
+					if (!checkTrigger(i))
+					{
+						return  colliders[id].getTag();
+					}
 				}
 			}
 		}
 	}
-	return false;
+	return -1;
 }
 
 bool CollisionManager::checkTrigger(int id)
 {
-		if (colliders[id].getTrigger())
-		{
-			return true;
-		}
+	if (colliders[id].getTrigger())
+	{
+		return true;
+	}
 	return false;
 }
 
@@ -53,4 +56,9 @@ void CollisionManager::updateColliders(Vector2 position, int id)
 
 void CollisionManager::update()
 {
+}
+
+int CollisionManager::getTag(int id)
+{
+	return colliders[id].getTag();
 }

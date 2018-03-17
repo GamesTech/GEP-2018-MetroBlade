@@ -171,7 +171,7 @@ void Game::Tick()
 //GEP:: Updates all the Game Object Structures
 void Game::Update(DX::StepTimer const& timer)
 {
-	if (scene.shouldQuit()) 
+	if (scene.shouldQuit())
 	{
 		PostQuitMessage(0);
 	}
@@ -224,11 +224,13 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 
+		testPlay->getCollider(0)->setTag(m_physics_objects.size());
+		testPlay->getCollider(1)->setTag(m_physics_objects.size());
+
 		collider.addCollider(*(testPlay->getCollider(0)));
 		collider.addCollider(*(testPlay->getCollider(1)));
 
-		testPlay->getCollider(0)->setTag(m_physics_objects.size());
-		testPlay->getCollider(1)->setTag(m_physics_objects.size());
+
 
 		m_physics_objects.push_back(testPlay);
 
@@ -236,18 +238,19 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 	if (!m_physics_objects.empty())
 	{
-		for (int i = 0; i < m_physics_objects.size(); i++)
+		for (int i = 0; i < collider.GetSize(); i++)
 		{
-			collider.updateColliders(m_physics_objects[i]->GetPos(), i);
-			if (collider.checkCollisions(i))
+			collider.updateColliders(m_physics_objects[collider.getTag(i)]->GetPos(), i);
+			int collider_tag = collider.checkCollisions(i);
+
+			if (collider_tag != -1)
 			{
 				if (!collider.checkTrigger(i))
 				{
-					m_physics_objects[i]->SetVel(m_physics_objects[i]->GetVel()*-1);
+					m_physics_objects[collider_tag]->SetVel(m_physics_objects[collider_tag]->GetVel()*-1);
 				}
 			}
 		}
-		
 	}
 	scene.Update(m_GSD);
 }
@@ -365,9 +368,9 @@ void Game::OnWindowSizeChanged(int width, int height)
 // Properties
 void Game::GetDefaultSize(int& width, int& height) const
 {
-    // TODO: Change to desired default window size (note minimum size is 320x200).
-    width = 1920;
-    height = 1080;
+	// TODO: Change to desired default window size (note minimum size is 320x200).
+	width = 1920;
+	height = 1080;
 }
 
 // These are the resources that depend on the device.
@@ -737,6 +740,6 @@ void Game::ReadInput()
 	//Note in both cases they are identical to the DirectXTK for DirectX 11
 
 	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState= m_keyboard->GetState();
+	m_GSD->m_keyboardState = m_keyboard->GetState();
 	m_GSD->m_mouseState = m_mouse->GetState();
 }

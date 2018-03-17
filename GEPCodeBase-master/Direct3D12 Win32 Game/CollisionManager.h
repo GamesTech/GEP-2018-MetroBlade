@@ -15,6 +15,7 @@ public:
 	int GetSize();
 	void updateColliders(Vector2 position, int id);
 	void update();
-	bool checkCollisions(int id);
+	int getTag(int id);
+	int checkCollisions(int id);
 	bool checkTrigger(int id);
 };
