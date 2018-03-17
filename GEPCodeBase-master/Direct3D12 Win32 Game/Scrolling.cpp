@@ -2,13 +2,9 @@
 #include "Scrolling.h"
 #include "SceneManager.h"
 
-
-void Scrolling::loadImages()
+void Scrolling::setLayerSpeed()
 {
+	layers[1]->getXPos = main_camera 
 
-}
-
-void Scrolling::renderImages(RenderData * _R)
-{
-	
+		
 }

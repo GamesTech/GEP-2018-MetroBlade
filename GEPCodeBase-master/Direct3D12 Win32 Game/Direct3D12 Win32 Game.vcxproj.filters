@@ -244,6 +244,9 @@
     <ClInclude Include="Scrolling.h">
       <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
     </ClInclude>
+    <ClInclude Include="Layers.h">
+      <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -331,6 +334,9 @@
       <Filter>Core\File IO\Sprite Animation</Filter>
     </ClCompile>
     <ClCompile Include="Scrolling.cpp">
+      <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Layers.cpp">
       <Filter>Core\GameComponent\Game components\Backgrounds</Filter>
     </ClCompile>
   </ItemGroup>
