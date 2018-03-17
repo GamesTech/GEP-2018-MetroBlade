@@ -15,4 +15,4 @@
 #pragma once
 
 
-constexpr char FILE_ANIMATION_EXTENSTION[] = ".txt";
+constexpr char FILE_ANIMATION_EXTENSTION[] = ".mbanim";
