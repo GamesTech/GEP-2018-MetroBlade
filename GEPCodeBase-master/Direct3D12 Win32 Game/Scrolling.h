@@ -1,5 +1,8 @@
 #pragma once
 #include "GameComponent.h"
+#include "SceneManager.h"
+
+class SceneManager;
 
 class Scrolling : public GameComponent
 {
@@ -8,9 +11,14 @@ public:
 	~Scrolling() = default;
 
 	void loadImages();
-	void renderImages(RenderData * _RD);
+	void renderImages(RenderData * _R);
+
+
+private:
+	std::unique_ptr<SceneManager> main_camera = nullptr;
+
 
 	//Created vector of layers;
-	//Each layer based upon distance from 
+	//Each layer based upon distance from camera; 
 
 };
