@@ -18,13 +18,15 @@ public:
 	ImageGO2D(RenderData* _RD, string _filename);
 	virtual ~ImageGO2D();
 
-	void Render(RenderData* _RD);
-
+	void Tick(GameStateData *_GSD) override;
+	void Render(RenderData* _RD) override;
+	virtual void ChangeRectPos(int pos1, int pos2, int pos3, int pos4);
 	void CentreOrigin();
 
 protected:
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_texture;
 	int m_resourceNum = -1;
-
+	std::shared_ptr<RECT>   src_rect;
+	int sheet_total = 0;
 };
 
