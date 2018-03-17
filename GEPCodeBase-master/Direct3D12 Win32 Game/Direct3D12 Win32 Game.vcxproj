@@ -190,6 +190,7 @@
     <ClInclude Include="SceneEvent.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneState.h" />
+    <ClInclude Include="Scrolling.h" />
     <ClInclude Include="SDKMeshGO3D.h" />
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Game.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneState.cpp" />
+    <ClCompile Include="Scrolling.cpp" />
     <ClCompile Include="SDKMeshGO3D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject2D.cpp" />
