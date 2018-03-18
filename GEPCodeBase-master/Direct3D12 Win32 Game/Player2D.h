@@ -9,8 +9,6 @@ class Player2D :
 	
 {
 public:
-
-	
 	//TODO: add a 3d player and modes to switch between different views and basic physics
 	Player2D(RenderData* _RD, string _filename);
 	virtual ~Player2D();

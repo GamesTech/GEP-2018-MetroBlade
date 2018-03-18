@@ -28,5 +28,5 @@ struct GameData
 	float respawn_time = 2.0f;
 	int game_speed_multiplier = 1;
 	int game_knockback_multiplier = 1;
-	int number_of_lives = 3;
+	int number_of_lives = 1;
 };

@@ -92,8 +92,6 @@ void GameManager::resetManager()
 
 void GameManager::checkPlayerLifeStatus()
 {
-	if (game_mode.number_of_lives != GAME_INFINITE_LIVES) 
-	{
 		for (auto& player : level_players)
 		{
 			if (player->isDead()) 
@@ -109,7 +107,6 @@ void GameManager::checkPlayerLifeStatus()
 				OutputDebugString(L"Im dead mate \n");
 			}
 		}
-	}
 }
 
 void GameManager::checkPlayerRespawnStatus(float delta_time)
@@ -134,6 +131,8 @@ void GameManager::checkPlayerRespawnStatus(float delta_time)
 
 bool GameManager::shouldRespawnPlayer(Player2D* player)
 {
+	bool return_val = false;
+
 	// Is the player in the list.
 	for (auto& respawnable_player : players_to_respawn)
 	{
@@ -143,23 +142,26 @@ bool GameManager::shouldRespawnPlayer(Player2D* player)
 		}
 	}
 
-	PlayerStatus*  player_stats = player->getComponentManager()->getComponentByType<PlayerStatus>();
-
-	if (player_stats->getLives() != 0) 
+	if (game_mode.number_of_lives != GAME_INFINITE_LIVES)
 	{
-		player_stats->setLives(player_stats->getLives() - 1);
+		PlayerStatus*  player_stats = player->getComponentManager()->getComponentByType<PlayerStatus>();
 
-		if (player_stats->getLives() == 0)
+		if (player_stats->getLives() != 0)
 		{
-			return false;
-		}
+			player_stats->setLives(player_stats->getLives() - 1);
 
-		return true;
+			if (player_stats->getLives() != 0)
+			{
+				return_val = true;
+			}
+		}
 	}
 	else 
 	{
-		return false;
+		return_val = true;
 	}
+
+	return return_val;
 }
 
 void GameManager::respawnPlayer(Player2D* player)
