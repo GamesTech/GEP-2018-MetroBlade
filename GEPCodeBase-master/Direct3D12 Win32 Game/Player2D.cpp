@@ -16,6 +16,7 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData * _GSD)
 {
+	col->setBoxOrigin(m_pos);
 
 	if (game_states == GROUNDED)
 	{
@@ -33,12 +34,17 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (_GSD->m_keyboardState.A)
 	{
 		AddForce(-m_drive * Vector2::UnitX);
-		punch_collider->setBoxOrigin(GetPos() + Vector2(-1, 0));
+		punch_collider->setBoxOrigin(m_pos + Vector2(-1, 0));
 	}
 	if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
-		punch_collider->setBoxOrigin(Vector2(col->getMaxX() + 1, 0));
+		punch_collider->setBoxOrigin(m_pos + Vector2(120, 0));
+
+	}
+	if (_GSD->m_keyboardState.F)
+	{
+		AddForce(100000 * Vector2::UnitX);
 
 	}
 
@@ -56,6 +62,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (m_pos.x < 0.0f)
 	{
 		m_pos.x = 1.0f;
+		m_vel = Vector2(0, 0);
 
 	}
 	if (m_pos.y <= 0.0f)
@@ -67,6 +74,7 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (m_pos.x > m_limit.x)
 	{
 		m_pos.x = m_limit.x;
+		m_vel = Vector2(0, 0);
 
 	}
 	if (m_pos.y >= m_limit.y)

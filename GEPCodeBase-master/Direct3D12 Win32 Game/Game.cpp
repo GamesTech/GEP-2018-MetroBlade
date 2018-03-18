@@ -225,10 +225,10 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetPos(Vector2(800, 500));
 
 		testPlay->getCollider(0)->setTag(m_physics_objects.size());
-		testPlay->getCollider(1)->setTag(m_physics_objects.size());
+		/*testPlay->getCollider(1)->setTag(m_physics_objects.size());*/
 
-		collider.addCollider(*(testPlay->getCollider(0)));
-		collider.addCollider(*(testPlay->getCollider(1)));
+		collider.addCollider((testPlay->getCollider(0)));
+		/*collider.addCollider((testPlay->getCollider(1)));*/
 
 
 

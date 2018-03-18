@@ -4,14 +4,14 @@
 class CollisionManager
 {
 private:
-	std::vector<Collider> colliders;
+	std::vector<Collider*> colliders;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
 
 	void init();
 
-	void addCollider(Collider collider);
+	void addCollider(Collider* collider);
 	int GetSize();
 	void updateColliders(Vector2 position, int id);
 	void update();

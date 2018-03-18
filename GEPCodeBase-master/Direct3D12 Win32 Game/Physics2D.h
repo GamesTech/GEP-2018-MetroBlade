@@ -16,6 +16,8 @@ public:
 	Vector2 GetVel() { return m_vel; }
 	void SetVel(Vector2 _vel) { m_vel = _vel ; }
 
+	Vector2 GetAcc() { return m_acc; }
+
 	void SetMass(float _mass) { m_mass = _mass; }
 	float GetMass() { return m_mass; }
 	void SetDrag(float _drag) { m_drag = _drag; }
