@@ -25,8 +25,13 @@ public:
 	Collider getCollider();
 
 
+	// Game Manager interface
 	bool			isDead() const;
+	void			isDead(bool is_dead);
 	Player2D*		getKiller() const;
+	float			getRespawnTime() const;
+	void			setRespawnTime(float respawn_timer);
+
 
 protected:
 	Sprite*				sprite;
@@ -43,8 +48,9 @@ protected:
 
 	int game_states;
 
-	bool				dead = true;
+	bool				dead = false;
 	Player2D*			killer = nullptr;
+	float				respawn_time = 0.0f;
 
 
 	Vector2 m_limit = Vector2(800, 500);

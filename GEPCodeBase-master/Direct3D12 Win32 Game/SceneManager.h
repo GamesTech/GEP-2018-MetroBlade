@@ -63,6 +63,8 @@ public:
 	void instanciate2DObject(GameObject2D*  new_object);
 	void instanciate3DObject(GameObject3D*  new_object);
 
+	void startGameManager();
+
 private:
 	void processSceneEvents();
 

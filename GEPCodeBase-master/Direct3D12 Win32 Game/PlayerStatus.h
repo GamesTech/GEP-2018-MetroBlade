@@ -19,6 +19,7 @@
 #pragma once
 
 #include "GameComponent.h"
+#include "GameData.h"
 
 class PlayerStatus : public GameComponent 
 {
@@ -37,9 +38,14 @@ public:
 	void setDamagePercentage(int new_damage_percentage);
 	int getScore() const;
 	void setScore(int new_score);
+	int getLaunchMultiplier() const;
+	void setLaunchMultiplier(int new_multiplier);
 
 private: 
-	int lives = -1;
+
+	// TODO - Consider using an array for these variables.
+	int lives = GAME_INFINITE_LIVES;
 	int damage_percentage = 0;
 	int score = 0;
+	int launch_multiplier = 1;
 };

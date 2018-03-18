@@ -248,6 +248,9 @@
     <ClInclude Include="Sprite.h">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
     </ClInclude>
+    <ClInclude Include="GameModeEvent.h">
+      <Filter>Core\Events\Scene Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">

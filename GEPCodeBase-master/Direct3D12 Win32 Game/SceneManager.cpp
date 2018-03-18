@@ -89,9 +89,7 @@ void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
 	game_manager.resetManager();
-	game_manager.setupGame();
 	current_scene.reset(scene_name);
-	game_manager.startGame();
 }
 
 void SceneManager::clearScene()
@@ -117,6 +115,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	{
 		game_manager.registerPlayer((Player2D*)new_object);
 	}
+
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
@@ -124,6 +123,12 @@ void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
 	new_object->assignWorldEventLisener(scene_event_listener);
 	current_scene->add3DGameObjectToScene(new_object);
+}
+
+void SceneManager::startGameManager()
+{
+	game_manager.setupGame();
+	game_manager.startGame();
 }
 
 void SceneManager::processSceneEvents()

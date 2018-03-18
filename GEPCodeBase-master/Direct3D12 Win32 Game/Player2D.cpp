@@ -43,6 +43,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 		Vector2 test_vel = Vector2(0, 0);
 		SetVel(test_vel);
+		dead = true;
 	}
 
 	//change anim depending on gamestate - testing purposes
@@ -131,9 +132,24 @@ bool Player2D::isDead() const
 	return dead;
 }
 
+void Player2D::isDead(bool is_dead)
+{
+	dead = is_dead;
+}
+
 Player2D* Player2D::getKiller() const
 {
 	return killer;
+}
+
+float Player2D::getRespawnTime() const
+{
+	return respawn_time;
+}
+
+void Player2D::setRespawnTime(float respawn_timer)
+{
+	respawn_time = respawn_timer;
 }
 
 Collider Player2D::getCollider()

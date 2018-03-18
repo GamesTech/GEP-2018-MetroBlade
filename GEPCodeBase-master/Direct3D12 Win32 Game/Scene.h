@@ -42,5 +42,4 @@ private:
 	/* Object Buffers */
 	std::vector<GameObject3D*> m_3DObjects; 
 	std::vector<GameObject2D*> m_2DObjects;
-
 };

@@ -181,6 +181,7 @@
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameModeEvent.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Physics2D.h" />

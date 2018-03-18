@@ -157,13 +157,6 @@ void Game::Initialize(HWND window, int width, int height)
 
 	TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
 	m_sounds.push_back(TS);
-
-	
-	//std::vector<AnimationData> testVector;
-
-	//SpriteAnimFileReader		test_reader;
-	//test_reader.setFileName("C:\\Users\\Nathan\\Documents\\GitHub\\GEP-2018-MetroBlade\\GEPCodeBase-master\\DirectXTK12-master\\Debug\\test.txt");
-	//test_reader.parseFile(testVector);
 }
 
 //GEP:: Executes the basic game loop.
@@ -220,6 +213,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		scene.startGameManager();
 		m_physics_object.clear();
 
 	}
