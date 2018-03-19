@@ -83,6 +83,14 @@ Scene * SceneManager::getScene()
 void SceneManager::loadScene(string scene_name)
 {
 	// TODO - Add Code to load diffrent Scenes into the game.
+	if (scene_name == "clear") 
+	{
+		loadScene(nullptr);
+	}
+	else 
+	{
+		// Parse the scene file and load its contents here.
+	}
 }
 
 void SceneManager::loadScene(Scene * scene_name)
@@ -148,6 +156,10 @@ void SceneManager::processSceneEvents()
 			OutputDebugString(L"Critical Error - Game Killed by event SIGKILL");
 #endif 
 			break;
+		}
+		case SceneEventFlags::EVENT_SIGCHANGE:
+		{
+			loadScene(scene_event_listener->new_map);
 		}
 	}
 	scene_event_listener->event_flag = EVENT_SIGNONE;

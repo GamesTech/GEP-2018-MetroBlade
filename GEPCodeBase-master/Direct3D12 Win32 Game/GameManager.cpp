@@ -92,21 +92,21 @@ void GameManager::resetManager()
 
 void GameManager::checkPlayerLifeStatus()
 {
-		for (auto& player : level_players)
+	for (auto& player : level_players)
+	{
+		if (player->isDead()) 
 		{
-			if (player->isDead()) 
+			if (shouldRespawnPlayer(player)) 
 			{
-				if (shouldRespawnPlayer(player)) 
-				{
-					respawnPlayer(player);
-					// Here we add them to a respawn list if there not being respawned.
-					OutputDebugString(L"Im going to respawn mate \n");
-				}
-
-				// change the score accordingly.
-				OutputDebugString(L"Im dead mate \n");
+				respawnPlayer(player);
+				// Here we add them to a respawn list if there not being respawned.
+				OutputDebugString(L"Im going to respawn mate \n");
 			}
+
+			// change the score accordingly.
+			OutputDebugString(L"Im dead mate \n");
 		}
+	}
 }
 
 void GameManager::checkPlayerRespawnStatus(float delta_time)
