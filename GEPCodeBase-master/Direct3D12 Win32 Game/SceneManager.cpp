@@ -121,7 +121,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	new_object->assignWorldEventListener(scene_event_listener);
 	if (dynamic_cast<Player2D*>(new_object)) 
 	{
-		game_manager.registerPlayer((Player2D*)new_object);
+		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
 
 	current_scene->add2DGameObjectToScene(new_object);

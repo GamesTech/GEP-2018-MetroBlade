@@ -34,14 +34,14 @@ public:
 
 	void tickGameManager(GameStateData* _GSD);
 
-	void registerPlayer(Player2D*	new_player);
+	void registerPlayerInstance(Player2D*	new_player);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
-	std::vector<PlayerData> getPlayerDataArray() const; // TODO - Consider returning a refrence to the array instead. 
-	void addPlayerData(PlayerData new_player_data);
+	std::vector<PlayerData>* getPlayerDataArray() const; // TODO - Consider returning a refrence to the array instead. 
+	void addPlayer(PlayerData new_player_data);
 
-	GameData getGameModeData() const;
-	void	 setGameModeData(GameData new_game_data);
+	GameData* getGameModeData();
+	GameData* getGameModeStatus();
 
 	// Game Manager Event Handlers.
 	void setupGame();
@@ -66,8 +66,8 @@ private:
 
 	SceneState						world;
 	GameData						game_mode;
-	bool							game_active = false;
-	bool							time_limit = true;
+	GameData						game_mode_state; ///< The present game state which is passed trough to objects. 
 
+	bool							game_active = false;
 	float							game_time;
 };

@@ -208,7 +208,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_2_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(800, 500));

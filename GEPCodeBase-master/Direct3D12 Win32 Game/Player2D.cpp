@@ -15,7 +15,7 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
-	sprite->setSpriteAnimationFile("Fighter_1_animations");
+	sprite->setSpriteAnimationFile("Fighter_2_animations");
 	sprite->setAnimationState("idle");
 }
 
