@@ -23,7 +23,6 @@ class GameComponentManager
 public:
 	GameComponentManager() = default;
 	~GameComponentManager() = default;
-
 	void addComponent(GameComponent*  new_component);
 
 	// Component Manager Utilities
