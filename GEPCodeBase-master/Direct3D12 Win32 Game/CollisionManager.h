@@ -5,6 +5,9 @@ class CollisionManager
 {
 private:
 	std::vector<Collider*> colliders;
+
+	Vector2 x_overlap;
+	Vector2 y_overlap;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
@@ -17,5 +20,6 @@ public:
 	void update();
 	int getTag(int id);
 	int checkCollisions(int id);
+	Vector2 colliderOverlap();
 	bool checkTrigger(int id);
 };

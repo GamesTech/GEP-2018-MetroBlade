@@ -201,6 +201,7 @@ void Game::Update(DX::StepTimer const& timer)
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
+
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
@@ -209,9 +210,8 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "gens");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
-		m_physics_objects.clear();
-
+		scene.instanciate2DObject(testPlay);
+		m_player_objects.clear();
 	}
 
 	if (m_keyboard->GetState().T)
@@ -224,34 +224,41 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);
 		testPlay->SetPos(Vector2(800, 500));
 
-		testPlay->getCollider(0)->setTag(m_physics_objects.size());
-		/*testPlay->getCollider(1)->setTag(m_physics_objects.size());*/
+		testPlay->getCollider(0)->setTag(m_player_objects.size());
+		testPlay->getCollider(1)->setTag(m_player_objects.size());
 
 		collider.addCollider((testPlay->getCollider(0)));
-		/*collider.addCollider((testPlay->getCollider(1)));*/
+		collider.addCollider((testPlay->getCollider(1)));
 
-
-
-		m_physics_objects.push_back(testPlay);
+	m_player_objects.push_back(testPlay);
 
 
 	}
-	if (!m_physics_objects.empty())
+	if (!m_player_objects.empty())
 	{
 		for (int i = 0; i < collider.GetSize(); i++)
 		{
-			collider.updateColliders(m_physics_objects[collider.getTag(i)]->GetPos(), i);
 			int collider_tag = collider.checkCollisions(i);
 
 			if (collider_tag != -1)
 			{
 				if (!collider.checkTrigger(i))
 				{
-					m_physics_objects[collider_tag]->SetVel(m_physics_objects[collider_tag]->GetVel()*-1);
+					Vector2 col_dir = m_player_objects[collider_tag]->GetVel();
+					col_dir.Normalize();
+					/*m_player_objects[collider_tag]->SetVel(m_player_objects[collider_tag]->GetVel() * -col_dir * m_player_objects[collider_tag]->GetMass());*/
+					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() * -col_dir * m_player_objects[collider_tag]->GetMass());
+					m_player_objects[1]->AddForce(Vector2(1000,0));
+					m_player_objects[0]->AddForce(Vector2(-1000, 0));
+				}
+				else /*(collider.checkTrigger(i))*/
+				{
+					m_player_objects[collider_tag]->punch(m_GSD, collider_tag);
 				}
 			}
 		}
 	}
+	
 	scene.Update(m_GSD);
 }
 

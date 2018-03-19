@@ -31,6 +31,8 @@ int CollisionManager::checkCollisions(int id)
 				{
 					if (!checkTrigger(i))
 					{
+						x_overlap = Vector2::Max(colliders[id]->getBoxOrigin(), colliders[i]->getBoxOrigin());
+						y_overlap = Vector2::Max(colliders[id]->getBoxOrigin(), colliders[i]->getBoxOrigin());
 						return  colliders[id]->getTag();
 					}
 				}
@@ -38,6 +40,11 @@ int CollisionManager::checkCollisions(int id)
 		}
 	}
 	return -1;
+}
+
+Vector2 CollisionManager::colliderOverlap()
+{
+
 }
 
 bool CollisionManager::checkTrigger(int id)

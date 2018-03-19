@@ -24,6 +24,7 @@ public:
 	float GetDrag() { return m_drag; }
 
 	virtual void Tick(GameStateData* _GSD);
+	void ClearAcceleration();
 protected:
 	Vector2 m_vel;
 	Vector2 m_acc;

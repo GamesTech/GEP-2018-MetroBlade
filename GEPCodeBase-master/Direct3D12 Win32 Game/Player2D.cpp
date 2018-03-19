@@ -34,18 +34,14 @@ void Player2D::Tick(GameStateData * _GSD)
 	if (_GSD->m_keyboardState.A)
 	{
 		AddForce(-m_drive * Vector2::UnitX);
-		punch_collider->setBoxOrigin(m_pos + Vector2(-1, 0));
+		punch_collider->setBoxOrigin(m_pos + Vector2(-20, 0));
+		direction = Vector2(-1, 0);
 	}
 	if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
 		punch_collider->setBoxOrigin(m_pos + Vector2(120, 0));
-
-	}
-	if (_GSD->m_keyboardState.F)
-	{
-		AddForce(100000 * Vector2::UnitX);
-
+		direction = Vector2(1, 0);
 	}
 
 	if (_GSD->m_keyboardState.Escape)
@@ -55,8 +51,6 @@ void Player2D::Tick(GameStateData * _GSD)
 	}
 
 	//GEP:: Lets go up the inheritence and share our functionality
-
-	Physics2D::Tick(_GSD);
 
 	//after that as updated my position let's lock it inside my limits
 	if (m_pos.x < 0.0f)
@@ -83,6 +77,7 @@ void Player2D::Tick(GameStateData * _GSD)
 		game_states = GROUNDED;
 	}
 
+	Physics2D::Tick(_GSD);
 
 }
 
@@ -107,6 +102,14 @@ Collider* Player2D::getCollider(int id)
 	case 1:
 		return punch_collider;
 		break;
+	}
+}
+
+void Player2D::punch(GameStateData * _GSD, int id)
+{
+	if (_GSD->m_keyboardState.F)
+	{
+		AddForce(10000 * -direction * Vector2::UnitX);
 	}
 }
 

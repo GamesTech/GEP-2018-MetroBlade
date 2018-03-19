@@ -20,6 +20,10 @@ public:
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
+	void punch(GameStateData* _GFD, int id);
+	
+	Vector2 direction = Vector2(0, 0);
+
 
 	bool			isDead() const;
 	Player2D*		getKiller() const;
@@ -28,7 +32,7 @@ protected:
 
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
-	
+
 
 	float m_drive = 1.0f;
 	float jump_force = 250000.0f;
