@@ -9,7 +9,7 @@ constexpr int MAX_PLAYERS = 8;
 void GameManager::init()
 {
 	level_players.reserve(MAX_PLAYERS);
-	current_players.reserve(MAX_PLAYERS);
+	lobby.reserve(MAX_PLAYERS);
 	players_to_respawn.reserve(MAX_PLAYERS);
 }
 
@@ -48,14 +48,14 @@ void GameManager::addWorldEventListener(std::shared_ptr<SceneEvent> world_event_
 	world.assignSceneManagerListener(world_event_listener);
 }
 
-std::vector<PlayerData>* GameManager::getPlayerDataArray()
+std::vector<PlayerData>* GameManager::getPlayerLobbyData()
 {
-	return &current_players;
+	return &lobby;
 }
 
-void GameManager::addPlayer(PlayerData new_player_data)
+void GameManager::addPlayer(PlayerData new_player_data) // TODO - Consider Removing.
 {
-	current_players.push_back(new_player_data);
+	lobby.push_back(new_player_data);
 }
 
 GameData* GameManager::getGameModeData()
@@ -174,6 +174,7 @@ void GameManager::respawnPlayer(Player2D* player)
 void GameManager::updatePlayerScore()
 {
 	// TODO - Add code to update the players score according to game mode variables.
+	// TODO - Consider making component/event driven. As score changes may very.
 
 }
 

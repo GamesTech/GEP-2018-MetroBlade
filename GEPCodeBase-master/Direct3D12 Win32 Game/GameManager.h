@@ -37,7 +37,7 @@ public:
 	void registerPlayerInstance(Player2D*	new_player);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
-	std::vector<PlayerData>* getPlayerDataArray(); // TODO - Consider returning a refrence to the array instead. 
+	std::vector<PlayerData>* getPlayerLobbyData(); // TODO - Consider returning a refrence to the array instead. 
 	void addPlayer(PlayerData new_player_data);
 
 	GameData* getGameModeData();
@@ -49,6 +49,8 @@ public:
 	void resetManager();
 
 private:
+	// TODO - Add Spawnpoint register for determining locations hwne respawning players.
+
 	void checkPlayerLifeStatus();
 	void checkPlayerRespawnStatus(float delta_time);
 
@@ -62,7 +64,7 @@ private:
 	std::vector<Player2D*>			level_players;
 	std::vector<Player2D*>			players_to_respawn; /// < Buffer of players that need to be respawned.
 
-	std::vector<PlayerData>			current_players;
+	std::vector<PlayerData>			lobby;
 
 	SceneState						world;
 	GameData						game_mode;
