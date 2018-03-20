@@ -213,6 +213,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.loadScene(newScene);
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);

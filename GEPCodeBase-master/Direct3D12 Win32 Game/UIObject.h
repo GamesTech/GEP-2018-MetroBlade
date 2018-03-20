@@ -34,6 +34,6 @@ public:
 	virtual void Tick(GameStateData * _GSD) override;
 	virtual void Render(RenderData * _RD) override;
 
-private:
+protected:
 	Vector2		canvas_position; //< The Normalised position of the UI Element on the canvas. Scales with resolution. 
 };
