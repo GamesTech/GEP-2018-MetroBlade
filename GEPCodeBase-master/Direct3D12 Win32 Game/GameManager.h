@@ -37,7 +37,7 @@ public:
 	void registerPlayerInstance(Player2D*	new_player);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
-	std::vector<PlayerData>* getPlayerDataArray() const; // TODO - Consider returning a refrence to the array instead. 
+	std::vector<PlayerData>* getPlayerDataArray(); // TODO - Consider returning a refrence to the array instead. 
 	void addPlayer(PlayerData new_player_data);
 
 	GameData* getGameModeData();
