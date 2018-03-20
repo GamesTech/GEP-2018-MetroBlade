@@ -7,7 +7,7 @@
 
 void UILabel::setText(std::string new_text)
 {
-	text = std::wstring(L"test");
+	text = std::wstring(L"Super Open Smash");
 }
 
 void UILabel::Tick(GameStateData* _GSD)
@@ -16,5 +16,5 @@ void UILabel::Tick(GameStateData* _GSD)
 
 void UILabel::Render(RenderData* _RD)
 {
-	_RD->m_font->DrawString(_RD->m_spriteBatch.get(), text.c_str(), Vector2(600, 600));
+	_RD->m_font->DrawString(_RD->m_spriteBatch.get(), text.c_str(), Vector2(100, 300));
 }

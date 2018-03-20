@@ -159,5 +159,5 @@ void SceneManager::processSceneEvents()
 void SceneManager::resetRenderState()
 {
 	// Add any other resetting routienes here.
-	render_data->m_resourceCount = 0;
+	render_data->m_resourceCount = 1;
 }

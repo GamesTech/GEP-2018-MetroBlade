@@ -377,7 +377,9 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
     </ClCompile>
-    <ClCompile Include="UILabel.cpp" />
+    <ClCompile Include="UILabel.cpp">
+      <Filter>Core\UI\Label</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
