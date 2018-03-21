@@ -33,7 +33,7 @@ protected:
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
 
-
+	Vector2 offset;
 	float m_drive = 1.0f;
 	float jump_force = 250000.0f;
 	float gravity = 9.8f;

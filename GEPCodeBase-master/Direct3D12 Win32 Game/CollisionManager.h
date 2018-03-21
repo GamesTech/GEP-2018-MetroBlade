@@ -8,6 +8,7 @@ private:
 
 	Vector2 x_overlap;
 	Vector2 y_overlap;
+	Vector2 overlap;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;

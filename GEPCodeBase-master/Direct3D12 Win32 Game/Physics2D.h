@@ -14,7 +14,7 @@ public:
 	void AddForce(Vector2 _push) { m_acc += _push / m_mass; }
 
 	Vector2 GetVel() { return m_vel; }
-	void SetVel(Vector2 _vel) { m_vel = _vel ; }
+	void SetVelX(Vector2 _vel) { m_vel.x = _vel.x ; }
 
 	Vector2 GetAcc() { return m_acc; }
 
@@ -24,7 +24,6 @@ public:
 	float GetDrag() { return m_drag; }
 
 	virtual void Tick(GameStateData* _GSD);
-	void ClearAcceleration();
 protected:
 	Vector2 m_vel;
 	Vector2 m_acc;

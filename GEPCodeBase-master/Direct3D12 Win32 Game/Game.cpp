@@ -230,7 +230,7 @@ void Game::Update(DX::StepTimer const& timer)
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
 
-	m_player_objects.push_back(testPlay);
+		m_player_objects.push_back(testPlay);
 
 
 	}
@@ -247,18 +247,19 @@ void Game::Update(DX::StepTimer const& timer)
 					Vector2 col_dir = m_player_objects[collider_tag]->GetVel();
 					col_dir.Normalize();
 					/*m_player_objects[collider_tag]->SetVel(m_player_objects[collider_tag]->GetVel() * -col_dir * m_player_objects[collider_tag]->GetMass());*/
-					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() * -col_dir * m_player_objects[collider_tag]->GetMass());
-					m_player_objects[1]->AddForce(Vector2(1000,0));
-					m_player_objects[0]->AddForce(Vector2(-1000, 0));
+					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
+					/*		m_player_objects[1]->AddForce(Vector2(1000,0));
+							m_player_objects[0]->AddForce(Vector2(-1000, 0));*/
+					m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
 				}
-				else /*(collider.checkTrigger(i))*/
+				if (collider.checkTrigger(i))
 				{
 					m_player_objects[collider_tag]->punch(m_GSD, collider_tag);
 				}
 			}
 		}
 	}
-	
+
 	scene.Update(m_GSD);
 }
 
