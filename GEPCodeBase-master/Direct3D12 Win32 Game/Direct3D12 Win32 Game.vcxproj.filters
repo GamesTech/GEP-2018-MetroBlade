@@ -140,6 +140,9 @@
     <Filter Include="Core\UI\Components">
       <UniqueIdentifier>{3123c2be-bf17-48b7-8929-9883e1980b6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\UISprite">
+      <UniqueIdentifier>{c35bb81d-3d96-40f5-9093-3997aa513eea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -278,6 +281,9 @@
     <ClInclude Include="UILabel.h">
       <Filter>Core\UI\Label</Filter>
     </ClInclude>
+    <ClInclude Include="UISprite.h">
+      <Filter>Core\UI\UISprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -379,6 +385,9 @@
     </ClCompile>
     <ClCompile Include="UILabel.cpp">
       <Filter>Core\UI\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="UISprite.cpp">
+      <Filter>Core\UI\UISprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
