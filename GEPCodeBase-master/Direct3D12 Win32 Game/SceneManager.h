@@ -23,6 +23,7 @@
 #include "Scene.h"
 #include "SceneEvent.h"
 #include "GameManager.h"
+#include "UICanvas.h"
 
 namespace DX {
 	class StepTimer;
@@ -65,6 +66,8 @@ public:
 
 	void startGameManager();
 
+	void instanciateUIObject(UIObject*    new_object);
+
 private:
 	void processSceneEvents();
 
@@ -73,6 +76,7 @@ private:
 	std::unique_ptr<Scene>			current_scene;
 	Camera*							main_camera = nullptr;
 	RenderData*						render_data = nullptr;
+	UICanvas						game_ui;
 
 	bool							quit = false;
 	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
