@@ -27,3 +27,13 @@ void Camera::Tick(GameStateData* _GSD)
 
 	GameObject3D::Tick(_GSD);
 }
+
+void Camera::set2DViewport(Vector2 new_viewport)
+{
+	viewport_2D = new_viewport;
+}
+
+Vector2 Camera::get2DViewport() const
+{
+	return viewport_2D;
+}

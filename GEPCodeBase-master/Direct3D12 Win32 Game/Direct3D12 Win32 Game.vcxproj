@@ -213,6 +213,11 @@
     <ClInclude Include="TestSound.h" />
     <ClInclude Include="Text2D.h" />
     <ClInclude Include="GameStateData.h" />
+    <ClInclude Include="UICanvas.h" />
+    <ClInclude Include="UILabel.h" />
+    <ClInclude Include="UIObject.h" />
+    <ClInclude Include="UISprite.h" />
+    <ClInclude Include="UITest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -251,6 +256,11 @@
     <ClCompile Include="TestPBGO3D.cpp" />
     <ClCompile Include="TestSound.cpp" />
     <ClCompile Include="Text2D.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
+    <ClCompile Include="UILabel.cpp" />
+    <ClCompile Include="UIObject.cpp" />
+    <ClCompile Include="UISprite.cpp" />
+    <ClCompile Include="UITest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
