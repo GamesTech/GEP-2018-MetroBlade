@@ -10,6 +10,9 @@
 
 #include "SpriteAnimFileReader.h"
 
+#include "UILabel.h"
+#include "UISprite.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -208,6 +211,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
@@ -236,7 +240,12 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.push_back(testPlay2);
 		scene.startGameManager();
 
-		
+		UILabel* test_label = new UILabel;
+		test_label->setText("test");
+		scene.instanciateUIObject(test_label);
+
+		//UISprite* test_sprite = new UISprite("twist", m_RD);
+	//	scene.instanciateUIObject(test_sprite);
 	}
 
 	if (m_keyboard->GetState().T)
