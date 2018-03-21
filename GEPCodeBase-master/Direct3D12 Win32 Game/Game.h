@@ -100,6 +100,7 @@ private:
 	vector<GameObject3D*> m_3DObjects;
 	vector<GameObject2D*> m_2DObjects;
 	vector<Player2D*> m_player_objects;
+	vector<Obstacle2D*> m_obstacle_objects;
 	vector<Sound*> m_sounds;
 	RenderData* m_RD;
 	Camera* m_cam;

@@ -36,7 +36,7 @@ void Player2D::Tick(GameStateData* _GSD)
 		{
 			setGravity(100.0f);
 			game_states = JUMPING;
-			AddForce(-jump_force * Vector2::UnitY);
+			AddForce(-jump_force * Vector2::UnitY*_GSD->m_dt);
 		}
 	}
 
@@ -103,17 +103,12 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	}
 
-	if (m_pos.x > m_limit.x)
-	{
-		m_pos.x = m_limit.x;
-		m_vel.x = 0.0f;
-
-	}
 	if (m_pos.y >= m_limit.y)
 	{
 		m_pos.y = m_limit.y;
 		game_states = GROUNDED;
 	}
+
 
 	Physics2D::Tick(_GSD);
 
@@ -164,5 +159,10 @@ void Player2D::punch(GameStateData * _GSD, Vector2 direction)
 	{
 		AddForce(10000 * direction * Vector2::UnitX);
 	}
+}
+
+void Player2D::setStateGrounded()
+{
+	game_states = GROUNDED;
 }
 

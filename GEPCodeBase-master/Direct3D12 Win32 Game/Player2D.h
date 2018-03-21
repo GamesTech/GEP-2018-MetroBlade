@@ -22,6 +22,7 @@ public:
 	Collider* getCollider(int id);
 	void punch(GameStateData* _GFD, Vector2 direction);
 	Vector2 getDirection() { return direction; }
+	void setStateGrounded();
 
 
 
@@ -42,7 +43,7 @@ protected:
 
 	Vector2 offset;
 	float m_drive = 1.0f;
-	float jump_force = 25000.0f;
+	float jump_force = 25000000.0f;
 	float gravity = 9.8f;
 	float vertical_velocity;
 

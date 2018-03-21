@@ -4,7 +4,7 @@
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Obstacle2D
-	: public Physics2D
+	: public ImageGO2D
 
 {
 public:
@@ -19,7 +19,5 @@ public:
 
 
 protected:
-	Sprite*				sprite;
-		std::unique_ptr<Sprite> sprite;
-	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 100), false);
 };

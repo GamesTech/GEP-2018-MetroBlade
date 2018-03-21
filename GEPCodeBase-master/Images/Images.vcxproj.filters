@@ -9,6 +9,7 @@
     <ImageContentTask Include="Fighter_2_ss.png" />
     <ImageContentTask Include="Fighter_3_ss.png" />
     <ImageContentTask Include="Fighter_4_ss.png" />
+    <ImageContentTask Include="Block.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />
