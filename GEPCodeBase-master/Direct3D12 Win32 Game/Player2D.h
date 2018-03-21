@@ -20,7 +20,7 @@ public:
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
-	void punch(GameStateData* _GFD, int id);
+	void punch(GameStateData* _GFD);
 	
 	Vector2 direction = Vector2(0, 0);
 

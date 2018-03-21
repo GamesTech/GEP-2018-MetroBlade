@@ -9,6 +9,8 @@ private:
 	Vector2 x_overlap;
 	Vector2 y_overlap;
 	Vector2 overlap;
+
+	int target;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
@@ -17,6 +19,8 @@ public:
 
 	void addCollider(Collider* collider);
 	int GetSize();
+	void setTarget(int id);
+	int getTarget();
 	void updateColliders(Vector2 position, int id);
 	void update();
 	int getTag(int id);

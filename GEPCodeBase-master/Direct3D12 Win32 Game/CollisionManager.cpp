@@ -16,6 +16,15 @@ int CollisionManager::GetSize()
 	return colliders.size();
 }
 
+void CollisionManager::setTarget(int id)
+{
+	target = id;
+}
+int CollisionManager::getTarget()
+{
+	return target;
+}
+
 int CollisionManager::checkCollisions(int id)
 {
 	if (!colliders.empty())
@@ -32,6 +41,7 @@ int CollisionManager::checkCollisions(int id)
 					if (!checkTrigger(i))
 					{
 						overlap = colliders[id]->getBoxOrigin() - colliders[i]->getBoxOrigin();
+						setTarget(colliders[i]->getTag());
 						return  colliders[id]->getTag();
 					}
 				}

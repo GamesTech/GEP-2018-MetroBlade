@@ -106,11 +106,11 @@ Collider* Player2D::getCollider(int id)
 	}
 }
 
-void Player2D::punch(GameStateData * _GSD, int id)
+void Player2D::punch(GameStateData * _GSD)
 {
 	if (_GSD->m_keyboardState.F)
 	{
-		AddForce(10000 * -direction * Vector2::UnitX);
+		AddForce(10000 * direction * Vector2::UnitX);
 	}
 }
 
