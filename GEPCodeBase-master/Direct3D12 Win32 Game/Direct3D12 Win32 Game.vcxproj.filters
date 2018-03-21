@@ -83,6 +83,45 @@
     <Filter Include="Core\GameComponent\Game components\Test">
       <UniqueIdentifier>{3bc4128c-a606-41d7-8727-5520b366cdf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Collision Manager">
+      <UniqueIdentifier>{92fea116-d5f7-47d3-84e3-a9ce939424fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{c608e1f8-fc7b-4371-9a7c-cd156d575d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events\Scene Events">
+      <UniqueIdentifier>{25bef321-2fc8-4e68-b89c-32881737c0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events\Base">
+      <UniqueIdentifier>{658994ec-46b9-4ab8-a7e1-5bacba59e65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scene Manager\Scene State">
+      <UniqueIdentifier>{f9e1b9b3-9b94-4485-bc84-45983b0ad33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Game Management">
+      <UniqueIdentifier>{6b882ec3-e593-4163-9a1a-6a19a7f6c330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Game Management\Data">
+      <UniqueIdentifier>{16b67cf6-3c4d-43f4-8c59-fe4174d41050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO">
+      <UniqueIdentifier>{c54b78e7-ea2e-47c0-a9b8-17bc123cd64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Game components\Players">
+      <UniqueIdentifier>{bec5be17-523c-4b25-88fb-960d5dd0c993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO\Base">
+      <UniqueIdentifier>{9276d140-20a3-44be-af12-3c612e9e465c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO\Sprite Animation">
+      <UniqueIdentifier>{b93d1c55-8a8d-4f04-a46d-777a69c32c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers">
+      <UniqueIdentifier>{c10998e0-ea09-43e5-ac30-a9fa2a665f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameComponent\Game components\Sprite Animation">
+      <UniqueIdentifier>{dae7578c-4c76-4f53-9fdd-35248ca50bbb}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\Input">
       <UniqueIdentifier>{0daaf260-df3c-4110-8123-0df54d6c0e47}</UniqueIdentifier>
     </Filter>
@@ -169,10 +208,49 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="Collider.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Core\Collision Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEvent.h">
+      <Filter>Core\Events\Scene Events</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>Core\Events\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneState.h">
+      <Filter>Core\Scene Manager\Scene State</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Core\Game Management</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Core\Game Management\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Core\Game Management\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStatus.h">
+      <Filter>Core\GameComponent\Game components\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReaderBase.h">
+      <Filter>Core\File IO\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimFileReader.h">
+      <Filter>Core\File IO\Sprite Animation</Filter>
+    </ClInclude>
     <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="FileExtenstionNames.h">
+      <Filter>Core\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
+    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Core\Input</Filter>
     </ClInclude>
@@ -241,8 +319,29 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="Collider.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Core\Collision Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneState.cpp">
+      <Filter>Core\Scene Manager\Scene State</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Core\Game Management</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp">
+      <Filter>Core\GameComponent\Game components\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReaderBase.cpp">
+      <Filter>Core\File IO\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimFileReader.cpp">
+      <Filter>Core\File IO\Sprite Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Core\Input</Filter>

@@ -172,15 +172,26 @@
   <ItemGroup>
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="FileExtenstionNames.h" />
+    <ClInclude Include="FileReaderBase.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="GameComponentManager.h" />
+    <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Physics2D.h" />
     <ClInclude Include="Player2D.h" />
+    <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneEvent.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneState.h" />
     <ClInclude Include="SDKMeshGO3D.h" />
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Game.h" />
@@ -193,6 +204,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SpriteAnimFileReader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="TestComponent.h" />
@@ -203,14 +215,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="FileReaderBase.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Physics2D.cpp" />
     <ClCompile Include="Player2D.cpp" />
+    <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneState.cpp" />
     <ClCompile Include="SDKMeshGO3D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject2D.cpp" />
@@ -226,6 +244,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpriteAnimFileReader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestPBGO3D.cpp" />
     <ClCompile Include="TestSound.cpp" />

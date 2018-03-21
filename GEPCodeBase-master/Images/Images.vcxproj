@@ -139,7 +139,11 @@
     <ImageContentTask Include="Fighter_1_ss.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Fighter_2_ss.png" />
+    <ImageContentTask Include="Fighter_2_ss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Fighter_3_ss.png" />
+    <ImageContentTask Include="Fighter_4_ss.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

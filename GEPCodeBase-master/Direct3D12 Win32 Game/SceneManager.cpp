@@ -37,6 +37,8 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 void SceneManager::Init()
 {
 	// Create a basic scene and set up all of the scene manager systems.
+	game_manager.init();
+	game_manager.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);
 
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -46,10 +48,12 @@ void SceneManager::Init()
 
 void SceneManager::Update(GameStateData * game_state)
 {
+	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
 		current_scene->Update(game_state);
 	}
+	processSceneEvents();
 }
 
 void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
@@ -66,6 +70,11 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 	}
 }
 
+bool SceneManager::shouldQuit() const
+{
+	return quit;
+}
+
 Scene * SceneManager::getScene()
 {
 	return current_scene.get();
@@ -74,11 +83,20 @@ Scene * SceneManager::getScene()
 void SceneManager::loadScene(string scene_name)
 {
 	// TODO - Add Code to load diffrent Scenes into the game.
+	if (scene_name == "clear") 
+	{
+		loadScene(nullptr);
+	}
+	else 
+	{
+		// Parse the scene file and load its contents here.
+	}
 }
 
 void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
+	game_manager.resetManager();
 	current_scene.reset(scene_name);
 }
 
@@ -100,12 +118,51 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
+	new_object->assignWorldEventListener(scene_event_listener);
+	if (dynamic_cast<Player2D*>(new_object)) 
+	{
+		game_manager.registerPlayerInstance((Player2D*)new_object);
+	}
+
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
 void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
+	new_object->assignWorldEventLisener(scene_event_listener);
 	current_scene->add3DGameObjectToScene(new_object);
+}
+
+void SceneManager::startGameManager()
+{
+	game_manager.setupGame();
+	game_manager.startGame();
+}
+
+void SceneManager::processSceneEvents()
+{
+	switch (scene_event_listener->event_flag) 
+	{
+		case SceneEventFlags::EVENT_SIGEXIT:
+		{
+			quit = true;
+			break;
+		}
+		case SceneEventFlags::EVENT_SIGKILL:
+		{
+			std::cout << "Critical Error - Game Killed by EVENT_SIGKILL" << std::endl;
+		
+#ifdef _DEBUG
+			OutputDebugString(L"Critical Error - Game Killed by event SIGKILL");
+#endif 
+			break;
+		}
+		case SceneEventFlags::EVENT_SIGCHANGE:
+		{
+			loadScene(scene_event_listener->new_map);
+		}
+	}
+	scene_event_listener->event_flag = EVENT_SIGNONE;
 }
 
 void SceneManager::resetRenderState()
