@@ -1,12 +1,11 @@
 #pragma once
 #include "Physics2D.h"
-#include "Collider.h"
 #include "Sprite.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Player2D :
 	public Physics2D
-	
+
 {
 public:
 	//TODO: add a 3d player and modes to switch between different views and basic physics
@@ -21,9 +20,9 @@ public:
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
-	void punch(GameStateData* _GFD);
-	
-	Vector2 direction = Vector2(0, 0);
+	void punch(GameStateData* _GFD, Vector2 direction);
+	Vector2 getDirection() { return direction; }
+
 
 
 	// Game Manager interface
@@ -35,8 +34,9 @@ public:
 
 
 protected:
+	Vector2 direction = Vector2(0, 0);
 	Sprite*				sprite;
-//	std::unique_ptr<Sprite> sprite;
+	//	std::unique_ptr<Sprite> sprite;
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
 

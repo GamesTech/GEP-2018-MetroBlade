@@ -158,7 +158,7 @@ Collider* Player2D::getCollider(int id)
 	}
 }
 
-void Player2D::punch(GameStateData * _GSD)
+void Player2D::punch(GameStateData * _GSD, Vector2 direction)
 {
 	if (_GSD->m_keyboardState.F)
 	{

@@ -15,6 +15,7 @@
 #include "SceneManager.h"
 #include "CollisionManager.h"
 #include "Physics2D.h"
+#include "Obstacle2D.h"
 
 using std::vector;
 

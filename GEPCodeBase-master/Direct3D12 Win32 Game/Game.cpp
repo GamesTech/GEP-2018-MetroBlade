@@ -225,13 +225,27 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
+
+
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-   	testPlay->SetPos(Vector2(800, 500));
+
+		testPlay->SetPos(Vector2(800, 500));
+
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		m_player_objects.push_back(testPlay);
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Fighter_1_ss");
+		testPlatform->getCollider(0)->setTag(m_player_objects.size());
+		collider.addCollider((testPlatform->getCollider(0)));
+
+		testPlatform->SetPos(Vector2(800, 100));
+
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_player_objects.push_back(testPlatform);
+
 	}
 	if (!m_player_objects.empty())
 	{
@@ -250,7 +264,7 @@ void Game::Update(DX::StepTimer const& timer)
 				}
 				if (collider.checkTrigger(i))
 				{
-					m_player_objects[collider.getTarget()]->punch(m_GSD);
+					m_player_objects[collider.getTarget()]->punch(m_GSD, m_player_objects[collider_tag]->getDirection());
 				}
 			}
 		}
