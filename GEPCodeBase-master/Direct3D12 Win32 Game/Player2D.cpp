@@ -223,6 +223,6 @@ void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 
 void Player2D::setStateGrounded()
 {
-	game_states = GROUNDED;
+	phys_state = GROUNDED;
 }
 

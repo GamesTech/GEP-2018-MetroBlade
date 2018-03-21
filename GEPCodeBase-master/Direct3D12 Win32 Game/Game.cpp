@@ -202,12 +202,13 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().P)
 	{
 		m_player_objects.clear();
+		m_obstacle_objects.clear();
 		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
 
-		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
@@ -234,9 +235,18 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay2->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay2);
 		m_player_objects.push_back(testPlay2);
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		testPlatform->SetPos(Vector2(800, 400));
+		testPlatform->getCollider(0)->setTag(10);
+		collider.addCollider((testPlatform->getCollider(0)));
+		
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_obstacle_objects.push_back(testPlatform);
+
 		scene.startGameManager();
-		m_player_objects.clear();
-		m_obstacle_objects.clear();
+
+
 
 		
 	}
@@ -263,7 +273,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
 
-		testPlatform->SetPos(Vector2(800, 500));
+		testPlatform->SetPos(Vector2(0, 500));
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
@@ -288,13 +298,8 @@ void Game::Update(DX::StepTimer const& timer)
 							m_player_objects[collider_tag]->setStateGrounded();
 						}
 					}
-					if (collider.checkTrigger(i) && collider.getTarget() != 10)
-					{
-
-						m_player_objects[collider.getTarget()]->punch(m_GSD, m_player_objects[collider_tag]->getDirection());
-					}
 				}
-				if (collider.checkTrigger(i))
+				if (collider.checkTrigger(i) && collider.getTarget() != 10)
 				{
 					if (m_player_objects[collider_tag]->IsAttacking())
 					{

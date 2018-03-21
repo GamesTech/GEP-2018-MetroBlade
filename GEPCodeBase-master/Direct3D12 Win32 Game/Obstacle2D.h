@@ -19,5 +19,6 @@ public:
 
 
 protected:
+	Sprite*				sprite;
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 100), false);
 };
