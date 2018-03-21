@@ -237,10 +237,9 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.push_back(testPlay2);
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->SetPos(Vector2(800, 400));
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
-		
+		testPlatform->SetPos(Vector2(800, 400));
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
 

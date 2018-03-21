@@ -19,6 +19,7 @@ Obstacle2D::~Obstacle2D()
 void Obstacle2D::Tick(GameStateData* _GSD)
 {
 	col->setBoxOrigin(Vector2(m_pos));
+	m_origin = Vector2(550,63);
 
 	//change anim depending
 
