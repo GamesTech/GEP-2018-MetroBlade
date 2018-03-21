@@ -8,6 +8,8 @@
 #include "GameStateData.h"
 #include "Scene.h"
 
+#include "SpriteAnimFileReader.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -207,32 +209,29 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "gens");
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_2_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		scene.instanciate2DObject(testPlay);
-		m_player_objects.clear();
+		testPlay->SetPos(Vector2(800, 500));
+		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		scene.startGameManager();
+		m_physics_object.clear();
+
 	}
 
 	if (m_keyboard->GetState().T)
 	{
 		// Instantiation test.
-		Player2D* testPlay = new Player2D(m_RD, "gens");
-
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		scene.instanciate2DObject(testPlay);
-		testPlay->SetPos(Vector2(800, 500));
-
-		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
-
+		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-
- 		m_player_objects.push_back(testPlay);
-
-
+   	testPlay->SetPos(Vector2(800, 500));
+		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		m_player_objects.push_back(testPlay);
 	}
 	if (!m_player_objects.empty())
 	{

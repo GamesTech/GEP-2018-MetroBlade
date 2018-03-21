@@ -34,34 +34,42 @@ public:
 
 	void tickGameManager(GameStateData* _GSD);
 
-	void registerPlayer(Player2D*	 new_player);
+	void registerPlayerInstance(Player2D*	new_player);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
-	std::vector<PlayerData> getPlayerDataArray() const; // TODO - Consider returning a refrence to the array instead. 
-	void addPlayerData(PlayerData new_player_data);
+	std::vector<PlayerData>* getPlayerLobbyData(); // TODO - Consider returning a refrence to the array instead. 
+	void addPlayer(PlayerData new_player_data);
 
-	GameData getGameModeData() const;
-	void	 setGameModeData(GameData new_game_data);
+	GameData* getGameModeData();
+	GameData* getGameModeStatus();
 
 	// Game Manager Event Handlers.
 	void setupGame();
 	void startGame();
-
 	void resetManager();
 
 private:
+	// TODO - Add Spawnpoint register for determining locations hwne respawning players.
+
 	void checkPlayerLifeStatus();
+	void checkPlayerRespawnStatus(float delta_time);
+
+	bool shouldRespawnPlayer(Player2D* player);
+	void respawnPlayer(Player2D* player);
+
+	void updatePlayerScore();
 
 	void endCurrentGame();
 
 	std::vector<Player2D*>			level_players;
-	std::vector<PlayerData>			current_players;
+	std::vector<Player2D*>			players_to_respawn; /// < Buffer of players that need to be respawned.
+
+	std::vector<PlayerData>			lobby;
 
 	SceneState						world;
 	GameData						game_mode;
+	GameData						game_mode_state; ///< The present game state which is passed trough to objects. 
+
 	bool							game_active = false;
-	bool							time_limit = true;
-
-
 	float							game_time;
 };
