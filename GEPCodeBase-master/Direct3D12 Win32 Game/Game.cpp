@@ -201,6 +201,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 	if (m_keyboard->GetState().P)
 	{
+		m_player_objects.clear();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
@@ -213,16 +214,28 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
+		testPlay->getCollider(1)->setTag(m_player_objects.size());
+		testPlay->getCollider(0)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay->getCollider(0)));
+		collider.addCollider((testPlay->getCollider(1)));
 		testPlay->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		m_player_objects.push_back(testPlay);
+
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_1_ss", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
-		testPlay2->SetPos(Vector2(400, 500));
+		
+		testPlay2->getCollider(1)->setTag(m_player_objects.size());
+		testPlay2->getCollider(0)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay2->getCollider(0)));
+		collider.addCollider((testPlay2->getCollider(1)));
+		testPlay2->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay2);//m_2DObjects.push_back(testPlay);
+		m_player_objects.push_back(testPlay2);
 		scene.startGameManager();
-		m_player_objects.clear();
 
+		
 	}
 
 	if (m_keyboard->GetState().T)
@@ -235,7 +248,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-   	testPlay->SetPos(Vector2(800, 500));
+		testPlay->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		m_player_objects.push_back(testPlay);
 	}
@@ -256,7 +269,11 @@ void Game::Update(DX::StepTimer const& timer)
 				}
 				if (collider.checkTrigger(i))
 				{
-					m_player_objects[collider.getTarget()]->punch(m_GSD);
+					if (m_player_objects[collider_tag]->IsAttacking())
+					{
+						m_player_objects[collider.getTarget()]->punched(m_GSD, -m_player_objects[collider.getTarget()]->getDirection());
+					}
+					
 				}
 			}
 		}

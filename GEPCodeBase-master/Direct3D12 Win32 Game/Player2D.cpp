@@ -45,26 +45,32 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
-			SetVel(Vector2(0, 0));
+			//SetVel(Vector2(0, 0));
 		}
 
 	}
 	else if (_GSD->m_keyboardState.A || stick_x < 0)
 	{
+		offset = Vector2(-20, 0);
+		direction = Vector2(-1, 0);
 		m_effects = SpriteEffects_FlipHorizontally;
-		SetVel(Vector2(-250, m_vel.y));
+		//SetVel(Vector2(-x_speed, m_vel.y));
 		action_state = MOVING;
+		AddForce(-m_drive * Vector2::UnitX);
 	}
 	else if (_GSD->m_keyboardState.D || stick_x > 0)
 	{
+		offset = Vector2(120, 0);
+		direction = Vector2(1, 0);
 		m_effects = SpriteEffects_None;
-		SetVel(Vector2(250, m_vel.y));
+		//SetVel(Vector2(x_speed, m_vel.y));
 		action_state = MOVING;
+		AddForce(m_drive * Vector2::UnitX);
 	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
 		action_state = IDLE;
-		SetVel(Vector2(0, 0));
+		//SetVel(Vector2(0, 0));
 	}
 	
 	if (_GSD->m_keyboardState.J)
@@ -93,8 +99,10 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 
 	//action state determines the players action such as attacking, jumping, moving etc
+	attacking = false;
 	switch (action_state)
 	{
+
 	case IDLE:
 
 		sprite->setAnimationState("idle");
@@ -116,9 +124,12 @@ void Player2D::Tick(GameStateData* _GSD)
 		break;
 
 	case ATTACKING:
-		
+		attacking = true;
 		sprite->setAnimationState("attack");
 		break;
+	
+		
+
 	}
 	if (_GSD->m_keyboardState.Escape)
 	{
@@ -204,12 +215,9 @@ Collider* Player2D::getCollider(int id)
 	}
 }
 
-void Player2D::punch(GameStateData * _GSD)
+void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
-	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
-	if (_GSD->m_keyboardState.F || controller_state.IsXPressed())
-	{
-		AddForce(10000 * direction * Vector2::UnitX);
-	}
+	
+	AddForce(10000 * direction * Vector2::UnitX);
 }
 
