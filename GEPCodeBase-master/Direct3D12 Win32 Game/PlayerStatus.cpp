@@ -40,3 +40,13 @@ void PlayerStatus::setScore(int new_score)
 {
 	score = new_score;
 }
+
+int PlayerStatus::getLaunchMultiplier() const
+{
+	return launch_multiplier;
+}
+
+void PlayerStatus::setLaunchMultiplier(int new_multiplier)
+{
+	launch_multiplier = new_multiplier;
+}
