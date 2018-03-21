@@ -175,7 +175,7 @@ void Game::Tick()
 //GEP:: Updates all the Game Object Structures
 void Game::Update(DX::StepTimer const& timer)
 {
-	if (scene.shouldQuit()) 
+	if (scene.shouldQuit())
 	{
 		PostQuitMessage(0);
 	}
@@ -205,19 +205,20 @@ void Game::Update(DX::StepTimer const& timer)
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
+
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_2_ss");
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		scene.startGameManager();
-		m_physics_object.clear();
+		m_player_objects.clear();
 
 		UILabel* test_label = new UILabel;
 		test_label->setText(L"test");
@@ -230,24 +231,37 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		testPlay->getCollider(1)->setTag(m_player_objects.size());
+		testPlay->getCollider(0)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay->getCollider(0)));
+		collider.addCollider((testPlay->getCollider(1)));
    	testPlay->SetPos(Vector2(800, 500));
-		collider.addCollider(testPlay->getCollider());
-		m_physics_object.push_back(testPlay);
+		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		m_player_objects.push_back(testPlay);
 	}
-	if (!m_physics_object.empty())
+	if (!m_player_objects.empty())
 	{
-		for (int i = 0; i < m_physics_object.size(); i++)
+		for (int i = 0; i < collider.GetSize(); i++)
 		{
-			collider.updateColliders(m_physics_object[i]->GetPos(), i);
-			/*m_2DObjects[i]->SetPos(m_2DObjects[i]->GetPos() + collider.checkCollisions(i));*/
-			if (collider.checkCollisions(i))
+			int collider_tag = collider.checkCollisions(i);
+
+			if (collider_tag != -1)
 			{
-				m_physics_object[i]->SetVel(m_physics_object[i]->GetVel()*-1);
+				if (!collider.checkTrigger(i))
+				{
+					Vector2 col_dir = m_player_objects[collider_tag]->GetVel();
+					col_dir.Normalize();
+					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
+					m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+				}
+				if (collider.checkTrigger(i))
+				{
+					m_player_objects[collider.getTarget()]->punch(m_GSD);
+				}
 			}
 		}
-		
 	}
+
 	scene.Update(m_GSD);
 }
 
@@ -364,9 +378,9 @@ void Game::OnWindowSizeChanged(int width, int height)
 // Properties
 void Game::GetDefaultSize(int& width, int& height) const
 {
-    // TODO: Change to desired default window size (note minimum size is 320x200).
-    width = 1920;
-    height = 1080;
+	// TODO: Change to desired default window size (note minimum size is 320x200).
+	width = 1920;
+	height = 1080;
 }
 
 // These are the resources that depend on the device.
@@ -736,6 +750,6 @@ void Game::ReadInput()
 	//Note in both cases they are identical to the DirectXTK for DirectX 11
 
 	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState= m_keyboard->GetState();
+	m_GSD->m_keyboardState = m_keyboard->GetState();
 	m_GSD->m_mouseState = m_mouse->GetState();
 }

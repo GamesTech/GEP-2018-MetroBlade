@@ -20,7 +20,10 @@ public:
 	float GetDrive() { return m_drive; }
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	Vector2 GetLimit() { return m_limit; }
-	Collider getCollider();
+	Collider* getCollider(int id);
+	void punch(GameStateData* _GFD);
+	
+	Vector2 direction = Vector2(0, 0);
 
 
 	// Game Manager interface
@@ -35,6 +38,9 @@ protected:
 	Sprite*				sprite;
 //	std::unique_ptr<Sprite> sprite;
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
+
+	Vector2 offset;
 	float m_drive = 1.0f;
 	float jump_force = 25000.0f;
 	float gravity = 9.8f;
@@ -42,7 +48,7 @@ protected:
 
 	void setGravity(float gravity) { this->gravity = gravity; }
 
-	enum GameStates { GROUNDED,JUMPING,	FALLING };
+	enum GameStates { GROUNDED, JUMPING, FALLING };
 
 	int game_states;
 

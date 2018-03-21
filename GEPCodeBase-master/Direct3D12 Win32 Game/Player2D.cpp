@@ -15,7 +15,7 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
-	sprite->setSpriteAnimationFile("Fighter_2_animations");
+	sprite->setSpriteAnimationFile("Fighter_1_animations");
 	sprite->setAnimationState("idle");
 }
 
@@ -26,10 +26,11 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameStateData* _GSD)
 {
+	col->setBoxOrigin(m_pos);
+	punch_collider->setBoxOrigin(m_pos + offset);
 
 	if (game_states == GROUNDED)
 	{
-		
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
@@ -41,8 +42,6 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	if (_GSD->m_keyboardState.J)
 	{
-		Vector2 test_vel = Vector2(0, 0);
-		SetVel(test_vel);
 		dead = true;
 	}
 
@@ -63,38 +62,28 @@ void Player2D::Tick(GameStateData* _GSD)
 		//sprite->SetAnimation(JUMP_ANIM);
 	}
 	AddForce(gravity*Vector2::UnitY);
-//Push the guy around in the directions for the key presses
+	//Push the guy around in the directions for the key presses
 
 	if (_GSD->m_keyboardState.A)
 	{
 		AddForce(-m_drive * Vector2::UnitX);
-		if (game_states == GROUNDED)
-		{
-			
-		}
+		offset = Vector2(-20, 0);
+		direction = Vector2(-1, 0);
 	}
 	else if (_GSD->m_keyboardState.D)
 	{
 		AddForce(m_drive * Vector2::UnitX);
-		if (game_states == GROUNDED)
-		{
-			
-		}
+		offset = Vector2(120, 0);
+		direction = Vector2(1, 0);
 	}
-	else if(game_states == GROUNDED)
-	{
-		Vector2 test_vel = Vector2(0, 0);
-		SetVel(test_vel);
-	}
-	
-	if (_GSD->m_keyboardState.Escape) 
+
+	if (_GSD->m_keyboardState.Escape)
 	{
 		// Testing for error components. 
 		world.exitGame();
 	}
 
-	
-//GEP:: Lets go up the inheritence and share our functionality
+	//GEP:: Lets go up the inheritance and share our functionality
 
 	Physics2D::Tick(_GSD);
 
@@ -105,18 +94,20 @@ void Player2D::Tick(GameStateData* _GSD)
 	if (m_pos.x < 50.0f)
 	{
 		m_pos.x = 1.0f;
-		
+		m_vel.x = 0.0f;
+
 	}
 	if (m_pos.y <= 0.0f)
 	{
 		m_pos.y = 0.0f;
-		
+
 	}
 
 	if (m_pos.x > m_limit.x)
 	{
 		m_pos.x = m_limit.x;
-		
+		m_vel.x = 0.0f;
+
 	}
 	if (m_pos.y >= m_limit.y)
 	{
@@ -124,6 +115,7 @@ void Player2D::Tick(GameStateData* _GSD)
 		game_states = GROUNDED;
 	}
 
+	Physics2D::Tick(_GSD);
 
 }
 
@@ -152,8 +144,25 @@ void Player2D::setRespawnTime(float respawn_timer)
 	respawn_time = respawn_timer;
 }
 
-Collider Player2D::getCollider()
+Collider* Player2D::getCollider(int id)
 {
-	return *col;
+
+	switch (id)
+	{
+	case 0:
+		return col;
+		break;
+	case 1:
+		return punch_collider;
+		break;
+	}
+}
+
+void Player2D::punch(GameStateData * _GSD)
+{
+	if (_GSD->m_keyboardState.F)
+	{
+		AddForce(10000 * direction * Vector2::UnitX);
+	}
 }
 

@@ -4,22 +4,27 @@
 class CollisionManager
 {
 private:
-	std::vector<Collider> colliders;
-	Vector2 left;
-	Vector2 right;
-	Vector2 top;
-	Vector2 bottom;
+	std::vector<Collider*> colliders;
+
+	Vector2 x_overlap;
+	Vector2 y_overlap;
+	Vector2 overlap;
+
+	int target;
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
 
 	void init();
 
-	void addCollider(Collider collider);
-	bool boundingBox(Vector2 wallType, int rect2ID);
+	void addCollider(Collider* collider);
+	int GetSize();
+	void setTarget(int id);
+	int getTarget();
 	void updateColliders(Vector2 position, int id);
-	void updateBoundingBox(int id);
 	void update();
-	bool checkCollisions(int id);
-	Vector2 collide();
+	int getTag(int id);
+	int checkCollisions(int id);
+	Vector2 colliderOverlap();
+	bool checkTrigger(int id);
 };
