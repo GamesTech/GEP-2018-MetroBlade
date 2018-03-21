@@ -15,7 +15,7 @@ Player2D::Player2D(RenderData* _RD, string _filename):Physics2D(_RD,_filename)
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
-	sprite->setSpriteAnimationFile("Fighter_2_animations");
+	sprite->setSpriteAnimationFile("Fighter_1_animations");
 	sprite->setAnimationState("idle");
 }
 
@@ -31,7 +31,6 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	if (game_states == GROUNDED)
 	{
-		
 		setGravity(0.0f);
 		if (_GSD->m_keyboardState.Space)
 		{
@@ -43,8 +42,6 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	if (_GSD->m_keyboardState.J)
 	{
-		Vector2 test_vel = Vector2(0, 0);
-		SetVel(test_vel);
 		dead = true;
 	}
 
