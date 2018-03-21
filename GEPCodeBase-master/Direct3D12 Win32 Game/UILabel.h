@@ -12,7 +12,7 @@ public:
 	UILabel() = default;
 	~UILabel() = default;
 
-	void setText(std::wstring new_text);
+	void setText(std::string new_text);
 
 	virtual void Tick(GameStateData * _GSD) override;
 	virtual void Render(RenderData * _RD) override;

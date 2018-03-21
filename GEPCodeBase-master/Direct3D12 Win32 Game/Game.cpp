@@ -222,11 +222,11 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.clear();
 
 		UILabel* test_label = new UILabel;
-		test_label->setText(L"test");
+		test_label->setText("test");
 		scene.instanciateUIObject(test_label);
 
-		UISprite* test_sprite = new UISprite("twist", m_RD);
-		scene.instanciateUIObject(test_sprite);
+		//UISprite* test_sprite = new UISprite("twist", m_RD);
+	//	scene.instanciateUIObject(test_sprite);
 	}
 
 	if (m_keyboard->GetState().T)

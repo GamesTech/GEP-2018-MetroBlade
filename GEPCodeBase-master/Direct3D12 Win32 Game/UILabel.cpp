@@ -22,8 +22,9 @@ void UILabel::setTextColour(Vector4 new_colour)
 	colour = new_colour;
 }
 
-void UILabel::setText(std::wstring new_text)
+void UILabel::setText(std::string new_text)
 {
-	text = new_text;
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	text = converter.from_bytes(new_text);
 }
 
