@@ -226,7 +226,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_physics_object.clear();
 
 		UILabel* test_label = new UILabel;
-		test_label->setText("test");
+		test_label->setText(L"test");
 		scene.instanciateUIObject(test_label);
 	}
 
