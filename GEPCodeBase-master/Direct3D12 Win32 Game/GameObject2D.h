@@ -3,6 +3,7 @@
 #include "GameComponentManager.h"
 #include "SceneState.h"
 
+
 //GEP:: Base class for all 2-D objects
 
 using namespace DirectX;

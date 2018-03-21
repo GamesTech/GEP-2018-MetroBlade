@@ -24,4 +24,8 @@ void Physics2D::Tick(GameStateData * _GSD)
 	m_pos = newPos;
 	m_vel = newVel;
 	m_acc = Vector2::Zero;
+	
 }
+
+
+
