@@ -272,7 +272,7 @@ void Game::Update(DX::StepTimer const& timer)
 				{
 					if (m_player_objects[collider_tag]->IsAttacking())
 					{
-						m_player_objects[collider.getTarget()]->punched(m_GSD, -m_player_objects[collider.getTarget()]->getDirection());
+						m_player_objects[collider.getTarget()]->punched(m_GSD, m_player_objects[collider_tag]->getDirection());
 					}
 					
 				}

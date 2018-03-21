@@ -160,12 +160,11 @@ void Player2D::Tick(GameStateData* _GSD)
 		
 	}
 
-	/*if (m_pos.x > m_limit.x)
+	if (m_pos.x > m_limit.x)
 	{
-		m_pos.x = m_limit.x;
-		m_vel.x = 0.0f;
+	
 
-	}*/
+	}
 	if (m_pos.y > m_limit.y)
 	{
 		m_pos.y = m_limit.y;
