@@ -69,8 +69,8 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 		render_data->m_GPeffect->SetProjection(main_camera->GetProj());
 		render_data->m_GPeffect->SetView(main_camera->GetView());
 		current_scene->Render(render_data, command_list);
+		game_ui.renderUIObjects(render_data);
 	}
-	game_ui.renderUIObjects(render_data);
 }
 
 bool SceneManager::shouldQuit() const
