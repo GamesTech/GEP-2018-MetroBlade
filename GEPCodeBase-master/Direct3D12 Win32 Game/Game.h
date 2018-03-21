@@ -17,6 +17,7 @@
 #include "Physics2D.h"
 #include "Obstacle2D.h"
 
+#include "InputManager.h"
 using std::vector;
 
 struct RenderData;
@@ -111,10 +112,10 @@ private:
 	void ReadInput();
 	std::unique_ptr<DirectX::Keyboard> m_keyboard;
 	std::unique_ptr<DirectX::Mouse> m_mouse;
-
+	//std::unique_ptr<DirectX::GamePad> m_gamePad;
+	std::unique_ptr<InputManager> m_inputManager;
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
-
 	SceneManager scene;
 	CollisionManager collider;
 

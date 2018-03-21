@@ -15,6 +15,7 @@ public:
 
 	Vector2 GetVel() { return m_vel; }
 	void SetVelX(Vector2 _vel) { m_vel.x = _vel.x ; }
+	void SetVel(Vector2 _vel) { m_vel = _vel; }
 
 	Vector2 GetAcc() { return m_acc; }
 

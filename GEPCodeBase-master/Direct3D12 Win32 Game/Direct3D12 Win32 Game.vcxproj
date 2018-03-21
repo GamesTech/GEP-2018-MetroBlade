@@ -182,6 +182,7 @@
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="Obstacle2D.h" />
     <ClInclude Include="Physics2D.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="Obstacle2D.cpp" />
     <ClCompile Include="Physics2D.cpp" />
