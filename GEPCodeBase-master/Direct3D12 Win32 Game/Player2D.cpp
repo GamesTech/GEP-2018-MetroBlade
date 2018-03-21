@@ -148,24 +148,24 @@ void Player2D::Tick(GameStateData* _GSD)
 	sprite->tickComponent(_GSD);
 
 //after that as updated my position let's lock it inside my limits
-	if (m_pos.x < 50.0f)
+	/*if (m_pos.x < 50.0f)
 	{
 		m_pos.x = 1.0f;
 		m_vel.x = 0.0f;
 
-	}
+	}*/
 	if (m_pos.y <= 0.0f)
 	{
 		m_pos.y = 0.1f;
 		
 	}
 
-	if (m_pos.x > m_limit.x)
+	/*if (m_pos.x > m_limit.x)
 	{
 		m_pos.x = m_limit.x;
 		m_vel.x = 0.0f;
 
-	}
+	}*/
 	if (m_pos.y > m_limit.y)
 	{
 		m_pos.y = m_limit.y;
