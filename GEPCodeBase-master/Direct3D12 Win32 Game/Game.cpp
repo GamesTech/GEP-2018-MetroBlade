@@ -11,6 +11,7 @@
 #include "SpriteAnimFileReader.h"
 
 #include "UILabel.h"
+#include "UISprite.h"
 
 extern void ExitGame();
 
@@ -223,6 +224,9 @@ void Game::Update(DX::StepTimer const& timer)
 		UILabel* test_label = new UILabel;
 		test_label->setText(L"test");
 		scene.instanciateUIObject(test_label);
+
+		UISprite* test_sprite = new UISprite("twist", m_RD);
+		scene.instanciateUIObject(test_sprite);
 	}
 
 	if (m_keyboard->GetState().T)
