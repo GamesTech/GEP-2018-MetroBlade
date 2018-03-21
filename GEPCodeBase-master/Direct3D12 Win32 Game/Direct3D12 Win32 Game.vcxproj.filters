@@ -122,6 +122,9 @@
     <Filter Include="Core\GameComponent\Game components\Sprite Animation">
       <UniqueIdentifier>{dae7578c-4c76-4f53-9fdd-35248ca50bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{0daaf260-df3c-4110-8123-0df54d6c0e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -248,6 +251,9 @@
     <ClInclude Include="Sprite.h">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -336,6 +342,9 @@
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Core\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

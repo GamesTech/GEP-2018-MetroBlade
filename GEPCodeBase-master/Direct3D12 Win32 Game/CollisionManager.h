@@ -27,4 +27,6 @@ public:
 	int checkCollisions(int id);
 	Vector2 colliderOverlap();
 	bool checkTrigger(int id);
+
+	void reset();
 };

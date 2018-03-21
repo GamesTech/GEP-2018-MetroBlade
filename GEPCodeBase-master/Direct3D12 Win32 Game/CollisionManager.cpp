@@ -65,6 +65,11 @@ bool CollisionManager::checkTrigger(int id)
 	return false;
 }
 
+void CollisionManager::reset()
+{
+	colliders.clear();
+}
+
 void CollisionManager::updateColliders(Vector2 position, int id)
 {
 	colliders[id]->setBoxOrigin(position);
