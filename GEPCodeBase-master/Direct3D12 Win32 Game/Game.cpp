@@ -212,7 +212,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
@@ -223,7 +223,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);
 		m_player_objects.push_back(testPlay);
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_1_ss", 1);
+		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
 		
@@ -234,6 +234,29 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay2->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay2);
 		m_player_objects.push_back(testPlay2);
+
+		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
+		testPlay3->SetDrive(1000.0f);
+		testPlay3->SetDrag(0.5f);
+		testPlay3->getCollider(0)->setTag(m_player_objects.size());
+		testPlay3->getCollider(1)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay3->getCollider(0)));
+		collider.addCollider((testPlay3->getCollider(1)));
+		testPlay3->SetPos(Vector2(1100, 500));
+		scene.instanciate2DObject(testPlay3);
+		m_player_objects.push_back(testPlay3);
+
+		Player2D* testPlay4 = new Player2D(m_RD, "Fighter_4", 2);
+		testPlay4->SetDrive(1000.0f);
+		testPlay4->SetDrag(0.5f);
+		testPlay4->getCollider(0)->setTag(m_player_objects.size());
+		testPlay4->getCollider(1)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay4->getCollider(0)));
+		collider.addCollider((testPlay4->getCollider(1)));
+		testPlay4->SetPos(Vector2(1700, 500));
+		scene.instanciate2DObject(testPlay4);
+		m_player_objects.push_back(testPlay4);
+
 		scene.startGameManager();
 
 		

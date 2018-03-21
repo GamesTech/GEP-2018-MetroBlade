@@ -5,10 +5,10 @@
     <ImageContentTask Include="twist.png" />
     <ImageContentTask Include="gens.png" />
     <ImageContentTask Include="gens_ss.png" />
-    <ImageContentTask Include="Fighter_1_ss.png" />
-    <ImageContentTask Include="Fighter_2_ss.png" />
-    <ImageContentTask Include="Fighter_3_ss.png" />
-    <ImageContentTask Include="Fighter_4_ss.png" />
+    <ImageContentTask Include="Fighter_4.png" />
+    <ImageContentTask Include="Fighter_1.png" />
+    <ImageContentTask Include="Fighter_2.png" />
+    <ImageContentTask Include="Fighter_3.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />
