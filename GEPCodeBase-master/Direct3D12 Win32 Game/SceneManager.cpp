@@ -83,15 +83,21 @@ Scene * SceneManager::getScene()
 void SceneManager::loadScene(string scene_name)
 {
 	// TODO - Add Code to load diffrent Scenes into the game.
+	if (scene_name == "clear") 
+	{
+		loadScene(nullptr);
+	}
+	else 
+	{
+		// Parse the scene file and load its contents here.
+	}
 }
 
 void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
 	game_manager.resetManager();
-	game_manager.setupGame();
 	current_scene.reset(scene_name);
-	game_manager.startGame();
 }
 
 void SceneManager::clearScene()
@@ -115,8 +121,9 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	new_object->assignWorldEventListener(scene_event_listener);
 	if (dynamic_cast<Player2D*>(new_object)) 
 	{
-		game_manager.registerPlayer((Player2D*)new_object);
+		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
+
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
@@ -124,6 +131,12 @@ void SceneManager::instanciate3DObject(GameObject3D* new_object)
 {
 	new_object->assignWorldEventLisener(scene_event_listener);
 	current_scene->add3DGameObjectToScene(new_object);
+}
+
+void SceneManager::startGameManager()
+{
+	game_manager.setupGame();
+	game_manager.startGame();
 }
 
 void SceneManager::processSceneEvents()
@@ -143,6 +156,10 @@ void SceneManager::processSceneEvents()
 			OutputDebugString(L"Critical Error - Game Killed by event SIGKILL");
 #endif 
 			break;
+		}
+		case SceneEventFlags::EVENT_SIGCHANGE:
+		{
+			loadScene(scene_event_listener->new_map);
 		}
 	}
 	scene_event_listener->event_flag = EVENT_SIGNONE;

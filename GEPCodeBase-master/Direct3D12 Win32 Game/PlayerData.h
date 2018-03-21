@@ -19,10 +19,13 @@
 
 #include "pch.h"
 
+
+
+
 struct PlayerData 
 {
-	std::string   player_name = "Player";
+	std::string   player_name = "player_null";
 	std::string	  character_name = "none";
 	int			  character_costume = 0;
-	int			  input_binding = 0;
+	int			  input_device_id = 0;
 };
