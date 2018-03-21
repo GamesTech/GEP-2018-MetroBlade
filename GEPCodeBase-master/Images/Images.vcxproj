@@ -141,6 +141,9 @@
     <ImageContentTask Include="Fighter_3.png" />
     <ImageContentTask Include="Fighter_4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Block.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

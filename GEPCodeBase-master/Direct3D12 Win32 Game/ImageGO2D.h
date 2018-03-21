@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-
 #include "GameObject2D.h"
 #include "Collider.h"
 using std::string;

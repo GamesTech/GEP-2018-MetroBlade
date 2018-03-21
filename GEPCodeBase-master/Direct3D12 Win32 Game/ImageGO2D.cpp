@@ -6,6 +6,7 @@
 #include "RenderData.h"
 
 
+
 ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
 {
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;

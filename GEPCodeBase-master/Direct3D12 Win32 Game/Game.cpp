@@ -205,6 +205,7 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().P)
 	{
 		m_player_objects.clear();
+		m_obstacle_objects.clear();
 		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -261,6 +262,14 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay4);
 		m_player_objects.push_back(testPlay4);
 
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		testPlatform->getCollider(0)->setTag(10);
+		collider.addCollider((testPlatform->getCollider(0)));
+		testPlatform->SetPos(Vector2(800, 400));
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_obstacle_objects.push_back(testPlatform);
+
 		scene.startGameManager();
 
 		UILabel* test_label = new UILabel;
@@ -277,13 +286,27 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
+
+
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-		testPlay->SetPos(Vector2(800, 500));
+
+		testPlay->SetPos(Vector2(0, 500));
+
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		m_player_objects.push_back(testPlay);
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		testPlatform->getCollider(0)->setTag(10);
+		collider.addCollider((testPlatform->getCollider(0)));
+
+		testPlatform->SetPos(Vector2(0, 500));
+
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_obstacle_objects.push_back(testPlatform);
+
 	}
 	if (!m_player_objects.empty())
 	{
@@ -293,14 +316,19 @@ void Game::Update(DX::StepTimer const& timer)
 
 			if (collider_tag != -1)
 			{
-				if (!collider.checkTrigger(i))
+				if (collider_tag != 10)
 				{
-					Vector2 col_dir = m_player_objects[collider_tag]->GetVel();
-					col_dir.Normalize();
-					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
-					m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+					if (!collider.checkTrigger(i))
+					{
+						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
+						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+						if (collider.getTarget() == 10)
+						{
+							m_player_objects[collider_tag]->setStateGrounded();
+						}
+					}
 				}
-				if (collider.checkTrigger(i))
+				if (collider.checkTrigger(i) && collider.getTarget() != 10)
 				{
 					if (m_player_objects[collider_tag]->IsAttacking())
 					{

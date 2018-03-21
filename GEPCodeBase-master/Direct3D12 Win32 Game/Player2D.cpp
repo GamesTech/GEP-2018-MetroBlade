@@ -171,6 +171,7 @@ void Player2D::Tick(GameStateData* _GSD)
 		phys_state = GROUNDED;
 	}
 
+
 	Physics2D::Tick(_GSD);
 
 }
@@ -218,5 +219,10 @@ void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
 	
 	AddForce(10000 * direction * Vector2::UnitX);
+}
+
+void Player2D::setStateGrounded()
+{
+	phys_state = GROUNDED;
 }
 

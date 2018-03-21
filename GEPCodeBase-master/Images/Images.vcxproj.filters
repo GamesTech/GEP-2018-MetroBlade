@@ -5,6 +5,7 @@
     <ImageContentTask Include="twist.png" />
     <ImageContentTask Include="gens.png" />
     <ImageContentTask Include="gens_ss.png" />
+    <ImageContentTask Include="Block.jpg" />
     <ImageContentTask Include="Fighter_4.png" />
     <ImageContentTask Include="Fighter_1.png" />
     <ImageContentTask Include="Fighter_2.png" />
