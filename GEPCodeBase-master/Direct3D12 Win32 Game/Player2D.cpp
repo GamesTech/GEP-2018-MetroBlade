@@ -5,7 +5,11 @@
 
 Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
 {
+	src_rect.reset(new RECT);
 	CentreOrigin();
+	object_components.addComponent(new Sprite(true));
+	sprite = object_components.getComponentByType<Sprite>();
+	sprite->SetRECT(src_rect);
 	controller_id = gamepadID;
 	
 }
@@ -15,67 +19,112 @@ Player2D::~Player2D()
 {
 }
 
-void Player2D::Tick(GameStateData * _GSD)
+void Player2D::CheckInput(GameStateData* _GSD)
 {
-	//temporary gamepad input
-	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
+	//temp place for input
+	if (_GSD->m_keyboardState.Space && phys_state == GROUNDED)
+	{
+		action_state = JUMPING;
+		phys_state = AIR;
+	}
+	else if (_GSD->m_keyboardState.A)
+	{
+		m_effects = SpriteEffects_FlipHorizontally;
+		SetVel(Vector2(-250, m_vel.y));
+		action_state = MOVING;
+	}
+	else if (_GSD->m_keyboardState.D)
+	{
+		m_effects = SpriteEffects_None;
+		SetVel(Vector2(250, m_vel.y));
+		action_state = MOVING;
+	}
+	else if (phys_state == GROUNDED && action_state != JUMPING)
+	{
+		action_state = IDLE;
+		SetVel(Vector2(0, 0));
+	}
+}
+void Player2D::Tick(GameStateData* _GSD)
+{
 	
-	float stick_x = controller_state.thumbSticks.leftX;
-	float stick_y = controller_state.thumbSticks.leftY;
-//Push the guy around in the directions for the key presses
-	if (controller_state.IsAPressed())
+	CheckInput(_GSD);
+
+	//physical state determines stuff like if they are colliding with ground, or walls or in the air
+	switch (phys_state)
 	{
-		AddForce(-m_drive * Vector2::UnitY);
+	case GROUNDED:
+		SetVel(Vector2(m_vel.x, 0));
+		setGravity(0.0f);
+		break;
+
+	case AIR:
+
+		break;
 	}
 
-	if (_GSD->m_keyboardState.W)
+	//action state determines the players action such as attacking, jumping, moving etc
+	switch (action_state)
 	{
-		AddForce(-m_drive * Vector2::UnitY);
-	}
-	if (_GSD->m_keyboardState.S)
-	{
-		AddForce(m_drive * Vector2::UnitY);
-	}
-	if (_GSD->m_keyboardState.A)
-	{
-		AddForce(-m_drive * Vector2::UnitX);
-	}
-	if (_GSD->m_keyboardState.D)
-	{
-		AddForce(m_drive * Vector2::UnitX);
-	}
+	case IDLE:
 
-	Vector2 mousePush = Vector2(_GSD->m_mouseState.x, _GSD->m_mouseState.y);
+		sprite->SetAnimation(IDLE_ANIM);
+		break;
 
-	//use analogue stick to move, minus value cancels out the inverted axis
-	AddForce(m_drive*Vector2(stick_x, -stick_y));
+	case MOVING:
 
-	AddForce(m_drive*mousePush);
+		if (phys_state == GROUNDED)
+		{
+			sprite->SetAnimation(MOVE_ANIM);
+		}
+		break;
+
+	case JUMPING:
+
+		sprite->SetAnimation(JUMP_ANIM);
+		setGravity(1000.0f);
+		AddForce(-jump_force * Vector2::UnitY);
+		break;
+
+	case ATTACKING:
+
+		break;
+	}
 	
-//GEP:: Lets go up the inheritence and share our functionality
+
+	//GRAVITY
+	AddForce(gravity*Vector2::UnitY);
+
+	//GEP:: Lets go up the inheritence and share our functionality
 
 	Physics2D::Tick(_GSD);
 
+	//Update sprite animation
+	sprite->PlayAnimation(_GSD);
+
 //after that as updated my position let's lock it inside my limits
-	if (m_pos.x < 0.0f)
+	if (m_pos.x < 50.0f)
 	{
-		m_pos.x *= -1.0f;
-		m_vel.x *= -1.0f; // yea, not a nice bounce for works okay for a first pass
+		m_pos.x = 1.0f;
+		
 	}
-	if (m_pos.y < 0.0f)
+	if (m_pos.y <= 0.0f)
 	{
-		m_pos.y *= -1.0f;
-		m_vel.y *= -1.0f;
+		m_pos.y = 0.1f;
+		
 	}
 
 	if (m_pos.x > m_limit.x)
 	{
-		m_pos.x = 2.0f * m_limit.x - m_pos.x;
-		m_vel.x *= -1.0f;
+		m_pos.x = m_limit.x;
+		
 	}
 	if (m_pos.y > m_limit.y)
 	{
-		m_pos.y = 2.0f * m_limit.y - m_pos.y;
-		m_vel.y *= -1.0f;
+		m_pos.y = m_limit.y;
+		phys_state = GROUNDED;
 	}
+
+	
+	
 }

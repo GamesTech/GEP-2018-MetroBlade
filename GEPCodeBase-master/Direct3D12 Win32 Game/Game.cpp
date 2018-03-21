@@ -192,27 +192,29 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().P)
 	{
 		Scene*  newScene = new Scene;
-		scene.clearScene();
+		scene.loadScene(newScene);
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		scene.setMainCamera(camera);
-		newScene->add3DGameObjectToScene(camera);
+		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "gens", 0);
-		testPlay->SetDrive(100.0f);
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
+		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		newScene->add2DGameObjectToScene(testPlay);//m_2DObjects.push_back(testPlay);
-
-		Player2D* testPlay2 = new Player2D(m_RD, "gens", 1);
-		testPlay2->SetDrive(100.0f);
-		testPlay2->SetDrag(0.5f);
-		newScene->add2DGameObjectToScene(testPlay2);
-
-		scene.loadScene(newScene);
+		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		testPlay->SetPos(Vector2(800, 500));
 	}
 
-	
+	if (m_keyboard->GetState().T) 
+	{
+		// Instantiation test.
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss");
+		testPlay->SetDrive(1000.0f);
+		testPlay->SetDrag(0.5f);
+		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
+		testPlay->SetPos(Vector2(800, 500));
+	}
 
 	scene.Update(m_GSD);
 }
@@ -564,9 +566,6 @@ void Game::CreateResources()
     dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
     m_d3dDevice->CreateDepthStencilView(m_depthStencil.Get(), &dsvDesc, m_dsvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
-
-    // TODO: Initialize windows-size dependent objects here.
-	scene.assignGPUControlObjects(m_commandQueue.Get(), m_fence.Get(), &m_backBufferIndex, &m_fenceEvent, m_fenceValues);
 }
 
 void Game::WaitForGpu() noexcept

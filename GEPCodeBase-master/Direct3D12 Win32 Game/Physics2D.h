@@ -12,7 +12,7 @@ public:
 	void AddForce(Vector2 _push) { m_acc += _push / m_mass; }
 
 	Vector2 GetVel() { return m_vel; }
-
+	void SetVel(Vector2 new_vel) { m_vel = new_vel; }
 	void SetMass(float _mass) { m_mass = _mass; }
 	float GetMass() { return m_mass; }
 	void SetDrag(float _drag) { m_drag = _drag; }
@@ -27,4 +27,3 @@ protected:
 	float m_mass = 1.0f;
 	float m_drag = 0.0f;
 };
-
