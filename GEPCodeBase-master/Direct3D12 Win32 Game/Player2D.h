@@ -1,6 +1,5 @@
 #pragma once
 #include "Physics2D.h"
-#include "Collider.h"
 #include "Sprite.h"
 #include "InputManager.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
@@ -23,7 +22,11 @@ public:
 	bool IsAttacking() { return attacking; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
+	
+	void setStateGrounded();
+	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
+
 
 
 	// Game Manager interface
@@ -68,7 +71,7 @@ protected:
 	bool attacking = false;
 	void setGravity(float gravity) { this->gravity = gravity; }
 	PhysicalStates phys_state = GROUNDED;
-	PlayerActions action_state = IDLE;
+	PlayerActions action_state = JUMPING;
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;

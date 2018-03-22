@@ -17,7 +17,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
-	sprite->setSpriteAnimationFile("Fighter_1_animations");
+	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
 	controller_id = gamepadID;
 }
@@ -165,11 +165,16 @@ void Player2D::Tick(GameStateData* _GSD)
 	
 
 	}
-	if (m_pos.y > m_limit.y)
+	/*if (m_pos.y > m_limit.y)
 	{
 		m_pos.y = m_limit.y;
 		phys_state = GROUNDED;
+	}*/
+	if (m_pos.y > 1500)
+	{
+		dead = true;
 	}
+
 
 	Physics2D::Tick(_GSD);
 
@@ -218,5 +223,15 @@ void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
 	
 	AddForce(10000 * direction * Vector2::UnitX);
+}
+
+void Player2D::setStateGrounded()
+{
+	phys_state = GROUNDED;
+}
+
+void Player2D::setStateFalling()
+{
+	setGravity(1000.0f);
 }
 

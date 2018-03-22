@@ -6,6 +6,7 @@
 #include "RenderData.h"
 
 
+
 ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
 {
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
@@ -57,6 +58,6 @@ void ImageGO2D::CentreOrigin()
 {
 	XMUINT2 size = GetTextureSize(m_texture.Get());
 
-	m_origin.x = float(size.x / 2);
-	m_origin.y = float(size.y / 2);
+	m_origin.x = float(100);
+	m_origin.y = float(100);
 }
