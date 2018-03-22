@@ -35,3 +35,8 @@ void UICanvas::addWorldEventListener(std::shared_ptr<SceneEvent> world_event_lis
 	world.assignSceneManagerListener(world_event_listener);
 }
 
+void UICanvas::clearUICanvas()
+{
+	ui_objects.clear();
+}
+

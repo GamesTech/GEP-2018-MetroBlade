@@ -21,6 +21,7 @@
 #include "StepTimer.h"
 #include "GameStateData.h"
 
+#include "UILabel.h"
 #include "SceneManager.h"
 
 SceneManager::SceneManager(RenderData* render_structure)
@@ -42,9 +43,15 @@ void SceneManager::Init()
 	game_ui.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);
 
-	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+	Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
 	setMainCamera(camera);
+	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
+
+	UILabel* label = new UILabel;
+	label->setCanvasPosition(Vector2(0.4, 0.4));
+	label->setText("Super Indie Smash. \n Press P to start.");
+	game_ui.addUIObject(label);
 }
 
 void SceneManager::Update(GameStateData * game_state)
@@ -88,7 +95,17 @@ void SceneManager::loadScene(string scene_name)
 	// TODO - Add Code to load diffrent Scenes into the game.
 	if (scene_name == "clear") 
 	{
-		loadScene(nullptr);
+		loadScene(new Scene);
+
+		Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
+		setMainCamera(camera);
+		camera->set2DViewport(Vector2(1920, 1080));
+		current_scene->add3DGameObjectToScene(camera);
+
+		UILabel* label = new UILabel;
+		label->setCanvasPosition(Vector2(0.4, 0.4));
+		label->setText("Super Indie Smash. \n Press P to start.");
+		game_ui.addUIObject(label);
 	}
 	else 
 	{
@@ -100,6 +117,7 @@ void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
 	game_manager.resetManager();
+	game_ui.clearUICanvas();
 	current_scene.reset(scene_name);
 }
 
