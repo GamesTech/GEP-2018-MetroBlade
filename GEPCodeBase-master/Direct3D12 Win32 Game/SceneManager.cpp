@@ -127,7 +127,7 @@ void SceneManager::clearScene()
 	{
 		resetRenderState();
 		current_scene.reset(nullptr);
-	    setMainCamera(nullptr);
+	    //setMainCamera(nullptr);
 	}
 }
 

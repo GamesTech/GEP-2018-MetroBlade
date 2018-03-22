@@ -207,15 +207,17 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.clear();
 		m_obstacle_objects.clear();
 		collider.reset();
+		scene.clearScene();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
 
-		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
-		//m_3DObjects.push_back(camera);
+		camera->SetOffset(500, 0);
+
 
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
@@ -263,12 +265,13 @@ void Game::Update(DX::StepTimer const& timer)
 
 		UILabel* test_label = new UILabel;
 		test_label->setText("Kill your opponents.");
+		test_label->setCanvasPosition(Vector2(0.05, 0.05));
 		scene.instanciateUIObject(test_label);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}
-
+	
 	if (m_keyboard->GetState().T)
 	{
 		// Instantiation test.

@@ -5,7 +5,8 @@
 Camera::Camera(float _width, float _height, float _near, float _far)
 {
 	m_pos = Vector3::Backward;
-	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,_width/_height ,_near,_far);
+	//m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,_width/_height ,_near,_far);
+	m_proj = Matrix::CreateOrthographic(_width, _height, 1.0f, 1000.0f);
 }
 
 
@@ -36,4 +37,9 @@ void Camera::set2DViewport(Vector2 new_viewport)
 Vector2 Camera::get2DViewport() const
 {
 	return viewport_2D;
+}
+
+void Camera::SetOffset(float x, float y)
+{
+	offset = Vector3(x, y, offset.z);
 }

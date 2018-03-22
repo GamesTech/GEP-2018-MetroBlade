@@ -14,7 +14,7 @@ public:
 
 	Matrix GetProj() { return m_proj; }
 	Matrix GetView() { return m_view; }
-
+	void SetOffset(float x, float y);
 	virtual void Tick(GameStateData* _GSD);
 	virtual void Render(RenderData* _RD) {};
 
@@ -22,6 +22,7 @@ public:
 	Vector2	get2DViewport() const; 
 
 protected:
+	Vector3 offset = Vector3::Zero;
 	Vector2		  viewport_2D;
 	GameObject3D* m_targetObject=NULL;
 	Vector3 m_targetPos=Vector3::Zero;
