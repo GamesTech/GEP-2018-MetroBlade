@@ -1,6 +1,5 @@
 #pragma once
 #include "Physics2D.h"
-#include "Collider.h"
 #include "Sprite.h"
 #include "InputManager.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
@@ -23,7 +22,9 @@ public:
 	bool IsAttacking() { return attacking; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
+	void setStateGrounded();
 	void punched(GameStateData* _GFD, Vector2 direction);
+
 
 
 	// Game Manager interface

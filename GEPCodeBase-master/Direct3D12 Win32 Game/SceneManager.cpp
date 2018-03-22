@@ -39,6 +39,7 @@ void SceneManager::Init()
 	// Create a basic scene and set up all of the scene manager systems.
 	game_manager.init();
 	game_manager.addWorldEventListener(scene_event_listener);
+	game_ui.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);
 
 	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -53,6 +54,7 @@ void SceneManager::Update(GameStateData * game_state)
 	{
 		current_scene->Update(game_state);
 	}
+	game_ui.tickUIObjects(game_state);
 	processSceneEvents();
 }
 
@@ -67,6 +69,7 @@ void SceneManager::Render(ID3D12GraphicsCommandList* command_list)
 		render_data->m_GPeffect->SetProjection(main_camera->GetProj());
 		render_data->m_GPeffect->SetView(main_camera->GetView());
 		current_scene->Render(render_data, command_list);
+		game_ui.renderUIObjects(render_data);
 	}
 }
 
@@ -139,6 +142,11 @@ void SceneManager::startGameManager()
 	game_manager.startGame();
 }
 
+void SceneManager::instanciateUIObject(UIObject * new_object)
+{
+	game_ui.addUIObject(new_object);
+}
+
 void SceneManager::processSceneEvents()
 {
 	switch (scene_event_listener->event_flag) 
@@ -168,5 +176,5 @@ void SceneManager::processSceneEvents()
 void SceneManager::resetRenderState()
 {
 	// Add any other resetting routienes here.
-	render_data->m_resourceCount = 0;
+	render_data->m_resourceCount = 1;
 }

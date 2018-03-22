@@ -10,6 +10,9 @@
 
 #include "SpriteAnimFileReader.h"
 
+#include "UILabel.h"
+#include "UISprite.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -202,17 +205,19 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_keyboard->GetState().P)
 	{
 		m_player_objects.clear();
+		m_obstacle_objects.clear();
 		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		//m_3DObjects.push_back(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
@@ -223,7 +228,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);
 		m_player_objects.push_back(testPlay);
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_1_ss", 1);
+		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
 		
@@ -234,9 +239,45 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay2->SetPos(Vector2(800, 500));
 		scene.instanciate2DObject(testPlay2);
 		m_player_objects.push_back(testPlay2);
+
+		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
+		testPlay3->SetDrive(1000.0f);
+		testPlay3->SetDrag(0.5f);
+		testPlay3->getCollider(0)->setTag(m_player_objects.size());
+		testPlay3->getCollider(1)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay3->getCollider(0)));
+		collider.addCollider((testPlay3->getCollider(1)));
+		testPlay3->SetPos(Vector2(1100, 500));
+		scene.instanciate2DObject(testPlay3);
+		m_player_objects.push_back(testPlay3);
+
+		Player2D* testPlay4 = new Player2D(m_RD, "Fighter_4", 2);
+		testPlay4->SetDrive(1000.0f);
+		testPlay4->SetDrag(0.5f);
+		testPlay4->getCollider(0)->setTag(m_player_objects.size());
+		testPlay4->getCollider(1)->setTag(m_player_objects.size());
+		collider.addCollider((testPlay4->getCollider(0)));
+		collider.addCollider((testPlay4->getCollider(1)));
+		testPlay4->SetPos(Vector2(1700, 500));
+		scene.instanciate2DObject(testPlay4);
+		m_player_objects.push_back(testPlay4);
+
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		testPlatform->getCollider(0)->setTag(10);
+		collider.addCollider((testPlatform->getCollider(0)));
+		testPlatform->SetPos(Vector2(800, 400));
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_obstacle_objects.push_back(testPlatform);
+
 		scene.startGameManager();
 
-		
+		UILabel* test_label = new UILabel;
+		test_label->setText("test");
+		scene.instanciateUIObject(test_label);
+
+		//UISprite* test_sprite = new UISprite("twist", m_RD);
+	//	scene.instanciateUIObject(test_sprite);
 	}
 
 	if (m_keyboard->GetState().T)
@@ -245,13 +286,27 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
+
+
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-		testPlay->SetPos(Vector2(800, 500));
+
+		testPlay->SetPos(Vector2(0, 500));
+
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
 		m_player_objects.push_back(testPlay);
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		testPlatform->getCollider(0)->setTag(10);
+		collider.addCollider((testPlatform->getCollider(0)));
+
+		testPlatform->SetPos(Vector2(0, 500));
+
+		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		m_obstacle_objects.push_back(testPlatform);
+
 	}
 	if (!m_player_objects.empty())
 	{
@@ -261,14 +316,19 @@ void Game::Update(DX::StepTimer const& timer)
 
 			if (collider_tag != -1)
 			{
-				if (!collider.checkTrigger(i))
+				if (collider_tag != 10)
 				{
-					Vector2 col_dir = m_player_objects[collider_tag]->GetVel();
-					col_dir.Normalize();
-					m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
-					m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+					if (!collider.checkTrigger(i))
+					{
+						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
+						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+						if (collider.getTarget() == 10)
+						{
+							m_player_objects[collider_tag]->setStateGrounded();
+						}
+					}
 				}
-				if (collider.checkTrigger(i))
+				if (collider.checkTrigger(i) && collider.getTarget() != 10)
 				{
 					if (m_player_objects[collider_tag]->IsAttacking())
 					{

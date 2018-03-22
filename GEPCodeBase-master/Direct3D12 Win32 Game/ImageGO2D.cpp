@@ -1,7 +1,10 @@
 #include "pch.h"
-#include "ImageGO2D.h"
+
 #include <codecvt>
+
+#include "ImageGO2D.h"
 #include "RenderData.h"
+
 
 
 ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
@@ -49,14 +52,6 @@ void ImageGO2D::Render(RenderData* _RD)
 	
 	//TODO::add sprite effects & layer Depth
 	//TODO::example stuff for sprite sheet
-}
-
-void ImageGO2D::ChangeRectPos(int pos1, int pos2, int pos3, int pos4)
-{
-	src_rect->left = pos1;
-	src_rect->top = pos2;
-	src_rect->right = pos3;
-	src_rect->bottom = pos4;
 }
 
 void ImageGO2D::CentreOrigin()

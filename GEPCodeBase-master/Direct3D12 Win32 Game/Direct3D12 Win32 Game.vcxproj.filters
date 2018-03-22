@@ -110,6 +110,18 @@
     <Filter Include="Core\GameComponent\Game components\Players">
       <UniqueIdentifier>{bec5be17-523c-4b25-88fb-960d5dd0c993}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI">
+      <UniqueIdentifier>{9aa44dd9-973f-404c-8bb3-5e1fdcfdd9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Canvas">
+      <UniqueIdentifier>{f919082c-e4a6-4a4e-8949-b893e3acb99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Base Object">
+      <UniqueIdentifier>{61077468-25bf-41de-94b8-f83d5123eeb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Test Object">
+      <UniqueIdentifier>{954bae20-35e9-4487-a0ef-aa8cd8a1131c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\File IO\Base">
       <UniqueIdentifier>{9276d140-20a3-44be-af12-3c612e9e465c}</UniqueIdentifier>
     </Filter>
@@ -124,6 +136,15 @@
     </Filter>
     <Filter Include="Core\Input">
       <UniqueIdentifier>{0daaf260-df3c-4110-8123-0df54d6c0e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Label">
+      <UniqueIdentifier>{aff4b8f2-3875-4b54-92b4-4cadb03b7585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Components">
+      <UniqueIdentifier>{3123c2be-bf17-48b7-8929-9883e1980b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\UISprite">
+      <UniqueIdentifier>{c35bb81d-3d96-40f5-9093-3997aa513eea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +256,15 @@
     <ClInclude Include="PlayerStatus.h">
       <Filter>Core\GameComponent\Game components\Players</Filter>
     </ClInclude>
+    <ClInclude Include="UICanvas.h">
+      <Filter>Core\UI\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>Core\UI\Base Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UITest.h">
+      <Filter>Core\UI\Test Object</Filter>
+    </ClInclude>
     <ClInclude Include="FileReaderBase.h">
       <Filter>Core\File IO\Base</Filter>
     </ClInclude>
@@ -253,6 +283,15 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UILabel.h">
+      <Filter>Core\UI\Label</Filter>
+    </ClInclude>
+    <ClInclude Include="UISprite.h">
+      <Filter>Core\UI\UISprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle2D.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +370,16 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Core\Game Management</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStatus.cpp" />
+    <ClCompile Include="UITest.cpp">
+      <Filter>Core\UI\Test Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>Core\UI\Base Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UICanvas.cpp">
+      <Filter>Core\UI\Canvas</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerStatus.cpp">
       <Filter>Core\GameComponent\Game components\Players</Filter>
     </ClCompile>
@@ -345,6 +394,15 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle2D.cpp">
+      <Filter>Core\GameObjects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UILabel.cpp">
+      <Filter>Core\UI\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="UISprite.cpp">
+      <Filter>Core\UI\UISprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
