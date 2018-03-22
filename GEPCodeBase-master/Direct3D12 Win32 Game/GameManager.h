@@ -22,6 +22,8 @@
 #include "GameData.h"
 #include "SceneState.h"
 
+class UILabel;
+
 struct GameStateData;
 
 class GameManager 
@@ -48,6 +50,8 @@ public:
 	void startGame();
 	void resetManager();
 
+	void setUILabel(UILabel* new_label);
+
 private:
 	// TODO - Add Spawnpoint register for determining locations hwne respawning players.
 
@@ -72,4 +76,6 @@ private:
 
 	bool							game_active = false;
 	float							game_time;
+
+	UILabel*						timer_label = nullptr;
 };

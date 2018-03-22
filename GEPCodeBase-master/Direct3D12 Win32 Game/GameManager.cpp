@@ -90,6 +90,11 @@ void GameManager::resetManager()
 	level_players.clear();
 }
 
+void GameManager::setUILabel(UILabel * new_label)
+{
+	timer_label = new_label;
+}
+
 void GameManager::checkPlayerLifeStatus()
 {
 	for (auto& player : level_players)

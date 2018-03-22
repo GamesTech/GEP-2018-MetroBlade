@@ -241,7 +241,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.startGameManager();
 
 		UILabel* test_label = new UILabel;
-		test_label->setText("test");
+		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
