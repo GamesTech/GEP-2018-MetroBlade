@@ -165,10 +165,14 @@ void Player2D::Tick(GameStateData* _GSD)
 	
 
 	}
-	if (m_pos.y > m_limit.y)
+	/*if (m_pos.y > m_limit.y)
 	{
 		m_pos.y = m_limit.y;
 		phys_state = GROUNDED;
+	}*/
+	if (m_pos.y > 1500)
+	{
+		dead = true;
 	}
 
 
@@ -224,5 +228,10 @@ void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 void Player2D::setStateGrounded()
 {
 	phys_state = GROUNDED;
+}
+
+void Player2D::setStateFalling()
+{
+	setGravity(1000.0f);
 }
 
