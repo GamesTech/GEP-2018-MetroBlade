@@ -159,8 +159,8 @@ void Game::Initialize(HWND window, int width, int height)
 	loop->Play();
 	m_sounds.push_back(loop);
 
-	TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
-	m_sounds.push_back(TS);
+	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
+	m_sounds.push_back(TS);*/
 }
 
 //GEP:: Executes the basic game loop.
@@ -224,7 +224,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
 		collider.addCollider((testPlay->getCollider(1)));
-		testPlay->SetPos(Vector2(1500, 500));
+		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
 		m_player_objects.push_back(testPlay);
 
@@ -236,7 +236,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay2->getCollider(1)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay2->getCollider(1)));
 		collider.addCollider((testPlay2->getCollider(0)));
-		testPlay2->SetPos(Vector2(800, 500));
+		testPlay2->SetPos(Vector2(800, 200));
 		scene.instanciate2DObject(testPlay2);
 		m_player_objects.push_back(testPlay2);
 
@@ -251,22 +251,11 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay3);
 		m_player_objects.push_back(testPlay3);
 
-		Player2D* testPlay4 = new Player2D(m_RD, "Fighter_4", 2);
-		testPlay4->SetDrive(1000.0f);
-		testPlay4->SetDrag(0.5f);
-		testPlay4->getCollider(0)->setTag(m_player_objects.size());
-		testPlay4->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay4->getCollider(0)));
-		collider.addCollider((testPlay4->getCollider(1)));
-		testPlay4->SetPos(Vector2(1700, 500));
-		scene.instanciate2DObject(testPlay4);
-		m_player_objects.push_back(testPlay4);
 
-
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
-		testPlatform->SetPos(Vector2(800, 400));
+		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
 
@@ -302,7 +291,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
 
-		testPlatform->SetPos(Vector2(0, 500));
+		testPlatform->SetPos(Vector2(0,600));
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
@@ -322,11 +311,14 @@ void Game::Update(DX::StepTimer const& timer)
 					{
 						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
 						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
-						if (collider.getTarget() == 10)
-						{
-							m_player_objects[collider_tag]->setStateGrounded();
-						}
+
+						
 					}
+					if (collider.getTarget() == 10)
+					{
+						m_player_objects[collider_tag]->setStateGrounded();
+					}
+					
 				}
 				if (collider.checkTrigger(i) && collider.getTarget() != 10)
 				{

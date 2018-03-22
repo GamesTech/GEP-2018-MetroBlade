@@ -9,6 +9,7 @@
 
 Obstacle2D::Obstacle2D(RenderData* _RD, string _filename): ImageGO2D(_RD, _filename)
 {
+	
 }
 
 
@@ -19,8 +20,8 @@ Obstacle2D::~Obstacle2D()
 void Obstacle2D::Tick(GameStateData* _GSD)
 {
 	col->setBoxOrigin(Vector2(m_pos));
-	m_origin = Vector2(550,63);
-
+	m_origin = Vector2(100,100);
+	
 	//change anim depending
 
 	//GEP:: Lets go up the inheritance and share our functionality
