@@ -132,6 +132,21 @@
   <ItemGroup>
     <Text Include="READ_ME.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="gens_ss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Fighter_1.png" />
+    <ImageContentTask Include="Fighter_2.png" />
+    <ImageContentTask Include="Fighter_3.png" />
+    <ImageContentTask Include="Fighter_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Block.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Platform_Sprite.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

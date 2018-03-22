@@ -14,10 +14,8 @@ struct RenderData
 
 	std::unique_ptr<DirectX::SpriteFont> m_font;
 	int m_fontResNum;
-
 	std::unique_ptr<DirectX::DescriptorHeap> m_resourceDescriptors;
 	int m_resourceCount = 0;
-
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 
 	std::unique_ptr<DirectX::BasicEffect> m_effect;

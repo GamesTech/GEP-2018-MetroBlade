@@ -7,9 +7,17 @@
 
 #pragma once
 
+#include <vector>
+
 #include "StepTimer.h"
 #include "Audio.h"
-#include <vector>
+
+#include "SceneManager.h"
+#include "CollisionManager.h"
+#include "Physics2D.h"
+#include "Obstacle2D.h"
+
+#include "InputManager.h"
 using std::vector;
 
 struct RenderData;
@@ -92,19 +100,23 @@ private:
 
 	vector<GameObject3D*> m_3DObjects;
 	vector<GameObject2D*> m_2DObjects;
+	vector<Player2D*> m_player_objects;
+	vector<Obstacle2D*> m_obstacle_objects;
 	vector<Sound*> m_sounds;
-
 	RenderData* m_RD;
 	Camera* m_cam;
 
 	GameStateData* m_GSD;
 
-	//GEP:: Keyboard and Mouse Abstractions for basic input system
+	//GEP:: Keyboard and Mouse Abstractions for basic input systemGame
 	void ReadInput();
 	std::unique_ptr<DirectX::Keyboard> m_keyboard;
 	std::unique_ptr<DirectX::Mouse> m_mouse;
-
+	//std::unique_ptr<DirectX::GamePad> m_gamePad;
+	std::unique_ptr<InputManager> m_inputManager;
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
+	SceneManager scene;
+	CollisionManager collider;
 
 };

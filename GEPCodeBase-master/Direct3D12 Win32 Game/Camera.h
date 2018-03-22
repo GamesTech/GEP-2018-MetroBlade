@@ -18,7 +18,11 @@ public:
 	virtual void Tick(GameStateData* _GSD);
 	virtual void Render(RenderData* _RD) {};
 
+	void	set2DViewport(Vector2  new_viewport);
+	Vector2	get2DViewport() const; 
+
 protected:
+	Vector2		  viewport_2D;
 	GameObject3D* m_targetObject=NULL;
 	Vector3 m_targetPos=Vector3::Zero;
 	Matrix m_proj = Matrix::Identity;

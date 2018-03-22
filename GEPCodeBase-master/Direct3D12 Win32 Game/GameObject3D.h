@@ -1,6 +1,9 @@
 #pragma once
 #include "pch.h"
 
+#include "GameComponentManager.h"
+#include "SceneState.h"
+
 //Base 3D Game Object
 
 using namespace DirectX;
@@ -43,7 +46,13 @@ public:
 	Matrix GetOri() { return m_rot; }
 	GO3D_Render_Type GetType() { return m_type; }
 
+	void   assignWorldEventLisener(std::shared_ptr<SceneEvent>	scene_event_listener);
+
 protected:
+	SceneState					world;
+
+	GameComponentManager		object_components;
+
 	Vector3 m_pos	= Vector3::Zero;
 	Vector3 m_scale = Vector3::One;
 	float m_pitch	= 0.0f;
