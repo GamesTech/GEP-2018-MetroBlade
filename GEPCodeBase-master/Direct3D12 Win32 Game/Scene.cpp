@@ -92,3 +92,13 @@ void Scene::add3DGameObjectToScene(GameObject3D * new_object)
 	m_3DObjects.push_back(new_object);
 }
 
+bool Scene::isLevel() const
+{
+	return is_level;
+}
+
+void Scene::isLevel(bool level)
+{
+	is_level = level;
+}
+

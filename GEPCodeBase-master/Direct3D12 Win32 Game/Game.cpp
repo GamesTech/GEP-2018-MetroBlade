@@ -202,12 +202,14 @@ void Game::Update(DX::StepTimer const& timer)
 		}
 	}
 
+	// TODO - Replace with a level loading system. Hence we can just load a map when we feel like it.
 	if (m_keyboard->GetState().P)
 	{
 		m_player_objects.clear();
 		m_obstacle_objects.clear();
 		collider.reset();
 		Scene*  newScene = new Scene;
+		newScene->isLevel(true);
 		scene.loadScene(newScene);
 
 

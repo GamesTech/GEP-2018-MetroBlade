@@ -19,8 +19,6 @@ public:
 	void init();
 	void LoadInputSettings();
 	void UpdateInput();
-	
-
 
 private:
 

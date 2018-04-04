@@ -146,6 +146,9 @@
     <Filter Include="Core\UI\UISprite">
       <UniqueIdentifier>{c35bb81d-3d96-40f5-9093-3997aa513eea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameComponent\Game components\Lobby">
+      <UniqueIdentifier>{4e8a5140-4da7-47cd-8464-78a84132d70f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -293,6 +296,9 @@
     <ClInclude Include="Obstacle2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="LobbySystem.h">
+      <Filter>Core\GameComponent\Game components\Lobby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -403,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbySystem.cpp">
+      <Filter>Core\GameComponent\Game components\Lobby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,20 @@ void LobbySystemComponent::addPlayer(PlayerData new_player)
 	lobby_refrence->push_back(new_player);
 }
 
-void LobbySystemComponent::checkPlayers()
+bool LobbySystemComponent::isPlayerRegistered(int controller_id)
+{
+	for (auto& player : *lobby_refrence) 
+	{
+		if (player.input_device_id == controller_id) 
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void LobbySystemComponent::checkPlayersActivity()
 {
 	return;
 }
