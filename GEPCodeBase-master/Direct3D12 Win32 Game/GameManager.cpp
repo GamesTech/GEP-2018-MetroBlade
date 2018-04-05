@@ -8,14 +8,14 @@ constexpr int MAX_PLAYERS = 8;
 
 void GameManager::init()
 {
-	level_players.reserve(MAX_PLAYERS);
+	player_instances.reserve(MAX_PLAYERS);
 	lobby.reserve(MAX_PLAYERS);
 	players_to_respawn.reserve(MAX_PLAYERS);
 }
 
 void GameManager::tickGameManager(GameStateData* _GSD)
 {
-	if ((!level_players.empty()) && game_active) 
+	if ((!player_instances.empty()) && game_active) 
 	{
 		// Here we check the state of the game. 
 		if (game_mode.game_length != GAME_INFINITE_TIME)
@@ -27,6 +27,7 @@ void GameManager::tickGameManager(GameStateData* _GSD)
 				// TODO - Add code to change level to the results screen
 				endCurrentGame();
 				OutputDebugString(L"The Games Ended Mate \n");
+				return; 
 			}
 		}
 
@@ -40,7 +41,7 @@ void GameManager::registerPlayerInstance(Player2D* new_player)
 {
 	// Setup player stats according to game mode and then register the player for checking every frame.
 	// TODO - Move [layer setup to when the game starts. 
-	level_players.push_back(new_player);
+	player_instances.push_back(new_player);
 }
 
 void GameManager::addWorldEventListener(std::shared_ptr<SceneEvent> world_event_listener)
@@ -70,7 +71,7 @@ GameData* GameManager::getGameModeStatus()
 
 void GameManager::setupGame()
 {
-	for (auto& player : level_players) 
+	for (auto& player : player_instances) 
 	{
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLaunchMultiplier(game_mode.game_knockback_multiplier);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(game_mode.number_of_lives);
@@ -87,7 +88,7 @@ void GameManager::startGame()
 
 void GameManager::resetManager()
 {
-	level_players.clear();
+	player_instances.clear();
 }
 
 void GameManager::setUILabel(UILabel * new_label)
@@ -97,7 +98,7 @@ void GameManager::setUILabel(UILabel * new_label)
 
 void GameManager::checkPlayerLifeStatus()
 {
-	for (auto& player : level_players)
+	for (auto& player : player_instances)
 	{
 		if (player->isDead()) 
 		{
@@ -185,5 +186,12 @@ void GameManager::updatePlayerScore()
 
 void GameManager::endCurrentGame()
 {
+	// TODO - Add links to a results screen based on the player data aquired from the last game.
+	for (int i = 0; i < lobby.size(); ++i) 
+	{
+		// Sets the Player Data which can then be displayed for players to view.
+		lobby[i].player_data = *(player_instances[i]->getComponentManager()->getComponentByType<PlayerStatus>());
+	}
+
 	world.changeScene("clear");
 }

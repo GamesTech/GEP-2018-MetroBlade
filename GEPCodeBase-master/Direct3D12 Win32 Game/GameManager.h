@@ -65,7 +65,7 @@ private:
 
 	void endCurrentGame();
 
-	std::vector<Player2D*>			level_players;
+	std::vector<Player2D*>			player_instances;
 	std::vector<Player2D*>			players_to_respawn; /// < Buffer of players that need to be respawned.
 
 	std::vector<PlayerData>			lobby;

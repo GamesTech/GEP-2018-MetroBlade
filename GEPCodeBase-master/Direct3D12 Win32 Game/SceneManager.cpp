@@ -123,13 +123,18 @@ void SceneManager::loadScene(Scene * scene_name)
 	// Here we spawn characters according to the game_manager player lobby if a scene as a level flag.
 	if (current_scene->isLevel())
 	{
+		//PlayerData test;
+		//test.character_name = "Fighter_1";
+		//test.player_name = "P1";
+		//test.input_device_id = 0;
+		//game_manager.addPlayer(test); // Test Object.
+
 		// Add the Players to the scene according to the game manager.
 		OutputDebugString(L"Its a level mate");
 
 		for (auto& player_object : *(game_manager.getPlayerLobbyData())) 
 		{
 			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id);
-			game_manager.registerPlayerInstance(player);
 			instanciate2DObject(player);
 		}
 	}

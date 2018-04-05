@@ -19,13 +19,14 @@
 
 #include "pch.h"
 
-
+#include "PlayerStatus.h"
 
 
 struct PlayerData 
 {
-	std::string   player_name = "player_null";
-	std::string	  character_name = "none";
-	int			  character_costume = 0;
-	int			  input_device_id = 0;
+	std::string		player_name = "player_null"; // When a player is registered they should have the ability to change there name.
+	std::string		character_name = "none";
+	int				character_costume = 0;
+	int				input_device_id = 0;
+	PlayerStatus	player_data; // stores data about the player which can be used by the results screen. This will be set at the end of the game.
 };
