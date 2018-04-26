@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "Item.h"
 
-Item::Item(RenderData* _RD, string _filename) : ImageGO2D(_RD, _filename)
+Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
 {
+	item_type = type;
 	CentreOrigin();
 }
 
@@ -13,4 +14,9 @@ Item::~Item()
 void Item::SetPosition(Vector2 new_pos)
 {
 	pos = new_pos;
+}
+
+void::Item::Tick(GameStateData* _GSD)
+{
+	//physics stuff, need new physics before implementing as old inherits from image
 }
