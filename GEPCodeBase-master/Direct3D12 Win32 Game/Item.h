@@ -10,7 +10,7 @@ enum ItemType {
 class Item : public ImageGO2D
 {
 public:
-	Item(RenderData* _RD, string _filename, int item_num);
+	Item(RenderData* _RD, string _filename, ItemType type);
 	virtual ~Item();
 
 	Vector2 GetPostion() { return pos; }
