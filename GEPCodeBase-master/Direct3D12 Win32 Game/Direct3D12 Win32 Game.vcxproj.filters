@@ -293,6 +293,9 @@
     <ClInclude Include="Obstacle2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -404,6 +407,7 @@
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

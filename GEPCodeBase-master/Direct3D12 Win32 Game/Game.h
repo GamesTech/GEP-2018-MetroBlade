@@ -16,7 +16,7 @@
 #include "CollisionManager.h"
 #include "Physics2D.h"
 #include "Obstacle2D.h"
-
+#include "Item.h"
 #include "InputManager.h"
 using std::vector;
 
@@ -103,6 +103,7 @@ private:
 	vector<Player2D*> m_player_objects;
 	vector<Obstacle2D*> m_obstacle_objects;
 	vector<Sound*> m_sounds;
+	vector<Item*> m_items;
 	RenderData* m_RD;
 	Camera* m_cam;
 
@@ -118,5 +119,6 @@ private:
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 	SceneManager scene;
 	CollisionManager collider;
+
 
 };

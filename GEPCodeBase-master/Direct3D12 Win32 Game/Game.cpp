@@ -206,6 +206,7 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		m_player_objects.clear();
 		m_obstacle_objects.clear();
+		m_items.clear();
 		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -265,6 +266,10 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
+		Item* test_item = new Item(m_RD, "gens");
+		test_item->SetPos(Vector2(300, 300));
+		scene.instanciate2DObject(test_item);
+		m_items.push_back(test_item);
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}
