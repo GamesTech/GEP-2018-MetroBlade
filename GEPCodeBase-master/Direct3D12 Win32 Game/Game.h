@@ -12,6 +12,7 @@
 #include "StepTimer.h"
 #include "Audio.h"
 
+#include "UILabel.h"
 #include "SceneManager.h"
 #include "CollisionManager.h"
 #include "Physics2D.h"
@@ -118,5 +119,6 @@ private:
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 	SceneManager scene;
 	CollisionManager collider;
-
+	int test_damage = 10;
+	UILabel* player_damage = nullptr;
 };

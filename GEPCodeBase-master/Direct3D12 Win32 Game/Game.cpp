@@ -10,7 +10,7 @@
 
 #include "SpriteAnimFileReader.h"
 
-#include "UILabel.h"
+
 #include "UISprite.h"
 
 extern void ExitGame();
@@ -62,6 +62,7 @@ Game::~Game()
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
 {
+	
 	m_window = window;
 	m_outputWidth = std::max(width, 1);
 	m_outputHeight = std::max(height, 1);
@@ -265,8 +266,15 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
+		player_damage = new UILabel;
+		player_damage->setCanvasPosition(Vector2(0.4, 0.4));
+		player_damage->setText(std::to_string(test_damage));
+		scene.instanciateUIObject(player_damage);
+		
+		
+
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
-	//	scene.instanciateUIObject(test_sprite);
+		//scene.instanciateUIObject(test_sprite);
 	}
 
 	if (m_keyboard->GetState().T)
@@ -331,8 +339,12 @@ void Game::Update(DX::StepTimer const& timer)
 			}
 		}
 	}
-
+	if (player_damage != nullptr)
+	{
+		player_damage->setText(std::to_string(test_damage));
+	}
 	scene.Update(m_GSD);
+	test_damage--;
 }
 
 //GEP:: Draws the scene.
