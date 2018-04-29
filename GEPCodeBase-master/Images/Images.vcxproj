@@ -147,6 +147,14 @@
   <ItemGroup>
     <ImageContentTask Include="Platform_Sprite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="RedTeamUIPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="BlueTeamUIPanel.png" />
+    <ImageContentTask Include="GreenTeamUIPanel.png" />
+    <ImageContentTask Include="YellowTeamUIPanel.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

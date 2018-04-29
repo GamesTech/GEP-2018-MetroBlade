@@ -23,6 +23,7 @@ public:
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
 	
+	int getPlayerHealth() { return player_health;}
 	void setStateGrounded();
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
@@ -75,5 +76,6 @@ protected:
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;
+	int player_health = 0;
 	//	Vector2 m_limit = Vector2(800, 500);
 };

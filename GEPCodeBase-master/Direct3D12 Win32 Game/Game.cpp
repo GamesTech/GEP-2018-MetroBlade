@@ -62,7 +62,7 @@ Game::~Game()
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
 {
-	
+
 	m_window = window;
 	m_outputWidth = std::max(width, 1);
 	m_outputHeight = std::max(height, 1);
@@ -79,7 +79,7 @@ void Game::Initialize(HWND window, int width, int height)
 
 	m_GSD = new GameStateData;
 
-//GEP::set up keyboard & mouse input systems
+	//GEP::set up keyboard & mouse input systems
 	m_inputManager.reset(new InputManager);
 	m_keyboard = std::make_unique<Keyboard>();
 	m_mouse = std::make_unique<Mouse>();
@@ -232,7 +232,7 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
-		
+
 		testPlay2->getCollider(0)->setTag(m_player_objects.size());
 		testPlay2->getCollider(1)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay2->getCollider(1)));
@@ -266,15 +266,48 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
-		player_damage = new UILabel;
-		player_damage->setCanvasPosition(Vector2(0.4, 0.4));
-		player_damage->setText(std::to_string(test_damage));
-		scene.instanciateUIObject(player_damage);
-		
-		
+
+
+
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 		//scene.instanciateUIObject(test_sprite);
+
+		UISprite* red_team = new UISprite("RedTeamUIPanel", m_RD);
+		red_team->SetPos(Vector2(200.0, 500.0));
+		scene.instanciateUIObject(red_team);
+
+		player1_damage = new UILabel;
+		player1_damage->setCanvasPosition(Vector2(0.16, 0.7));
+		scene.instanciateUIObject(player1_damage);
+		player_labels.push_back(player1_damage);
+
+		UISprite* green_team = new UISprite("GreenTeamUIPanel", m_RD);
+		green_team->SetPos(Vector2(400.0, 500.0));
+		scene.instanciateUIObject(green_team);
+
+		player2_damage = new UILabel;
+		player2_damage->setCanvasPosition(Vector2(0.31, 0.7));
+		scene.instanciateUIObject(player2_damage);
+		player_labels.push_back(player2_damage);
+
+		UISprite* blue_team = new UISprite("BlueTeamUIPanel", m_RD);
+		blue_team->SetPos(Vector2(600.0, 500.0));
+		scene.instanciateUIObject(blue_team);
+
+		player3_damage = new UILabel;
+		player3_damage->setCanvasPosition(Vector2(0.46, 0.7));
+		scene.instanciateUIObject(player3_damage);
+		player_labels.push_back(player3_damage);
+
+		UISprite* yellow_team = new UISprite("YellowTeamUIPanel", m_RD);
+		yellow_team->SetPos(Vector2(800.0, 500.0));
+		scene.instanciateUIObject(yellow_team);
+
+		player4_damage = new UILabel;
+		player4_damage->setCanvasPosition(Vector2(0.61, 0.7));
+		scene.instanciateUIObject(player4_damage);
+		player_labels.push_back(player4_damage);
 	}
 
 	if (m_keyboard->GetState().T)
@@ -299,7 +332,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
 
-		testPlatform->SetPos(Vector2(0,600));
+		testPlatform->SetPos(Vector2(0, 600));
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
@@ -320,13 +353,13 @@ void Game::Update(DX::StepTimer const& timer)
 						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
 						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
 
-						
+
 					}
 					if (collider.getTarget() == 10)
 					{
 						m_player_objects[collider_tag]->setStateGrounded();
 					}
-					
+
 				}
 				if (collider.checkTrigger(i) && collider.getTarget() != 10)
 				{
@@ -334,14 +367,17 @@ void Game::Update(DX::StepTimer const& timer)
 					{
 						m_player_objects[collider.getTarget()]->punched(m_GSD, m_player_objects[collider_tag]->getDirection());
 					}
-					
+
 				}
 			}
 		}
 	}
-	if (player_damage != nullptr)
+	if (!player_labels.empty())
 	{
-		player_damage->setText(std::to_string(test_damage));
+		for (int i = 0; i < m_player_objects.size(); i++)
+		{
+				player_labels[i]->setText(std::to_string(m_player_objects[i]->getPlayerHealth()) += "%");
+		}
 	}
 	scene.Update(m_GSD);
 	test_damage--;

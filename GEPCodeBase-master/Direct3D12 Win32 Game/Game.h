@@ -120,5 +120,10 @@ private:
 	SceneManager scene;
 	CollisionManager collider;
 	int test_damage = 10;
-	UILabel* player_damage = nullptr;
+	UILabel* player1_damage = nullptr;
+	UILabel* player2_damage = nullptr;
+	UILabel* player3_damage = nullptr;
+	UILabel* player4_damage = nullptr;
+
+	std::vector<UILabel*> player_labels;
 };
