@@ -210,7 +210,6 @@ void Game::Update(DX::StepTimer const& timer)
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
-
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
@@ -219,7 +218,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
+		testPlay->getRigidbodyComponent()->SetDrag(0.5f);
 		testPlay->getCollider(0)->setTag(m_player_objects.size());
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay->getCollider(0)));
@@ -230,7 +229,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
-		testPlay2->SetDrag(0.5f);
+		testPlay2->getRigidbodyComponent()->SetDrag(0.5f);
 		
 		testPlay2->getCollider(0)->setTag(m_player_objects.size());
 		testPlay2->getCollider(1)->setTag(m_player_objects.size());
@@ -242,7 +241,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
 		testPlay3->SetDrive(1000.0f);
-		testPlay3->SetDrag(0.5f);
+		testPlay3->getRigidbodyComponent()->SetDrag(0.5f);
 		testPlay3->getCollider(0)->setTag(m_player_objects.size());
 		testPlay3->getCollider(1)->setTag(m_player_objects.size());
 		collider.addCollider((testPlay3->getCollider(0)));
@@ -274,7 +273,7 @@ void Game::Update(DX::StepTimer const& timer)
 		// Instantiation test.
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
 		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
+		testPlay->getRigidbodyComponent()->SetDrag(0.5f);
 
 
 		testPlay->getCollider(1)->setTag(m_player_objects.size());
@@ -310,7 +309,7 @@ void Game::Update(DX::StepTimer const& timer)
 					if (!collider.checkTrigger(i))
 					{
 						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
-						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
+						m_player_objects[collider_tag]->getRigidbodyComponent()->SetVelX(Vector2(0, 0));
 
 						
 					}

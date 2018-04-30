@@ -8,17 +8,22 @@
 #include "SpriteAnimFileReader.h"
 
 
-Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
-
+Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID)
 {
-	src_rect.reset(new RECT);
-	CentreOrigin();
+	// Component setup.
 	object_components.addComponent(new PlayerStatus);
+	object_components.addComponent(new Physics2D(_RD,_filename));
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
-	sprite->setSpriteRECT(src_rect);
+	rigidbody = object_components.getComponentByType<Physics2D>();
+
+	rigidbody->getSharedSourceRectanglePtr().reset(new RECT);
+	rigidbody->CentreOrigin();
+
+	sprite->setSpriteRECT(rigidbody->getSharedSourceRectanglePtr());
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
+	
 	controller_id = gamepadID;
 }
 
@@ -31,6 +36,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 {
 	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
 	float stick_x = controller_state.thumbSticks.leftX;
+	
 	//temp place for input
 	if (_GSD->m_keyboardState.Space || controller_state.IsAPressed())
 	{
@@ -45,7 +51,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
-			//SetVel(Vector2(0, 0));
+			//rigidbody->SetVel(Vector2(0, 0));
 		}
 
 	}
@@ -54,23 +60,22 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		offset = Vector2(-20, 0);
 		direction = Vector2(-1, 0);
 		m_effects = SpriteEffects_FlipHorizontally;
-		//SetVel(Vector2(-x_speed, m_vel.y));
+		//rigidbody->SetVel(Vector2(-x_speed, m_vel.y));
 		action_state = MOVING;
-		AddForce(-m_drive * Vector2::UnitX);
+		rigidbody->AddForce(-m_drive * Vector2::UnitX);
 	}
 	else if (_GSD->m_keyboardState.D || stick_x > 0)
 	{
 		offset = Vector2(120, 0);
 		direction = Vector2(1, 0);
 		m_effects = SpriteEffects_None;
-		//SetVel(Vector2(x_speed, m_vel.y));
+		//rigidbody->SetVel(Vector2(x_speed, m_vel.y));
 		action_state = MOVING;
-		AddForce(m_drive * Vector2::UnitX);
+		rigidbody->AddForce(m_drive * Vector2::UnitX);
 	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
 		action_state = IDLE;
-		//SetVel(Vector2(0, 0));
 	}
 	
 	if (_GSD->m_keyboardState.J)
@@ -79,17 +84,21 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	}
 
 }
+
 void Player2D::Tick(GameStateData* _GSD)
 {
 	punch_collider->setBoxOrigin(m_pos + offset);
 	col->setBoxOrigin(m_pos);
+	rigidbody->SetPos(m_pos);
+
+
 	CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 	switch (phys_state)
 	{
 	case GROUNDED:
-		SetVel(Vector2(m_vel.x, 0));
+		rigidbody->SetVel(Vector2(rigidbody->GetVel().x, 0));
 		setGravity(0.0f);
 		break;
 
@@ -104,7 +113,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 
 	case IDLE:
-
 		sprite->setAnimationState("idle");
 		break;
 
@@ -120,7 +128,7 @@ void Player2D::Tick(GameStateData* _GSD)
 
 		sprite->setAnimationState("jump");
 		setGravity(1000.0f);
-		AddForce(-jump_force * Vector2::UnitY);
+		rigidbody->AddForce(-jump_force * Vector2::UnitY);
 		break;
 
 	case ATTACKING:
@@ -138,22 +146,18 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 
 	//GRAVITY
-	AddForce(gravity*Vector2::UnitY);
+	rigidbody->AddForce(gravity*Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
 
-	Physics2D::Tick(_GSD);
+	// Physics2D::Tick(_GSD);
+
+	rigidbody->tickComponent(_GSD);
 
 	//Update sprite animation
 	sprite->tickComponent(_GSD);
 
 //after that as updated my position let's lock it inside my limits
-	/*if (m_pos.x < 50.0f)
-	{
-		m_pos.x = 1.0f;
-		m_vel.x = 0.0f;
-
-	}*/
 	if (m_pos.y <= 0.0f)
 	{
 		m_pos.y = 0.1f;
@@ -165,19 +169,20 @@ void Player2D::Tick(GameStateData* _GSD)
 	
 
 	}
-	/*if (m_pos.y > m_limit.y)
-	{
-		m_pos.y = m_limit.y;
-		phys_state = GROUNDED;
-	}*/
+
 	if (m_pos.y > 1500)
 	{
 		dead = true;
 	}
 
 
-	Physics2D::Tick(_GSD);
+	//Physics2D::Tick(_GSD);
+	rigidbody->tickComponent(_GSD);
+}
 
+void Player2D::Render(RenderData* _RD)
+{
+	rigidbody->renderComponent(_RD);
 }
 
 bool Player2D::isDead() const
@@ -222,7 +227,12 @@ Collider* Player2D::getCollider(int id)
 void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
 	
-	AddForce(10000 * direction * Vector2::UnitX);
+	rigidbody->AddForce(10000 * direction * Vector2::UnitX);
+}
+
+Physics2D* Player2D::getRigidbodyComponent()
+{
+	return rigidbody;
 }
 
 void Player2D::setStateGrounded()

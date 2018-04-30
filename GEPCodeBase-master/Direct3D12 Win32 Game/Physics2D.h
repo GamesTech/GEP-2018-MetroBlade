@@ -4,7 +4,8 @@
 
 //GEP:: Euler Integration Solve for VERY Basic 2D physics
 class Physics2D :
-	public ImageGO2D
+	public ImageGO2D,
+	public GameComponent
 {
 public:
 	Physics2D(RenderData* _RD, string _filename);
@@ -25,11 +26,14 @@ public:
 	float GetDrag() { return m_drag; }
 
 	virtual void Tick(GameStateData* _GSD);
+
+	void tickComponent(GameStateData*  _GSD) override;
+	void renderComponent(RenderData* _RD) override;
+
 protected:
 	Vector2 m_vel;
 	Vector2 m_acc;
 
 	float m_mass = 1.0f;
 	float m_drag = 0.0f;
-	
 };

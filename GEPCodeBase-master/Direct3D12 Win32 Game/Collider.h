@@ -5,7 +5,7 @@ class Collider
 {
 public:
 	Collider() = default;
-	Collider(Vector2  &origin, Vector2 dimensions,bool trigger = false);
+	Collider(Vector2  &origin, Vector2 dimensions, bool trigger = false);
 	~Collider() = default;
 
 	int getTag();

@@ -7,7 +7,6 @@ Physics2D::Physics2D(RenderData* _RD, string _filename):ImageGO2D(_RD,_filename)
 {
 }
 
-
 Physics2D::~Physics2D()
 {
 }
@@ -25,6 +24,34 @@ void Physics2D::Tick(GameStateData * _GSD)
 	m_vel = newVel;
 	m_acc = Vector2::Zero;
 	
+}
+
+void Physics2D::tickComponent(GameStateData * _GSD)
+{
+	//VERY Basic idea of drag i.e. the faster I go the more I get pulled back.
+
+
+	/* INFO - 
+	 This code will be called instead of the current tick function.
+	 Physics2D will now be converted to a rigidbody component and then added to the
+	 player. 
+	 Hence we can remove the coupleing and fix the codebase. 
+	 */
+
+	m_acc -= m_drag * m_vel;
+
+	Vector2 newPos = m_pos + _GSD->m_dt * m_vel;
+	Vector2 newVel = m_vel + _GSD->m_dt * m_acc;
+
+	m_pos = newPos;
+	m_vel = newVel;
+	m_acc = Vector2::Zero;
+
+}
+
+void Physics2D::renderComponent(RenderData * _RD)
+{
+	ImageGO2D::Render(_RD);
 }
 
 

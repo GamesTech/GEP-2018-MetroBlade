@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "GameObject2D.h"
+
 #include "Collider.h"
 using std::string;
 struct RenderData;
@@ -16,6 +17,10 @@ class ImageGO2D :
 public:
 	ImageGO2D(RenderData* _RD, string _filename);
 	virtual ~ImageGO2D();
+
+	std::shared_ptr<RECT> getSharedSourceRectanglePtr();
+
+	RECT*	getSourceRectange();
 
 	void Tick(GameStateData* _GSD) override;
 	void Render(RenderData* _RD) override;

@@ -2,11 +2,11 @@
 #include "Physics2D.h"
 #include "Sprite.h"
 #include "InputManager.h"
+
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Player2D :
-	public Physics2D
-
+	public GameObject2D
 {
 public:
 	//TODO: add a 3d player and modes to switch between different views and basic physics
@@ -14,7 +14,7 @@ public:
 	virtual ~Player2D();
 
 
-	virtual void Tick(GameStateData* _GSD);
+//	virtual void Tick(GameStateData* _GSD);
 	void CheckInput(GameStateData* _GSD);
 	void SetDrive(float _drive) { m_drive = _drive; }
 	float GetDrive() { return m_drive; }
@@ -27,7 +27,11 @@ public:
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
 
+	// Regular Component Access
+	Physics2D* getRigidbodyComponent();
 
+	void Tick(GameStateData* _GSD) override;
+	void Render(RenderData* _RD) override;
 
 	// Game Manager interface
 	bool			isDead() const;
@@ -37,6 +41,8 @@ public:
 	void			setRespawnTime(float respawn_timer);
 
 	Vector2 getDirection() { return direction; }
+
+	void CentreOrigin() override { return; }
 
 protected:
 
@@ -52,11 +58,14 @@ protected:
 		JUMPING
 	};
 
-	Sprite*				sprite;
+	Sprite*			sprite;
 	bool flipped = false;
-	//	std::unique_ptr<Sprite> sprite;
 	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
+
+	// Represents the players rigidbody now. 
+	Physics2D*  rigidbody = nullptr;
+
 
 	Vector2 offset;
 	float m_drive = 1.0f;

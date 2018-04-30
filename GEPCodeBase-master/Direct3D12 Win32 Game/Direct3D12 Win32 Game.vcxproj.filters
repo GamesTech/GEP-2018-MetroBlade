@@ -146,6 +146,18 @@
     <Filter Include="Core\UI\UISprite">
       <UniqueIdentifier>{c35bb81d-3d96-40f5-9093-3997aa513eea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Physics">
+      <UniqueIdentifier>{afb523c5-4f7c-489a-8c87-8fb3867b30d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Objects">
+      <UniqueIdentifier>{ba32ba14-5bbe-4d0e-aa39-f968557e1a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Objects\Collider">
+      <UniqueIdentifier>{3946c919-dc50-49ae-bf6f-e3844caf8c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Objects\Rigidbody">
+      <UniqueIdentifier>{a4ee1cc0-a200-48ee-adba-87e0e15547fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -229,9 +241,6 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Core\Collision Manager</Filter>
     </ClInclude>
@@ -292,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="Obstacle2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Core\Physics\Objects\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -358,9 +370,6 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Core\Collision Manager</Filter>
     </ClCompile>
@@ -403,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Core\Physics\Objects\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

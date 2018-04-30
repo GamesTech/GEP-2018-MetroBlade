@@ -6,12 +6,13 @@
 #include "RenderData.h"
 
 
-
 ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
 {
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 	string fullpath = "../DDS/" + _filename + ".dds";
 	std::wstring wFilename = converter.from_bytes(fullpath.c_str());
+
+	src_rect = std::make_shared<RECT>();
 
 	ResourceUploadBatch resourceUpload(_RD->m_d3dDevice.Get());
 
@@ -28,14 +29,22 @@ ImageGO2D::ImageGO2D(RenderData* _RD, string _filename)
 	auto uploadResourcesFinished = resourceUpload.End(_RD->m_commandQueue.Get());
 
 	uploadResourcesFinished.wait();
-
-	
 }
 
 
 ImageGO2D::~ImageGO2D()
 {
 	m_texture.Reset();
+}
+
+std::shared_ptr<RECT> ImageGO2D::getSharedSourceRectanglePtr()
+{
+	return src_rect;
+}
+
+RECT* ImageGO2D::getSourceRectange()
+{
+	return src_rect.get();
 }
 
 void ImageGO2D::Tick(GameStateData * _GSD)
