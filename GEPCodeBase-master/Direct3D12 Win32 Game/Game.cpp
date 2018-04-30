@@ -266,48 +266,47 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
-
-
-
-
-		//UISprite* test_sprite = new UISprite("twist", m_RD);
-		//scene.instanciateUIObject(test_sprite);
-
+		//Adds all teams coloured panels to UISprite Vector
 		UISprite* red_team = new UISprite("RedTeamUIPanel", m_RD);
 		red_team->SetPos(Vector2(200.0, 500.0));
-		scene.instanciateUIObject(red_team);
-
-		player1_damage = new UILabel;
-		player1_damage->setCanvasPosition(Vector2(0.16, 0.7));
-		scene.instanciateUIObject(player1_damage);
-		player_labels.push_back(player1_damage);
+		team_colours.push_back(red_team);
 
 		UISprite* green_team = new UISprite("GreenTeamUIPanel", m_RD);
 		green_team->SetPos(Vector2(400.0, 500.0));
-		scene.instanciateUIObject(green_team);
-
-		player2_damage = new UILabel;
-		player2_damage->setCanvasPosition(Vector2(0.31, 0.7));
-		scene.instanciateUIObject(player2_damage);
-		player_labels.push_back(player2_damage);
+		team_colours.push_back(green_team);
 
 		UISprite* blue_team = new UISprite("BlueTeamUIPanel", m_RD);
 		blue_team->SetPos(Vector2(600.0, 500.0));
-		scene.instanciateUIObject(blue_team);
-
-		player3_damage = new UILabel;
-		player3_damage->setCanvasPosition(Vector2(0.46, 0.7));
-		scene.instanciateUIObject(player3_damage);
-		player_labels.push_back(player3_damage);
+		team_colours.push_back(blue_team);
 
 		UISprite* yellow_team = new UISprite("YellowTeamUIPanel", m_RD);
 		yellow_team->SetPos(Vector2(800.0, 500.0));
-		scene.instanciateUIObject(yellow_team);
+		team_colours.push_back(yellow_team);
 
-		player4_damage = new UILabel;
-		player4_damage->setCanvasPosition(Vector2(0.61, 0.7));
-		scene.instanciateUIObject(player4_damage);
-		player_labels.push_back(player4_damage);
+		/**Only instanciates team colours based on number of players*/
+		for (int i = 0; i < m_player_objects.size(); i++)
+		{
+			scene.instanciateUIObject(team_colours[i]);
+		}
+
+		/**All the labels are instanciated but only 
+		*the label text is updated based on player numbers
+		*e.g. 3 players only shows 3 numbers, the 4th one is invisible.
+		*/
+		
+		UILabel* player1_damage = new UILabel;
+		createLabel(player1_damage, Vector2(0.16, 0.7));
+
+		UILabel* player2_damage = new UILabel;
+		createLabel(player2_damage, Vector2(0.31, 0.7));
+
+		UILabel* player3_damage = new UILabel;
+		createLabel(player3_damage, Vector2(0.46, 0.7));
+
+		UILabel* player4_damage = new UILabel;
+		createLabel(player4_damage, Vector2(0.61, 0.7));
+
+
 	}
 
 	if (m_keyboard->GetState().T)
@@ -374,6 +373,7 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 	if (!player_labels.empty())
 	{
+		//Updates the text based on player numbers and each individuals health.
 		for (int i = 0; i < m_player_objects.size(); i++)
 		{
 				player_labels[i]->setText(std::to_string(m_player_objects[i]->getPlayerHealth()) += "%");
@@ -499,6 +499,13 @@ void Game::GetDefaultSize(int& width, int& height) const
 	// TODO: Change to desired default window size (note minimum size is 320x200).
 	width = 1920;
 	height = 1080;
+}
+
+void Game::createLabel(UILabel * label, Vector2 canvas_pos)
+{
+	label->setCanvasPosition(canvas_pos);
+	scene.instanciateUIObject(label);
+	player_labels.push_back(label);
 }
 
 // These are the resources that depend on the device.

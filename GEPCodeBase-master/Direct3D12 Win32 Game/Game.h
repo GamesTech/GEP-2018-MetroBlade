@@ -13,6 +13,7 @@
 #include "Audio.h"
 
 #include "UILabel.h"
+
 #include "SceneManager.h"
 #include "CollisionManager.h"
 #include "Physics2D.h"
@@ -23,6 +24,7 @@ using std::vector;
 
 struct RenderData;
 struct GameStateData;
+class UISprite;
 
 // A basic game implementation that creates a D3D12 device and
 // provides a game loop.
@@ -48,6 +50,9 @@ public:
 
     // Properties
     void GetDefaultSize( int& width, int& height ) const;
+
+
+	void createLabel(UILabel* label, Vector2 canvas_pos);
 
 private:
 
@@ -120,10 +125,11 @@ private:
 	SceneManager scene;
 	CollisionManager collider;
 	int test_damage = 10;
-	UILabel* player1_damage = nullptr;
-	UILabel* player2_damage = nullptr;
-	UILabel* player3_damage = nullptr;
-	UILabel* player4_damage = nullptr;
+	//UILabel* player1_damage = nullptr;
+	//UILabel* player2_damage = nullptr;
+	//UILabel* player3_damage = nullptr;
+	//UILabel* player4_damage = nullptr;
 
 	std::vector<UILabel*> player_labels;
+	std::vector<UISprite*> team_colours;
 };
