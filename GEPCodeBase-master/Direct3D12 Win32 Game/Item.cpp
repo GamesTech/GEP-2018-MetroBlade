@@ -16,7 +16,17 @@ void Item::SetPosition(Vector2 new_pos)
 	pos = new_pos;
 }
 
-void::Item::Tick(GameStateData* _GSD)
+void Item::Tick(GameStateData* _GSD)
 {
 	//physics stuff, need new physics before implementing as old inherits from image
+}
+
+void Item::UseItem(Player2D* player, ItemType type)
+{
+	switch (type)
+	{
+	case HEALTH:
+
+		break;
+	}
 }

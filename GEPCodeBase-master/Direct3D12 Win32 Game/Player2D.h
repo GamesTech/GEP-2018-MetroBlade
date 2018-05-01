@@ -2,6 +2,7 @@
 #include "Physics2D.h"
 #include "Sprite.h"
 #include "InputManager.h"
+#include "Item.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
 class Player2D :
@@ -22,7 +23,9 @@ public:
 	bool IsAttacking() { return attacking; }
 	Vector2 GetLimit() { return m_limit; }
 	Collider* getCollider(int id);
-	
+
+	void AddItem(Item* obj, int uses);
+
 	void setStateGrounded();
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
@@ -75,5 +78,7 @@ protected:
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;
+
+	Item* player_item = nullptr;
 	//	Vector2 m_limit = Vector2(800, 500);
 };

@@ -235,3 +235,8 @@ void Player2D::setStateFalling()
 	setGravity(1000.0f);
 }
 
+void Player2D::AddItem(Item* obj, int uses)
+{
+	player_item = obj;
+}
+
