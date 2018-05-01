@@ -20,11 +20,18 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
 	controller_id = gamepadID;
+	player_item = new Item(_RD, "health_item", HEALTH);
+	player_item->SetPos(Vector2(350, 300));
 }
 
 
 Player2D::~Player2D()
 {
+	if (player_item)
+	{
+		delete player_item;
+		player_item = nullptr;
+	}
 }
 
 void Player2D::CheckInput(GameStateData* _GSD)
@@ -67,11 +74,16 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		action_state = MOVING;
 		AddForce(m_drive * Vector2::UnitX);
 	}
+	else if (_GSD->m_keyboardState.I || controller_state.IsYPressed())
+	{
+		action_state = USE;
+	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
 		action_state = IDLE;
 		//SetVel(Vector2(0, 0));
 	}
+	
 	
 	if (_GSD->m_keyboardState.J)
 	{
@@ -128,8 +140,14 @@ void Player2D::Tick(GameStateData* _GSD)
 		sprite->setAnimationState("attack");
 		break;
 	
-		
-
+	case USE:
+		if (player_item)
+		{
+			player_item->UseItem(this, player_item->GetType());
+			delete player_item;
+			player_item = nullptr;
+		}
+		break;
 	}
 	if (_GSD->m_keyboardState.Escape)
 	{
@@ -137,6 +155,10 @@ void Player2D::Tick(GameStateData* _GSD)
 		world.exitGame();
 	}
 
+	if (health > 0)
+	{
+		health++;
+	}
 	//GRAVITY
 	AddForce(gravity*Vector2::UnitY);
 

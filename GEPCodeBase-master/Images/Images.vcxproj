@@ -147,6 +147,9 @@
   <ItemGroup>
     <ImageContentTask Include="Platform_Sprite.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="health_item.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

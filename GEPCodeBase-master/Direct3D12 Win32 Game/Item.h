@@ -18,6 +18,7 @@ public:
 
 	Vector2 GetPostion() { return pos; }
 	void SetPosition(Vector2 new_pos);
+	ItemType GetType() { return item_type; }
 	virtual void Tick(GameStateData* _GSD);
 	void UseItem(Player2D* player, ItemType type);
 private:

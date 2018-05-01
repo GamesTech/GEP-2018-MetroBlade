@@ -26,7 +26,8 @@ void Item::UseItem(Player2D* player, ItemType type)
 	switch (type)
 	{
 	case HEALTH:
-
+		player->health += 25;
 		break;
 	}
+
 }

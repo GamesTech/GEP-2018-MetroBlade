@@ -30,7 +30,8 @@ public:
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
 
-
+	//test health
+	int health = 0;
 
 	// Game Manager interface
 	bool			isDead() const;
@@ -52,7 +53,8 @@ protected:
 		IDLE,
 		MOVING,
 		ATTACKING,
-		JUMPING
+		JUMPING,
+		USE
 	};
 
 	Sprite*				sprite;
