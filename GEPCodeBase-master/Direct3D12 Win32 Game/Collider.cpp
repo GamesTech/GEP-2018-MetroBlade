@@ -51,3 +51,23 @@ Vector2 Collider::getMaxValues()
 	return max_values;
 }
 
+void Collider::isColliderActive(bool is_active)
+{
+	is_collider_active = is_active;
+}
+
+bool Collider::iscolliderActive() const
+{
+	return is_collider_active;
+}
+
+void Collider::isColliderImmediate(bool is_immediate)
+{
+	bool is_collider_immediate = is_immediate;
+}
+
+bool Collider::isColliderImmediate() const
+{
+	return is_collider_immediate;
+}
+

@@ -297,6 +297,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_obstacle_objects.push_back(testPlatform);
 
 	}
+
 	if (!m_player_objects.empty())
 	{
 		for (int i = 0; i < collider.GetSize(); i++)
@@ -770,6 +771,7 @@ void Game::GetAdapter(IDXGIAdapter1** ppAdapter)
 void Game::OnDeviceLost()
 {
 	m_RD->m_states.reset();
+
 	//TODO: SDKMeshGO3D
 	//m_fxFactory.reset();
 	//m_modelResources.reset();
