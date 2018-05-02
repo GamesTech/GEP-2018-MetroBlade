@@ -8,7 +8,7 @@ Collider::Collider(Vector2 &origin, Vector2 dimensions, bool trigger)
 	box_dimensions(dimensions),
 	is_trigger(trigger)
 {
-	
+
 }
 
 int Collider::getTag()
@@ -69,6 +69,29 @@ void Collider::isColliderImmediate(bool is_immediate)
 bool Collider::isColliderImmediate() const
 {
 	return is_collider_immediate;
+}
+
+void Collider::addParentObjectRefrence(GameObject2D * gameobject)
+{
+	parent_object = gameobject;
+}
+
+void Collider::assignCollisionEvent(std::function<void(MetroBrawlCollisionData)> func_delegate)
+{
+	collision_event_deligate = func_delegate;
+}
+
+void Collider::OnCollision(MetroBrawlCollisionData col_data)
+{
+	if (collision_event_deligate) 
+	{
+		collision_event_deligate(col_data);
+	}
+}
+
+GameObject2D* Collider::getCollidersParent()
+{
+	return  parent_object;
 }
 
 void Collider::tickComponent(GameStateData * _GSD)

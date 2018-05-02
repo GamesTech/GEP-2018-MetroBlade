@@ -46,8 +46,14 @@ void MetroBrawlCollisionManager::checkColliders(Collider& col)
 		{
 			if (collisionTest(col, *object_colliders[i])) 
 			{
+				MetroBrawlCollisionData   col_event;
 				// Here we send the events to the player objects. 
-				printf("A Collision has Occured");
+
+				col_event.collider_object = object_colliders[i];
+				col.OnCollision(col_event);
+
+				col_event.collider_object = &col;
+				object_colliders[i]->OnCollision(col_event);
 			}
 		}
 	}

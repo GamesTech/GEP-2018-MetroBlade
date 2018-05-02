@@ -27,7 +27,6 @@ public:
 	void punched(GameStateData* _GFD, Vector2 direction);
 
 
-
 	// Game Manager interface
 	bool			isDead() const;
 	void			isDead(bool is_dead);
@@ -74,5 +73,8 @@ protected:
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;
+
+private:
+	void onCollision(MetroBrawlCollisionData  col_data);
 	//	Vector2 m_limit = Vector2(800, 500);
 };

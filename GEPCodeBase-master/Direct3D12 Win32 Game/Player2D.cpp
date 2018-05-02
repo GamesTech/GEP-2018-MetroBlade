@@ -1,4 +1,7 @@
 #include "pch.h"
+#include <functional>
+
+
 #include "Player2D.h"
 #include "GamePad.h"
 #include "GameStateData.h"
@@ -11,6 +14,8 @@
 Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
 
 {
+	using namespace std::placeholders;
+
 	src_rect.reset(new RECT);
 	CentreOrigin();
 	object_components.addComponent(new PlayerStatus);
@@ -18,6 +23,10 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 
 	// Add Colliders to the players.
 	col->isColliderImmediate(true);
+	col->addParentObjectRefrence(this);
+	col->assignCollisionEvent(std::bind(&Player2D::onCollision, this, _1));
+
+	punch_collider->addParentObjectRefrence(this);
 	object_components.addComponent(col);
 	object_components.addComponent(punch_collider);
 
@@ -210,6 +219,11 @@ float Player2D::getRespawnTime() const
 void Player2D::setRespawnTime(float respawn_timer)
 {
 	respawn_time = respawn_timer;
+}
+
+void Player2D::onCollision(MetroBrawlCollisionData col_data)
+{
+	printf("I Should be called.");
 }
 
 Collider* Player2D::getCollider(int id)
