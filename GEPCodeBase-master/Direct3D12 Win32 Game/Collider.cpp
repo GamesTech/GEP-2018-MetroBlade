@@ -56,7 +56,7 @@ void Collider::isColliderActive(bool is_active)
 	is_collider_active = is_active;
 }
 
-bool Collider::iscolliderActive() const
+bool Collider::isColliderActive() const
 {
 	return is_collider_active;
 }
@@ -69,5 +69,15 @@ void Collider::isColliderImmediate(bool is_immediate)
 bool Collider::isColliderImmediate() const
 {
 	return is_collider_immediate;
+}
+
+void Collider::tickComponent(GameStateData * _GSD)
+{
+	return;
+}
+
+void Collider::renderComponent(RenderData * _RD)
+{
+	return;
 }
 

@@ -28,11 +28,42 @@ void MetroBrawlCollisionManager::performCollisionCheck()
 		if (col->isColliderImmediate()) 
 		{
 			// TODO - Add code to perform collision checks.
+			checkColliders(*col);
 		}
 	}
 }
 
-bool MetroBrawlCollisionManager::collisionTest(Collider a, Collider b)
+void MetroBrawlCollisionManager::clearCollisionManager()
 {
+	object_colliders.clear();
+}
+
+void MetroBrawlCollisionManager::checkColliders(Collider& col)
+{
+	for (int i = 0; i < object_colliders.size(); i++) 
+	{
+		if ((object_colliders[i] != &col) && (object_colliders[i]->isColliderActive())) 
+		{
+			if (collisionTest(col, *object_colliders[i])) 
+			{
+				// Here we send the events to the player objects. 
+				printf("A Collision has Occured");
+			}
+		}
+	}
+}
+
+bool MetroBrawlCollisionManager::collisionTest(Collider& a, Collider& b)
+{
+	if ((a.getMaxValues().x > b.getBoxOrigin().x) && 
+		(b.getMaxValues().x > a.getBoxOrigin().x)) 
+	{
+		if ((a.getMaxValues().y > b.getBoxOrigin().y) && 
+			(b.getMaxValues().y > a.getBoxOrigin().y))
+		{
+			return true;
+		}
+	}
+
 	return false;
 }

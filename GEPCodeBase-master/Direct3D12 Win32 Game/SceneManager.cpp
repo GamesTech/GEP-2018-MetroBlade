@@ -38,6 +38,7 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 void SceneManager::Init()
 {
 	// Create a basic scene and set up all of the scene manager systems.
+	// In future the scene manager should just intialise the first scene we want to enter
 	game_manager.init();
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
@@ -60,6 +61,7 @@ void SceneManager::Update(GameStateData * game_state)
 	if (current_scene)
 	{
 		current_scene->Update(game_state);
+		collision_manager.performCollisionCheck();
 	}
 	game_ui.tickUIObjects(game_state);
 	processSceneEvents();
@@ -93,6 +95,11 @@ Scene * SceneManager::getScene()
 void SceneManager::loadScene(string scene_name)
 {
 	// TODO - Add Code to load diffrent Scenes into the game.
+	// This will be done via a JSON map file. 
+	// This way we can create loads of diffrent scenes at the same time.
+	collision_manager.clearCollisionManager();
+
+
 	if (scene_name == "clear") 
 	{
 		loadScene(new Scene);
@@ -119,6 +126,8 @@ void SceneManager::loadScene(Scene * scene_name)
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
 	current_scene.reset(scene_name);
+
+	// TODO - Add object setup here so we can have a better map loader.
 }
 
 void SceneManager::clearScene()
@@ -144,6 +153,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
+	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 
 	current_scene->add2DGameObjectToScene(new_object);
 }

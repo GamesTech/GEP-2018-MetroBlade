@@ -15,10 +15,17 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	CentreOrigin();
 	object_components.addComponent(new PlayerStatus);
 	object_components.addComponent(new Sprite(true));
+
+	// Add Colliders to the players.
+	col->isColliderImmediate(true);
+	object_components.addComponent(col);
+	object_components.addComponent(punch_collider);
+
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
+
 	controller_id = gamepadID;
 }
 

@@ -9,7 +9,8 @@
 
 Obstacle2D::Obstacle2D(RenderData* _RD, string _filename): ImageGO2D(_RD, _filename)
 {
-	
+	col->isColliderActive(true);
+	object_components.addComponent(col);
 }
 
 

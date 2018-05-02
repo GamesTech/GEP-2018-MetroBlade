@@ -146,6 +146,18 @@
     <Filter Include="Core\UI\UISprite">
       <UniqueIdentifier>{c35bb81d-3d96-40f5-9093-3997aa513eea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Physics">
+      <UniqueIdentifier>{6b904ff7-7638-46b8-8fc8-636e17e5a2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Collision">
+      <UniqueIdentifier>{f726aa76-fb19-446d-b875-7b36ccde6674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Collision\Object">
+      <UniqueIdentifier>{575440c2-eca4-4aa5-a8d6-6bc8d2992e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\Collision\Data">
+      <UniqueIdentifier>{61c4f99f-3727-4aa9-bdb3-279c15190fa0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -229,9 +241,6 @@
     <ClInclude Include="TestComponent.h">
       <Filter>Core\GameComponent\Game components\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Core\Collision Manager</Filter>
     </ClInclude>
@@ -292,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="Obstacle2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MetroBrawlCollisionManager.h">
+      <Filter>Core\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Core\Physics\Collision\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -358,9 +373,6 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>Core\GameComponent\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Core\Collision Manager</Filter>
     </ClCompile>
@@ -403,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
+    </ClCompile>
+    <ClCompile Include="MetroBrawlCollisionManager.cpp">
+      <Filter>Core\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Core\Physics\Collision\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,6 @@
 
 class Player2D :
 	public Physics2D
-
 {
 public:
 	//TODO: add a 3d player and modes to switch between different views and basic physics
@@ -54,9 +53,9 @@ protected:
 
 	Sprite*				sprite;
 	bool flipped = false;
-	//	std::unique_ptr<Sprite> sprite;
-	Collider * col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
-	Collider * punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
+
+	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider* punch_collider = new Collider(Vector2(m_pos), Vector2(0, 0), true);
 
 	Vector2 offset;
 	float m_drive = 1.0f;

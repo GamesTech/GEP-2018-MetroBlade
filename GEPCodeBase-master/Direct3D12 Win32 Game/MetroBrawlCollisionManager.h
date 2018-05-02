@@ -32,10 +32,11 @@ public:
 
 	void performCollisionCheck();
 
-
+	void clearCollisionManager();
 
 private:
-	bool collisionTest(Collider a, Collider b);
+	void checkColliders(Collider& col);
+	bool collisionTest(Collider& a, Collider& b);
 
 	std::vector<Collider*>	object_colliders;
 };
