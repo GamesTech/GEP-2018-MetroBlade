@@ -30,9 +30,6 @@ public:
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
 
-	//test health
-	int health = 0;
-
 	// Game Manager interface
 	bool			isDead() const;
 	void			isDead(bool is_dead);

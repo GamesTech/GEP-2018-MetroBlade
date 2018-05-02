@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "PlayerStatus.h"
 #include "Item.h"
 
 Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
@@ -26,7 +27,10 @@ void Item::UseItem(Player2D* player, ItemType type)
 	switch (type)
 	{
 	case HEALTH:
-		player->health += 25;
+		player->getComponentManager()->getComponentByType<PlayerStatus>()->addHealth(health_amount);
+		break;
+	case PROJECTILE:
+
 		break;
 	}
 

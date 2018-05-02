@@ -155,10 +155,6 @@ void Player2D::Tick(GameStateData* _GSD)
 		world.exitGame();
 	}
 
-	if (health > 0)
-	{
-		health++;
-	}
 	//GRAVITY
 	AddForce(gravity*Vector2::UnitY);
 

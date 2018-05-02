@@ -5,6 +5,7 @@ class Player2D;
 enum ItemType {
 	SPEED,
 	HEALTH,
+	PROJECTILE
 };
 enum ItemState {
 	PICKUP,
@@ -25,4 +26,5 @@ private:
 	Vector2 pos = Vector2::Zero;
 	ItemType item_type = ItemType::HEALTH;
 	ItemState item_state = ItemState::PICKUP;
+	const int health_amount = 25;
 };

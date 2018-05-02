@@ -40,7 +40,7 @@ ImageGO2D::~ImageGO2D()
 
 void ImageGO2D::Tick(GameStateData * _GSD)
 {
-	printf("Hello world");
+	//printf("Hello world");
 }
 
 void ImageGO2D::Render(RenderData* _RD)

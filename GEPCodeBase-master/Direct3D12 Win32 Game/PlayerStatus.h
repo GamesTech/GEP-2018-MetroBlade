@@ -40,7 +40,9 @@ public:
 	void setScore(int new_score);
 	int getLaunchMultiplier() const;
 	void setLaunchMultiplier(int new_multiplier);
-
+	int getHealth() { return current_health; }
+	void setHealth(int value);
+	void addHealth(int value_to_add);
 private: 
 
 	// TODO - Consider using an array for these variables.
@@ -48,4 +50,6 @@ private:
 	int damage_percentage = 0;
 	int score = 0;
 	int launch_multiplier = 1;
+	const int max_health = 100;
+	int current_health = max_health;
 };
