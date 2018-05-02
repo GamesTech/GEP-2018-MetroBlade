@@ -63,7 +63,7 @@ bool Collider::isColliderActive() const
 
 void Collider::isColliderImmediate(bool is_immediate)
 {
-	bool is_collider_immediate = is_immediate;
+	is_collider_immediate = is_immediate;
 }
 
 bool Collider::isColliderImmediate() const

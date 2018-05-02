@@ -97,9 +97,6 @@ void SceneManager::loadScene(string scene_name)
 	// TODO - Add Code to load diffrent Scenes into the game.
 	// This will be done via a JSON map file. 
 	// This way we can create loads of diffrent scenes at the same time.
-	collision_manager.clearCollisionManager();
-
-
 	if (scene_name == "clear") 
 	{
 		loadScene(new Scene);
@@ -123,6 +120,7 @@ void SceneManager::loadScene(string scene_name)
 void SceneManager::loadScene(Scene * scene_name)
 {
 	clearScene();
+	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
 	current_scene.reset(scene_name);
@@ -149,10 +147,12 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
 	new_object->assignWorldEventListener(scene_event_listener);
+
 	if (dynamic_cast<Player2D*>(new_object)) 
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
+
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 
 	current_scene->add2DGameObjectToScene(new_object);
