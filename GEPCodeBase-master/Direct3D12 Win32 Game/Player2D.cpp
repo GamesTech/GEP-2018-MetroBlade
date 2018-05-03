@@ -1,4 +1,7 @@
 #include "pch.h"
+#include <functional>
+
+
 #include "Player2D.h"
 #include "GamePad.h"
 #include "GameStateData.h"
@@ -11,15 +14,32 @@
 Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
 
 {
+	using namespace std::placeholders;
+
 	src_rect.reset(new RECT);
 	CentreOrigin();
 	object_components.addComponent(new PlayerStatus);
 	object_components.addComponent(new Sprite(true));
+
+	// Add Colliders to the players.
+	col->isColliderImmediate(true);
+	col->addParentObjectRefrence(this);
+	punch_collider->addParentObjectRefrence(this);
+
+	col->assignCollisionEvent(std::bind(&Player2D::onCollision, this, _1));
+	punch_collider->assignCollisionEvent(std::bind(&Player2D::onPunchCollision, this, _1));
+
+	object_components.addComponent(col);
+	object_components.addComponent(punch_collider);
+
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
+
 	controller_id = gamepadID;
+
+	setGravity(500.0f);
 }
 
 
@@ -31,6 +51,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 {
 	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
 	float stick_x = controller_state.thumbSticks.leftX;
+
 	//temp place for input
 	if (_GSD->m_keyboardState.Space || controller_state.IsAPressed())
 	{
@@ -45,7 +66,6 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
-			//SetVel(Vector2(0, 0));
 		}
 
 	}
@@ -54,31 +74,23 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		offset = Vector2(-20, 0);
 		direction = Vector2(-1, 0);
 		m_effects = SpriteEffects_FlipHorizontally;
-		//SetVel(Vector2(-x_speed, m_vel.y));
+		SetInputVel(Vector2(-x_speed, 0));
 		action_state = MOVING;
-		AddForce(-m_drive * Vector2::UnitX);
 	}
 	else if (_GSD->m_keyboardState.D || stick_x > 0)
 	{
 		offset = Vector2(120, 0);
 		direction = Vector2(1, 0);
 		m_effects = SpriteEffects_None;
-		//SetVel(Vector2(x_speed, m_vel.y));
+		SetInputVel(Vector2(x_speed, 0));
 		action_state = MOVING;
-		AddForce(m_drive * Vector2::UnitX);
 	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
 		action_state = IDLE;
-		//SetVel(Vector2(0, 0));
 	}
-	
-	if (_GSD->m_keyboardState.J)
-	{
-		dead = true;
-	}
-
 }
+
 void Player2D::Tick(GameStateData* _GSD)
 {
 	punch_collider->setBoxOrigin(m_pos + offset);
@@ -86,17 +98,15 @@ void Player2D::Tick(GameStateData* _GSD)
 	CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
-	switch (phys_state)
-	{
-	case GROUNDED:
-		SetVel(Vector2(m_vel.x, 0));
-		setGravity(0.0f);
-		break;
+	//switch (phys_state)
+	//{
+	//case GROUNDED:
+	//	SetVel(Vector2(m_vel.x, 0));
+	//	break;
 
-	case AIR:
-
-		break;
-	}
+	//case AIR:
+	//	break;
+	//}
 
 	//action state determines the players action such as attacking, jumping, moving etc
 	attacking = false;
@@ -104,12 +114,10 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 
 	case IDLE:
-
 		sprite->setAnimationState("idle");
 		break;
 
 	case MOVING:
-
 		if (phys_state == GROUNDED)
 		{
 			sprite->setAnimationState("move");
@@ -117,9 +125,7 @@ void Player2D::Tick(GameStateData* _GSD)
 		break;
 
 	case JUMPING:
-
 		sprite->setAnimationState("jump");
-		setGravity(1000.0f);
 		AddForce(-jump_force * Vector2::UnitY);
 		break;
 
@@ -127,18 +133,18 @@ void Player2D::Tick(GameStateData* _GSD)
 		attacking = true;
 		sprite->setAnimationState("attack");
 		break;
-	
-		
-
 	}
+
 	if (_GSD->m_keyboardState.Escape)
 	{
-		// Testing for error components. 
-		world.exitGame();
+		// Testing for error components.
+
+		// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
+		world.changeScene("clear"); 
 	}
 
 	//GRAVITY
-	AddForce(gravity*Vector2::UnitY);
+	AddForce(gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
 
@@ -147,37 +153,10 @@ void Player2D::Tick(GameStateData* _GSD)
 	//Update sprite animation
 	sprite->tickComponent(_GSD);
 
-//after that as updated my position let's lock it inside my limits
-	/*if (m_pos.x < 50.0f)
-	{
-		m_pos.x = 1.0f;
-		m_vel.x = 0.0f;
-
-	}*/
-	if (m_pos.y <= 0.0f)
-	{
-		m_pos.y = 0.1f;
-		
-	}
-
-	if (m_pos.x > m_limit.x)
-	{
-	
-
-	}
-	/*if (m_pos.y > m_limit.y)
-	{
-		m_pos.y = m_limit.y;
-		phys_state = GROUNDED;
-	}*/
 	if (m_pos.y > 1500)
 	{
 		dead = true;
 	}
-
-
-	Physics2D::Tick(_GSD);
-
 }
 
 bool Player2D::isDead() const
@@ -205,18 +184,18 @@ void Player2D::setRespawnTime(float respawn_timer)
 	respawn_time = respawn_timer;
 }
 
-Collider* Player2D::getCollider(int id)
+void Player2D::onCollision(MetroBrawlCollisionData col_data)
 {
+	// Calculate there normals and apply a force to them.
+	// Currently in 'test' state. Will be changed to the above algorithm later.
 
-	switch (id)
-	{
-	case 0:
-		return col;
-		break;
-	case 1:
-		return punch_collider;
-		break;
-	}
+	//printf("I Should be called."); 
+	SetVel(Vector2(0, 0));
+}
+
+void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
+{
+	printf("We can now detect punches.");
 }
 
 void Player2D::punched(GameStateData * _GSD, Vector2 direction)
@@ -232,6 +211,6 @@ void Player2D::setStateGrounded()
 
 void Player2D::setStateFalling()
 {
-	setGravity(1000.0f);
+	// setGravity(1000.0f);
 }
 
