@@ -38,8 +38,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setAnimationState("idle");
 
 	controller_id = gamepadID;
-
-	setGravity(500.0f);
+	// setGravity(500.0f);
 }
 
 
@@ -58,6 +57,8 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = JUMPING;
+			sprite->setAnimationState("jump");
+			AddForce(-jump_force * Vector2::UnitY);
 			phys_state = AIR;
 		}
 	}
@@ -98,15 +99,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
-	//switch (phys_state)
-	//{
-	//case GROUNDED:
-	//	SetVel(Vector2(m_vel.x, 0));
-	//	break;
-
-	//case AIR:
-	//	break;
-	//}
 
 	//action state determines the players action such as attacking, jumping, moving etc
 	attacking = false;
@@ -125,8 +117,6 @@ void Player2D::Tick(GameStateData* _GSD)
 		break;
 
 	case JUMPING:
-		sprite->setAnimationState("jump");
-		AddForce(-jump_force * Vector2::UnitY);
 		break;
 
 	case ATTACKING:
@@ -200,7 +190,6 @@ void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 
 void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
-	
 	AddForce(10000 * direction * Vector2::UnitX);
 }
 
