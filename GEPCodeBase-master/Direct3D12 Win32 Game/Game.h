@@ -118,7 +118,4 @@ private:
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 	SceneManager scene;
-	CollisionManager collider;
-
-
 };

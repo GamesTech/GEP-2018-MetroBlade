@@ -143,7 +143,6 @@ void Game::Initialize(HWND window, int width, int height)
 	scene.assignRenderData(m_RD);
 	scene.Init();
 	//objectList.reserve(20);
-	collider.init();
 
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -207,24 +206,17 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.clear();
 		m_obstacle_objects.clear();
 		m_items.clear();
-		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
-
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
-		//m_3DObjects.push_back(camera);
 
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		testPlay->getCollider(0)->setTag(m_player_objects.size());
-		testPlay->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay->getCollider(0)));
-		collider.addCollider((testPlay->getCollider(1)));
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
 		m_player_objects.push_back(testPlay);
@@ -232,11 +224,6 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
-		
-		testPlay2->getCollider(0)->setTag(m_player_objects.size());
-		testPlay2->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay2->getCollider(1)));
-		collider.addCollider((testPlay2->getCollider(0)));
 		testPlay2->SetPos(Vector2(800, 200));
 		scene.instanciate2DObject(testPlay2);
 		m_player_objects.push_back(testPlay2);
@@ -244,20 +231,14 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
 		testPlay3->SetDrive(1000.0f);
 		testPlay3->SetDrag(0.5f);
-		testPlay3->getCollider(0)->setTag(m_player_objects.size());
-		testPlay3->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay3->getCollider(0)));
-		collider.addCollider((testPlay3->getCollider(1)));
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
 		m_player_objects.push_back(testPlay3);
 
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
-		testPlatform->getCollider(0)->setTag(10);
-		collider.addCollider((testPlatform->getCollider(0)));
 		testPlatform->SetPos(Vector2(500, 600));
-		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
+		scene.instanciate2DObject(testPlatform);
 		m_obstacle_objects.push_back(testPlatform);
 
 		scene.startGameManager();
@@ -281,12 +262,6 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 
-
-		testPlay->getCollider(1)->setTag(m_player_objects.size());
-		testPlay->getCollider(0)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay->getCollider(0)));
-		collider.addCollider((testPlay->getCollider(1)));
-
 		testPlay->SetPos(Vector2(0, 500));
 
 		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
@@ -294,47 +269,11 @@ void Game::Update(DX::StepTimer const& timer)
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
 		testPlatform->getCollider(0)->setTag(10);
-		collider.addCollider((testPlatform->getCollider(0)));
 
 		testPlatform->SetPos(Vector2(0,600));
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
-
-	}
-	if (!m_player_objects.empty())
-	{
-		for (int i = 0; i < collider.GetSize(); i++)
-		{
-			int collider_tag = collider.checkCollisions(i);
-
-			if (collider_tag != -1)
-			{
-				if (collider_tag != 10)
-				{
-					if (!collider.checkTrigger(i))
-					{
-						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
-						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
-
-						
-					}
-					if (collider.getTarget() == 10)
-					{
-						m_player_objects[collider_tag]->setStateGrounded();
-					}
-					
-				}
-				if (collider.checkTrigger(i) && collider.getTarget() != 10)
-				{
-					if (m_player_objects[collider_tag]->IsAttacking())
-					{
-						m_player_objects[collider.getTarget()]->punched(m_GSD, m_player_objects[collider_tag]->getDirection());
-					}
-					
-				}
-			}
-		}
 	}
 
 	scene.Update(m_GSD);
@@ -775,6 +714,7 @@ void Game::GetAdapter(IDXGIAdapter1** ppAdapter)
 void Game::OnDeviceLost()
 {
 	m_RD->m_states.reset();
+
 	//TODO: SDKMeshGO3D
 	//m_fxFactory.reset();
 	//m_modelResources.reset();

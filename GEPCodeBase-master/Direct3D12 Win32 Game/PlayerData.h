@@ -20,8 +20,6 @@
 #include "pch.h"
 
 
-
-
 struct PlayerData 
 {
 	std::string   player_name = "player_null";

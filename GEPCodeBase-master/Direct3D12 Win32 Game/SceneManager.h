@@ -23,6 +23,8 @@
 #include "Scene.h"
 #include "SceneEvent.h"
 #include "GameManager.h"
+#include "MetroBrawlCollisionManager.h"
+
 #include "UICanvas.h"
 
 namespace DX {
@@ -82,4 +84,5 @@ private:
 	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
 	
 	GameManager						game_manager;
+	MetroBrawlCollisionManager		collision_manager;
 };
