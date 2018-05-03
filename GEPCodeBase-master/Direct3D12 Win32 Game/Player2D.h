@@ -58,12 +58,12 @@ protected:
 
 	Vector2 offset;
 	float m_drive = 1.0f;
-	float x_speed = 100;
+	float x_speed = 100.0f;
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 500);
 	InputManager* m_input;
 	float jump_force = 2000.0f;
-	float gravity = 9.8f;
+	float gravity = 981.0f;
 	float vertical_velocity;
 	Vector2 direction = Vector2(0, 0);
 	bool attacking = false;

@@ -157,10 +157,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 		dead = true;
 	}
-
-
-	Physics2D::Tick(_GSD);
-
 }
 
 bool Player2D::isDead() const
