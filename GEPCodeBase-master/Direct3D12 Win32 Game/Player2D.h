@@ -14,7 +14,6 @@ public:
 	Player2D(RenderData* _RD, string _filename, int gamepadID);
 	virtual ~Player2D();
 
-
 	virtual void Tick(GameStateData* _GSD);
 	void CheckInput(GameStateData* _GSD);
 	void SetDrive(float _drive) { m_drive = _drive; }
@@ -22,7 +21,6 @@ public:
 	void SetLimit(Vector2 _lim) { m_limit = _lim; }
 	bool IsAttacking() { return attacking; }
 	Vector2 GetLimit() { return m_limit; }
-	Collider* getCollider(int id);
 	
 	void setStateGrounded();
 	void setStateFalling();
@@ -79,4 +77,5 @@ protected:
 private:
 	// Event Handlers for collision.
 	void onCollision(MetroBrawlCollisionData  col_data);
+	void onPunchCollision(MetroBrawlCollisionData  col_data);
 };
