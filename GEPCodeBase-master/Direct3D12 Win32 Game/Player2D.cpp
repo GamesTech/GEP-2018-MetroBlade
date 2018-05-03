@@ -1,6 +1,4 @@
 #include "pch.h"
-#include <functional>
-
 
 #include "Player2D.h"
 #include "GamePad.h"
@@ -38,8 +36,6 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setAnimationState("idle");
 
 	controller_id = gamepadID;
-	player_item = new Item(_RD, "health_item", HEALTH);
-	player_item->SetPos(Vector2(350, 300));
 
 	setGravity(500.0f);
 }
@@ -47,11 +43,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 
 Player2D::~Player2D()
 {
-	if (player_item)
-	{
-		delete player_item;
-		player_item = nullptr;
-	}
+
 }
 
 void Player2D::CheckInput(GameStateData* _GSD)

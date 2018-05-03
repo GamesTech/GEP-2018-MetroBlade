@@ -1,11 +1,16 @@
 #include "pch.h"
+#include <functional>
 #include "PlayerStatus.h"
 #include "Item.h"
 
 Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
 {
+	using namespace std::placeholders;
 	item_type = type;
 	CentreOrigin();
+	col->addParentObjectRefrence(this);
+	col->assignCollisionEvent(std::bind(&Item::onCollision, this, _1));
+	object_components.addComponent(col);
 }
 
 Item::~Item()
@@ -19,7 +24,16 @@ void Item::SetPosition(Vector2 new_pos)
 
 void Item::Tick(GameStateData* _GSD)
 {
-	//physics stuff, need new physics before implementing as old inherits from image
+	
+	col->setBoxOrigin(m_pos);
+}
+
+void Item::Render(RenderData * _GSD)
+{
+	if (item_state == PICKUP) 
+	{
+		ImageGO2D::Render(_GSD);
+	}
 }
 
 void Item::UseItem(Player2D* player, ItemType type)
@@ -34,4 +48,18 @@ void Item::UseItem(Player2D* player, ItemType type)
 		break;
 	}
 
+}
+
+void Item::onCollision(MetroBrawlCollisionData  col_data)
+{
+	if (item_state == PICKUP)
+	{
+		Player2D*   player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
+		if (player)
+		{
+			player->AddItem(this, 1);
+			item_state = NONE;
+			col->isColliderActive(false);
+		}
+	}
 }

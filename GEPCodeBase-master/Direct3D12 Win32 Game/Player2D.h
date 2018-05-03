@@ -70,7 +70,7 @@ protected:
 	Vector2 direction = Vector2(0, 0);
 	bool attacking = false;
 	void setGravity(float gravity) { this->gravity = gravity; }
-	PhysicalStates phys_state = GROUNDED;
+	PhysicalStates phys_state = AIR;
 	PlayerActions action_state = JUMPING;
 	bool				dead = false;
 	Player2D*			killer = nullptr;
