@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Physics2D.h"
 #include "Sprite.h"
 #include "InputManager.h"
@@ -8,6 +9,7 @@ class Player2D :
 	public Physics2D
 {
 public:
+
 	//TODO: add a 3d player and modes to switch between different views and basic physics
 	Player2D(RenderData* _RD, string _filename, int gamepadID);
 	virtual ~Player2D();
@@ -62,7 +64,7 @@ protected:
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 500);
 	InputManager* m_input;
-	float jump_force = 2500.0f;
+	float jump_force = 2000.0f;
 	float gravity = 9.8f;
 	float vertical_velocity;
 	Vector2 direction = Vector2(0, 0);
@@ -75,6 +77,6 @@ protected:
 	float				respawn_time = 0.0f;
 
 private:
+	// Event Handlers for collision.
 	void onCollision(MetroBrawlCollisionData  col_data);
-	//	Vector2 m_limit = Vector2(800, 500);
 };

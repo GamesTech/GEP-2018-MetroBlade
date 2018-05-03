@@ -36,6 +36,8 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setAnimationState("idle");
 
 	controller_id = gamepadID;
+
+	setGravity(500.0f);
 }
 
 
@@ -106,7 +108,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 	case GROUNDED:
 		SetVel(Vector2(m_vel.x, 0));
-		setGravity(0.0f);
 		break;
 
 	case AIR:
@@ -120,7 +121,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 
 	case IDLE:
-
 		sprite->setAnimationState("idle");
 		break;
 
@@ -135,7 +135,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	case JUMPING:
 
 		sprite->setAnimationState("jump");
-		setGravity(1000.0f);
 		AddForce(-jump_force * Vector2::UnitY);
 		break;
 
@@ -143,18 +142,18 @@ void Player2D::Tick(GameStateData* _GSD)
 		attacking = true;
 		sprite->setAnimationState("attack");
 		break;
-	
-		
-
 	}
+
 	if (_GSD->m_keyboardState.Escape)
 	{
-		// Testing for error components. 
-		world.exitGame();
+		// Testing for error components.
+
+		// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
+		world.changeScene("clear"); 
 	}
 
 	//GRAVITY
-	AddForce(gravity*Vector2::UnitY);
+	AddForce(gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
 
@@ -164,28 +163,12 @@ void Player2D::Tick(GameStateData* _GSD)
 	sprite->tickComponent(_GSD);
 
 //after that as updated my position let's lock it inside my limits
-	/*if (m_pos.x < 50.0f)
-	{
-		m_pos.x = 1.0f;
-		m_vel.x = 0.0f;
-
-	}*/
 	if (m_pos.y <= 0.0f)
 	{
 		m_pos.y = 0.1f;
 		
 	}
 
-	if (m_pos.x > m_limit.x)
-	{
-	
-
-	}
-	/*if (m_pos.y > m_limit.y)
-	{
-		m_pos.y = m_limit.y;
-		phys_state = GROUNDED;
-	}*/
 	if (m_pos.y > 1500)
 	{
 		dead = true;
@@ -223,7 +206,11 @@ void Player2D::setRespawnTime(float respawn_timer)
 
 void Player2D::onCollision(MetroBrawlCollisionData col_data)
 {
-	printf("I Should be called.");
+	// Calculate there normals and apply a force to them.
+	// Currently in 'test' state. Will be changed to the above algorithm later.
+
+	//printf("I Should be called."); 
+	SetVel(Vector2(0, 0));
 }
 
 Collider* Player2D::getCollider(int id)
