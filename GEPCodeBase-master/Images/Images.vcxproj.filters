@@ -11,6 +11,14 @@
     <ImageContentTask Include="Fighter_2.png" />
     <ImageContentTask Include="Fighter_3.png" />
     <ImageContentTask Include="Platform_Sprite.png" />
+    <ImageContentTask Include="Fighter_1_profile.png" />
+    <ImageContentTask Include="Fighter_2_profile.png" />
+    <ImageContentTask Include="Fighter_3_profile.png" />
+    <ImageContentTask Include="Fighter_4_profile.png" />
+    <ImageContentTask Include="Fighter_2_teamview.png" />
+    <ImageContentTask Include="Fighter_1_teamview.png" />
+    <ImageContentTask Include="Fighter_3_teamview.png" />
+    <ImageContentTask Include="Fighter_4_teamview.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

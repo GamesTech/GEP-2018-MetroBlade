@@ -78,7 +78,7 @@ void Game::Initialize(HWND window, int width, int height)
 
 	m_GSD = new GameStateData;
 
-//GEP::set up keyboard & mouse input systems
+	//GEP::set up keyboard & mouse input systems
 	m_inputManager.reset(new InputManager);
 	m_keyboard = std::make_unique<Keyboard>();
 	m_mouse = std::make_unique<Mouse>();
@@ -200,7 +200,38 @@ void Game::Update(DX::StepTimer const& timer)
 			(*it)->Tick(m_GSD);
 		}
 	}
+	if (m_keyboard->GetState().Enter)
+	{
+		Scene*  newScene = new Scene;
+		scene.loadScene(newScene);
 
+		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
+		scene.setMainCamera(camera);
+		scene.instanciate3DObject(camera);
+
+		UISprite* fighter_1 = new UISprite("Fighter_1_profile", m_RD);
+		fighter_1->SetPos(Vector2(300, 200));
+		scene.instanciateUIObject(fighter_1);
+
+		UISprite* fighter_2 = new UISprite("Fighter_2_profile", m_RD);
+		fighter_2->SetPos(Vector2(500, 200));
+		scene.instanciateUIObject(fighter_2);
+
+		UISprite* fighter_2_teamview = new UISprite("Fighter_2_teamview", m_RD);
+		fighter_2_teamview->SetPos(Vector2(500, 500));
+		scene.instanciateUIObject(fighter_2_teamview);
+
+		UISprite* fighter_3 = new UISprite("Fighter_3_profile", m_RD);
+		fighter_3->SetPos(Vector2(700, 200));
+		scene.instanciateUIObject(fighter_3);
+
+		UISprite* fighter_4 = new UISprite("Fighter_4_profile", m_RD);
+		fighter_4->SetPos(Vector2(900, 200));
+		scene.instanciateUIObject(fighter_4);
+
+		scene.startGameManager();
+	}
 	if (m_keyboard->GetState().P)
 	{
 		m_player_objects.clear();
@@ -249,7 +280,6 @@ void Game::Update(DX::StepTimer const& timer)
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}
-
 	if (m_keyboard->GetState().T)
 	{
 		// Instantiation test.
@@ -265,7 +295,7 @@ void Game::Update(DX::StepTimer const& timer)
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
 		testPlatform->getCollider(0)->setTag(10);
 
-		testPlatform->SetPos(Vector2(0,600));
+		testPlatform->SetPos(Vector2(0, 600));
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
