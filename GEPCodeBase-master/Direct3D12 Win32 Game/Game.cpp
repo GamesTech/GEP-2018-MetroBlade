@@ -205,6 +205,8 @@ void Game::Update(DX::StepTimer const& timer)
 
 	if (m_keyboard->GetState().P)
 	{
+		player_labels.clear();
+		team_colours.clear();
 		m_player_objects.clear();
 		m_obstacle_objects.clear();
 		collider.reset();
