@@ -38,7 +38,6 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setAnimationState("idle");
 
 	controller_id = gamepadID;
-	// setGravity(500.0f);
 }
 
 
