@@ -12,6 +12,7 @@
 
 #include "UILabel.h"
 #include "UISprite.h"
+#include "Cursor.h"
 
 extern void ExitGame();
 
@@ -210,6 +211,18 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
+		UISprite* fighter_1_teamview = new UISprite("Fighter_1_teamview", m_RD);
+		teamview.push_back(fighter_1_teamview);
+
+		UISprite* fighter_2_teamview = new UISprite("Fighter_2_teamview", m_RD);
+		teamview.push_back(fighter_2_teamview);
+
+		UISprite* fighter_3_teamview = new UISprite("Fighter_3_teamview", m_RD);
+		teamview.push_back(fighter_3_teamview);
+
+		UISprite* fighter_4_teamview = new UISprite("Fighter_4_teamview", m_RD);
+		teamview.push_back(fighter_4_teamview);
+
 		UISprite* fighter_1 = new UISprite("Fighter_1_profile", m_RD);
 		fighter_1->SetPos(Vector2(300, 200));
 		scene.instanciateUIObject(fighter_1);
@@ -218,9 +231,6 @@ void Game::Update(DX::StepTimer const& timer)
 		fighter_2->SetPos(Vector2(500, 200));
 		scene.instanciateUIObject(fighter_2);
 
-		UISprite* fighter_2_teamview = new UISprite("Fighter_2_teamview", m_RD);
-		fighter_2_teamview->SetPos(Vector2(500, 500));
-		scene.instanciateUIObject(fighter_2_teamview);
 
 		UISprite* fighter_3 = new UISprite("Fighter_3_profile", m_RD);
 		fighter_3->SetPos(Vector2(700, 200));
@@ -229,6 +239,9 @@ void Game::Update(DX::StepTimer const& timer)
 		UISprite* fighter_4 = new UISprite("Fighter_4_profile", m_RD);
 		fighter_4->SetPos(Vector2(900, 200));
 		scene.instanciateUIObject(fighter_4);
+
+		Cursor* player1_cursor = new Cursor("player1_cursor", m_RD);
+		scene.instanciateUIObject(player1_cursor);
 
 		scene.startGameManager();
 	}

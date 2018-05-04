@@ -20,6 +20,7 @@
 #include "InputManager.h"
 using std::vector;
 
+class UISprite;
 struct RenderData;
 struct GameStateData;
 
@@ -117,4 +118,5 @@ private:
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 	SceneManager scene;
+	std::vector<UISprite*> teamview;
 };

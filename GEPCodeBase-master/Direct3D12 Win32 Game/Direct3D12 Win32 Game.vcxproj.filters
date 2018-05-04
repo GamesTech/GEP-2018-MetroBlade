@@ -158,6 +158,9 @@
     <Filter Include="Core\Physics\Collision\Data">
       <UniqueIdentifier>{61c4f99f-3727-4aa9-bdb3-279c15190fa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\Cursor">
+      <UniqueIdentifier>{9c0ebe47-7981-4795-a7b9-5c762b203d92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -311,6 +314,9 @@
     <ClInclude Include="MetroBrawlCollisionData.h">
       <Filter>Core\Physics\Collision\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Core\UI\Cursor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -425,6 +431,7 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics\Collision\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
