@@ -60,8 +60,8 @@ void SceneManager::Update(GameStateData * game_state)
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
-		current_scene->Update(game_state);
 		collision_manager.performCollisionCheck();
+		current_scene->Update(game_state);
 	}
 	game_ui.tickUIObjects(game_state);
 	processSceneEvents();

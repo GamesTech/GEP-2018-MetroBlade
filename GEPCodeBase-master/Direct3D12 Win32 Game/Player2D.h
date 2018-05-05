@@ -43,6 +43,7 @@ protected:
 		AIR,
 		COLLISION
 	};
+
 	enum PlayerActions {
 		IDLE,
 		MOVING,
@@ -62,14 +63,14 @@ protected:
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 500);
 	InputManager* m_input;
-	float jump_force = 2000.0f;
+	float jump_force = 1000000.0f;
 	float gravity = 981.0f;
 	float vertical_velocity;
 	Vector2 direction = Vector2(0, 0);
 	bool attacking = false;
 	void setGravity(float gravity) { this->gravity = gravity; }
 	PhysicalStates phys_state = GROUNDED;
-	PlayerActions action_state = JUMPING;
+	PlayerActions action_state = IDLE;
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;

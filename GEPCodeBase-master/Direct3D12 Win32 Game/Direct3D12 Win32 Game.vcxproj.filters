@@ -11,12 +11,6 @@
     <Filter Include="Game Base">
       <UniqueIdentifier>{b4a4bf75-3cb8-4a7b-9b5e-db4ff132aba2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Base\Headers">
-      <UniqueIdentifier>{6cc53fe2-9597-4029-87e9-f973aa967c6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game Base\Source">
-      <UniqueIdentifier>{c6145a56-6b6a-4cdf-aecf-c59fe5db8df0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{d6022f93-5073-407f-9fa9-e4692d3cccbe}</UniqueIdentifier>
     </Filter>
@@ -158,6 +152,30 @@
     <Filter Include="Core\Physics\Collision\Data">
       <UniqueIdentifier>{61c4f99f-3727-4aa9-bdb3-279c15190fa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Physics\Resolver">
+      <UniqueIdentifier>{f809afd7-1627-4f69-a928-e23ecd4e2a80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics\RigidBody">
+      <UniqueIdentifier>{3ed700f4-d6b1-4dc6-96eb-d0d711969549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\Text %28depreciated%29">
+      <UniqueIdentifier>{061ad967-d7c3-4122-8156-b069861ed7fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\2D\Player">
+      <UniqueIdentifier>{c0bbc2b1-81b3-4f31-9e0c-e54612408cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\2D\Obstacle">
+      <UniqueIdentifier>{cc43e775-6d3f-4d0d-84de-8bbdf6542279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Base\Game">
+      <UniqueIdentifier>{28d9d662-0f3a-435a-aad7-fe9b790a796d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Base\System">
+      <UniqueIdentifier>{f958415b-4ec3-4963-a9f4-1e33c56af760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Base\Core Data">
+      <UniqueIdentifier>{6cc53fe2-9597-4029-87e9-f973aa967c6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -170,9 +188,6 @@
       <Filter>Core\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ImageGO2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Text2D.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
     <ClInclude Include="PBGO3D.h">
@@ -190,32 +205,20 @@
     <ClInclude Include="SDKMeshGO3D.h">
       <Filter>Core\GameObjects\3D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Player2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Core\GameObjects\Sounds\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Loop.h">
       <Filter>Core\GameObjects\Sounds\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game Base\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameStateData.h">
-      <Filter>Game Base\Headers</Filter>
+      <Filter>Game Base\Core Data</Filter>
     </ClInclude>
     <ClInclude Include="RenderData.h">
-      <Filter>Game Base\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Game Base\Headers</Filter>
+      <Filter>Game Base\Core Data</Filter>
     </ClInclude>
     <ClInclude Include="TestSound.h">
       <Filter>Core\GameObjects\Sounds\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Core\Scene Manager</Filter>
@@ -299,9 +302,6 @@
     <ClInclude Include="UISprite.h">
       <Filter>Core\UI\UISprite</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="MetroBrawlCollisionManager.h">
       <Filter>Core\Physics\Collision</Filter>
     </ClInclude>
@@ -311,12 +311,30 @@
     <ClInclude Include="MetroBrawlCollisionData.h">
       <Filter>Core\Physics\Collision\Data</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsResolver.h">
+      <Filter>Core\Physics\Resolver</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics2D.h">
+      <Filter>Core\Physics\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Text2D.h">
+      <Filter>Core\UI\Text %28depreciated%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2D.h">
+      <Filter>Core\GameObjects\2D\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle2D.h">
+      <Filter>Core\GameObjects\2D\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Game Base\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Text2D.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="PBGO3D.cpp">
@@ -334,29 +352,14 @@
     <ClCompile Include="SDKMeshGO3D.cpp">
       <Filter>Core\GameObjects\3D\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Player2D.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Core\GameObjects\Sounds\Source</Filter>
     </ClCompile>
     <ClCompile Include="Loop.cpp">
       <Filter>Core\GameObjects\Sounds\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game Base\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Game Base\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Game Base\Source</Filter>
-    </ClCompile>
     <ClCompile Include="TestSound.cpp">
       <Filter>Core\GameObjects\Sounds\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics2D.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Core\Scene Manager</Filter>
@@ -410,9 +413,6 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Core\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle2D.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="UILabel.cpp">
       <Filter>Core\UI\Label</Filter>
     </ClCompile>
@@ -424,6 +424,28 @@
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics2D.cpp">
+      <Filter>Core\Physics\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="Text2D.cpp">
+      <Filter>Core\UI\Text %28depreciated%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
+      <Filter>Core\GameObjects\2D\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle2D.cpp">
+      <Filter>Core\GameObjects\2D\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Game Base\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhysicsResolver.cpp">
+      <Filter>Core\Physics\Resolver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -29,17 +29,7 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 	//GEP:: Lets go up the inheritance and share our functionality
 }
 
-
-Collider* Obstacle2D::getCollider(int id)
+void Obstacle2D::onObjectCollision(MetroBrawlCollisionData col_data)
 {
-
-	switch (id)
-	{
-	case 0:
-		return col;
-		break;
-	}
-	return nullptr;
+	// This works but doing collisions should really be handled by a physics engine instead. 
 }
-
-

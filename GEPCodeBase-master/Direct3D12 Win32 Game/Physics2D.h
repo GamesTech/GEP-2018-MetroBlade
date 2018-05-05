@@ -26,9 +26,13 @@ public:
 	void SetDrag(float _drag) { m_drag = _drag; }
 	float GetDrag() { return m_drag; }
 
+	Vector2 getDeltaPos() const;
+
+
 	virtual void Tick(GameStateData* _GSD);
 
 protected:
+	Vector2 m_delta_pos;
 	Vector2 m_vel;
 	Vector2 m_input_vel;
 	Vector2 m_acc;

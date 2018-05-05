@@ -45,6 +45,17 @@ void Collider::setBoxOrigin(Vector2 box_origin)
 {
 	this->box_origin = box_origin;
 }
+
+Vector2 Collider::getBoxMidpoint()
+{
+	return getBoxOrigin() / 0.5f;
+}
+
+Vector2 Collider::getBoxDimenstions()
+{
+	return box_dimensions;
+}
+
 Vector2 Collider::getMaxValues()
 {
 	max_values = box_origin + box_dimensions;
