@@ -40,6 +40,7 @@ void SceneManager::Init()
 	// Create a basic scene and set up all of the scene manager systems.
 	// In future the scene manager should just intialise the first scene we want to enter
 	game_manager.init();
+	scene_loader.init();
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);

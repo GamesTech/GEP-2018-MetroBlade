@@ -79,4 +79,7 @@ private:
 	// Event Handlers for collision.
 	void onCollision(MetroBrawlCollisionData  col_data);
 	void onPunchCollision(MetroBrawlCollisionData  col_data);
+
+public:
+	// Global Constructor function
 };

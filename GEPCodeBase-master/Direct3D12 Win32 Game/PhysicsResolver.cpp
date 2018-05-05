@@ -39,7 +39,7 @@ Vector2 MetroBrawlPhysicsResolver::calculateCollisionNormal(Collider a, Collider
 
 	collision_point.Normalize();
 
-	collision_normal = Vector2
+	collision_normal = Vector2 // TODO - Consider removing as it isnt needed. 
 	(
 		(bool)(collision_point.x >= collision_point.y),
 		(bool)(collision_point.y >= collision_point.x)

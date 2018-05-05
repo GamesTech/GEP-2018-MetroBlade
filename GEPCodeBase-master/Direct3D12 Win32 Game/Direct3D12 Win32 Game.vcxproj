@@ -195,6 +195,7 @@
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneEvent.h" />
+    <ClInclude Include="SceneLoader.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneState.h" />
     <ClInclude Include="SDKMeshGO3D.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="Player2D.cpp" />
     <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneState.cpp" />
     <ClCompile Include="SDKMeshGO3D.cpp" />

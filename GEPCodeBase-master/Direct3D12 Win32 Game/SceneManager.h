@@ -22,6 +22,7 @@
 
 #include "Scene.h"
 #include "SceneEvent.h"
+#include "SceneLoader.h"
 #include "GameManager.h"
 #include "MetroBrawlCollisionManager.h"
 
@@ -85,4 +86,5 @@ private:
 	
 	GameManager						game_manager;
 	MetroBrawlCollisionManager		collision_manager;
+	SceneLoader						scene_loader;
 };
