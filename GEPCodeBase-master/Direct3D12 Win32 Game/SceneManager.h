@@ -49,7 +49,7 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
-	void Init();
+	void Init(RenderData* _RD);
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
 	bool shouldQuit() const;

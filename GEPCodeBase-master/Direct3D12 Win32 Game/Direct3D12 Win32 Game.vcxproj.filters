@@ -344,6 +344,9 @@
     <ClInclude Include="ImageGO2D.h">
       <Filter>Core\GameObjects\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="EntityConstructors.h">
+      <Filter>Core\Scenes\Scene Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">

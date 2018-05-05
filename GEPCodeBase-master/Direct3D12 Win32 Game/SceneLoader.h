@@ -34,18 +34,27 @@ public:
 	SceneLoader() = default;
 	~SceneLoader() = default;
 
-	void init();
+	void init(RenderData* _RD);
 
 	Scene*   createScene(std::string scene_name);
 
-	static void addObjectInitialiser(std::string name, std::function<void(jsoncons::key_value_pair<std::string, jsoncons::json>)> constructor);
+	void addObjectInitialiser(std::string name, std::function<GameObject2D*(RenderData*, jsoncons::key_value_pair<std::string, jsoncons::json>)> constructor);
 
 private:
+	RenderData * render_data = nullptr;
 	JSONFileReader   file_reader;
 
 	void constructScene(Scene*  scene);
 
 private:
 	// Global initialiser object.
-	static std::map<std::string, std::function<void(jsoncons::key_value_pair<std::string, jsoncons::json>)>> object_constructors;
+	std::map<
+	std::string, 
+	std::function<GameObject2D*(RenderData*,jsoncons::key_value_pair<std::string, jsoncons::json>)> 
+	> object_constructors;
+
+	GameObject2D* constructPlayer(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
+	{
+		return new Obstacle2D(_RD, key.value()["filename"].as_string());
+	}
 };

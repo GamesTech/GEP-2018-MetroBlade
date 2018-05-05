@@ -141,7 +141,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	//Update sprite animation
 	sprite->tickComponent(_GSD);
 
-	if (m_pos.y > 1500)
+	if (m_pos.y > 1500) // TODO - Change this to be collision based.
 	{
 		dead = true;
 	}
@@ -197,6 +197,5 @@ void Player2D::setStateGrounded()
 
 void Player2D::setStateFalling()
 {
-	// setGravity(1000.0f);
 }
 

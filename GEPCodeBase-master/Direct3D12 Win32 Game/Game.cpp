@@ -140,8 +140,8 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect = std::make_unique<BasicEffect>(m_d3dDevice.Get(), EffectFlags::Lighting, pd3);
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
-	scene.assignRenderData(m_RD);
-	scene.Init();
+	//scene.assignRenderData(m_RD);
+	scene.Init(m_RD);
 	//objectList.reserve(20);
 
 

@@ -27,7 +27,7 @@
 SceneManager::SceneManager(RenderData* render_structure)
 	:render_data(render_structure)
 {
-	Init();
+	Init(render_data);
 }
 
 void SceneManager::assignRenderData(RenderData* render_structure)
@@ -35,12 +35,13 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 	render_data = render_structure;
 }
 
-void SceneManager::Init()
+void SceneManager::Init(RenderData* _RD)
 {
 	// Create a basic scene and set up all of the scene manager systems.
 	// In future the scene manager should just intialise the first scene we want to enter
+	render_data = _RD;
 	game_manager.init();
-	scene_loader.init();
+	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
 	current_scene.reset(new Scene);
