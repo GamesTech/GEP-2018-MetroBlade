@@ -133,7 +133,8 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 
 	//GRAVITY
-	AddForce(gravity * Vector2::UnitY);
+	m_acc += (gravity * Vector2::UnitY);
+	// AddForce(gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
 	Physics2D::Tick(_GSD);
