@@ -111,7 +111,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc;$(ProjectDir)..\Libs\jsoncons\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,7 +156,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc;$(ProjectDir)..\Libs\jsoncons\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -183,6 +183,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="JSONFileReader.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="MetroBrawlCollisionData.h" />
     <ClInclude Include="MetroBrawlCollisionManager.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="JSONFileReader.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp" />
     <ClCompile Include="Obstacle2D.cpp" />

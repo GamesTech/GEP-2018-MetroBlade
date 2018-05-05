@@ -44,12 +44,6 @@
     <Filter Include="Core\GameObjects\Sounds\Source">
       <UniqueIdentifier>{961e8af5-86df-4189-a3b7-f30efdac3ab3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Scene Manager">
-      <UniqueIdentifier>{b9fbcb84-4228-428e-ab17-76d6ec6369fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Scene Manager\Scenes">
-      <UniqueIdentifier>{fc6c4e6c-78e6-4fbb-89b8-19fe20aedc05}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
@@ -88,9 +82,6 @@
     </Filter>
     <Filter Include="Core\Events\Base">
       <UniqueIdentifier>{658994ec-46b9-4ab8-a7e1-5bacba59e65f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Scene Manager\Scene State">
-      <UniqueIdentifier>{f9e1b9b3-9b94-4485-bc84-45983b0ad33e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Game Management">
       <UniqueIdentifier>{6b882ec3-e593-4163-9a1a-6a19a7f6c330}</UniqueIdentifier>
@@ -176,6 +167,24 @@
     <Filter Include="Game Base\Core Data">
       <UniqueIdentifier>{6cc53fe2-9597-4029-87e9-f973aa967c6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Scenes">
+      <UniqueIdentifier>{b9fbcb84-4228-428e-ab17-76d6ec6369fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scenes\Scenes">
+      <UniqueIdentifier>{fc6c4e6c-78e6-4fbb-89b8-19fe20aedc05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scenes\Scene State">
+      <UniqueIdentifier>{f9e1b9b3-9b94-4485-bc84-45983b0ad33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Scenes\Scene Loader">
+      <UniqueIdentifier>{dc735a3a-656d-49ac-8888-9fedf2c46cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO\Base\Standard Parser">
+      <UniqueIdentifier>{0580999c-970b-4221-a84d-ebecc49ab253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\File IO\Base\JSON Parser">
+      <UniqueIdentifier>{30cd999e-9c0c-46b5-ad99-5faac3263162}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -221,10 +230,10 @@
       <Filter>Core\GameObjects\Sounds\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Core\Scene Manager</Filter>
+      <Filter>Core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Core\Scene Manager\Scenes</Filter>
+      <Filter>Core\Scenes\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="GPUCommand.h">
       <Filter>Core\GPU</Filter>
@@ -254,7 +263,7 @@
       <Filter>Core\Events\Base</Filter>
     </ClInclude>
     <ClInclude Include="SceneState.h">
-      <Filter>Core\Scene Manager\Scene State</Filter>
+      <Filter>Core\Scenes\Scene State</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Core\Game Management</Filter>
@@ -276,9 +285,6 @@
     </ClInclude>
     <ClInclude Include="UITest.h">
       <Filter>Core\UI\Test Object</Filter>
-    </ClInclude>
-    <ClInclude Include="FileReaderBase.h">
-      <Filter>Core\File IO\Base</Filter>
     </ClInclude>
     <ClInclude Include="SpriteAnimFileReader.h">
       <Filter>Core\File IO\Sprite Animation</Filter>
@@ -332,6 +338,12 @@
     <ClInclude Include="pch.h">
       <Filter>Game Base\System</Filter>
     </ClInclude>
+    <ClInclude Include="FileReaderBase.h">
+      <Filter>Core\File IO\Base\Standard Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONFileReader.h">
+      <Filter>Core\File IO\Base\JSON Parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -362,10 +374,10 @@
       <Filter>Core\GameObjects\Sounds\Source</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Core\Scene Manager</Filter>
+      <Filter>Core\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Core\Scene Manager\Scenes</Filter>
+      <Filter>Core\Scenes\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject2D.cpp">
       <Filter>Core\GameObjects\Base\2D</Filter>
@@ -383,7 +395,7 @@
       <Filter>Core\Collision Manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneState.cpp">
-      <Filter>Core\Scene Manager\Scene State</Filter>
+      <Filter>Core\Scenes\Scene State</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Core\Game Management</Filter>
@@ -400,9 +412,6 @@
     </ClCompile>
     <ClCompile Include="PlayerStatus.cpp">
       <Filter>Core\GameComponent\Game components\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="FileReaderBase.cpp">
-      <Filter>Core\File IO\Base</Filter>
     </ClCompile>
     <ClCompile Include="SpriteAnimFileReader.cpp">
       <Filter>Core\File IO\Sprite Animation</Filter>
@@ -446,6 +455,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhysicsResolver.cpp">
       <Filter>Core\Physics\Resolver</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReaderBase.cpp">
+      <Filter>Core\File IO\Base\Standard Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONFileReader.cpp">
+      <Filter>Core\File IO\Base\JSON Parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
