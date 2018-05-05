@@ -113,8 +113,8 @@ void Player2D::Tick(GameStateData* _GSD)
 		{
 			sprite->setAnimationState("move");
 		}
-		break;
 
+		break;
 	case JUMPING:
 		break;
 
@@ -136,7 +136,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	AddForce(gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
-
 	Physics2D::Tick(_GSD);
 
 	//Update sprite animation
@@ -178,8 +177,7 @@ void Player2D::onCollision(MetroBrawlCollisionData col_data)
 	// Calculate there normals and apply a force to them.
 	// Currently in 'test' state. Will be changed to the above algorithm later.
 
-	//printf("I Should be called."); 
-	SetVel(Vector2(0, 0));
+	// printf("LOL"); 
 }
 
 void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)

@@ -32,5 +32,4 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 void Obstacle2D::onObjectCollision(MetroBrawlCollisionData col_data)
 {
 	// This works but doing collisions should really be handled by a physics engine instead. 
-	col_data.collider_object->getCollidersParent();
 }
