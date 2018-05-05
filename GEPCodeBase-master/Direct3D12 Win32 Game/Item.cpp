@@ -11,6 +11,13 @@ Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _f
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Item::onCollision, this, _1));
 	object_components.addComponent(col);
+
+	src_rect.reset(new RECT);
+	object_components.addComponent(new Sprite(true));
+	sprite = object_components.getComponentByType<Sprite>();
+	sprite->setSpriteRECT(src_rect);
+	sprite->setSpriteAnimationFile(_filename + "_animations");
+	sprite->setAnimationState("idle");
 }
 
 Item::~Item()
@@ -26,14 +33,16 @@ void Item::Tick(GameStateData* _GSD)
 {
 	
 	col->setBoxOrigin(m_pos);
+	sprite->tickComponent(_GSD);
 }
 
 void Item::Render(RenderData * _GSD)
 {
 	if (item_state == PICKUP) 
 	{
-		ImageGO2D::Render(_GSD);
+		//ImageGO2D::Render(_GSD);
 	}
+	ImageGO2D::Render(_GSD);
 }
 
 void Item::UseItem(Player2D* player, ItemType type)
@@ -60,6 +69,8 @@ void Item::onCollision(MetroBrawlCollisionData  col_data)
 			player->AddItem(this, 1);
 			item_state = NONE;
 			col->isColliderActive(false);
+			sprite->setLoop(false);
+			sprite->setAnimationState("pickup");
 		}
 	}
 }

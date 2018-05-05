@@ -1,6 +1,6 @@
 #pragma once
 #include "ImageGO2D.h"
-
+#include "Sprite.h"
 class Player2D;
 enum ItemType {
 	SPEED,
@@ -29,6 +29,7 @@ public:
 	void UseItem(Player2D* player, ItemType type);
 
 private:
+	Sprite* sprite;
 	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Vector2 pos = Vector2::Zero;
 	ItemType item_type = ItemType::HEALTH;
