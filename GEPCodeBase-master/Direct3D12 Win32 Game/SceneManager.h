@@ -73,8 +73,9 @@ public:
 
 private:
 	void processSceneEvents();
-
 	void resetRenderState();
+
+	void setupScene2DObjects(GameObject2D* object);
 
 	std::unique_ptr<Scene>			current_scene;
 	Camera*							main_camera = nullptr;

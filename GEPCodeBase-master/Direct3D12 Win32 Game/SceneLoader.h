@@ -52,9 +52,4 @@ private:
 	std::string, 
 	std::function<GameObject2D*(RenderData*,jsoncons::key_value_pair<std::string, jsoncons::json>)> 
 	> object_constructors;
-
-	GameObject2D* constructPlayer(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
-	{
-		return new Obstacle2D(_RD, key.value()["filename"].as_string());
-	}
 };

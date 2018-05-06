@@ -44,17 +44,19 @@ void SceneManager::Init(RenderData* _RD)
 	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
-	current_scene.reset(new Scene);
+// 	current_scene.reset(new Scene);
 
+	loadScene(scene_loader.createScene("menu.mbmap"));
+	
 	Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
 	setMainCamera(camera);
 	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
 
-	UILabel* label = new UILabel;
-	label->setCanvasPosition(Vector2(0.4, 0.4));
-	label->setText("Super Indie Smash. \n Press P to start.");
-	game_ui.addUIObject(label);
+	//UILabel* label = new UILabel;
+	//label->setCanvasPosition(Vector2(0.4, 0.4));
+	//label->setText("Super Indie Smash. \n Press P to start.");
+	//game_ui.addUIObject(label);
 }
 
 void SceneManager::Update(GameStateData * game_state)
@@ -119,8 +121,14 @@ void SceneManager::loadScene(string scene_name)
 	}
 }
 
-void SceneManager::loadScene(Scene * scene_name)
+void SceneManager::loadScene(Scene* scene_name)
 {
+	if (!scene_name) 
+	{
+		current_scene.reset(new Scene);
+		return;
+	}
+
 	clearScene();
 	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
@@ -128,6 +136,10 @@ void SceneManager::loadScene(Scene * scene_name)
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
+	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++) 
+	{
+		setupScene2DObjects(current_scene->get2DObjectInScene(i));
+	}
 }
 
 void SceneManager::clearScene()
@@ -207,4 +219,16 @@ void SceneManager::resetRenderState()
 {
 	// Add any other resetting routienes here.
 	render_data->m_resourceCount = 1;
+}
+
+void SceneManager::setupScene2DObjects(GameObject2D * object)
+{
+	object->assignWorldEventListener(scene_event_listener);
+
+	if (dynamic_cast<Player2D*>(object))
+	{
+		game_manager.registerPlayerInstance((Player2D*)object);
+	}
+
+	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
 }

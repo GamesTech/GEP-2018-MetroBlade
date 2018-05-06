@@ -12,7 +12,7 @@ void SceneLoader::init(RenderData * _RD)
 {
 	using namespace std::placeholders;
 	render_data = _RD;
-	addObjectInitialiser("Obstacle2D", std::bind(&SceneLoader::constructPlayer, this, _1, _2));
+	addObjectInitialiser("Obstacle2D", std::bind(&Entities::constructObstacle2D, _1, _2));
 }
 
 Scene* SceneLoader::createScene(std::string scene_name)
@@ -38,4 +38,12 @@ void SceneLoader::addObjectInitialiser(std::string name, std::function<GameObjec
 void SceneLoader::constructScene(Scene* scene)
 {
 	// Go through the list and construct the corrisponding object.
+	for (auto& entity : file_reader.getFileBuffer().members()) 
+	{
+		auto& loader = object_constructors.find(entity.value()["type"].as_string());
+		if (loader != object_constructors.end()) 
+		{
+			scene->add2DGameObjectToScene(loader->second(render_data, entity));
+		}
+	}
 }
