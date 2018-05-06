@@ -203,6 +203,12 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 	if (m_keyboard->GetState().Enter)
 	{
+
+		cursors.clear();
+		teamview.clear();
+		teamview_images.clear();
+		profile_pics.clear();
+
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
@@ -211,37 +217,61 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
-		UISprite* fighter_1_teamview = new UISprite("Fighter_1_teamview", m_RD);
-		teamview.push_back(fighter_1_teamview);
+		teamview_images.push_back("Fighter_1_teamview");
+		teamview_images.push_back("Fighter_2_teamview");
+		teamview_images.push_back("Fighter_3_teamview");
+		teamview_images.push_back("Fighter_4_teamview");
 
-		UISprite* fighter_2_teamview = new UISprite("Fighter_2_teamview", m_RD);
-		teamview.push_back(fighter_2_teamview);
+		//= new UISprite("Fighter_1_teamview", m_RD);
 
-		UISprite* fighter_3_teamview = new UISprite("Fighter_3_teamview", m_RD);
-		teamview.push_back(fighter_3_teamview);
+		UISprite* fighter_1_panel = new UISprite("blank", m_RD);
+		fighter_1_panel->SetPos(Vector2(300, 500));
+		scene.instanciateUIObject(fighter_1_panel);
+		teamview.push_back(fighter_1_panel);
 
-		UISprite* fighter_4_teamview = new UISprite("Fighter_4_teamview", m_RD);
-		teamview.push_back(fighter_4_teamview);
+		UISprite* fighter_2_panel = new UISprite("blank", m_RD);;
+		fighter_2_panel->SetPos(Vector2(500, 500));
+		scene.instanciateUIObject(fighter_2_panel);
+		teamview.push_back(fighter_2_panel);
+
+		UISprite* fighter_3_panel = new UISprite("blank", m_RD);;
+		fighter_3_panel->SetPos(Vector2(700, 500));
+		scene.instanciateUIObject(fighter_3_panel);
+		teamview.push_back(fighter_3_panel);
+
+		UISprite* fighter_4_panel = new UISprite("blank", m_RD);;
+		fighter_4_panel->SetPos(Vector2(900, 500));
+		scene.instanciateUIObject(fighter_4_panel);
+		teamview.push_back(fighter_4_panel);
 
 		UISprite* fighter_1 = new UISprite("Fighter_1_profile", m_RD);
 		fighter_1->SetPos(Vector2(300, 200));
+		scene.instanciateUIObject(fighter_1);
+		profile_pics.push_back(fighter_1);
+
+		fighter_1 = new UISprite("Fighter_2_profile", m_RD);
+		fighter_1->SetPos(Vector2(400, 200));
 		scene.instanciateUIObject(fighter_1);
 
 		UISprite* fighter_2 = new UISprite("Fighter_2_profile", m_RD);
 		fighter_2->SetPos(Vector2(500, 200));
 		scene.instanciateUIObject(fighter_2);
-
+		profile_pics.push_back(fighter_2);
 
 		UISprite* fighter_3 = new UISprite("Fighter_3_profile", m_RD);
 		fighter_3->SetPos(Vector2(700, 200));
 		scene.instanciateUIObject(fighter_3);
+		profile_pics.push_back(fighter_3);
 
 		UISprite* fighter_4 = new UISprite("Fighter_4_profile", m_RD);
 		fighter_4->SetPos(Vector2(900, 200));
 		scene.instanciateUIObject(fighter_4);
+		profile_pics.push_back(fighter_4);
 
 		Cursor* player1_cursor = new Cursor("player1_cursor", m_RD);
 		scene.instanciateUIObject(player1_cursor);
+		cursors.push_back(player1_cursor);
+
 
 		scene.startGameManager();
 	}
@@ -312,6 +342,21 @@ void Game::Update(DX::StepTimer const& timer)
 
 		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
 		m_obstacle_objects.push_back(testPlatform);
+	}
+
+	for (int i = 0; i < cursors.size(); i++)
+	{
+		if (cursors[i]->getInteract())
+		{
+			for (int j = 0; j < profile_pics.size(); j++)
+			{
+				if (profile_pics[j]->getInteract())
+				{
+					teamview[i] = new UISprite(/*teamview_images[j]*/"Fighter_4_teamview", m_RD);
+					teamview[i]->setInteract(false);
+				}
+			}
+		}
 	}
 
 	scene.Update(m_GSD);

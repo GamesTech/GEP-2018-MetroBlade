@@ -159,6 +159,12 @@
     <ImageContentTask Include="Fighter_3_teamview.png" />
     <ImageContentTask Include="Fighter_4_teamview.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="player1_cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="blank.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

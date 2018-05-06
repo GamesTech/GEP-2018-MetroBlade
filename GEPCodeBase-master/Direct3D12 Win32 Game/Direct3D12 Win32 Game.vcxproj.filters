@@ -431,7 +431,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics\Collision\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Core\UI\Cursor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -173,6 +173,8 @@ void SceneManager::startGameManager()
 void SceneManager::instanciateUIObject(UIObject * new_object)
 {
 	game_ui.addUIObject(new_object);
+
+	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 }
 
 void SceneManager::processSceneEvents()
