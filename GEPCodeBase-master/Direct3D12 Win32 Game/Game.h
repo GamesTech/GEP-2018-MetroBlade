@@ -98,7 +98,7 @@ private:
 
 	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 
-	vector<Sound*> m_sounds;
+	vector<SoundComponent*> m_sounds;
 	RenderData* m_RD;
 	Camera* m_cam;
 

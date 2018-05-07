@@ -25,6 +25,7 @@
 #include "SceneLoader.h"
 #include "GameManager.h"
 #include "MetroBrawlCollisionManager.h"
+#include "AudioManager.h"
 
 #include "UICanvas.h"
 
@@ -36,10 +37,10 @@ struct GameStateData;
 
 class GameObject3D;
 class GameObject2D;
-class Sound;
+class SoundComponent;
 
 /**
-*  Add Class Discription Here.
+*  Manages active scenes and 
 */
 class SceneManager 
 {
@@ -88,4 +89,6 @@ private:
 	GameManager						game_manager;
 	MetroBrawlCollisionManager		collision_manager;
 	SceneLoader						scene_loader;
+
+	AudioManager					scene_audio;
 };

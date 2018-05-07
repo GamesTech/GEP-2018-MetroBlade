@@ -44,7 +44,7 @@ Game::~Game()
 	scene.clearScene();
 
 	//delete the sounds
-	for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
+	for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
 	{
 		delete (*it);
 	}
@@ -194,7 +194,7 @@ void Game::Update(DX::StepTimer const& timer)
 	else
 	{
 		//update sounds playing
-		for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
+		for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
 		{
 			(*it)->Tick(m_GSD);
 		}

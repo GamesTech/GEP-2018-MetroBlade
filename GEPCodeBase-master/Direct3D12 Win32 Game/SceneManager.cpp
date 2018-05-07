@@ -64,6 +64,7 @@ void SceneManager::Update(GameStateData * game_state)
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
+		scene_audio.updateAudioManager();
 		collision_manager.performCollisionCheck();
 		current_scene->Update(game_state);
 	}
@@ -231,4 +232,5 @@ void SceneManager::setupScene2DObjects(GameObject2D * object)
 	}
 
 	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());
 }
