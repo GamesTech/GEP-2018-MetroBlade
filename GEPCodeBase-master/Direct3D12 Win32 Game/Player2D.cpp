@@ -134,7 +134,6 @@ void Player2D::Tick(GameStateData* _GSD)
 
 	//GRAVITY
 	m_acc += (gravity * Vector2::UnitY);
-	// AddForce(gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
 	Physics2D::Tick(_GSD);
@@ -142,7 +141,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	//Update sprite animation
 	sprite->tickComponent(_GSD);
 
-	if (m_pos.y > 1500)
+	if (m_pos.y > 1500) // TODO - Change this to be collision based.
 	{
 		dead = true;
 	}
@@ -198,6 +197,5 @@ void Player2D::setStateGrounded()
 
 void Player2D::setStateFalling()
 {
-	// setGravity(1000.0f);
 }
 

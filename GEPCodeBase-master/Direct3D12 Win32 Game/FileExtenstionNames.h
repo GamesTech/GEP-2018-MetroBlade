@@ -16,3 +16,4 @@
 
 
 constexpr char FILE_ANIMATION_EXTENSTION[] = ".mbanim";
+constexpr char FILE_MAP_EXTENSTION[] = ".mbmap";

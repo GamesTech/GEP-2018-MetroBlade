@@ -111,7 +111,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc;$(ProjectDir)..\Libs\jsoncons\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,7 +156,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc;$(ProjectDir)..\Libs\jsoncons\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -174,6 +174,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="EntityConstructors.h" />
     <ClInclude Include="FileExtenstionNames.h" />
     <ClInclude Include="FileReaderBase.h" />
     <ClInclude Include="GameComponent.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="JSONFileReader.h" />
     <ClInclude Include="Loop.h" />
     <ClInclude Include="MetroBrawlCollisionData.h" />
     <ClInclude Include="MetroBrawlCollisionManager.h" />
@@ -194,6 +196,7 @@
     <ClInclude Include="PlayerStatus.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneEvent.h" />
+    <ClInclude Include="SceneLoader.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneState.h" />
     <ClInclude Include="SDKMeshGO3D.h" />
@@ -231,6 +234,7 @@
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="JSONFileReader.cpp" />
     <ClCompile Include="Loop.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp" />
     <ClCompile Include="Obstacle2D.cpp" />
@@ -239,6 +243,7 @@
     <ClCompile Include="Player2D.cpp" />
     <ClCompile Include="PlayerStatus.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneLoader.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneState.cpp" />
     <ClCompile Include="SDKMeshGO3D.cpp" />
