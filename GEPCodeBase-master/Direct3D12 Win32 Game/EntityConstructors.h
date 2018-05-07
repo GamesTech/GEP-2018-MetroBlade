@@ -1,7 +1,19 @@
-
-
-
-
+/**
+*  @file    SceneLoader.h
+*  @author  Nathan Butt (GitHub - n86-64)
+*  @date    06/05/2018
+*  @version v1.0
+*
+*  @section System Module
+*           Scene Management
+*
+*  @brief Scene loading function delegates
+*
+*  @section Description
+*
+*  Defines a set of constructor functions which can be used to create objects.
+*
+*/
 
 #pragma once
 
@@ -9,6 +21,8 @@
 #include <jsoncons\json.hpp>
 #include "RenderData.h"
 
+
+// Object Entity Headers - (Additional Constructors should be added here).
 #include "Obstacle2D.h"
 
 

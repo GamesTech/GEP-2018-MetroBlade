@@ -16,10 +16,9 @@ Obstacle2D::Obstacle2D(RenderData* _RD, string _filename): ImageGO2D(_RD, _filen
 	object_components.addComponent(col);
 
 	// Testing the sound system.
-	SoundComponent*	  test_sound = new SoundComponent();
-
+	SoundComponent*	  test_sound = new SoundComponent("Explo1");
+	object_components.addComponent(test_sound);
 }
-
 
 Obstacle2D::~Obstacle2D()
 {
@@ -33,6 +32,11 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 	//change anim depending
 
 	//GEP:: Lets go up the inheritance and share our functionality
+
+	if (_GSD->m_keyboardState.IsKeyDown(Keyboard::Tab)) 
+	{
+		object_components.getComponentByType<SoundComponent>()->Play();
+	}
 }
 
 void Obstacle2D::onObjectCollision(MetroBrawlCollisionData col_data)

@@ -37,6 +37,10 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
 
+	SoundComponent*	  test_sound = new SoundComponent("Explo1");
+	object_components.addComponent(test_sound);
+
+
 	controller_id = gamepadID;
 }
 
@@ -59,6 +63,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 			sprite->setAnimationState("jump");
 			AddForce(-jump_force * Vector2::UnitY);
 			phys_state = AIR;
+			object_components.getComponentByType<SoundComponent>()->Play();
 		}
 	}
 	else if (_GSD->m_keyboardState.F || controller_state.IsXPressed())

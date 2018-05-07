@@ -17,9 +17,11 @@ class SoundComponent :
 	public GameComponent
 {
 public:
-	SoundComponent() = default;
+	SoundComponent(std::string filename);
 	SoundComponent(AudioEngine* _audEngine, string _filename);
 	virtual ~SoundComponent();
+
+	void initAudio();
 
 	virtual void Tick(GameStateData* _GSD) {};
 
@@ -41,6 +43,7 @@ public:
 
 	void SetPan(float _pan) { m_pan = _pan; }
 	float GetPan() { return m_pan; }
+
 
 protected:
 	std::string								  sound_name;

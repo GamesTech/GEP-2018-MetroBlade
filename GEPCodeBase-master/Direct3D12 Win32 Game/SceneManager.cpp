@@ -131,6 +131,7 @@ void SceneManager::loadScene(Scene* scene_name)
 	}
 
 	clearScene();
+	scene_audio.clear();
 	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
@@ -169,6 +170,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	}
 
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
 
 	current_scene->add2DGameObjectToScene(new_object);
 }

@@ -25,6 +25,7 @@ void AudioManager::registerSoundComponents(std::vector<SoundComponent*> sound_co
 	{
 		// Here we register our sound components to assign them the audio manager as well as allowing files to be laoded and played.
 		component->registerAudioManager(this);
+		component->initAudio();
 		sound_components.push_back(component);
 	}
 }
@@ -72,6 +73,11 @@ void AudioManager::resumeAudioEngine()
 void AudioManager::clear()
 {
 	// Stop all sounds playing and then clear the audio buffer. 
+	for (auto& component : audio_components) 
+	{
+		component->Stop();
+	}
+
 	audio_components.clear();
 }
 
