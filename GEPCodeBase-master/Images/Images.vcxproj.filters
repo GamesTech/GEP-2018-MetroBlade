@@ -21,6 +21,7 @@
     <ImageContentTask Include="Fighter_4_teamview.png" />
     <ImageContentTask Include="player1_cursor.png" />
     <ImageContentTask Include="blank.png" />
+    <ImageContentTask Include="teamview_spritesheet.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

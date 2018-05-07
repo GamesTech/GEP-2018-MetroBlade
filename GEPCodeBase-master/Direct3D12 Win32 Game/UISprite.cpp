@@ -9,7 +9,7 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 	using namespace std::placeholders;
 
 	col = new Collider(m_pos, Vector2(100, 100), true);
-	
+
 
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 	string fullpath = "../DDS/" + filename + ".dds";
@@ -37,12 +37,26 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 
 	uploadResourcesFinished.wait();
 
-	
+}
+
+UISprite::~UISprite()
+{
+	delete test;
+	test = nullptr;
 }
 
 void UISprite::onCollision(MetroBrawlCollisionData col_data)
 {
 	interact = true;
+}
+
+void UISprite::setRECT(float left, float top, float right, float bottom)
+{
+	test = new RECT;
+	test->left = left;
+	test->top = top;
+	test->right = right;
+	test->bottom = bottom;
 }
 
 void UISprite::Tick(GameStateData * _GSD)
@@ -53,7 +67,8 @@ void UISprite::Tick(GameStateData * _GSD)
 
 void UISprite::Render(RenderData * _RD)
 {
-	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, src_rect.get());
+
+	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, test);
 }
 
 
