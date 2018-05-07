@@ -24,6 +24,8 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 
 	object_components.addComponent(col);
 
+	
+
 	resourceUpload.Begin();
 
 	DX::ThrowIfFailed(
@@ -36,39 +38,41 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 	auto uploadResourcesFinished = resourceUpload.End(_RD->m_commandQueue.Get());
 
 	uploadResourcesFinished.wait();
+	
 
 }
 
-UISprite::~UISprite()
+void UISprite::setSprite(std::string filename, std::string fighter)
 {
-	delete test;
-	test = nullptr;
+	src_rect = std::make_shared<RECT>();
+	sprite = new Sprite(false);
+	sprite->setSpriteRECT(src_rect);
+	sprite->setSpriteAnimationFile(filename);
+	sprite->setAnimationState(fighter);
+	object_components.addComponent(sprite);
+	sprite = object_components.getComponentByType<Sprite>();
 }
+
 
 void UISprite::onCollision(MetroBrawlCollisionData col_data)
 {
 	interact = true;
 }
 
-void UISprite::setRECT(float left, float top, float right, float bottom)
-{
-	test = new RECT;
-	test->left = left;
-	test->top = top;
-	test->right = right;
-	test->bottom = bottom;
-}
-
 void UISprite::Tick(GameStateData * _GSD)
 {
 	col->tickComponent(_GSD);
 	col->setBoxOrigin(m_pos);
+
+	if (sprite != nullptr)
+	{
+		sprite->tickComponent(_GSD);
+	}
 }
 
 void UISprite::Render(RenderData * _RD)
 {
-
-	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, test);
+	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, src_rect.get());
 }
 
 

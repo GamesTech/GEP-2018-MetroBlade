@@ -17,6 +17,8 @@ public:
 
 	void setSpriteAnimationFile(std::string  file_name);
 
+	std::string getAnimStateName() { return current_anim_state.anim_state_name; }
+
 private:
 	void setAnimationFrame(RECT new_rect);
 	bool is_animated = false;

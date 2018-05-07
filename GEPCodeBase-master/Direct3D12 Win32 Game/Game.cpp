@@ -217,32 +217,34 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
-		teamview_images.push_back("Fighter_1_teamview");
-		teamview_images.push_back("Fighter_2_teamview");
-		teamview_images.push_back("Fighter_3_teamview");
-		teamview_images.push_back("Fighter_4_teamview");
+		teamview_images.push_back("fighter_1");
+		teamview_images.push_back("fighter_2");
+		teamview_images.push_back("fighter_3");
+		teamview_images.push_back("fighter_4");
 
 		//= new UISprite("Fighter_1_teamview", m_RD);
 
 		UISprite* fighter_1_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_1_panel->SetPos(Vector2(300, 500));
+		fighter_1_panel->setSprite("fighter_spritesheet", "fighter_1");
 		scene.instanciateUIObject(fighter_1_panel);
-		fighter_1_panel->setRECT(0.0f,0.0f,164.0f, 201.0f);
 		teamview.push_back(fighter_1_panel);
 
-		UISprite* fighter_2_panel = new UISprite("teamview_spritesheet", m_RD);;
+		UISprite* fighter_2_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_2_panel->SetPos(Vector2(500, 500));
+		fighter_2_panel->setSprite("fighter_spritesheet", "fighter_2");
 		scene.instanciateUIObject(fighter_2_panel);
-		fighter_2_panel->setRECT(164.0f, 0.0f, 288.0f, 200.0f);
 		teamview.push_back(fighter_2_panel);
 
-		UISprite* fighter_3_panel = new UISprite("teamview_spritesheet", m_RD);;
+		UISprite* fighter_3_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_3_panel->SetPos(Vector2(700, 500));
+		fighter_3_panel->setSprite("fighter_spritesheet", "fighter_3");
 		scene.instanciateUIObject(fighter_3_panel);
 		teamview.push_back(fighter_3_panel);
 
-		UISprite* fighter_4_panel = new UISprite("teamview_spritesheet", m_RD);;
+		UISprite* fighter_4_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_4_panel->SetPos(Vector2(900, 500));
+		fighter_4_panel->setSprite("fighter_spritesheet", "fighter_4");
 		scene.instanciateUIObject(fighter_4_panel);
 		teamview.push_back(fighter_4_panel);
 
@@ -250,10 +252,6 @@ void Game::Update(DX::StepTimer const& timer)
 		fighter_1->SetPos(Vector2(300, 200));
 		scene.instanciateUIObject(fighter_1);
 		profile_pics.push_back(fighter_1);
-
-		fighter_1 = new UISprite("Fighter_2_profile", m_RD);
-		fighter_1->SetPos(Vector2(400, 200));
-		scene.instanciateUIObject(fighter_1);
 
 		UISprite* fighter_2 = new UISprite("Fighter_2_profile", m_RD);
 		fighter_2->SetPos(Vector2(500, 200));
@@ -354,8 +352,9 @@ void Game::Update(DX::StepTimer const& timer)
 			{
 				if (profile_pics[j]->getInteract())
 				{
-					teamview[i] = new UISprite(/*teamview_images[j]*/"Fighter_4_teamview", m_RD);
+					teamview[i]->setSprite("fighter_spritesheet", "fighter_1");
 					teamview[i]->setInteract(false);
+					break;
 				}
 			}
 		}
