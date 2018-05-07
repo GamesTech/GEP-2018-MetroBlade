@@ -43,6 +43,7 @@ public:
 	int getHealth() { return current_health; }
 	void setHealth(int value);
 	void addHealth(int value_to_add);
+	void takeHealth(int value_to_subtract);
 private: 
 
 	// TODO - Consider using an array for these variables.
