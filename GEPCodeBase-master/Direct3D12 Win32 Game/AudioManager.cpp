@@ -3,6 +3,7 @@
 
 AudioManager::AudioManager()
 {
+	system_sounds.reserve(100);
 	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
 #ifdef _DEBUG
 	eflags = eflags | AudioEngine_Debug;
@@ -26,6 +27,20 @@ void AudioManager::registerSoundComponents(std::vector<SoundComponent*> sound_co
 		component->registerAudioManager(this);
 		sound_components.push_back(component);
 	}
+}
+
+DirectX::SoundEffectInstance* AudioManager::loadSound(std::string sound_name)
+{
+	int sound_data_index = findSoundData(sound_name);
+
+	if (sound_data_index == -1) 
+	{
+		// Here we load the sound from the file if it dosent exist.
+		loadAudioFromDisk(sound_name);
+		sound_data_index = system_sounds.size() - 1;
+	}
+	
+	return (system_sounds[sound_data_index].sound_data->CreateInstance().release());
 }
 
 void AudioManager::updateAudioManager()
@@ -52,4 +67,36 @@ void AudioManager::pauseAudioEngine()
 void AudioManager::resumeAudioEngine()
 {
 	sound_engine->Resume();
+}
+
+void AudioManager::clear()
+{
+	// Stop all sounds playing and then clear the audio buffer. 
+	audio_components.clear();
+}
+
+int AudioManager::findSoundData(std::string filename)
+{
+	int index = -1;
+	for (int i = 0; i < system_sounds.size(); i++) 
+	{
+		if (filename == system_sounds[i].sound_name) 
+		{
+			index = i;
+		}
+	}
+
+	return index;
+}
+
+void AudioManager::loadAudioFromDisk(std::string filename)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	string fullpath = "../sounds/" + filename + ".wav";
+	std::wstring wFilename = converter.from_bytes(fullpath.c_str());
+
+	SoundData  new_data;
+	new_data.sound_name = filename;
+	new_data.sound_data = std::make_unique<DirectX::SoundEffect>(sound_engine.get(), wFilename.c_str());
+	system_sounds.push_back(std::move(new_data));
 }

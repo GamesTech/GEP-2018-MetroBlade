@@ -23,8 +23,10 @@
 
 struct SoundData 
 {
+	SoundData() {};
+	SoundData(SoundData&&) = default;
 	std::string   sound_name = "NULLSOUND";
-	std::unique_ptr<DirectX::SoundEffect>   sound_data;
+	std::unique_ptr<DirectX::SoundEffect>   sound_data = nullptr;
 };
 
 
@@ -36,11 +38,18 @@ public:
 
 	void registerSoundComponents(std::vector<SoundComponent*> sound_components); // Register any sound components in the object.
 
+	DirectX::SoundEffectInstance* loadSound(std::string sound_name);
 
 	// Scene manager functions. 
 	void updateAudioManager(); 
 	void pauseAudioEngine();
 	void resumeAudioEngine();
+
+	void clear();
+
+private:
+	int findSoundData(std::string  filename);
+	void loadAudioFromDisk(std::string filename);
 
 private: 
 	std::vector<SoundData>				  system_sounds;

@@ -3,6 +3,8 @@
 #include "GameStateData.h"
 #include "PlayerStatus.h"
 
+#include "Sound.h"
+
 #include "Sprite.h"
 #include "SpriteAnimFileReader.h"
 
@@ -12,6 +14,10 @@ Obstacle2D::Obstacle2D(RenderData* _RD, string _filename): ImageGO2D(_RD, _filen
 	col->isColliderActive(true);
 	col->addParentObjectRefrence(this);
 	object_components.addComponent(col);
+
+	// Testing the sound system.
+	SoundComponent*	  test_sound = new SoundComponent();
+
 }
 
 

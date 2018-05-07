@@ -17,10 +17,13 @@ class SoundComponent :
 	public GameComponent
 {
 public:
+	SoundComponent() = default;
 	SoundComponent(AudioEngine* _audEngine, string _filename);
 	virtual ~SoundComponent();
 
 	virtual void Tick(GameStateData* _GSD) {};
+
+	void setSoundFile(std::string new_sound);
 
 	virtual void Play();
 	virtual void Stop();
@@ -40,6 +43,7 @@ public:
 	float GetPan() { return m_pan; }
 
 protected:
+	std::string								  sound_name;
 	AudioManager*								   audio;
 
 	std::unique_ptr<DirectX::SoundEffect>		   m_sfx;
