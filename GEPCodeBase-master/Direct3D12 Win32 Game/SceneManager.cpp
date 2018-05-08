@@ -147,7 +147,7 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
 	new_object->assignWorldEventListener(scene_event_listener);
-
+	new_object->assignSceneManager(this);
 	if (dynamic_cast<Player2D*>(new_object)) 
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);

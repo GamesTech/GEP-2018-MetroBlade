@@ -8,11 +8,23 @@ Projectile::Projectile(RenderData* _RD, string _filename, Vector2 new_direction,
 	using namespace std::placeholders;
 
 	direction = new_direction;
+
+	Vector2 new_pos = original->GetPos();
+	new_pos.y -= y_offset;
+	SetPos(new_pos);
+
 	player_original = original;
 
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Projectile::onCollision, this, _1));
 	object_components.addComponent(col);
+
+	src_rect.reset(new RECT);
+	object_components.addComponent(new Sprite(true));
+	sprite = object_components.getComponentByType<Sprite>();
+	sprite->setSpriteRECT(src_rect);
+	sprite->setSpriteAnimationFile(_filename + "_animations");
+	sprite->setAnimationState("move");
 }
 
 Projectile::~Projectile()
@@ -23,16 +35,24 @@ void Projectile::Tick(GameStateData* _GSD)
 {
 	current_time -= _GSD->m_dt;
 	
-	if (current_time <= 0)
+	if (current_time <= 0.0f || !alive)
 	{
-		isAlive = false;
+		sprite->setLoop(false);
+		sprite->setAnimationState("hit");
 	}
 	else
 	{
 		MoveProjectile(_GSD);
 	}
-
+	col->setBoxOrigin(m_pos);
+	sprite->tickComponent(_GSD);
 	Physics2D::Tick(_GSD);
+
+}
+
+void Projectile::Render(RenderData* _GSD)
+{
+	ImageGO2D::Render(_GSD);
 }
 
 void Projectile::MoveProjectile(GameStateData* _GSD)
@@ -54,7 +74,7 @@ void Projectile::onCollision(MetroBrawlCollisionData  col_data)
 		else
 		{
 			player->getComponentManager()->getComponentByType<PlayerStatus>()->takeHealth(damage_amount);
-
+			alive = false;
 		}
 	}
 }

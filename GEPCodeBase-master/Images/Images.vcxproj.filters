@@ -12,6 +12,7 @@
     <ImageContentTask Include="Fighter_3.png" />
     <ImageContentTask Include="Platform_Sprite.png" />
     <ImageContentTask Include="Health_item.png" />
+    <ImageContentTask Include="projectile_item.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

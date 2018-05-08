@@ -2,6 +2,7 @@
 #include <functional>
 #include "PlayerStatus.h"
 #include "Item.h"
+#include "Projectile.h"
 
 Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
 {
@@ -18,6 +19,8 @@ Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _f
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
+
+	
 }
 
 Item::~Item()
@@ -38,14 +41,10 @@ void Item::Tick(GameStateData* _GSD)
 
 void Item::Render(RenderData * _GSD)
 {
-	if (item_state == PICKUP) 
-	{
-		//ImageGO2D::Render(_GSD);
-	}
 	ImageGO2D::Render(_GSD);
 }
 
-void Item::UseItem(Player2D* player, ItemType type)
+void Item::UseItem(RenderData* _RD, Player2D* player, ItemType type)
 {
 	switch (type)
 	{
@@ -53,7 +52,8 @@ void Item::UseItem(Player2D* player, ItemType type)
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->addHealth(health_amount);
 		break;
 	case PROJECTILE:
-
+		proj = new Projectile(_RD, "projectile_item", player->getDirection(), player);
+		world.instantiateToScene(proj);
 		break;
 	}
 

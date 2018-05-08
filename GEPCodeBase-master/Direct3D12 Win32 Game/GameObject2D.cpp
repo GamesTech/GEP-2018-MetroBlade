@@ -21,3 +21,9 @@ GameComponentManager* GameObject2D::getComponentManager()
 {
 	return &object_components;
 }
+
+void GameObject2D::assignSceneManager(SceneManager* manager)
+{
+	world.assignSceneManager(manager);
+}
+

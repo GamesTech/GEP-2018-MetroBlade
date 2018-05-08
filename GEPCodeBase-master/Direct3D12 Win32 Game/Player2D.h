@@ -51,7 +51,7 @@ protected:
 		JUMPING,
 		USE
 	};
-
+	RenderData* _playerRD = nullptr;
 	Sprite*				sprite;
 	bool flipped = false;
 

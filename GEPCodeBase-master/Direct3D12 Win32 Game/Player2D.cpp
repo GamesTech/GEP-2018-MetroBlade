@@ -36,7 +36,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setAnimationState("idle");
 
 	controller_id = gamepadID;
-
+	_playerRD = _RD;
 	setGravity(500.0f);
 }
 
@@ -145,10 +145,10 @@ void Player2D::Tick(GameStateData* _GSD)
 		break;
 	
 	case USE:
+		
 		if (player_item)
 		{
-			player_item->UseItem(this, player_item->GetType());
-			delete player_item;
+			player_item->UseItem(_playerRD, this, player_item->GetType());
 			player_item = nullptr;
 		}
 		break;

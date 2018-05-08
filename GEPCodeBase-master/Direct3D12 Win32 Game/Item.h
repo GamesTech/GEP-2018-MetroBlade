@@ -1,6 +1,8 @@
 #pragma once
 #include "ImageGO2D.h"
 #include "Sprite.h"
+
+class Projectile;
 class Player2D;
 enum ItemType {
 	SPEED,
@@ -26,7 +28,7 @@ public:
 	virtual void Tick(GameStateData* _GSD);
 	virtual void Render(RenderData* _GSD);
 
-	void UseItem(Player2D* player, ItemType type);
+	void UseItem(RenderData* _RD, Player2D* player, ItemType type);
 
 private:
 	Sprite* sprite;
@@ -35,5 +37,7 @@ private:
 	ItemType item_type = ItemType::HEALTH;
 	ItemState item_state = ItemState::PICKUP;
 	const int health_amount = 25;
+	Projectile* proj = nullptr;
+
 	void onCollision(MetroBrawlCollisionData  col_data);
 };

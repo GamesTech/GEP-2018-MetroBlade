@@ -305,7 +305,6 @@
     <ClInclude Include="Item.h">
       <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h" />
     <ClInclude Include="MetroBrawlCollisionManager.h">
       <Filter>Core\Physics\Collision</Filter>
     </ClInclude>
@@ -314,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="MetroBrawlCollisionData.h">
       <Filter>Core\Physics\Collision\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Core\GameObjects\2D\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -426,12 +428,14 @@
     <ClCompile Include="Item.cpp">
       <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp">
       <Filter>Core\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics\Collision\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Core\GameObjects\2D\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
