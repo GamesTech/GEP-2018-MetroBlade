@@ -102,11 +102,7 @@ private:
 
 	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 
-	vector<GameObject3D*> m_3DObjects;
-	vector<GameObject2D*> m_2DObjects;
-	vector<Player2D*> m_player_objects;
-	vector<Obstacle2D*> m_obstacle_objects;
-	vector<Sound*> m_sounds;
+	vector<SoundComponent*> m_sounds;
 	RenderData* m_RD;
 	Camera* m_cam;
 

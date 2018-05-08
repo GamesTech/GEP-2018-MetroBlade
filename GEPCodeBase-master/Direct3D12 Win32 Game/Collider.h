@@ -28,6 +28,10 @@ public:
 
 	Vector2 getBoxOrigin();
 	void setBoxOrigin(Vector2 box_origin);
+
+	Vector2 getBoxMidpoint();
+	Vector2 getBoxDimenstions();
+
 	Vector2 getMaxValues();
 
 	void isColliderActive(bool is_active);

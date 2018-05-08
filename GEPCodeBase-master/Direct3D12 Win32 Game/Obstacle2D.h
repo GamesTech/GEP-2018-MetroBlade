@@ -13,12 +13,12 @@ public:
 	virtual ~Obstacle2D();
 	virtual void Tick(GameStateData* _GSD);
 
-	Collider* getCollider(int id);
-
 	Vector2 direction = Vector2(0, 0);
 
 
 protected:
 	Sprite*				sprite;
 	Collider * col = new Collider(Vector2(m_pos), Vector2(1100, 100), false);
+
+	void onObjectCollision(MetroBrawlCollisionData	col_data);
 };
