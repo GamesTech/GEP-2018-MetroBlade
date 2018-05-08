@@ -192,14 +192,7 @@ void Game::Update(DX::StepTimer const& timer)
 			// We lost the audio device!
 		}
 	}
-	else
-	{
-		//update sounds playing
-		for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-		{
-			(*it)->Tick(m_GSD);
-		}
-	}
+
 	if (m_keyboard->GetState().Enter)
 	{
 
