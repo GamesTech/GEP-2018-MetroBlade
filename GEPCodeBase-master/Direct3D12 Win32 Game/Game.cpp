@@ -184,15 +184,6 @@ void Game::Update(DX::StepTimer const& timer)
 	ReadInput();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	//this will update the audio engine but give us chance to do somehting else if that isn't working
-	if (!m_audEngine->Update())
-	{
-		if (m_audEngine->IsCriticalError())
-		{
-			// We lost the audio device!
-		}
-	}
-
 	if (m_keyboard->GetState().Enter)
 	{
 
