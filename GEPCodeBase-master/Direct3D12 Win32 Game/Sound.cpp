@@ -10,15 +10,6 @@ SoundComponent::SoundComponent(std::string filename)
 {
 }
 
-SoundComponent::SoundComponent(AudioEngine* _audEngine, string _filename)
-{
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-	string fullpath = "../sounds/" + _filename + ".wav";
-	std::wstring wFilename = converter.from_bytes(fullpath.c_str());
-
-	m_sfx = std::make_unique<SoundEffect>(_audEngine, wFilename.c_str());
-}
-
 SoundComponent::~SoundComponent()
 {
 	m_sfx.reset();
@@ -40,11 +31,6 @@ void SoundComponent::setSoundFile(std::string new_sound)
 
 void SoundComponent::Play()
 {
-	//if (m_sfx)
-	//{
-	//	m_sfx->Play(m_volume, m_pitch, m_pan);
-	//}
-
 	if (sound) 
 	{
 		if (sound->GetState() == PLAYING) 
@@ -52,7 +38,7 @@ void SoundComponent::Play()
 			sound->Stop();
 		}
 
-		sound->Play();
+		sound->Play(loop);
 	}
 }
 
@@ -67,6 +53,11 @@ void SoundComponent::registerAudioManager(AudioManager* audio_system)
 	audio = audio_system;
 }
 
+AudioManager* SoundComponent::getAudioManager()
+{
+	return audio;
+}
+
 void SoundComponent::tickComponent(GameStateData * _GSD)
 {
 	
@@ -76,5 +67,10 @@ void SoundComponent::tickComponent(GameStateData * _GSD)
 void SoundComponent::renderComponent(RenderData * _RD)
 {
 	return;
+}
+
+void SoundComponent::isLooped(bool looped)
+{
+	loop = looped;
 }
 

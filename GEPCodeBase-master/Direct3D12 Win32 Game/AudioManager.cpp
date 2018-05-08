@@ -89,6 +89,7 @@ int AudioManager::findSoundData(std::string filename)
 		if (filename == system_sounds[i].sound_name) 
 		{
 			index = i;
+			break;
 		}
 	}
 

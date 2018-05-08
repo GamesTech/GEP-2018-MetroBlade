@@ -3,5 +3,8 @@
   <ItemGroup>
     <Media Include="Explo1.wav" />
     <Media Include="NightAmbienceSimple_02.wav" />
+    <Media Include="Buzz-Dungeon.wav" />
+    <Media Include="spyro-test.wav" />
+    <Media Include="across-the-border.wav" />
   </ItemGroup>
 </Project>

@@ -16,7 +16,8 @@ Obstacle2D::Obstacle2D(RenderData* _RD, string _filename): ImageGO2D(_RD, _filen
 	object_components.addComponent(col);
 
 	// Testing the sound system.
-	SoundComponent*	  test_sound = new SoundComponent("Explo1");
+	SoundComponent*	  test_sound = new SoundComponent("across-the-border");
+	test_sound->isLooped(true);
 	object_components.addComponent(test_sound);
 }
 

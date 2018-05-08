@@ -186,7 +186,6 @@
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="JSONFileReader.h" />
-    <ClInclude Include="Loop.h" />
     <ClInclude Include="MetroBrawlCollisionData.h" />
     <ClInclude Include="MetroBrawlCollisionManager.h" />
     <ClInclude Include="Obstacle2D.h" />
@@ -217,7 +216,6 @@
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="TestComponent.h" />
     <ClInclude Include="TestPBGO3D.h" />
-    <ClInclude Include="TestSound.h" />
     <ClInclude Include="Text2D.h" />
     <ClInclude Include="GameStateData.h" />
     <ClInclude Include="UICanvas.h" />
@@ -237,7 +235,6 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JSONFileReader.cpp" />
-    <ClCompile Include="Loop.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp" />
     <ClCompile Include="Obstacle2D.cpp" />
     <ClCompile Include="Physics2D.cpp" />
@@ -266,7 +263,6 @@
     <ClCompile Include="SpriteAnimFileReader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestPBGO3D.cpp" />
-    <ClCompile Include="TestSound.cpp" />
     <ClCompile Include="Text2D.cpp" />
     <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="UILabel.cpp" />

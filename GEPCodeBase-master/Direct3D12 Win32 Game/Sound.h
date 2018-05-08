@@ -18,7 +18,6 @@ class SoundComponent :
 {
 public:
 	SoundComponent(std::string filename);
-	SoundComponent(AudioEngine* _audEngine, string _filename);
 	virtual ~SoundComponent();
 
 	void initAudio();
@@ -31,6 +30,7 @@ public:
 	virtual void Stop();
 
 	void registerAudioManager(AudioManager* audio_system);
+	AudioManager*  getAudioManager();
 
 	virtual void tickComponent(GameStateData*  _GSD) override;
 	virtual void renderComponent(RenderData*     _RD) override;
@@ -44,6 +44,7 @@ public:
 	void SetPan(float _pan) { m_pan = _pan; }
 	float GetPan() { return m_pan; }
 
+	void isLooped(bool looped);
 
 protected:
 	std::string								  sound_name;
@@ -55,5 +56,7 @@ protected:
 	float m_volume = 1.0f;
 	float m_pitch = 0.0f;
 	float m_pan = 0.0f;
+
+	bool loop = false;
 };
 
