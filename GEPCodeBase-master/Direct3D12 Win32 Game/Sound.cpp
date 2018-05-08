@@ -12,7 +12,7 @@ SoundComponent::SoundComponent(std::string filename)
 
 SoundComponent::~SoundComponent()
 {
-	m_sfx.reset();
+	sound.reset();
 }
 
 void SoundComponent::initAudio()
@@ -21,6 +21,11 @@ void SoundComponent::initAudio()
 	{
 		setSoundFile(sound_name);
 	}
+}
+
+std::string SoundComponent::getSoundName() const
+{
+	return sound_name;
 }
 
 void SoundComponent::setSoundFile(std::string new_sound)
@@ -59,8 +64,7 @@ AudioManager* SoundComponent::getAudioManager()
 }
 
 void SoundComponent::tickComponent(GameStateData * _GSD)
-{
-	
+{	
 	return;
 }
 
@@ -72,5 +76,12 @@ void SoundComponent::renderComponent(RenderData * _RD)
 void SoundComponent::isLooped(bool looped)
 {
 	loop = looped;
+	if (sound) // TODO - Consider making this more efficent. 
+	{
+		if (sound->GetState() == PLAYING) 
+		{
+			Play();
+		}
+	}
 }
 

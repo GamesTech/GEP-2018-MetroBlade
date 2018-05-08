@@ -40,6 +40,11 @@ public:
 
 	DirectX::SoundEffectInstance* loadSound(std::string sound_name);
 
+	// Audio Manager Configuration.
+	void setVolume(float new_vol);
+	float getVolume() const;
+
+
 	// Scene manager functions. 
 	void updateAudioManager(); 
 	void pauseAudioEngine();
@@ -56,4 +61,6 @@ private:
 	std::vector<SoundComponent*>	   audio_components;
 
 	std::unique_ptr<DirectX::AudioEngine>  sound_engine;
+
+	float								  volume = 1.0f;
 };

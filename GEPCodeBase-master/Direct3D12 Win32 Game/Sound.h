@@ -22,8 +22,7 @@ public:
 
 	void initAudio();
 
-	virtual void Tick(GameStateData* _GSD) {};
-
+	std::string  getSoundName() const;
 	void setSoundFile(std::string new_sound);
 
 	virtual void Play();
@@ -35,6 +34,7 @@ public:
 	virtual void tickComponent(GameStateData*  _GSD) override;
 	virtual void renderComponent(RenderData*     _RD) override;
 
+	// Component Utilities. 
 	void SetVolume(float _vol) { m_volume = _vol; }
 	float GetVolume() { return m_volume; }
 
@@ -50,7 +50,6 @@ protected:
 	std::string								  sound_name;
 	AudioManager*								   audio;
 
-	std::unique_ptr<DirectX::SoundEffect>		   m_sfx;
 	std::unique_ptr<DirectX::SoundEffectInstance>  sound; 
 
 	float m_volume = 1.0f;

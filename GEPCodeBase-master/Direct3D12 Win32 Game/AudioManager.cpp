@@ -26,6 +26,7 @@ void AudioManager::registerSoundComponents(std::vector<SoundComponent*> sound_co
 		// Here we register our sound components to assign them the audio manager as well as allowing files to be laoded and played.
 		component->registerAudioManager(this);
 		component->initAudio();
+		component->SetVolume(volume);
 		audio_components.push_back(component);
 	}
 }
@@ -44,6 +45,20 @@ DirectX::SoundEffectInstance* AudioManager::loadSound(std::string sound_name)
 	return (system_sounds[sound_data_index].sound_data->CreateInstance().release());
 }
 
+void AudioManager::setVolume(float new_vol)
+{
+	volume = new_vol;
+	for (auto& components : audio_components) 
+	{
+		components->SetVolume(volume);
+	}
+}
+
+float AudioManager::getVolume() const
+{
+	return volume;
+}
+
 void AudioManager::updateAudioManager()
 {
 	if (!sound_engine->Update())
@@ -57,6 +72,7 @@ void AudioManager::updateAudioManager()
 	else 
 	{
 		// Update settings within components as well as any other issues.
+
 	}
 }
 

@@ -124,17 +124,18 @@ void SceneManager::loadScene(string scene_name)
 
 void SceneManager::loadScene(Scene* scene_name)
 {
+	scene_audio.clear();
+	collision_manager.clearCollisionManager();
+	game_manager.resetManager();
+	game_ui.clearUICanvas();
+
+
 	if (!scene_name) 
 	{
 		clearScene();
 		// current_scene.reset(new Scene);
 		return;
 	}
-
-	scene_audio.clear();
-	collision_manager.clearCollisionManager();
-	game_manager.resetManager();
-	game_ui.clearUICanvas();
 
 	// clearScene();
 	current_scene.reset(scene_name);
