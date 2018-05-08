@@ -126,15 +126,17 @@ void SceneManager::loadScene(Scene* scene_name)
 {
 	if (!scene_name) 
 	{
-		current_scene.reset(new Scene);
+		clearScene();
+		// current_scene.reset(new Scene);
 		return;
 	}
 
-	clearScene();
 	scene_audio.clear();
 	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
+
+	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
@@ -149,7 +151,7 @@ void SceneManager::clearScene()
 	if (current_scene) 
 	{
 		resetRenderState();
-		current_scene.reset(nullptr);
+		current_scene.reset(new Scene);
 	    setMainCamera(nullptr);
 	}
 }

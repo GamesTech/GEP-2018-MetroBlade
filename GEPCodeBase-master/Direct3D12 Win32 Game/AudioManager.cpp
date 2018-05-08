@@ -26,7 +26,7 @@ void AudioManager::registerSoundComponents(std::vector<SoundComponent*> sound_co
 		// Here we register our sound components to assign them the audio manager as well as allowing files to be laoded and played.
 		component->registerAudioManager(this);
 		component->initAudio();
-		sound_components.push_back(component);
+		audio_components.push_back(component);
 	}
 }
 
