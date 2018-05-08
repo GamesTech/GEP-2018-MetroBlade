@@ -161,6 +161,9 @@
     <Filter Include="Core\UI\Cursor">
       <UniqueIdentifier>{9c0ebe47-7981-4795-a7b9-5c762b203d92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\TeamSelect">
+      <UniqueIdentifier>{9ffc375c-e87e-4622-97e1-b120429d3a41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -317,6 +320,9 @@
     <ClInclude Include="Cursor.h">
       <Filter>Core\UI\Cursor</Filter>
     </ClInclude>
+    <ClInclude Include="TeamSelect.h">
+      <Filter>Core\UI\TeamSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageGO2D.cpp">
@@ -434,6 +440,7 @@
     <ClCompile Include="Cursor.cpp">
       <Filter>Core\UI\Cursor</Filter>
     </ClCompile>
+    <ClCompile Include="TeamSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

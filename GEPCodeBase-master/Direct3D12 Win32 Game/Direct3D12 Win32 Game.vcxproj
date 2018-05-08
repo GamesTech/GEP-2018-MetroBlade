@@ -211,6 +211,7 @@
     <ClInclude Include="SpriteAnimFileReader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="TeamSelect.h" />
     <ClInclude Include="TestComponent.h" />
     <ClInclude Include="TestPBGO3D.h" />
     <ClInclude Include="TestSound.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteAnimFileReader.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TeamSelect.cpp" />
     <ClCompile Include="TestPBGO3D.cpp" />
     <ClCompile Include="TestSound.cpp" />
     <ClCompile Include="Text2D.cpp" />

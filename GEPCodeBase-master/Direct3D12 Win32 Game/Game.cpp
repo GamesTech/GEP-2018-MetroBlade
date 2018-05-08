@@ -272,7 +272,6 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciateUIObject(player1_cursor);
 		cursors.push_back(player1_cursor);
 
-
 		scene.startGameManager();
 	}
 	if (m_keyboard->GetState().P)
@@ -344,21 +343,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_obstacle_objects.push_back(testPlatform);
 	}
 
-	for (int i = 0; i < cursors.size(); i++)
-	{
-		if (cursors[i]->getInteract())
-		{
-			for (int j = 0; j < profile_pics.size(); j++)
-			{
-				if (profile_pics[j]->getInteract())
-				{
-					teamview[i]->setSprite("fighter_spritesheet", "fighter_1");
-					teamview[i]->setInteract(false);
-					break;
-				}
-			}
-		}
-	}
+	teamselect->update(cursors,profile_pics,teamview,teamview_images);
 
 	scene.Update(m_GSD);
 }

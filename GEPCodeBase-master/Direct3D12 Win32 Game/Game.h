@@ -16,10 +16,12 @@
 #include "CollisionManager.h"
 #include "Physics2D.h"
 #include "Obstacle2D.h"
+#include "TeamSelect.h"
 
 #include "InputManager.h"
 using std::vector;
 
+class TeamSelect;
 class Cursor;
 class UISprite;
 struct RenderData;
@@ -124,4 +126,6 @@ private:
 	std::vector<UISprite*> profile_pics;
 	std::vector<Cursor*> cursors;
 	std::vector<std::string> teamview_images;
+
+	TeamSelect* teamselect;
 };

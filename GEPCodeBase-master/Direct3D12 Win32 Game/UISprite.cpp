@@ -53,6 +53,10 @@ void UISprite::setSprite(std::string filename, std::string fighter)
 	sprite = object_components.getComponentByType<Sprite>();
 }
 
+void UISprite::changeSpriteRect(std::string filename, std::string fighter)
+{
+	sprite->setAnimationState(fighter);
+}
 
 void UISprite::onCollision(MetroBrawlCollisionData col_data)
 {
