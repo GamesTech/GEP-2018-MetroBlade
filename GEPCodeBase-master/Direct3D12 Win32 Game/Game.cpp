@@ -32,10 +32,10 @@ Game::Game() :
 
 Game::~Game()
 {
-	if (m_audEngine)
-	{
-		m_audEngine->Suspend();
-	}
+	//if (m_audEngine)
+	//{
+	//	m_audEngine->Suspend();
+	//}
 
 	// Ensure that the GPU is no longer referencing resources that are about to be destroyed.
 	WaitForGpu();
@@ -44,11 +44,11 @@ Game::~Game()
 	scene.clearScene();
 
 	//delete the sounds
-	for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-	{
-		delete (*it);
-	}
-	m_sounds.clear();
+	//for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
+	//{
+	//	delete (*it);
+	//}
+	//m_sounds.clear();
 
 	delete m_RD;
 	delete m_GSD;
@@ -152,10 +152,10 @@ void Game::Initialize(HWND window, int width, int height)
 	*/
 
 	//GEP::This is where I am creating the test objects
-	Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
-	loop->SetVolume(0.1f);
-	loop->Play();
-	m_sounds.push_back(loop);
+	//Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
+	//loop->SetVolume(0.1f);
+	//loop->Play();
+	//m_sounds.push_back(loop);
 
 	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
 	m_sounds.push_back(TS);*/
@@ -184,21 +184,6 @@ void Game::Update(DX::StepTimer const& timer)
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
 	//this will update the audio engine but give us chance to do somehting else if that isn't working
-	if (!m_audEngine->Update())
-	{
-		if (m_audEngine->IsCriticalError())
-		{
-			// We lost the audio device!
-		}
-	}
-	else
-	{
-		//update sounds playing
-		for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-		{
-			(*it)->Tick(m_GSD);
-		}
-	}
 
 	if (m_keyboard->GetState().P)
 	{

@@ -64,6 +64,7 @@ void SceneManager::Update(GameStateData * game_state)
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
+		scene_audio.updateAudioManager();
 		collision_manager.performCollisionCheck();
 		current_scene->Update(game_state);
 	}
@@ -123,16 +124,20 @@ void SceneManager::loadScene(string scene_name)
 
 void SceneManager::loadScene(Scene* scene_name)
 {
-	if (!scene_name) 
-	{
-		current_scene.reset(new Scene);
-		return;
-	}
-
-	clearScene();
+	scene_audio.clear();
 	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
+
+
+	if (!scene_name) 
+	{
+		clearScene();
+		// current_scene.reset(new Scene);
+		return;
+	}
+
+	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
@@ -147,7 +152,7 @@ void SceneManager::clearScene()
 	if (current_scene) 
 	{
 		resetRenderState();
-		current_scene.reset(nullptr);
+		current_scene.reset(new Scene);
 	    setMainCamera(nullptr);
 	}
 }
@@ -168,6 +173,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	}
 
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
 
 	current_scene->add2DGameObjectToScene(new_object);
 }
@@ -231,4 +237,5 @@ void SceneManager::setupScene2DObjects(GameObject2D * object)
 	}
 
 	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());
 }

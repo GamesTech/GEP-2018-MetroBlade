@@ -26,15 +26,6 @@
     <Filter Include="Core\GameObjects\3D\Source">
       <UniqueIdentifier>{32b089ec-d6eb-4d4b-8588-e1678ceb5426}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameObjects\Sounds">
-      <UniqueIdentifier>{58dab2df-41ab-41d7-a757-ee03d066c55c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\GameObjects\Sounds\Headers">
-      <UniqueIdentifier>{476e8f58-4862-4ba4-8b81-b98f94a7b80f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\GameObjects\Sounds\Source">
-      <UniqueIdentifier>{961e8af5-86df-4189-a3b7-f30efdac3ab3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\GPU">
       <UniqueIdentifier>{64c6fa30-1b1a-432d-b541-617074b2d699}</UniqueIdentifier>
     </Filter>
@@ -179,8 +170,11 @@
     <Filter Include="Core\GameObjects\Player">
       <UniqueIdentifier>{c0bbc2b1-81b3-4f31-9e0c-e54612408cf9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameObjects\Source">
-      <UniqueIdentifier>{7ad75a1f-e82c-4369-a4ed-92ab6af974da}</UniqueIdentifier>
+    <Filter Include="Core\Audio">
+      <UniqueIdentifier>{1f7b3cba-c56d-4029-a684-2f5e318fa0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Audio\Components">
+      <UniqueIdentifier>{86cf8d12-cadb-4002-94b1-906fe1d44b7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -208,20 +202,11 @@
     <ClInclude Include="SDKMeshGO3D.h">
       <Filter>Core\GameObjects\3D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Core\GameObjects\Sounds\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Loop.h">
-      <Filter>Core\GameObjects\Sounds\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameStateData.h">
       <Filter>Game Base\Core Data</Filter>
     </ClInclude>
     <ClInclude Include="RenderData.h">
       <Filter>Game Base\Core Data</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSound.h">
-      <Filter>Core\GameObjects\Sounds\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Core\Scenes</Filter>
@@ -347,11 +332,14 @@
     <ClInclude Include="EntityConstructors.h">
       <Filter>Core\Scenes\Scene Loader</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Core\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Core\Audio\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ImageGO2D.cpp">
-      <Filter>Core\GameObjects\Source</Filter>
-    </ClCompile>
     <ClCompile Include="PBGO3D.cpp">
       <Filter>Core\GameObjects\3D\Source</Filter>
     </ClCompile>
@@ -366,15 +354,6 @@
     </ClCompile>
     <ClCompile Include="SDKMeshGO3D.cpp">
       <Filter>Core\GameObjects\3D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Core\GameObjects\Sounds\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Loop.cpp">
-      <Filter>Core\GameObjects\Sounds\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TestSound.cpp">
-      <Filter>Core\GameObjects\Sounds\Source</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Core\Scenes</Filter>
@@ -467,6 +446,15 @@
     </ClCompile>
     <ClCompile Include="SceneLoader.cpp">
       <Filter>Core\Scenes\Scene Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Core\Audio\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGO2D.cpp">
+      <Filter>Core\GameObjects\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
