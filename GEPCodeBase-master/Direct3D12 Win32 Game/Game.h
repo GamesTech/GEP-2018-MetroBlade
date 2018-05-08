@@ -17,7 +17,9 @@
 #include "Physics2D.h"
 #include "Obstacle2D.h"
 
-#include "InputManager.h"
+#include "InputManager.h" // This header is depreciated. Will be removed.
+#include "MetroBrawlInputManager.h"
+
 using std::vector;
 
 struct RenderData;
@@ -28,7 +30,6 @@ struct GameStateData;
 class Game
 {
 public:
-
     Game();
     ~Game();
 
@@ -110,7 +111,12 @@ private:
 	std::unique_ptr<DirectX::Mouse> m_mouse;
 	//std::unique_ptr<DirectX::GamePad> m_gamePad;
 	std::unique_ptr<InputManager> m_inputManager;
+
+	MetroBrawlInputManager		  input_manager;
+
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
+
+
 	SceneManager scene;
 };

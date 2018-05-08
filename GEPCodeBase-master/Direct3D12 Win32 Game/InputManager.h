@@ -16,12 +16,11 @@ class InputManager
 public:
 	InputManager() = default;
 	~InputManager() = default;
+
 	void init();
 	void LoadInputSettings();
 	void UpdateInput();
 	
-
-
 private:
 
 	std::vector<InputData> input_data_list;
