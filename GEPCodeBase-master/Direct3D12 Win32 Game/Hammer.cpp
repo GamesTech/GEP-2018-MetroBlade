@@ -8,21 +8,20 @@ Hammer::Hammer(RenderData* _RD, string _filename, Vector2 new_direction, Player2
 	using namespace std::placeholders;
 
 	player_original = original;
+	pos_offset = Vector2(300, 200);
 
 	col->isColliderImmediate(true);
 	col->setBoxDimensions(Vector2(50, 50));
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Hammer::onCollision, this, _1));
 	object_components.addComponent(col);
+	col->isColliderActive(false);
 
 	src_rect.reset(new RECT);
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
-	sprite->setLoop(false);
-	sprite->setAnimationState("attack");
-	
 }
 
 Hammer::~Hammer()
@@ -31,9 +30,13 @@ Hammer::~Hammer()
 
 void Hammer::Tick(GameStateData* _GSD)
 {
-	m_pos = player_original->GetPos();
 	current_time -= _GSD->m_dt;
-	if (current_time <= 0.0f || !alive)
+
+	if (current_time <= 1.5f)
+	{
+		col->isColliderActive(true);
+	}
+	if (current_time <= 0.0f)
 	{
 		//end
 	}
@@ -41,8 +44,10 @@ void Hammer::Tick(GameStateData* _GSD)
 	{
 		attack(_GSD);
 	}
-	m_pos = player_original->GetPos();
-	col->setBoxOrigin(m_pos);
+
+
+	
+	
 	sprite->tickComponent(_GSD);
 	Physics2D::Tick(_GSD);
 }
@@ -54,8 +59,10 @@ void Hammer::Render(RenderData* _RD)
 
 void Hammer::attack(GameStateData* _GSD)
 {
-	col_offset = col->getBoxOrigin();
-	col_offset.y += current_hammer_height;
+	col->setBoxOrigin(m_pos - pos_offset);
+	m_pos = player_original->GetPos() - pos_offset;
+	sprite->setLoop(false);
+	sprite->setAnimationState("attack");
 }
 
 void Hammer::onCollision(MetroBrawlCollisionData  col_data)

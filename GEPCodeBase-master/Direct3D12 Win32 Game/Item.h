@@ -2,12 +2,13 @@
 #include "ImageGO2D.h"
 #include "Sprite.h"
 
+class Hammer;
 class Projectile;
 class Player2D;
 enum ItemType {
-	HAMMER,
 	HEALTH,
 	PROJECTILE,
+	HAMMER,
 	BOMB
 };
 enum ItemState {
@@ -39,6 +40,6 @@ private:
 	ItemState item_state = ItemState::PICKUP;
 	const int health_amount = 25;
 	Projectile* proj = nullptr;
-
+	Hammer* ham = nullptr;
 	void onCollision(MetroBrawlCollisionData  col_data);
 };

@@ -13,14 +13,18 @@ private:
 	Sprite* sprite = nullptr;
 	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 	Vector2 col_offset;
+	Vector2 pos_offset;
 	Player2D* player_original = nullptr;
+
 	float damage_amount = 25.0f;
+
 	const float max_time = 2.0f;
 	float current_time = max_time;
+
 	bool alive = true;
-	float hammer_end_height = 50.0f;
-	float current_hammer_height = 0.0f;
-	float hammer_speed = 1;
+
+
+
 	void onCollision(MetroBrawlCollisionData  col_data);
 
 };
