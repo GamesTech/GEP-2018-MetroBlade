@@ -18,20 +18,9 @@
 #pragma once
 
 #include "pch.h"
+#include "JSONFileReader.h"
 
-// Binding Data Structure.
-struct InputBindings 
-{
-	
-};
-
-enum class INPUT_BUTTONS : int
-{
-	BUTTON_LEFT,
-	BUTTON_MIDDLE,
-	BUTTON_RIGHT
-};
-
+#include "InputBind.h"
 
 class MetroBrawlInputManager 
 {
@@ -56,6 +45,10 @@ public:
 
 
 private:
+	// per frame update routienes
+	void updateBindState();
+
+private:
 	std::unique_ptr<DirectX::Keyboard>    keyboard_input = std::make_unique<DirectX::Keyboard>();
 	std::unique_ptr<DirectX::Mouse>		  mouse_input = std::make_unique<DirectX::Mouse>();
 	std::unique_ptr<DirectX::GamePad>	  gamepad_input = std::make_unique<DirectX::GamePad>();
@@ -66,5 +59,6 @@ private:
 
 private:
 	// Here we need to add binds. 
-	
+	std::vector<InputBind>				  action_binds;
+	JSONFileReader						  input_bind_file;
 };
