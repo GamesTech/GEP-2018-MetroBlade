@@ -56,6 +56,11 @@ Vector2 Collider::getBoxDimenstions()
 	return box_dimensions;
 }
 
+void Collider::setBoxDimensions(Vector2 new_dimensions)
+{
+	box_dimensions = new_dimensions;
+}
+
 Vector2 Collider::getMaxValues()
 {
 	max_values = box_origin + box_dimensions;

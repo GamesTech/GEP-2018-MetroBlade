@@ -65,8 +65,8 @@ void SceneManager::Update(GameStateData * game_state)
 	if (current_scene)
 	{
 		scene_audio.updateAudioManager();
-		collision_manager.performCollisionCheck();
 		current_scene->Update(game_state);
+		collision_manager.performCollisionCheck();
 	}
 	game_ui.tickUIObjects(game_state);
 	processSceneEvents();
@@ -166,7 +166,7 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
 	new_object->assignWorldEventListener(scene_event_listener);
-
+	new_object->assignSceneManager(this);
 	if (dynamic_cast<Player2D*>(new_object)) 
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);

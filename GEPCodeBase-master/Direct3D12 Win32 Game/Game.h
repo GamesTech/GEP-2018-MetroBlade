@@ -16,7 +16,7 @@
 #include "CollisionManager.h"
 #include "Physics2D.h"
 #include "Obstacle2D.h"
-
+#include "Item.h"
 #include "InputManager.h"
 using std::vector;
 

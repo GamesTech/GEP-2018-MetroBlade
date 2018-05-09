@@ -338,6 +338,9 @@
     <ClInclude Include="Sound.h">
       <Filter>Core\Audio\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Obstacle2D.h" />
+    <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -456,6 +459,8 @@
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Core\GameObjects\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
