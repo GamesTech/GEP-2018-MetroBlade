@@ -12,7 +12,6 @@
 
 
 Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
-
 {
 	using namespace std::placeholders;
 
@@ -39,7 +38,6 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 
 	SoundComponent*	  test_sound = new SoundComponent("Explo1");
 	object_components.addComponent(test_sound);
-
 
 	controller_id = gamepadID;
 }

@@ -60,11 +60,11 @@ void Game::Initialize(HWND window, int width, int height)
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
-	m_inputManager.reset(new InputManager);
-	m_keyboard = std::make_unique<Keyboard>();
-	m_mouse = std::make_unique<Mouse>();
-	m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
-	m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
+	// m_inputManager.reset(new InputManager);
+//	m_keyboard = std::make_unique<Keyboard>();
+	//m_mouse = std::make_unique<Mouse>();
+	//m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
+	//m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
 
 	// Setup the input system. 
 	input_manager.init(window);
@@ -158,7 +158,7 @@ void Game::Update(DX::StepTimer const& timer)
 	ReadInput();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (m_keyboard->GetState().P)
+	if (input_manager.getKeyDown(Keyboard::Keys::P))
 	{
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -200,7 +200,7 @@ void Game::Update(DX::StepTimer const& timer)
 	//	scene.instanciateUIObject(test_sprite);
 	}
 
-	if (m_keyboard->GetState().T)
+	if (input_manager.getKeyDown(Keyboard::Keys::T))
 	{
 		// Instantiation test.
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
@@ -702,7 +702,7 @@ void Game::ReadInput()
 
 	//Note in both cases they are identical to the DirectXTK for DirectX 11
 
-	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState = m_keyboard->GetState();
-	m_GSD->m_mouseState = m_mouse->GetState();
+	// m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
+	// m_GSD->m_keyboardState = m_keyboard->GetState();
+	// m_GSD->m_mouseState = m_mouse->GetState();
 }

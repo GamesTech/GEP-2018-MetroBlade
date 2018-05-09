@@ -11,6 +11,7 @@ void MetroBrawlInputManager::init(HWND& window)
 void MetroBrawlInputManager::tick()
 {
 	// Here we update the state of inputs in the binds.
+	
 }
 
 bool MetroBrawlInputManager::getKeyDown(DirectX::Keyboard::Keys key)
@@ -25,7 +26,7 @@ bool MetroBrawlInputManager::getKeyUp(DirectX::Keyboard::Keys key)
 
 bool MetroBrawlInputManager::getMouseButtonDown()
 {
-	return false;
+	
 }
 
 Vector2 MetroBrawlInputManager::getMouseCoordinates()

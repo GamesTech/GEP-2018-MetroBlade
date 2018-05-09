@@ -19,6 +19,12 @@
 
 #include "pch.h"
 
+// Binding Data Structure.
+struct InputBindings 
+{
+	
+};
+
 enum class INPUT_BUTTONS : int
 {
 	BUTTON_LEFT,
@@ -31,7 +37,10 @@ class MetroBrawlInputManager
 {
 public:
 	MetroBrawlInputManager() = default;
-	~MetroBrawlInputManager() = default;
+
+	// Here we should clean up and stop controllers.
+	// This way we gan garantee the controllers will stop. 
+	~MetroBrawlInputManager() = default; 
 
 	void init(HWND& window);
 	void tick();
@@ -49,6 +58,7 @@ public:
 private:
 	std::unique_ptr<DirectX::Keyboard>    keyboard_input = std::make_unique<DirectX::Keyboard>();
 	std::unique_ptr<DirectX::Mouse>		  mouse_input = std::make_unique<DirectX::Mouse>();
+	std::unique_ptr<DirectX::GamePad>	  gamepad_input = std::make_unique<DirectX::GamePad>();
 
 	// TODO - Consider Removing.
 	DirectX::Keyboard::State			  keyboard_state;
@@ -56,5 +66,5 @@ private:
 
 private:
 	// Here we need to add binds. 
-
+	
 };
