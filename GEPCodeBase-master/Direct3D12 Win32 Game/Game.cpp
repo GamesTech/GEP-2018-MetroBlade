@@ -196,6 +196,9 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
+		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
+		test_item->SetPos(Vector2(400, 550));
+		scene.instanciate2DObject(test_item);
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}

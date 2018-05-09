@@ -107,7 +107,7 @@ enum MetroBrawlInputKeyBindings
 	RightWindows = 0x5c,
 	Apps = 0x5d,
 
-	Sleep = 0x5f,
+	// Sleep = 0x5f,
 	NumPad0 = 0x60,
 	NumPad1 = 0x61,
 	NumPad2 = 0x62,

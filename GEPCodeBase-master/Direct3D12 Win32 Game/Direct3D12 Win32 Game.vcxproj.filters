@@ -176,6 +176,18 @@
     <Filter Include="Core\Audio\Components">
       <UniqueIdentifier>{86cf8d12-cadb-4002-94b1-906fe1d44b7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Input\Binds">
+      <UniqueIdentifier>{998a52f4-6bcb-497e-87f4-6b130549130e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Item">
+      <UniqueIdentifier>{34a91a08-3450-4521-abdf-42162b064d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Projectile">
+      <UniqueIdentifier>{7d1a9fc8-7a78-4b53-bf07-347bcc805f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Spawner">
+      <UniqueIdentifier>{7608465e-8c31-4773-af94-d463fb637985}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -341,6 +353,18 @@
     <ClInclude Include="MetroBrawlInputManager.h">
       <Filter>Core\Input</Filter>
     </ClInclude>
+    <ClInclude Include="InputBind.h">
+      <Filter>Core\Input\Binds</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Core\GameObjects\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Core\GameObjects\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Core\GameObjects\Spawner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -461,6 +485,15 @@
     </ClCompile>
     <ClCompile Include="MetroBrawlInputManager.cpp">
       <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Core\GameObjects\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Core\GameObjects\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Core\GameObjects\Spawner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,10 +16,9 @@
 #include "CollisionManager.h"
 #include "Physics2D.h"
 #include "Obstacle2D.h"
-
-#include "InputManager.h" // This header is depreciated. Will be removed.
+#include "Item.h"
 #include "MetroBrawlInputManager.h"
-
+#include "InputManager.h"
 using std::vector;
 
 struct RenderData;

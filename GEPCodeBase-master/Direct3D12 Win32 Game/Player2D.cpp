@@ -1,6 +1,4 @@
 #include "pch.h"
-#include <functional>
-
 
 #include "Player2D.h"
 #include "GamePad.h"
@@ -40,16 +38,18 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	object_components.addComponent(test_sound);
 
 	controller_id = gamepadID;
+	_playerRD = _RD;
 }
 
 
 Player2D::~Player2D()
 {
+
 }
 
 void Player2D::CheckInput(GameStateData* _GSD)
 {
-	DirectX::GamePad::State controller_state = _GSD->m_gamePad->GetState(controller_id);
+	DirectX::GamePad::State controller_state; //_GSD->m_gamePad->GetState(controller_id);
 	float stick_x = controller_state.thumbSticks.leftX;
 
 	//temp place for input
@@ -88,10 +88,21 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		SetInputVel(Vector2(x_speed, 0));
 		action_state = MOVING;
 	}
+	else if (_GSD->m_keyboardState.I || controller_state.IsYPressed())
+	{
+		action_state = USE;
+	}
 	else if (phys_state == GROUNDED && action_state != JUMPING)
 	{
 		action_state = IDLE;
 	}
+	
+	
+	if (_GSD->m_keyboardState.J)
+	{
+		dead = true;
+	}
+
 }
 
 void Player2D::Tick(GameStateData* _GSD)
@@ -124,6 +135,15 @@ void Player2D::Tick(GameStateData* _GSD)
 	case ATTACKING:
 		attacking = true;
 		sprite->setAnimationState("attack");
+		break;
+	
+	case USE:
+		
+		if (player_item)
+		{
+			player_item->UseItem(_playerRD, this, player_item->GetType());
+			player_item = nullptr;
+		}
 		break;
 	}
 
@@ -200,5 +220,10 @@ void Player2D::setStateGrounded()
 
 void Player2D::setStateFalling()
 {
+}
+
+void Player2D::AddItem(Item* obj, int uses)
+{
+	player_item = obj;
 }
 

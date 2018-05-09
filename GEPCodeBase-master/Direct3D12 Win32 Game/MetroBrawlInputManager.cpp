@@ -26,7 +26,7 @@ bool MetroBrawlInputManager::getKeyUp(DirectX::Keyboard::Keys key)
 
 bool MetroBrawlInputManager::getMouseButtonDown()
 {
-	
+	return true;
 }
 
 Vector2 MetroBrawlInputManager::getMouseCoordinates()
@@ -37,4 +37,8 @@ Vector2 MetroBrawlInputManager::getMouseCoordinates()
 int MetroBrawlInputManager::getMouseScrollWheelValue() const
 {
 	return mouse_input->GetState().scrollWheelValue;
+}
+
+void MetroBrawlInputManager::updateBindState()
+{
 }
