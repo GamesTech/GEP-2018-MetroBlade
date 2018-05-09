@@ -32,10 +32,10 @@ Game::Game() :
 
 Game::~Game()
 {
-	if (m_audEngine)
-	{
-		m_audEngine->Suspend();
-	}
+	//if (m_audEngine)
+	//{
+	//	m_audEngine->Suspend();
+	//}
 
 	// Ensure that the GPU is no longer referencing resources that are about to be destroyed.
 	WaitForGpu();
@@ -44,11 +44,11 @@ Game::~Game()
 	scene.clearScene();
 
 	//delete the sounds
-	for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-	{
-		delete (*it);
-	}
-	m_sounds.clear();
+	//for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
+	//{
+	//	delete (*it);
+	//}
+	//m_sounds.clear();
 
 	delete m_RD;
 	delete m_GSD;
@@ -140,8 +140,7 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect = std::make_unique<BasicEffect>(m_d3dDevice.Get(), EffectFlags::Lighting, pd3);
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
-	scene.assignRenderData(m_RD);
-	scene.Init();
+	scene.Init(m_RD);
 	//objectList.reserve(20);
 
 
@@ -153,10 +152,10 @@ void Game::Initialize(HWND window, int width, int height)
 	*/
 
 	//GEP::This is where I am creating the test objects
-	Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
-	loop->SetVolume(0.1f);
-	loop->Play();
-	m_sounds.push_back(loop);
+	//Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
+	//loop->SetVolume(0.1f);
+	//loop->Play();
+	//m_sounds.push_back(loop);
 
 	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
 	m_sounds.push_back(TS);*/
@@ -185,27 +184,9 @@ void Game::Update(DX::StepTimer const& timer)
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
 	//this will update the audio engine but give us chance to do somehting else if that isn't working
-	if (!m_audEngine->Update())
-	{
-		if (m_audEngine->IsCriticalError())
-		{
-			// We lost the audio device!
-		}
-	}
-	else
-	{
-		//update sounds playing
-		for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-		{
-			(*it)->Tick(m_GSD);
-		}
-	}
 
 	if (m_keyboard->GetState().P)
 	{
-		m_player_objects.clear();
-		m_obstacle_objects.clear();
-		m_items.clear();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
@@ -219,27 +200,22 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
-		m_player_objects.push_back(testPlay);
 
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
 		testPlay2->SetPos(Vector2(800, 200));
 		scene.instanciate2DObject(testPlay2);
-		m_player_objects.push_back(testPlay2);
 
 		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
 		testPlay3->SetDrive(1000.0f);
 		testPlay3->SetDrag(0.5f);
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
-		m_player_objects.push_back(testPlay3);
-
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
-		m_obstacle_objects.push_back(testPlatform);
 
 		scene.startGameManager();
 
@@ -261,19 +237,12 @@ void Game::Update(DX::StepTimer const& timer)
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-
 		testPlay->SetPos(Vector2(0, 500));
-
-		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
-		m_player_objects.push_back(testPlay);
+		scene.instanciate2DObject(testPlay);
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->getCollider(0)->setTag(10);
-
 		testPlatform->SetPos(Vector2(0,600));
-
-		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
-		m_obstacle_objects.push_back(testPlatform);
+		scene.instanciate2DObject(testPlatform);
 	}
 
 	scene.Update(m_GSD);

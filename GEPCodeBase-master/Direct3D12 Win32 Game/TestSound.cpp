@@ -3,7 +3,7 @@
 #include "GameStateData.h"
 
 
-TestSound::TestSound(AudioEngine* _audEngine, string _filename) :Sound(_audEngine, _filename)
+TestSound::TestSound(AudioEngine* _audEngine, string _filename) :SoundComponent(_audEngine, _filename)
 {
 }
 

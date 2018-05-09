@@ -18,6 +18,8 @@
 #pragma once
 
 #include "pch.h"
+
+#include "PhysicsResolver.h"
 #include "Collider.h"
 
 
@@ -39,4 +41,6 @@ private:
 	bool collisionTest(Collider& a, Collider& b);
 
 	std::vector<Collider*>	object_colliders;
+
+	MetroBrawlPhysicsResolver		physics_manager;
 };

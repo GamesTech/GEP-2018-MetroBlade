@@ -35,9 +35,12 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
 
+	SoundComponent*	  test_sound = new SoundComponent("Explo1");
+	object_components.addComponent(test_sound);
+
+
 	controller_id = gamepadID;
 	_playerRD = _RD;
-	setGravity(500.0f);
 }
 
 
@@ -57,7 +60,10 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = JUMPING;
+			sprite->setAnimationState("jump");
+			AddForce(-jump_force * Vector2::UnitY);
 			phys_state = AIR;
+			object_components.getComponentByType<SoundComponent>()->Play();
 		}
 	}
 	else if (_GSD->m_keyboardState.F || controller_state.IsXPressed())
@@ -108,15 +114,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
-	//switch (phys_state)
-	//{
-	//case GROUNDED:
-	//	SetVel(Vector2(m_vel.x, 0));
-	//	break;
-
-	//case AIR:
-	//	break;
-	//}
 
 	//action state determines the players action such as attacking, jumping, moving etc
 	attacking = false;
@@ -132,11 +129,9 @@ void Player2D::Tick(GameStateData* _GSD)
 		{
 			sprite->setAnimationState("move");
 		}
-		break;
 
+		break;
 	case JUMPING:
-		sprite->setAnimationState("jump");
-		AddForce(-jump_force * Vector2::UnitY);
 		break;
 
 	case ATTACKING:
@@ -163,16 +158,15 @@ void Player2D::Tick(GameStateData* _GSD)
 	}
 
 	//GRAVITY
-	AddForce(gravity * Vector2::UnitY);
+	m_acc += (gravity * Vector2::UnitY);
 
 	//GEP:: Lets go up the inheritence and share our functionality
-
 	Physics2D::Tick(_GSD);
 
 	//Update sprite animation
 	sprite->tickComponent(_GSD);
 
-	if (m_pos.y > 1500)
+	if (m_pos.y > 1500) // TODO - Change this to be collision based.
 	{
 		dead = true;
 	}
@@ -208,8 +202,7 @@ void Player2D::onCollision(MetroBrawlCollisionData col_data)
 	// Calculate there normals and apply a force to them.
 	// Currently in 'test' state. Will be changed to the above algorithm later.
 
-	//printf("I Should be called."); 
-	SetVel(Vector2(0, 0));
+	// printf("LOL"); 
 }
 
 void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
@@ -219,7 +212,6 @@ void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 
 void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 {
-	
 	AddForce(10000 * direction * Vector2::UnitX);
 }
 
@@ -230,7 +222,6 @@ void Player2D::setStateGrounded()
 
 void Player2D::setStateFalling()
 {
-	// setGravity(1000.0f);
 }
 
 void Player2D::AddItem(Item* obj, int uses)

@@ -27,7 +27,7 @@
 SceneManager::SceneManager(RenderData* render_structure)
 	:render_data(render_structure)
 {
-	Init();
+	Init(render_data);
 }
 
 void SceneManager::assignRenderData(RenderData* render_structure)
@@ -35,24 +35,28 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 	render_data = render_structure;
 }
 
-void SceneManager::Init()
+void SceneManager::Init(RenderData* _RD)
 {
 	// Create a basic scene and set up all of the scene manager systems.
 	// In future the scene manager should just intialise the first scene we want to enter
+	render_data = _RD;
 	game_manager.init();
+	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
-	current_scene.reset(new Scene);
+// 	current_scene.reset(new Scene);
 
+	loadScene(scene_loader.createScene("menu.mbmap"));
+	
 	Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
 	setMainCamera(camera);
 	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
 
-	UILabel* label = new UILabel;
-	label->setCanvasPosition(Vector2(0.4, 0.4));
-	label->setText("Super Indie Smash. \n Press P to start.");
-	game_ui.addUIObject(label);
+	//UILabel* label = new UILabel;
+	//label->setCanvasPosition(Vector2(0.4, 0.4));
+	//label->setText("Super Indie Smash. \n Press P to start.");
+	//game_ui.addUIObject(label);
 }
 
 void SceneManager::Update(GameStateData * game_state)
@@ -60,8 +64,9 @@ void SceneManager::Update(GameStateData * game_state)
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
 	{
-		current_scene->Update(game_state);
+		scene_audio.updateAudioManager();
 		collision_manager.performCollisionCheck();
+		current_scene->Update(game_state);
 	}
 	game_ui.tickUIObjects(game_state);
 	processSceneEvents();
@@ -117,15 +122,29 @@ void SceneManager::loadScene(string scene_name)
 	}
 }
 
-void SceneManager::loadScene(Scene * scene_name)
+void SceneManager::loadScene(Scene* scene_name)
 {
-	clearScene();
+	scene_audio.clear();
 	collision_manager.clearCollisionManager();
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
+
+
+	if (!scene_name) 
+	{
+		clearScene();
+		// current_scene.reset(new Scene);
+		return;
+	}
+
+	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
+	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++) 
+	{
+		setupScene2DObjects(current_scene->get2DObjectInScene(i));
+	}
 }
 
 void SceneManager::clearScene()
@@ -133,7 +152,7 @@ void SceneManager::clearScene()
 	if (current_scene) 
 	{
 		resetRenderState();
-		current_scene.reset(nullptr);
+		current_scene.reset(new Scene);
 	    setMainCamera(nullptr);
 	}
 }
@@ -154,6 +173,7 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	}
 
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
 
 	current_scene->add2DGameObjectToScene(new_object);
 }
@@ -205,4 +225,17 @@ void SceneManager::resetRenderState()
 {
 	// Add any other resetting routienes here.
 	render_data->m_resourceCount = 1;
+}
+
+void SceneManager::setupScene2DObjects(GameObject2D * object)
+{
+	object->assignWorldEventListener(scene_event_listener);
+
+	if (dynamic_cast<Player2D*>(object))
+	{
+		game_manager.registerPlayerInstance((Player2D*)object);
+	}
+
+	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
+	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());
 }
