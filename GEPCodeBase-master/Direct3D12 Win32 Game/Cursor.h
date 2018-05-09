@@ -26,13 +26,14 @@ class Cursor : public UIObject
 {
 
 public:
-	Cursor(std::string filename, RenderData* _RD);
+	Cursor(std::string filename, RenderData* _RD, int controller_id);
 	~Cursor() = default;
 
 	void CheckInput(GameStateData* _GSD);
 	void onCollision(MetroBrawlCollisionData  col_data);
 
-	bool getInteract(){ return interact; }
+	bool getInteract() { return interact; }
+	int getCollided() { return collider_tag; }
 
 private:
 	DirectX::GamePad::State controller_state;
@@ -42,10 +43,11 @@ private:
 
 	bool interact = false;
 	bool a_pressed = false;
+	int collider_tag = 0;
 
 	void Tick(GameStateData * _GSD) override;
 	void Render(RenderData * _RD) override;
 
 	Collider* col = new Collider(Vector2(m_pos), Vector2(40, 40), true);
-	
+
 };

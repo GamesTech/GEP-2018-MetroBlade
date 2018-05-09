@@ -5,7 +5,7 @@
 #include "GameStateData.h"
 
 using namespace std::placeholders;
-Cursor::Cursor(std::string filename, RenderData * _RD)
+Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
 {
 	sprite = new UISprite(filename, _RD);
 
@@ -14,6 +14,8 @@ Cursor::Cursor(std::string filename, RenderData * _RD)
 
 	col->assignCollisionEvent(std::bind(&Cursor::onCollision, this, _1));
 	object_components.addComponent(col);
+
+	this->controller_id = controller_id;
 }
 
 void Cursor::CheckInput(GameStateData * _GSD)
@@ -58,5 +60,9 @@ void Cursor::onCollision(MetroBrawlCollisionData col_data)
 	{
 		interact = false;
 	}
+
+	collider_tag = col_data.collider_object->getCollidersParent()->getTag();
 }
+
+
 

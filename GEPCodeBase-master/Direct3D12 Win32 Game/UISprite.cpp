@@ -24,7 +24,7 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 
 	object_components.addComponent(col);
 
-	
+
 
 	resourceUpload.Begin();
 
@@ -38,7 +38,7 @@ UISprite::UISprite(std::string filename, RenderData* _RD)
 	auto uploadResourcesFinished = resourceUpload.End(_RD->m_commandQueue.Get());
 
 	uploadResourcesFinished.wait();
-	
+
 
 }
 
@@ -53,10 +53,25 @@ void UISprite::setSprite(std::string filename, std::string fighter)
 	sprite = object_components.getComponentByType<Sprite>();
 }
 
+void UISprite::CheckInput(GameStateData * _GSD)
+{
+	controller_state = _GSD->m_gamePad->GetState(controller_id);
+
+	if (controller_state.IsAPressed())
+	{
+		a_pressed = true;
+	}
+	else
+	{
+		a_pressed = false;
+	}
+}
+
 void UISprite::changeSpriteRect(std::string filename, std::string fighter)
 {
 	sprite->setAnimationState(fighter);
 }
+
 
 void UISprite::onCollision(MetroBrawlCollisionData col_data)
 {
@@ -67,6 +82,7 @@ void UISprite::Tick(GameStateData * _GSD)
 {
 	col->tickComponent(_GSD);
 	col->setBoxOrigin(m_pos);
+	CheckInput(_GSD);
 
 	if (sprite != nullptr)
 	{

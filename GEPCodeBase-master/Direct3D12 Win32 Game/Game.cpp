@@ -233,27 +233,35 @@ void Game::Update(DX::StepTimer const& timer)
 
 		UISprite* fighter_1 = new UISprite("Fighter_1_profile", m_RD);
 		fighter_1->SetPos(Vector2(300, 200));
+		fighter_1->setTag(0);
 		scene.instanciateUIObject(fighter_1);
 		profile_pics.push_back(fighter_1);
 
 		UISprite* fighter_2 = new UISprite("Fighter_2_profile", m_RD);
 		fighter_2->SetPos(Vector2(500, 200));
+		fighter_2->setTag(1);
 		scene.instanciateUIObject(fighter_2);
 		profile_pics.push_back(fighter_2);
 
 		UISprite* fighter_3 = new UISprite("Fighter_3_profile", m_RD);
 		fighter_3->SetPos(Vector2(700, 200));
+		fighter_3->setTag(2);
 		scene.instanciateUIObject(fighter_3);
 		profile_pics.push_back(fighter_3);
 
 		UISprite* fighter_4 = new UISprite("Fighter_4_profile", m_RD);
 		fighter_4->SetPos(Vector2(900, 200));
+		fighter_4->setTag(3);
 		scene.instanciateUIObject(fighter_4);
 		profile_pics.push_back(fighter_4);
 
-		Cursor* player1_cursor = new Cursor("player1_cursor", m_RD);
+		Cursor* player1_cursor = new Cursor("player1_cursor", m_RD , 0);
 		scene.instanciateUIObject(player1_cursor);
 		cursors.push_back(player1_cursor);
+
+		Cursor* player2_cursor = new Cursor("player1_cursor", m_RD, 1);
+		scene.instanciateUIObject(player2_cursor);
+		cursors.push_back(player2_cursor);
 
 		scene.startGameManager();
 	}
@@ -312,7 +320,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlatform);
 	}
 
-	teamselect->update(cursors,profile_pics,teamview,teamview_images);
+	teamselect->update(cursors,teamview,teamview_images);
 
 	scene.Update(m_GSD);
 }
