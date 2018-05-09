@@ -234,13 +234,15 @@ enum MetroBrawlInputKeyBindings
 };
 
 
+constexpr int  MAX_KEYBOARD_VALUE = 254;
+
 /**
 *   Defined an input keybind.
 *   State of binds is updated each tick of the 
 */
 struct InputBind 
 {
-	std::string						  binding_name;
-	MetroBrawlKeyInput				key_identifier;  
-	int								   input_value;
+	std::string								  binding_name;
+	MetroBrawlInputKeyBindings				key_identifier;  
+	int									   input_value = 0;
 };

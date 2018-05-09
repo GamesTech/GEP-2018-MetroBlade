@@ -158,7 +158,7 @@ void Game::Update(DX::StepTimer const& timer)
 	ReadInput();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (input_manager.getKeyDown(Keyboard::Keys::P))
+	if (input_manager.getBindDown("Action"))
 	{
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -199,6 +199,7 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
+
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}

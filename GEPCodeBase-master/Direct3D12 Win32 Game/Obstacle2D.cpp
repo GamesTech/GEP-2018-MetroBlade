@@ -34,10 +34,10 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 
 	//GEP:: Lets go up the inheritance and share our functionality
 
-	if (_GSD->m_keyboardState.IsKeyDown(Keyboard::Tab)) 
-	{
-		object_components.getComponentByType<SoundComponent>()->Play();
-	}
+//	if (_GSD->m_keyboardState.IsKeyDown(Keyboard::Tab)) 
+//	{
+	//	object_components.getComponentByType<SoundComponent>()->Play();
+//	}
 }
 
 void Obstacle2D::onObjectCollision(MetroBrawlCollisionData col_data)

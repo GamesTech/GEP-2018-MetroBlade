@@ -41,21 +41,25 @@ public:
 	Vector2 getMouseCoordinates();
 	int   getMouseScrollWheelValue() const;
 
-	// Bound Input Accessors. 
-
+	// Input Bind Accessors. 
+	bool getBindDown(std::string  bind);
 
 private:
 	// per frame update routienes
+	void loadBinds();
 	void updateBindState();
+
+	InputBind*	findBind(std::string bind);
 
 private:
 	std::unique_ptr<DirectX::Keyboard>    keyboard_input = std::make_unique<DirectX::Keyboard>();
 	std::unique_ptr<DirectX::Mouse>		  mouse_input = std::make_unique<DirectX::Mouse>();
 	std::unique_ptr<DirectX::GamePad>	  gamepad_input = std::make_unique<DirectX::GamePad>();
 
-	// TODO - Consider Removing.
+	// Input state recorders. Allows us to retrieve input state without too much hassle.
 	DirectX::Keyboard::State			  keyboard_state;
 	DirectX::Mouse::State				  mouse_state;
+	std::vector<DirectX::GamePad::State>  gamepad_state = std::vector<DirectX::GamePad::State>(DirectX::GamePad::MAX_PLAYER_COUNT);
 
 private:
 	// Here we need to add binds. 

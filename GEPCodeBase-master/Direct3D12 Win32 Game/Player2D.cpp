@@ -109,7 +109,7 @@ void Player2D::Tick(GameStateData* _GSD)
 {
 	punch_collider->setBoxOrigin(m_pos + offset);
 	col->setBoxOrigin(m_pos);
-	CheckInput(_GSD);
+	// CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 
@@ -147,13 +147,13 @@ void Player2D::Tick(GameStateData* _GSD)
 		break;
 	}
 
-	if (_GSD->m_keyboardState.Escape)
-	{
-		// Testing for error components.
+	//if (_GSD->m_keyboardState.Escape)
+	//{
+	//	// Testing for error components.
 
-		// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
-		world.changeScene("clear"); 
-	}
+	//	// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
+	//	world.changeScene("clear"); 
+	//}
 
 	//GRAVITY
 	m_acc += (gravity * Vector2::UnitY);
