@@ -5,16 +5,13 @@
 *  @version v1.0
 *
 *  @section System Module
-*           Cursor UI
+*           TeamSelect UI
 *
-*  @brief Defines a Cursor Object.
+*  @brief Defines a TeamSelect Object.
 *
 *  @section Description
 *
-*	Utilises the built in functionality of UI Object with inheritance, and composition for UISprite.
-*   As the sprite is rendered directly inside Cursor the object can be instanciated rather than the sprite itself.
-*   The thumb stick axis provide multipliers for direction and speed is for the amount the cursor moves.
-* e.g. m_pos += stickAxis * speed
+* A class created to store the logic from game.cpp inside an object.
 */
 #pragma once
 
@@ -25,7 +22,16 @@
 class TeamSelect : public GameObject2D
 {
 public:
-	TeamSelect() = default;
+	TeamSelect();
 	~TeamSelect() = default;
 	void update(std::vector<Cursor*> cursors, std::vector<UISprite*> teamview, std::vector<std::string> teamview_images);
+	std::vector<int> getTeamSelection() { return teamSelection; }
+
+	void CentreOrigin() override;
+	 void Tick(GameStateData* _GSD) override;
+	 void Render(RenderData* _RD) override;
+
+private:
+	std::vector<int> teamSelection;
+	int tag = -1;
 };

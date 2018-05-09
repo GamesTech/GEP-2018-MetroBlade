@@ -123,5 +123,5 @@ private:
 	std::vector<Cursor*> cursors;
 	std::vector<std::string> teamview_images;
 
-	TeamSelect* teamselect;
+	TeamSelect* teamselect = nullptr;
 };

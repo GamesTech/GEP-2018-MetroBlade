@@ -431,7 +431,6 @@
     <ClCompile Include="Cursor.cpp">
       <Filter>Core\UI\Cursor</Filter>
     </ClCompile>
-    <ClCompile Include="TeamSelect.cpp" />
     <ClCompile Include="Physics2D.cpp">
       <Filter>Core\Physics\RigidBody</Filter>
     </ClCompile>
@@ -471,6 +470,9 @@
     </ClCompile>
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Core\GameObjects\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="TeamSelect.cpp">
+      <Filter>Core\UI\TeamSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

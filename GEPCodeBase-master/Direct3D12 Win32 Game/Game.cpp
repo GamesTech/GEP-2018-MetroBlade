@@ -13,6 +13,7 @@
 #include "UILabel.h"
 #include "UISprite.h"
 #include "Cursor.h"
+#include "TeamSelect.h"
 
 extern void ExitGame();
 
@@ -58,11 +59,16 @@ Game::~Game()
 	m_mouse.reset();
 
 	m_graphicsMemory.reset();
+	delete teamselect;
+	teamselect = nullptr;
 }
 
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
 {
+
+	teamselect = new TeamSelect();
+
 	m_window = window;
 	m_outputWidth = std::max(width, 1);
 	m_outputHeight = std::max(height, 1);
