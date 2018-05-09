@@ -55,6 +55,8 @@ void Item::UseItem(RenderData* _RD, Player2D* player, ItemType type)
 		proj = new Projectile(_RD, "projectile_item", player->getDirection(), player);
 		world.instantiateToScene(proj);
 		break;
+	case HAMMER:
+		break;
 	}
 
 }

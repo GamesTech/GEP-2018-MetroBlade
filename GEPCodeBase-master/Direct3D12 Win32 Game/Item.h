@@ -5,9 +5,10 @@
 class Projectile;
 class Player2D;
 enum ItemType {
-	SPEED,
+	HAMMER,
 	HEALTH,
-	PROJECTILE
+	PROJECTILE,
+	BOMB
 };
 enum ItemState {
 	NONE,

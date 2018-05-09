@@ -341,6 +341,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Obstacle2D.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Hammer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -461,6 +462,7 @@
     </ClCompile>
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Hammer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
