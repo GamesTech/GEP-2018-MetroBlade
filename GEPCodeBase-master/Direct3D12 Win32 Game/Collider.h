@@ -31,7 +31,7 @@ public:
 
 	Vector2 getBoxMidpoint();
 	Vector2 getBoxDimenstions();
-
+	void setBoxDimensions(Vector2 new_dimensions);
 	Vector2 getMaxValues();
 
 	void isColliderActive(bool is_active);

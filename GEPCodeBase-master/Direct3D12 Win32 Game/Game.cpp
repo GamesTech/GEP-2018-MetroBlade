@@ -226,7 +226,6 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
-		m_items.push_back(test_item);
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}

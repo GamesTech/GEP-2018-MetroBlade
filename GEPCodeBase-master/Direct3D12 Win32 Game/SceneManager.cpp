@@ -65,8 +65,8 @@ void SceneManager::Update(GameStateData * game_state)
 	if (current_scene)
 	{
 		scene_audio.updateAudioManager();
-		collision_manager.performCollisionCheck();
 		current_scene->Update(game_state);
+		collision_manager.performCollisionCheck();
 	}
 	game_ui.tickUIObjects(game_state);
 	processSceneEvents();

@@ -15,6 +15,8 @@ Projectile::Projectile(RenderData* _RD, string _filename, Vector2 new_direction,
 
 	player_original = original;
 
+	col->isColliderImmediate(true);
+	col->setBoxDimensions(Vector2(50, 50));
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Projectile::onCollision, this, _1));
 	object_components.addComponent(col);
@@ -39,6 +41,7 @@ void Projectile::Tick(GameStateData* _GSD)
 	{
 		sprite->setLoop(false);
 		sprite->setAnimationState("hit");
+		col->isColliderActive(false);
 	}
 	else
 	{

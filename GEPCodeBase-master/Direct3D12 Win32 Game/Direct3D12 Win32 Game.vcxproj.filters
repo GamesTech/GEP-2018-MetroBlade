@@ -287,12 +287,6 @@
     <ClInclude Include="UISprite.h">
       <Filter>Core\UI\UISprite</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle2D.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="MetroBrawlCollisionManager.h">
       <Filter>Core\Physics\Collision</Filter>
     </ClInclude>
@@ -344,9 +338,9 @@
     <ClInclude Include="Sound.h">
       <Filter>Core\Audio\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Core\GameObjects\2D\Headers</Filter>
-    </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Obstacle2D.h" />
+    <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -419,9 +413,6 @@
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="MetroBrawlCollisionManager.cpp">
       <Filter>Core\Physics\Collision</Filter>
     </ClCompile>
@@ -468,9 +459,8 @@
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Core\GameObjects\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Core\GameObjects\2D\Source</Filter>
-    </ClCompile>
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
