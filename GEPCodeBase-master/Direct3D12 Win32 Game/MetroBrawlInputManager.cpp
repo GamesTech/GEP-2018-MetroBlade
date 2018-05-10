@@ -93,10 +93,14 @@ bool MetroBrawlInputManager::getBindDown(std::string bind)
 	{
 		isDown = bind_ptr->input_value;
 	}
-	bind_ptr = findControllerBind(bind);
-	if (bind_ptr)
+
+	for (int i = 0; i < gamepad_state.size(); i++) 
 	{
-		isDown |= bind_ptr->input_value;
+		bind_ptr = findControllerBind(bind, i);
+		if (bind_ptr)
+		{
+			isDown |= bind_ptr->input_value;
+		}
 	}
 
 	return (bool)isDown;
@@ -215,7 +219,7 @@ InputBind* MetroBrawlInputManager::findBind(std::string bind)
 	return nullptr;
 }
 
-InputBind * MetroBrawlInputManager::findControllerBind(std::string bind)
+InputBind* MetroBrawlInputManager::findControllerBind(std::string bind)
 {
 	// Check the controllers next.
 	for (auto& controller : gamepad_state)
@@ -231,5 +235,22 @@ InputBind * MetroBrawlInputManager::findControllerBind(std::string bind)
 			}
 		}
 	}
+
+	return nullptr;
+}
+
+InputBind* MetroBrawlInputManager::findControllerBind(std::string bind, int device_id)
+{
+	if (gamepad_state[device_id].state.IsConnected())
+	{
+		for (auto& bind_entity : gamepad_state[device_id].binds)
+		{
+			if (bind_entity.binding_name == bind)
+			{
+				return &bind_entity;
+			}
+		}
+	}
+
 	return nullptr;
 }

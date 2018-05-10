@@ -58,8 +58,9 @@ private:
 
 	void getBindButtonValue(InputBind& value);
 
-	InputBind*	findBind(std::string bind);
+	InputBind* findBind(std::string bind);
 	InputBind* findControllerBind(std::string bind);
+	InputBind* findControllerBind(std::string bind, int device_id);
 
 private:
 	std::unique_ptr<DirectX::Keyboard>    keyboard_input = std::make_unique<DirectX::Keyboard>();
