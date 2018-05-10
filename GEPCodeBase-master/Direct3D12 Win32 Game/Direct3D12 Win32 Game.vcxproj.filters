@@ -188,6 +188,15 @@
     <Filter Include="Core\GameObjects\Spawner">
       <UniqueIdentifier>{7608465e-8c31-4773-af94-d463fb637985}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Input\&quot;Drivers&quot;">
+      <UniqueIdentifier>{0cd6ed18-bc9b-4374-bd51-c6bfa5b01837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input\&quot;Drivers&quot;\Arcade">
+      <UniqueIdentifier>{ae37d795-8dfc-4ae8-b0ff-c078e1791a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input\&quot;Drivers&quot;\Arcade\Controller">
+      <UniqueIdentifier>{2966e6d9-ff19-4f07-93d3-c454a0e64f10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -365,6 +374,12 @@
     <ClInclude Include="Spawner.h">
       <Filter>Core\GameObjects\Spawner</Filter>
     </ClInclude>
+    <ClInclude Include="ArcadeControllerModule.h">
+      <Filter>Core\Input\"Drivers"\Arcade</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcadeController.h">
+      <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -495,6 +510,7 @@
     <ClCompile Include="Spawner.cpp">
       <Filter>Core\GameObjects\Spawner</Filter>
     </ClCompile>
+    <ClCompile Include="ArcadeControllerModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -44,7 +44,6 @@ void SceneManager::Init(RenderData* _RD)
 	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
-// 	current_scene.reset(new Scene);
 
 	loadScene(scene_loader.createScene("menu.mbmap"));
 	
@@ -52,11 +51,6 @@ void SceneManager::Init(RenderData* _RD)
 	setMainCamera(camera);
 	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
-
-	//UILabel* label = new UILabel;
-	//label->setCanvasPosition(Vector2(0.4, 0.4));
-	//label->setText("Super Indie Smash. \n Press P to start.");
-	//game_ui.addUIObject(label);
 }
 
 void SceneManager::Update(GameStateData * game_state)

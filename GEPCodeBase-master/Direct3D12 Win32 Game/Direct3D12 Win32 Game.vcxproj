@@ -236,7 +236,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;ARCADE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
       <AdditionalIncludeDirectories>..\DirectXTK12-master\Inc;$(ProjectDir)..\Libs\jsoncons\include</AdditionalIncludeDirectories>
@@ -254,6 +254,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="ArcadeController.h" />
+    <ClInclude Include="ArcadeControllerModule.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
@@ -313,6 +315,7 @@
     <ClInclude Include="UITest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArcadeControllerModule.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
