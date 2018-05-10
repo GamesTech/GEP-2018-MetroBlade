@@ -242,6 +242,7 @@ constexpr int  MAX_KEY_SWITCH_VALUE = 268;
 // DeviceID constatnts
 constexpr int DEVICE_KEYBOARD_AND_MOUSE = -1;
 
+constexpr int DEVICE_CONTROLLER_COUNT_ARCADE = 1;
 constexpr int DEVICE_CONTROLLER_BUTTONS_COUNT = 16;
 
 /**
@@ -254,7 +255,7 @@ struct InputBind
 	MetroBrawlInputActions					key_identifier;  
 	int									   input_value = 0;
 	int								  prev_input_value = 0;
-	int										device_id = DEVICE_KEYBOARD_AND_MOUSE;
+	int				 device_id = DEVICE_KEYBOARD_AND_MOUSE;
 };
 
 /*

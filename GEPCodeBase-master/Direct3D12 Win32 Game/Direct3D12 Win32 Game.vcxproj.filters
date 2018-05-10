@@ -510,7 +510,10 @@
     <ClCompile Include="Spawner.cpp">
       <Filter>Core\GameObjects\Spawner</Filter>
     </ClCompile>
-    <ClCompile Include="ArcadeControllerModule.cpp" />
+    <ClCompile Include="ArcadeControllerModule.cpp">
+      <Filter>Core\Input\"Drivers"\Arcade</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcadeController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

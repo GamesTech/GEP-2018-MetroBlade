@@ -22,6 +22,10 @@
 
 #include "InputBind.h"
 
+#ifdef ARCADE
+#include "ArcadeControllerModule.h"
+#endif
+
 class MetroBrawlInputManager 
 {
 public:
@@ -44,7 +48,7 @@ public:
 	// Controller input accessors.
 	int getControllerKeyValue(MetroBrawlInputActions  controller_button, int device_id);
 
-	// Input Bind Accessors. 
+	// Input Bind Accessors.
 	bool getBindDown(std::string  bind);
 
 private:
@@ -72,9 +76,16 @@ private:
 	DirectX::Mouse::State				  mouse_state;
 	std::vector<ControllerStates>		  gamepad_state = std::vector<ControllerStates>(DirectX::GamePad::MAX_PLAYER_COUNT);
 
+#ifdef ARCADE
+	ArcadeControllerModule				  arcade_controls = ArcadeControllerModule(keyboard_input.get());
+#else
+	// std::vector<ControllerStates>		  gamepad_state = std::vector<ControllerStates>(DirectX::GamePad::MAX_PLAYER_COUNT);
+#endif
+
 private:
 
 	// Here we need to add binds. 
-	std::vector<InputBind>				  action_binds;
+	std::vector<InputBind>				  action_binds; // Keyboard and mouse binds go here.
+
 	JSONFileReader						  input_bind_file;
 };

@@ -7,6 +7,11 @@ void MetroBrawlInputManager::init(HWND& window)
 	mouse_input->SetWindow(window);
 	mouse_input->SetMode(DirectX::Mouse::Mode::MODE_RELATIVE);
 	loadBinds();
+
+#ifdef ARCADE
+	// Here we initialise the ARCADE controllers.
+	arcade_controls.initModule("");
+#endif
 }
 
 void MetroBrawlInputManager::tick()
@@ -14,6 +19,11 @@ void MetroBrawlInputManager::tick()
 	// Here we update the state of inputs in the binds.
 	keyboard_state = keyboard_input->GetState();
 	mouse_state = mouse_input->GetState();
+
+#ifdef ARCADE 
+	arcade_controls.tickDriver();
+#endif
+
 	updateControllerState();
 
 	updateBindState();
@@ -116,6 +126,8 @@ bool MetroBrawlInputManager::getBindDown(std::string bind)
 		{
 			isDown |= abs(bind_ptr->input_value);
 		}
+
+		if (isDown) break;
 	}
 
 	return (bool)isDown;
@@ -125,7 +137,18 @@ void MetroBrawlInputManager::updateControllerState()
 {
 	for (int i = 0; i < DirectX::GamePad::MAX_PLAYER_COUNT; i++)
 	{
+#ifdef ARCADE
+		if (i < DEVICE_CONTROLLER_COUNT_ARCADE)
+		{
+			gamepad_state[i].state = arcade_controls.getControllerState(i);
+		}
+		else 
+		{
+			gamepad_state[i].state = gamepad_input->GetState(i);
+		}
+#else
 		gamepad_state[i].state = gamepad_input->GetState(i);
+#endif
 	}
 }
 

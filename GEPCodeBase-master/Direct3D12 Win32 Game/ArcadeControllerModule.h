@@ -20,15 +20,21 @@
 
 #include "pch.h"
 
-class ArcadeControllerModule 
+#include "ArcadeController.h"
+#include "JSONFileReader.h"
+
+class ArcadeControllerModule
 {
 public:
 	ArcadeControllerModule(DirectX::Keyboard*  keyboard_refrence);
 
-	void initModule(); // Load the game controllers here and then update
-
+	void initModule(std::string bind_file); // Load the game controllers here and then update
 	void tickDriver(); // Updates controller state. 
 
+	DirectX::GamePad::State getControllerState(int index);
+
 private:
-	DirectX::Keyboard*  keyboard;
+	std::vector<ArcadeController>       controllers = std::vector<ArcadeController>(2);
+	DirectX::Keyboard*					keyboard = nullptr;
+	JSONFileReader						bind_file_parser;
 };
