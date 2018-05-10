@@ -39,7 +39,7 @@ private:
 	DirectX::GamePad::State controller_state;
 	UISprite * sprite = nullptr;
 	int controller_id = 0;
-	float speed = 2.0f;
+	float speed = 0.001f;
 
 	bool interact = false;
 	bool a_pressed = false;
@@ -48,6 +48,7 @@ private:
 	void Tick(GameStateData * _GSD) override;
 	void Render(RenderData * _RD) override;
 
-	Collider* col = new Collider(Vector2(m_pos), Vector2(40, 40), true);
+	Collider* col = new Collider(Vector2(render_position), Vector2(40, 40), true);
+	Vector2 render_position;
 
 };

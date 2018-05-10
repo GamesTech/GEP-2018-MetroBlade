@@ -25,9 +25,9 @@ void Cursor::CheckInput(GameStateData * _GSD)
 	float stick_x = controller_state.thumbSticks.leftX;
 	float stick_y = controller_state.thumbSticks.leftY;
 
-	SetPos(Vector2(GetPos().x + (stick_x*speed), GetPos().y - (stick_y*speed)));
+	setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
 
-	sprite->SetPos(GetPos());
+	sprite->setCanvasPosition(getCanvasPosition());
 
 	if (controller_state.IsAPressed())
 	{
@@ -42,11 +42,13 @@ void Cursor::CheckInput(GameStateData * _GSD)
 void Cursor::Tick(GameStateData * _GSD)
 {
 	CheckInput(_GSD);
-	col->setBoxOrigin(m_pos);
+	col->setBoxOrigin(render_position);
 }
 
 void Cursor::Render(RenderData * _RD)
 {
+	Vector2 viewport = _RD->m_cam->get2DViewport();
+	render_position = Vector2(canvas_position.x * viewport.x, canvas_position.y * viewport.y);
 	sprite->Render(_RD);
 }
 

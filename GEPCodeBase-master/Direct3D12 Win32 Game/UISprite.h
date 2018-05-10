@@ -29,8 +29,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource>   texture;
 	std::shared_ptr<RECT>   src_rect /*= std::make_shared<RECT>()*/;
 	int resource_number = -1;
-	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 100), true);
+	Collider* col = new Collider(Vector2(canvas_position), Vector2(100, 100), true);
 	void onCollision(MetroBrawlCollisionData  col_data);
 	Sprite* sprite = nullptr;
 	int controller_id = 0;
+
+	Vector2 render_position;
+
 };

@@ -81,7 +81,7 @@ void UISprite::onCollision(MetroBrawlCollisionData col_data)
 void UISprite::Tick(GameStateData * _GSD)
 {
 	col->tickComponent(_GSD);
-	col->setBoxOrigin(m_pos);
+	col->setBoxOrigin(render_position);
 	CheckInput(_GSD);
 
 	if (sprite != nullptr)
@@ -92,7 +92,10 @@ void UISprite::Tick(GameStateData * _GSD)
 
 void UISprite::Render(RenderData * _RD)
 {
-	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, src_rect.get());
+	Vector2 viewport = _RD->m_cam->get2DViewport();
+	 render_position = Vector2(canvas_position.x * viewport.x, canvas_position.y * viewport.y);
+
+	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), render_position, src_rect.get());
 }
 
 
