@@ -37,21 +37,29 @@ public:
 	// Direct Input accessors.
 	bool getKeyDown(DirectX::Keyboard::Keys   key);
 	bool getKeyUp(DirectX::Keyboard::Keys   key);
-	bool getMouseButtonDown(MetroBrawlMouseButton mouse_button);
+	bool getMouseButtonDown(MetroBrawlInputActions mouse_button);
 	Vector2 getMouseCoordinates();
 	int   getMouseScrollWheelValue() const;
+
+	// Controller input accessors.
+	bool getControllerKeyDown(MetroBrawlInputActions  controller_button, int device_id);
 
 	// Input Bind Accessors. 
 	bool getBindDown(std::string  bind);
 
 private:
-	// per frame update routienes
+	void updateControllerState();
+
 	void loadBinds();
+	void loadControllerBinds(InputBind& new_bind);
+
 	void updateBindState();
+	void updateControllerBindState();
 
 	void getBindButtonValue(InputBind& value);
 
 	InputBind*	findBind(std::string bind);
+	InputBind* findControllerBind(std::string bind);
 
 private:
 	std::unique_ptr<DirectX::Keyboard>    keyboard_input = std::make_unique<DirectX::Keyboard>();
@@ -61,9 +69,10 @@ private:
 	// Input state recorders. Allows us to retrieve input state without too much hassle.
 	DirectX::Keyboard::State			  keyboard_state;
 	DirectX::Mouse::State				  mouse_state;
-	std::vector<DirectX::GamePad::State>  gamepad_state = std::vector<DirectX::GamePad::State>(DirectX::GamePad::MAX_PLAYER_COUNT);
+	std::vector<ControllerStates>		  gamepad_state = std::vector<ControllerStates>(DirectX::GamePad::MAX_PLAYER_COUNT);
 
 private:
+
 	// Here we need to add binds. 
 	std::vector<InputBind>				  action_binds;
 	JSONFileReader						  input_bind_file;

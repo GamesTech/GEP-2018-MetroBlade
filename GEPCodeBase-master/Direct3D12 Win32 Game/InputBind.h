@@ -30,7 +30,7 @@ using MetroBrawlKeyInput = int;
 *   Defines all interactable Keyboard, Mouse and Gamepad Buttons
 *   Based on the DirectXTK input structure system with values mapped according to this base structure.
 */
-enum MetroBrawlInputKeyBindings
+enum MetroBrawlInputActions
 {
     KEY_NULL = 0,
 
@@ -234,14 +234,10 @@ enum MetroBrawlInputKeyBindings
 	KEY_CONTROLLER_RIGHT_SHOLDER = 0x110,
 };
 
-enum MetroBrawlMouseButton 
-{
-	KEY_MOUSE_LEFTBUTTON = 0xff,
-	KEY_MOUSE_MIDDLEBUTTON = 0x100,
-	KEY_MOUSE_RIGHTBUTTON = 0x101,
-};
-
 constexpr int  MAX_KEY_SWITCH_VALUE = 268;
+
+// DeviceID constatnts
+constexpr int DEVICE_KEYBOARD_AND_MOUSE = -1;
 
 /**
 *   Defined an input keybind.
@@ -250,7 +246,19 @@ constexpr int  MAX_KEY_SWITCH_VALUE = 268;
 struct InputBind 
 {
 	std::string								  binding_name;
-	MetroBrawlInputKeyBindings				key_identifier;  
+	MetroBrawlInputActions					key_identifier;  
 	int									   input_value = 0;
 	int								  prev_input_value = 0;
+	int										device_id = DEVICE_KEYBOARD_AND_MOUSE;
+};
+
+/*
+*   Defines corrisponding binds for each controller plugged into the 
+*   PC. Allows for input to be read from all or individual controllers.
+*   This will also be utalised by the arcade machiene controllers.
+*/
+struct ControllerStates 
+{
+	std::vector<InputBind>  binds;
+	DirectX::GamePad::State  state;
 };
