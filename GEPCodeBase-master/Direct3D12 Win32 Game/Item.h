@@ -2,6 +2,7 @@
 #include "ImageGO2D.h"
 #include "Sprite.h"
 
+class Bomb;
 class Hammer;
 class Projectile;
 class Player2D;
@@ -41,5 +42,6 @@ private:
 	const int health_amount = 25;
 	Projectile* proj = nullptr;
 	Hammer* ham = nullptr;
+	Bomb* bomb = nullptr;
 	void onCollision(MetroBrawlCollisionData  col_data);
 };

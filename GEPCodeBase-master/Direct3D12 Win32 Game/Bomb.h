@@ -13,6 +13,8 @@ private:
 	Sprite* sprite = nullptr;
 	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
 
-	const float max_time = 4.0f;
+	const float max_time = 3.0f;
 	float current_time = max_time;
+
+	void onCollision(MetroBrawlCollisionData  col_data);
 };

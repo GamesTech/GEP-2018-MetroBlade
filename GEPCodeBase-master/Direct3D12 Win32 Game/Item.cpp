@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "Projectile.h"
 #include "Hammer.h"
+#include "Bomb.h"
 
 Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
 {
@@ -59,6 +60,10 @@ void Item::UseItem(RenderData* _RD, Player2D* player, ItemType type)
 	case HAMMER:
 		ham = new Hammer(_RD, "hammer_item", player->getDirection(), player);
 		world.instantiateToScene(ham);
+		break;
+	case BOMB:
+		bomb = new Bomb(_RD, "bomb_item", player->getDirection(), player);
+		world.instantiateToScene(bomb);
 		break;
 	}
 

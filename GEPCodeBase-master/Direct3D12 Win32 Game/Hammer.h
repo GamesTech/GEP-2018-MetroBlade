@@ -23,8 +23,5 @@ private:
 
 	bool alive = true;
 
-
-
 	void onCollision(MetroBrawlCollisionData  col_data);
-
 };
