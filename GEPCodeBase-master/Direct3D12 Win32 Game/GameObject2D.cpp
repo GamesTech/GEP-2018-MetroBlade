@@ -26,4 +26,3 @@ void GameObject2D::assignSceneManager(SceneManager* manager)
 {
 	world.assignSceneManager(manager);
 }
-
