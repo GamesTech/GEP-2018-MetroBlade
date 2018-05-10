@@ -66,20 +66,35 @@ int MetroBrawlInputManager::getMouseScrollWheelValue() const
 	return mouse_input->GetState().scrollWheelValue;
 }
 
-bool MetroBrawlInputManager::getControllerKeyDown(MetroBrawlInputActions controller_button, int device_id)
+int MetroBrawlInputManager::getControllerKeyValue(MetroBrawlInputActions controller_button, int device_id)
 {
-	// Check button keys.
-	bool isDown = false;
-	switch (controller_button) 
-	{
-		case MetroBrawlInputActions::KEY_CONTROLLER_A:
-		{
-			isDown = gamepad_state[device_id].state.IsAPressed();
-			break;
-		}
-	}
+	// Check button keys. Values can be cast according to data needs. 
+	int key_value = 0;
+	const int key_bind = ((int)controller_button - 259);
 
-	return isDown;
+	int key_values[DEVICE_CONTROLLER_BUTTONS_COUNT] = // Map of the key values used to retrieve the correct number.
+	{
+		gamepad_state[device_id].state.buttons.a,
+		gamepad_state[device_id].state.buttons.b,
+		gamepad_state[device_id].state.buttons.x,
+		gamepad_state[device_id].state.buttons.y,
+		gamepad_state[device_id].state.dpad.up,
+		gamepad_state[device_id].state.dpad.down,
+		gamepad_state[device_id].state.dpad.left,
+		gamepad_state[device_id].state.dpad.right,
+		gamepad_state[device_id].state.buttons.start,
+		gamepad_state[device_id].state.buttons.back,
+		gamepad_state[device_id].state.thumbSticks.leftX,
+		gamepad_state[device_id].state.thumbSticks.leftY,
+		gamepad_state[device_id].state.thumbSticks.rightX,
+		gamepad_state[device_id].state.thumbSticks.rightY,
+		gamepad_state[device_id].state.buttons.leftShoulder,
+		gamepad_state[device_id].state.buttons.rightShoulder
+	};
+	
+	key_value = key_values[key_bind];
+
+	return key_value;
 }
 
 bool MetroBrawlInputManager::getBindDown(std::string bind)
@@ -99,7 +114,7 @@ bool MetroBrawlInputManager::getBindDown(std::string bind)
 		bind_ptr = findControllerBind(bind, i);
 		if (bind_ptr)
 		{
-			isDown |= bind_ptr->input_value;
+			isDown |= abs(bind_ptr->input_value);
 		}
 	}
 
@@ -111,13 +126,7 @@ void MetroBrawlInputManager::updateControllerState()
 	for (int i = 0; i < DirectX::GamePad::MAX_PLAYER_COUNT; i++)
 	{
 		gamepad_state[i].state = gamepad_input->GetState(i);
-
-		for (auto bind : gamepad_state[i].binds) 
-		{
-			bind.device_id = i;
-		}
 	}
-
 }
 
 void MetroBrawlInputManager::loadBinds()
@@ -187,7 +196,7 @@ void MetroBrawlInputManager::updateControllerBindState()
 			for (auto& bind : controller.binds)
 			{
 				bind.prev_input_value = bind.input_value;
-				bind.input_value = getControllerKeyDown(bind.key_identifier, bind.device_id);
+				bind.input_value = getControllerKeyValue(bind.key_identifier, bind.device_id);
 			}
 		}
 	}

@@ -42,7 +42,7 @@ public:
 	int   getMouseScrollWheelValue() const;
 
 	// Controller input accessors.
-	bool getControllerKeyDown(MetroBrawlInputActions  controller_button, int device_id);
+	int getControllerKeyValue(MetroBrawlInputActions  controller_button, int device_id);
 
 	// Input Bind Accessors. 
 	bool getBindDown(std::string  bind);
