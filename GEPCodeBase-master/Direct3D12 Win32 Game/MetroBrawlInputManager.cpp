@@ -33,9 +33,30 @@ bool MetroBrawlInputManager::getKeyUp(DirectX::Keyboard::Keys key)
 	return keyboard_input->GetState().IsKeyUp(key);
 }
 
-bool MetroBrawlInputManager::getMouseButtonDown()
+bool MetroBrawlInputManager::getMouseButtonDown(MetroBrawlMouseButton mouse_button)
 {
-	return true;
+	bool isDown = false;
+
+	switch (mouse_button) 
+	{
+		case KEY_MOUSE_LEFTBUTTON: 
+		{
+			isDown = mouse_state.leftButton;
+			break;
+		}
+		case KEY_MOUSE_RIGHTBUTTON:
+		{
+			isDown = mouse_state.rightButton;
+			break;
+		}
+		case KEY_MOUSE_MIDDLEBUTTON:
+		{
+			isDown = mouse_state.rightButton;
+			break;
+		}
+	}
+
+	return isDown;
 }
 
 Vector2 MetroBrawlInputManager::getMouseCoordinates()
@@ -74,11 +95,31 @@ void MetroBrawlInputManager::updateBindState()
 	// Update state information for every type of bind.
 	for (auto& bind_entity : action_binds)
     {
-		if (bind_entity.key_identifier <= MAX_KEYBOARD_VALUE) 
+		bind_entity.prev_input_value = bind_entity.input_value;
+
+		if (bind_entity.key_identifier <= MAX_KEY_SWITCH_VALUE)
 		{
 			// Key State so value returned should be a bool. 
-			bind_entity.input_value = (int)keyboard_state.IsKeyDown((DirectX::Keyboard::Keys)bind_entity.key_identifier);
+			getBindButtonValue(bind_entity);
 		}
+		else 
+		{
+			// Its a scale input and a mouse
+			bind_entity.input_value = mouse_state.scrollWheelValue;
+		}
+	}
+}
+
+void MetroBrawlInputManager::getBindButtonValue(InputBind& value)
+{
+	if (value.key_identifier <= 0xfe) 
+	{
+		value.input_value = (int)keyboard_state.IsKeyDown((DirectX::Keyboard::Keys)value.key_identifier);
+	}
+	else 
+	{
+		// Its a mouse button.
+		value.input_value = (int)getMouseButtonDown((MetroBrawlMouseButton)value.key_identifier);
 	}
 }
 

@@ -37,7 +37,7 @@ public:
 	// Direct Input accessors.
 	bool getKeyDown(DirectX::Keyboard::Keys   key);
 	bool getKeyUp(DirectX::Keyboard::Keys   key);
-	bool getMouseButtonDown();
+	bool getMouseButtonDown(MetroBrawlMouseButton mouse_button);
 	Vector2 getMouseCoordinates();
 	int   getMouseScrollWheelValue() const;
 
@@ -48,6 +48,8 @@ private:
 	// per frame update routienes
 	void loadBinds();
 	void updateBindState();
+
+	void getBindButtonValue(InputBind& value);
 
 	InputBind*	findBind(std::string bind);
 

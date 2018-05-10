@@ -225,16 +225,23 @@ enum MetroBrawlInputKeyBindings
 	KEY_CONTROLLER_DPAD_DOWN = 0x108,
 	KEY_CONTROLLER_DPAD_LEFT = 0x109,
 	KEY_CONTROLLER_DPAD_RIGHT = 0x10A,
-	KEY_CONTROLLER_LEFT_THUMB = 0x10B,
-	KEY_CONTROLLER_RIGHT_THUMB = 0x10C,
-	KEY_CONTROLLER_LEFT_SHOLDER = 0x10D,
-	KEY_CONTROLLER_RIGHT_SHOLDER = 0x10E,
-	KEY_CONTROLLER_START = 0x10F,
-	KEY_CONTROLLER_BACK = 0x110,
+	KEY_CONTROLLER_START = 0x10B,
+	KEY_CONTROLLER_BACK = 0x10C,
+
+	KEY_CONTROLLER_LEFT_THUMB = 0x10D,
+	KEY_CONTROLLER_RIGHT_THUMB = 0x10E,
+	KEY_CONTROLLER_LEFT_SHOLDER = 0x10F,
+	KEY_CONTROLLER_RIGHT_SHOLDER = 0x110,
 };
 
+enum MetroBrawlMouseButton 
+{
+	KEY_MOUSE_LEFTBUTTON = 0xff,
+	KEY_MOUSE_MIDDLEBUTTON = 0x100,
+	KEY_MOUSE_RIGHTBUTTON = 0x101,
+};
 
-constexpr int  MAX_KEYBOARD_VALUE = 254;
+constexpr int  MAX_KEY_SWITCH_VALUE = 268;
 
 /**
 *   Defined an input keybind.
@@ -245,4 +252,5 @@ struct InputBind
 	std::string								  binding_name;
 	MetroBrawlInputKeyBindings				key_identifier;  
 	int									   input_value = 0;
+	int								  prev_input_value = 0;
 };
