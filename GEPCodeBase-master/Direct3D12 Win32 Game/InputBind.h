@@ -238,6 +238,7 @@ enum MetroBrawlInputActions
 
 constexpr int  MAX_KEY_SWITCH_VALUE = 268;
 
+
 // DeviceID constatnts
 constexpr int DEVICE_KEYBOARD_AND_MOUSE = -1;
 
