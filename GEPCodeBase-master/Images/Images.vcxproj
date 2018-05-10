@@ -168,6 +168,11 @@
   <ItemGroup>
     <ImageContentTask Include="teamview_spritesheet.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="player2_cursor.png" />
+    <ImageContentTask Include="player3_cursor.png" />
+    <ImageContentTask Include="player4_cursor.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

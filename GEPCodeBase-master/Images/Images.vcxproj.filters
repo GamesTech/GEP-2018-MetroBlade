@@ -22,6 +22,9 @@
     <ImageContentTask Include="player1_cursor.png" />
     <ImageContentTask Include="blank.png" />
     <ImageContentTask Include="teamview_spritesheet.png" />
+    <ImageContentTask Include="player4_cursor.png" />
+    <ImageContentTask Include="player2_cursor.png" />
+    <ImageContentTask Include="player3_cursor.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

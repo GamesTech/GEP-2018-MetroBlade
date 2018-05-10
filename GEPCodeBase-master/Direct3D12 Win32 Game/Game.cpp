@@ -265,9 +265,17 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciateUIObject(player1_cursor);
 		cursors.push_back(player1_cursor);
 
-		//Cursor* player2_cursor = new Cursor("player1_cursor", m_RD, 1);
-		//scene.instanciateUIObject(player2_cursor);
-		//cursors.push_back(player2_cursor);
+		Cursor* player2_cursor = new Cursor("player2_cursor", m_RD, 1);
+		scene.instanciateUIObject(player2_cursor);
+		cursors.push_back(player2_cursor);
+
+		Cursor* player3_cursor = new Cursor("player3_cursor", m_RD, 2);
+		scene.instanciateUIObject(player3_cursor);
+		cursors.push_back(player3_cursor);
+
+		Cursor* player4_cursor = new Cursor("player4_cursor", m_RD, 3);
+		scene.instanciateUIObject(player4_cursor);
+		cursors.push_back(player4_cursor);
 
 		scene.startGameManager();
 	}
