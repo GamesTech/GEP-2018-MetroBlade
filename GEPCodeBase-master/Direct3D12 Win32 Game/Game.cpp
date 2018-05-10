@@ -270,19 +270,19 @@ void Game::Update(DX::StepTimer const& timer)
 
 		//Adds all teams coloured panels to UISprite Vector
 		UISprite* red_team = new UISprite("RedTeamUIPanel", m_RD);
-		red_team->SetPos(Vector2(200.0, 500.0));
+		red_team->setCanvasPosition(Vector2(0.1, 0.7));
 		team_colours.push_back(red_team);
 
 		UISprite* green_team = new UISprite("GreenTeamUIPanel", m_RD);
-		green_team->SetPos(Vector2(400.0, 500.0));
+		green_team->setCanvasPosition(Vector2(0.3, 0.7));
 		team_colours.push_back(green_team);
 
 		UISprite* blue_team = new UISprite("BlueTeamUIPanel", m_RD);
-		blue_team->SetPos(Vector2(600.0, 500.0));
+		blue_team->setCanvasPosition(Vector2(0.5, 0.7));
 		team_colours.push_back(blue_team);
 
 		UISprite* yellow_team = new UISprite("YellowTeamUIPanel", m_RD);
-		yellow_team->SetPos(Vector2(800.0, 500.0));
+		yellow_team->setCanvasPosition(Vector2(0.7, 0.7));
 		team_colours.push_back(yellow_team);
 
 		/**Only instanciates team colours based on number of players*/
@@ -297,16 +297,16 @@ void Game::Update(DX::StepTimer const& timer)
 		*/
 		
 		UILabel* player1_damage = new UILabel;
-		createLabel(player1_damage, Vector2(0.16, 0.7));
+		createLabel(player1_damage, Vector2(0.125, 0.75));
 
 		UILabel* player2_damage = new UILabel;
-		createLabel(player2_damage, Vector2(0.31, 0.7));
+		createLabel(player2_damage, Vector2(0.325, 0.75));
 
 		UILabel* player3_damage = new UILabel;
-		createLabel(player3_damage, Vector2(0.46, 0.7));
+		createLabel(player3_damage, Vector2(0.525, 0.75));
 
 		UILabel* player4_damage = new UILabel;
-		createLabel(player4_damage, Vector2(0.61, 0.7));
+		createLabel(player4_damage, Vector2(0.725, 0.75));
 
 
 	}

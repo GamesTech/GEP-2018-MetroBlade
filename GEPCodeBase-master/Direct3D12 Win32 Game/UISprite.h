@@ -21,4 +21,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource>   texture;
 	std::shared_ptr<RECT>   src_rect;
 	int resource_number = -1;
+
+	Vector2 render_position;
 };
