@@ -20,7 +20,22 @@ Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _f
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
-	sprite->setAnimationState("idle");
+	
+	switch (type)
+	{
+	case HEALTH:
+		sprite->setAnimationState("health");
+		break;
+	case PROJECTILE:
+		sprite->setAnimationState("projectile");
+		break;
+	case HAMMER:
+		sprite->setAnimationState("hammer");
+		break;
+	case BOMB:
+		sprite->setAnimationState("bomb");
+		break;
+	}
 
 	
 }
@@ -43,7 +58,10 @@ void Item::Tick(GameStateData* _GSD)
 
 void Item::Render(RenderData * _GSD)
 {
-	ImageGO2D::Render(_GSD);
+	if (item_state != NONE)
+	{
+		ImageGO2D::Render(_GSD);
+	}
 }
 
 void Item::UseItem(RenderData* _RD, Player2D* player, ItemType type)
@@ -80,7 +98,6 @@ void Item::onCollision(MetroBrawlCollisionData  col_data)
 			item_state = NONE;
 			col->isColliderActive(false);
 			sprite->setLoop(false);
-			sprite->setAnimationState("pickup");
 		}
 	}
 }

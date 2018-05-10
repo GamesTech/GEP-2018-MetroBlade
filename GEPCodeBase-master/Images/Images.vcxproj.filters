@@ -15,6 +15,7 @@
     <ImageContentTask Include="projectile_item.png" />
     <ImageContentTask Include="hammer_item.png" />
     <ImageContentTask Include="bomb_item.png" />
+    <ImageContentTask Include="bubble_item.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />
