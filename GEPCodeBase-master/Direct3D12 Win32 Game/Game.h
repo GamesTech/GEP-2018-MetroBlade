@@ -18,7 +18,7 @@
 #include "CollisionManager.h"
 #include "Physics2D.h"
 #include "Obstacle2D.h"
-
+#include "Item.h"
 #include "InputManager.h"
 using std::vector;
 
@@ -104,11 +104,7 @@ private:
 
 	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 
-	vector<GameObject3D*> m_3DObjects;
-	vector<GameObject2D*> m_2DObjects;
-	vector<Player2D*> m_player_objects;
-	vector<Obstacle2D*> m_obstacle_objects;
-	vector<Sound*> m_sounds;
+	vector<SoundComponent*> m_sounds;
 	RenderData* m_RD;
 	Camera* m_cam;
 
@@ -123,13 +119,6 @@ private:
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 	SceneManager scene;
-	CollisionManager collider;
-	int test_damage = 10;
-	//UILabel* player1_damage = nullptr;
-	//UILabel* player2_damage = nullptr;
-	//UILabel* player3_damage = nullptr;
-	//UILabel* player4_damage = nullptr;
-
 	std::vector<UILabel*> player_labels;
 	std::vector<UISprite*> team_colours;
 };

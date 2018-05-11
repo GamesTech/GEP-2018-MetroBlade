@@ -19,6 +19,8 @@
     <ImageContentTask Include="Platform_Sprite3.png" />
     <ImageContentTask Include="Platform_Sprite2.png" />
     <ImageContentTask Include="night_sky.png" />
+    <ImageContentTask Include="Health_item.png" />
+    <ImageContentTask Include="projectile_item.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

@@ -17,6 +17,8 @@ public:
 	void SetVelX(Vector2 _vel) { m_vel.x = _vel.x ; }
 	void SetVel(Vector2 _vel) { m_vel = _vel; }
 
+	void SetInputVel(Vector2  _input_vel);
+
 	Vector2 GetAcc() { return m_acc; }
 
 	void SetMass(float _mass) { m_mass = _mass; }
@@ -24,9 +26,15 @@ public:
 	void SetDrag(float _drag) { m_drag = _drag; }
 	float GetDrag() { return m_drag; }
 
+	Vector2 getDeltaPos() const;
+
+
 	virtual void Tick(GameStateData* _GSD);
+
 protected:
+	Vector2 m_delta_pos;
 	Vector2 m_vel;
+	Vector2 m_input_vel;
 	Vector2 m_acc;
 
 	float m_mass = 1.0f;
