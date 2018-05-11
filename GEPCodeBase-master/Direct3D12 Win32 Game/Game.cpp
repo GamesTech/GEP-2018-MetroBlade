@@ -9,9 +9,8 @@
 #include "Scene.h"
 
 #include "SpriteAnimFileReader.h"
-
-
 #include "UISprite.h"
+#include "HUD.h"
 
 extern void ExitGame();
 
@@ -144,6 +143,7 @@ void Game::Initialize(HWND window, int width, int height)
 	scene.Init(m_RD);
 	//objectList.reserve(20);
 
+	hud = new HUD();
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
@@ -190,9 +190,7 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		player_labels.clear();
 		team_colours.clear();
-		m_player_objects.clear();
-		m_obstacle_objects.clear();
-		collider.reset();
+
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
@@ -252,16 +250,16 @@ void Game::Update(DX::StepTimer const& timer)
 		team_colours.push_back(yellow_team);
 
 		/**Only instanciates team colours based on number of players*/
-		for (int i = 0; i < m_player_objects.size(); i++)
-		{
-			scene.instanciateUIObject(team_colours[i]);
-		}
+		//for (int i = 0; i < m_player_objects.size(); i++)
+		//{
+		//	scene.instanciateUIObject(team_colours[i]);
+		//}
 
-		/**All the labels are instanciated but only 
+		/**All the labels are instanciated but only
 		*the label text is updated based on player numbers
 		*e.g. 3 players only shows 3 numbers, the 4th one is invisible.
 		*/
-		
+
 		UILabel* player1_damage = new UILabel;
 		createLabel(player1_damage, Vector2(0.125, 0.75));
 
@@ -274,7 +272,7 @@ void Game::Update(DX::StepTimer const& timer)
 		UILabel* player4_damage = new UILabel;
 		createLabel(player4_damage, Vector2(0.725, 0.75));
 
-
+		
 	}
 
 	if (m_keyboard->GetState().T)
@@ -287,21 +285,14 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciate2DObject(testPlay);
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->SetPos(Vector2(0,600));
+		testPlatform->SetPos(Vector2(0, 600));
 		scene.instanciate2DObject(testPlatform);
 	}
 
-	}
-		}
-				player_labels[i]->setText(std::to_string(m_player_objects[i]->getPlayerHealth()) += "%");
-		{
-		for (int i = 0; i < m_player_objects.size(); i++)
-		//Updates the text based on player numbers and each individuals health.
-	{
-	if (!player_labels.empty())
-	scene.Update(m_GSD);
-	test_damage--;
+		scene.Update(m_GSD);
+	//test_damage--;
 }
+
 
 //GEP:: Draws the scene.
 void Game::Render()
@@ -425,7 +416,7 @@ void Game::createLabel(UILabel * label, Vector2 canvas_pos)
 {
 	label->setCanvasPosition(canvas_pos);
 	scene.instanciateUIObject(label);
-	player_labels.push_back(label);
+	hud->addLabel(label);
 }
 
 // These are the resources that depend on the device.

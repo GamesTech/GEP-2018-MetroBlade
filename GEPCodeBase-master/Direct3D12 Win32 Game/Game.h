@@ -20,11 +20,13 @@
 #include "Obstacle2D.h"
 #include "Item.h"
 #include "InputManager.h"
+
 using std::vector;
 
 struct RenderData;
 struct GameStateData;
 class UISprite;
+class HUD;
 
 // A basic game implementation that creates a D3D12 device and
 // provides a game loop.
@@ -121,4 +123,6 @@ private:
 	SceneManager scene;
 	std::vector<UILabel*> player_labels;
 	std::vector<UISprite*> team_colours;
+
+	HUD* hud = nullptr;
 };

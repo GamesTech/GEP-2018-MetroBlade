@@ -176,6 +176,9 @@
     <Filter Include="Core\Audio\Components">
       <UniqueIdentifier>{86cf8d12-cadb-4002-94b1-906fe1d44b7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\HUD">
+      <UniqueIdentifier>{a18570a6-ce7c-4f1a-8dd0-ad26a5409077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -341,6 +344,9 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Obstacle2D.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="HUD.h">
+      <Filter>Core\UI\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -461,6 +467,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="HUD.cpp">
+      <Filter>Core\UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
