@@ -12,6 +12,11 @@ Physics2D::~Physics2D()
 {
 }
 
+Vector2 Physics2D::GetInputVel() const
+{
+	return m_input_vel;
+}
+
 void Physics2D::SetInputVel(Vector2 _input_vel)
 {
 	m_input_vel = _input_vel;

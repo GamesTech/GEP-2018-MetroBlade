@@ -49,10 +49,7 @@ Player2D::~Player2D()
 
 void Player2D::CheckInput(GameStateData* _GSD)
 {
-	DirectX::GamePad::State controller_state; //_GSD->m_gamePad->GetState(controller_id);
-// 	float stick_x = controller_state.thumbSticks.leftX;
-
-	//temp place for input
+	// Consider moving these into seperate functions.
 	if (_GSD->input->getBindDown("Jump",controller_id))
 	{
 		if (phys_state == GROUNDED)
@@ -64,45 +61,44 @@ void Player2D::CheckInput(GameStateData* _GSD)
 			object_components.getComponentByType<SoundComponent>()->Play();
 		}
 	}
-	/*else if (_GSD->m_keyboardState.F || controller_state.IsXPressed())
+
+	if (_GSD->input->getBindDown("Attack", controller_id))
 	{
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
 		}
-
 	}
-	else if (_GSD->m_keyboardState.A || stick_x < 0)
-	{
-		offset = Vector2(-20, 0);
-		direction = Vector2(-1, 0);
-		m_effects = SpriteEffects_FlipHorizontally;
-		SetInputVel(Vector2(-x_speed, 0));
-		action_state = MOVING;
-	}
-	else if (_GSD->m_keyboardState.D || stick_x > 0)
-	{
-		offset = Vector2(120, 0);
-		direction = Vector2(1, 0);
-		m_effects = SpriteEffects_None;
-		SetInputVel(Vector2(x_speed, 0));
-		action_state = MOVING;
-	}
-	else if (_GSD->m_keyboardState.I || controller_state.IsYPressed())
-	{
-		action_state = USE;
-	}
-	else if (phys_state == GROUNDED && action_state != JUMPING)
+	else 
 	{
 		action_state = IDLE;
 	}
-	
-	
-	if (_GSD->m_keyboardState.J)
-	{
-		dead = true;
-	}*/
 
+	// TODO - Change this to multiply the 
+	if (_GSD->input->getBindRawValue("Move", controller_id) < 0)
+	{
+		offset = Vector2(-20, 0);
+		m_effects = SpriteEffects_FlipHorizontally;
+	}
+	else if (_GSD->input->getBindRawValue("Move", controller_id) > 0)
+	{
+		offset = Vector2(120, 0);
+		m_effects = SpriteEffects_None;
+	}
+
+	direction = Vector2(_GSD->input->getBindRawValue("Move", controller_id) * 1, 0);
+	SetInputVel(Vector2(_GSD->input->getBindRawValue("Move", controller_id) * x_speed, 0));
+
+	if (GetInputVel() != Vector2::Zero) 
+	{
+		action_state = MOVING;
+	}
+
+	if (_GSD->input->getBindDown("Use", controller_id))
+	{
+		action_state = USE;
+	}
+	
 }
 
 void Player2D::Tick(GameStateData* _GSD)
@@ -117,34 +113,32 @@ void Player2D::Tick(GameStateData* _GSD)
 	attacking = false;
 	switch (action_state)
 	{
+		case IDLE:
+			sprite->setAnimationState("idle");
+			break;
 
-	case IDLE:
-		sprite->setAnimationState("idle");
-		break;
+		case MOVING:
+			if (phys_state == GROUNDED)
+			{
+				sprite->setAnimationState("move");
+			}
+			break;
 
-	case MOVING:
-		if (phys_state == GROUNDED)
-		{
-			sprite->setAnimationState("move");
-		}
+		case JUMPING:
+			break;
 
-		break;
-	case JUMPING:
-		break;
-
-	case ATTACKING:
-		attacking = true;
-		sprite->setAnimationState("attack");
-		break;
+		case ATTACKING:
+			attacking = true;
+			sprite->setAnimationState("attack");
+			break;
 	
-	case USE:
-		
-		if (player_item)
-		{
-			player_item->UseItem(_playerRD, this, player_item->GetType());
-			player_item = nullptr;
-		}
-		break;
+		case USE:
+			if (player_item)
+			{
+				player_item->UseItem(_playerRD, this, player_item->GetType());
+				player_item = nullptr;
+			}
+			break;
 	}
 
 	//if (_GSD->m_keyboardState.Escape)

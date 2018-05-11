@@ -123,15 +123,13 @@ void SceneManager::loadScene(Scene* scene_name)
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
 
+	clearScene();
 
 	if (!scene_name) 
 	{
-		clearScene();
-		// current_scene.reset(new Scene);
 		return;
 	}
 
-	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.

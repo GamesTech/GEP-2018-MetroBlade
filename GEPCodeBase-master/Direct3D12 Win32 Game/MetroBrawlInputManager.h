@@ -52,7 +52,8 @@ public:
 	bool getBindDown(std::string  bind);
 
 	// per-device input checks.
-	bool getBindDown(std::string  bind, int device_id);
+	bool  getBindDown(std::string  bind, int device_id);
+	float getBindRawValue(std::string bind, int device_id);
 
 private:
 	void updateControllerState();

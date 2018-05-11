@@ -60,11 +60,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
-	// m_inputManager.reset(new InputManager);
-//	m_keyboard = std::make_unique<Keyboard>();
-	//m_mouse = std::make_unique<Mouse>();
-	//m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
-	//m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
 
 	// Setup the input system. 
 	input_manager.init(window);
