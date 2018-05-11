@@ -50,10 +50,10 @@ Player2D::~Player2D()
 void Player2D::CheckInput(GameStateData* _GSD)
 {
 	DirectX::GamePad::State controller_state; //_GSD->m_gamePad->GetState(controller_id);
-	float stick_x = controller_state.thumbSticks.leftX;
+// 	float stick_x = controller_state.thumbSticks.leftX;
 
 	//temp place for input
-	if (_GSD->m_keyboardState.Space || controller_state.IsAPressed())
+	if (_GSD->input->getBindDown("Jump",controller_id))
 	{
 		if (phys_state == GROUNDED)
 		{
@@ -64,7 +64,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 			object_components.getComponentByType<SoundComponent>()->Play();
 		}
 	}
-	else if (_GSD->m_keyboardState.F || controller_state.IsXPressed())
+	/*else if (_GSD->m_keyboardState.F || controller_state.IsXPressed())
 	{
 		if (phys_state == GROUNDED)
 		{
@@ -101,7 +101,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	if (_GSD->m_keyboardState.J)
 	{
 		dead = true;
-	}
+	}*/
 
 }
 
@@ -109,7 +109,7 @@ void Player2D::Tick(GameStateData* _GSD)
 {
 	punch_collider->setBoxOrigin(m_pos + offset);
 	col->setBoxOrigin(m_pos);
-	// CheckInput(_GSD);
+	CheckInput(_GSD);
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 

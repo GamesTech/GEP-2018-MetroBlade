@@ -53,7 +53,7 @@ void SceneManager::Init(RenderData* _RD)
 	current_scene->add3DGameObjectToScene(camera);
 }
 
-void SceneManager::Update(GameStateData * game_state)
+void SceneManager::Update(GameStateData* game_state)
 {
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
@@ -165,7 +165,6 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
-
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
 

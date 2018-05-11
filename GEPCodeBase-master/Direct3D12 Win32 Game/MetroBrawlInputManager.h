@@ -33,7 +33,7 @@ public:
 
 	// Here we should clean up and stop controllers.
 	// This way we gan garantee the controllers will stop. 
-	~MetroBrawlInputManager() = default; 
+	~MetroBrawlInputManager(); 
 
 	void init(HWND& window);
 	void tick();
@@ -50,6 +50,9 @@ public:
 
 	// Input Bind Accessors.
 	bool getBindDown(std::string  bind);
+
+	// per-device input checks.
+	bool getBindDown(std::string  bind, int device_id);
 
 private:
 	void updateControllerState();

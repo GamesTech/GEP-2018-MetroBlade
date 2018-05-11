@@ -507,7 +507,9 @@
     <ClCompile Include="ArcadeControllerModule.cpp">
       <Filter>Core\Input\"Drivers"\Arcade</Filter>
     </ClCompile>
-    <ClCompile Include="ArcadeController.cpp" />
+    <ClCompile Include="ArcadeController.cpp">
+      <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

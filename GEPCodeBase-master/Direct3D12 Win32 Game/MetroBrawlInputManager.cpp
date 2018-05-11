@@ -1,6 +1,15 @@
 #include "pch.h"
 #include "MetroBrawlInputManager.h"
 
+MetroBrawlInputManager::~MetroBrawlInputManager()
+{
+	// Shutsdown the controllers.
+	for (int i = 0; i < gamepad_state.size(); i++) 
+	{
+		gamepad_input->SetVibration(i, 0.0f, 0.0f);
+	}
+}
+
 void MetroBrawlInputManager::init(HWND& window)
 {
 	// Setup the input devices here. Also setup the bindings for each of the devices.
@@ -127,6 +136,32 @@ bool MetroBrawlInputManager::getBindDown(std::string bind)
 		}
 
 		if (isDown) break;
+	}
+
+	return (bool)isDown;
+}
+
+bool MetroBrawlInputManager::getBindDown(std::string bind, int device_id)
+{
+	int  isDown = 0;
+	InputBind* bind_ptr = nullptr;
+
+	// Checks both controllers and Keyboard to see if key is down.
+	if (device_id < 0) 
+	{
+		bind_ptr = findBind(bind);
+		if (bind_ptr)
+		{
+			isDown = bind_ptr->input_value;
+		}
+	}
+	else 
+	{
+		bind_ptr = findControllerBind(bind, device_id);
+		if (bind_ptr)
+		{
+			isDown = abs(bind_ptr->input_value);
+		}
 	}
 
 	return (bool)isDown;

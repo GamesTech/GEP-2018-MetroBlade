@@ -9,7 +9,6 @@ class Player2D :
 	public Physics2D
 {
 public:
-
 	//TODO: add a 3d player and modes to switch between different views and basic physics
 	Player2D(RenderData* _RD, string _filename, int gamepadID);
 	virtual ~Player2D();
@@ -69,12 +68,14 @@ protected:
 	Vector2 direction = Vector2(0, 0);
 	bool attacking = false;
 	void setGravity(float gravity) { this->gravity = gravity; }
-	PhysicalStates phys_state = GROUNDED;
-	PlayerActions action_state = IDLE;
+
+	PhysicalStates		phys_state = GROUNDED;
+	PlayerActions		action_state = IDLE;
 	bool				dead = false;
 	Player2D*			killer = nullptr;
 	float				respawn_time = 0.0f;
-	Item* player_item = nullptr;
+	Item*				player_item = nullptr;
+
 private:
 	void onCollision(MetroBrawlCollisionData  col_data);
 	void onPunchCollision(MetroBrawlCollisionData  col_data);
