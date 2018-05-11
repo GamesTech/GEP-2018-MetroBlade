@@ -255,7 +255,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_player_objects.push_back(testPlay3);
 
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3");
 		testPlatform->getCollider(0)->setTag(10);
 		collider.addCollider((testPlatform->getCollider(0)));
 		testPlatform->SetPos(Vector2(500, 600));
