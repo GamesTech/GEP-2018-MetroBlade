@@ -1,3 +1,19 @@
+/**
+*  @file    ArcadeController.h
+*  @author  Nathan Butt (GitHub - n86-64)
+*  @date    10/05/2018
+*  @version v1.0
+*
+*  @section System Module
+*           Input
+*
+*  @brief Definition for An Arcade Controller.
+*
+*  @section Description
+*  Defines an arcade controller device which is used by the ArcadeControllerModule for input recognition on the 
+*  arcade cabinet. 
+*/
+
 #pragma once
 
 

@@ -2,7 +2,6 @@
 
 #include "Physics2D.h"
 #include "Sprite.h"
-#include "InputManager.h"
 #include "Item.h"
 //GEP:: Based on the ImageGO2D a basic keyboard controlled sprite
 
@@ -64,7 +63,6 @@ protected:
 	float x_speed = 100.0f;
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 500);
-	InputManager* m_input;
 	float jump_force = 1000000.0f;
 	float gravity = 981.0f;
 	float vertical_velocity;

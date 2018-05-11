@@ -4,7 +4,6 @@
 ArcadeControllerModule::ArcadeControllerModule(DirectX::Keyboard* keyboard_refrence)
 	: keyboard(keyboard_refrence)
 {
-
 }
 
 void ArcadeControllerModule::initModule(std::string bind_file)
@@ -12,7 +11,7 @@ void ArcadeControllerModule::initModule(std::string bind_file)
 	// Here we will parse the maps in manually
 	// TODO - Add a system where files are loaded in instead.
 
-	// All bindings for the arcade machiene go here. 
+	// All bindings for the arcade machiene go here.
 	std::map<DirectX::Keyboard::Keys, MetroBrawlInputActions>   key_map;
 	key_map.emplace(DirectX::Keyboard::Keys::LeftShift, MetroBrawlInputActions::KEY_CONTROLLER_A);
 	key_map.emplace(DirectX::Keyboard::Keys::Z, MetroBrawlInputActions::KEY_CONTROLLER_B);

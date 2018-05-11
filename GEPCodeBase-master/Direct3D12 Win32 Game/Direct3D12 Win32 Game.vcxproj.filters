@@ -299,9 +299,6 @@
     <ClInclude Include="Sprite.h">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Core\Input</Filter>
-    </ClInclude>
     <ClInclude Include="UILabel.h">
       <Filter>Core\UI\Label</Filter>
     </ClInclude>
@@ -442,9 +439,6 @@
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Core\GameComponent\Game components\Sprite Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Core\Input</Filter>
     </ClCompile>
     <ClCompile Include="UILabel.cpp">
       <Filter>Core\UI\Label</Filter>
