@@ -25,7 +25,6 @@ void MetroBrawlInputManager::tick()
 #endif
 
 	updateControllerState();
-
 	updateBindState();
 	updateControllerBindState();
 }

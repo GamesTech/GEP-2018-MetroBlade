@@ -19,6 +19,8 @@ void ArcadeController::updateControllerState(DirectX::Keyboard::State device_sta
 		input_values[(entry.second - 259)] = device_state.IsKeyDown((DirectX::Keyboard::Keys)entry.first);
 	}
 
+	SetStateValues();
+
 	return;
 }
 

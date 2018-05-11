@@ -79,7 +79,7 @@ private:
 #ifdef ARCADE
 	ArcadeControllerModule				  arcade_controls = ArcadeControllerModule(keyboard_input.get());
 #else
-	// std::vector<ControllerStates>		  gamepad_state = std::vector<ControllerStates>(DirectX::GamePad::MAX_PLAYER_COUNT);
+	//std::vector<ControllerStates>		  gamepad_state = std::vector<ControllerStates>(DirectX::GamePad::MAX_PLAYER_COUNT);
 #endif
 
 private:

@@ -242,7 +242,7 @@ constexpr int  MAX_KEY_SWITCH_VALUE = 268;
 // DeviceID constatnts
 constexpr int DEVICE_KEYBOARD_AND_MOUSE = -1;
 
-constexpr int DEVICE_CONTROLLER_COUNT_ARCADE = 1;
+constexpr int DEVICE_CONTROLLER_COUNT_ARCADE = 2;
 constexpr int DEVICE_CONTROLLER_BUTTONS_COUNT = 16;
 
 /**
