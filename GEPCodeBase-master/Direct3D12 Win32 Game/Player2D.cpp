@@ -141,6 +141,11 @@ void Player2D::Tick(GameStateData* _GSD)
 			break;
 	}
 
+	if (phys_state == AIR) 
+	{
+		sprite->setAnimationState("jump");
+	}
+
 	//if (_GSD->m_keyboardState.Escape)
 	//{
 	//	// Testing for error components.
