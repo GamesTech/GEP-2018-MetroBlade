@@ -25,7 +25,6 @@ public:
 	void AddItem(Item* obj, int uses);
 	void setStateGrounded();
 	void setStateFalling();
-	void punched(GameStateData* _GFD, Vector2 direction);
 
 
 	// Game Manager interface

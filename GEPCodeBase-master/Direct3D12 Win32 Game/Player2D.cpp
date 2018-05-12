@@ -208,12 +208,12 @@ void Player2D::onCollision(MetroBrawlCollisionData col_data)
 void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 {
 	printf("We can now detect punches.");
+	if (action_state == ATTACKING)
+	{
+		static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce(10000 * Vector2::UnitX * direction);
+	}
 }
 
-void Player2D::punched(GameStateData * _GSD, Vector2 direction)
-{
-	AddForce(10000 * direction * Vector2::UnitX);
-}
 
 void Player2D::setStateGrounded()
 {
