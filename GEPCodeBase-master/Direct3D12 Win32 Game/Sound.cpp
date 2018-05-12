@@ -1,29 +1,87 @@
 #include "pch.h"
-#include "Sound.h"
 
+#include "AudioManager.h"
+#include "Sound.h"
 //TODO:: add reference to web-tutorials about adding Wave-banks
 
 
-Sound::Sound(AudioEngine* _audEngine, string _filename)
+SoundComponent::SoundComponent(std::string filename)
+	:sound_name(filename)
 {
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
-	string fullpath = "../sounds/" + _filename + ".wav";
-	std::wstring wFilename = converter.from_bytes(fullpath.c_str());
-
-	m_sfx = std::make_unique<SoundEffect>(_audEngine, wFilename.c_str());
-
 }
 
-
-Sound::~Sound()
+SoundComponent::~SoundComponent()
 {
-	m_sfx.reset();
+	sound.reset();
 }
 
-void Sound::Play()
+void SoundComponent::initAudio()
 {
-	if (m_sfx)
+	if (sound_name != "") 
 	{
-		m_sfx->Play(m_volume, m_pitch, m_pan);
+		setSoundFile(sound_name);
 	}
 }
+
+std::string SoundComponent::getSoundName() const
+{
+	return sound_name;
+}
+
+void SoundComponent::setSoundFile(std::string new_sound)
+{
+	sound_name = new_sound;
+	sound.reset(audio->loadSound(new_sound));
+}
+
+void SoundComponent::Play()
+{
+	if (sound) 
+	{
+		if (sound->GetState() == PLAYING) 
+		{
+			sound->Stop();
+		}
+
+		sound->Play(loop);
+	}
+}
+
+void SoundComponent::Stop()
+{
+	// Here the sound can be stopped.
+	sound->Stop();
+}
+
+void SoundComponent::registerAudioManager(AudioManager* audio_system)
+{
+	audio = audio_system;
+}
+
+AudioManager* SoundComponent::getAudioManager()
+{
+	return audio;
+}
+
+void SoundComponent::tickComponent(GameStateData * _GSD)
+{	
+	return;
+}
+
+void SoundComponent::renderComponent(RenderData * _RD)
+{
+	return;
+}
+
+void SoundComponent::isLooped(bool looped)
+{
+	loop = looped;
+	if (sound) // TODO - Consider making this more efficent. 
+	{
+		if (sound->GetState() == PLAYING) 
+		{
+			Play();
+		}
+	}
+}
+

@@ -92,3 +92,18 @@ void Scene::add3DGameObjectToScene(GameObject3D * new_object)
 	m_3DObjects.push_back(new_object);
 }
 
+GameObject2D* Scene::get2DObjectInScene(int index)
+{
+	GameObject2D*  object = nullptr;
+	if (index < m_2DObjects.size()) 
+	{
+		object = m_2DObjects[index];
+	}
+	return object;
+}
+
+int Scene::getNumberOf2DObjectsInScene() const
+{
+	return m_2DObjects.size();
+}
+

@@ -50,3 +50,18 @@ void PlayerStatus::setLaunchMultiplier(int new_multiplier)
 {
 	launch_multiplier = new_multiplier;
 }
+
+void PlayerStatus::setHealth(int value)
+{
+	current_health = value;
+}
+
+void PlayerStatus::addHealth(int value_to_add)
+{
+	current_health += value_to_add;
+}
+
+void PlayerStatus::takeHealth(int value_to_subtract)
+{
+	current_health -= value_to_subtract;
+}

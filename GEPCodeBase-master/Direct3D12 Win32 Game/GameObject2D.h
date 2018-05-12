@@ -35,7 +35,7 @@ public:
 	virtual void Render(RenderData* _RD) = 0;
 
 	void assignWorldEventListener(std::shared_ptr<SceneEvent>   world_event_listener);
-
+	void assignSceneManager(SceneManager* manager);
 	GameComponentManager* getComponentManager();
 
 protected:
@@ -48,4 +48,5 @@ protected:
 	float m_orientation = 0.0f;
 	Color m_colour = Colors::White;
 	Vector2 m_scale = Vector2::One;
+	SpriteEffects m_effects = SpriteEffects_None;
 };

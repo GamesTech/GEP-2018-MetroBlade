@@ -1,0 +1,8 @@
+{
+	"ObsticleTest":
+	{
+		"type": "Obstacle2D",
+		"filename": "Platform_Sprite"
+	}
+
+}

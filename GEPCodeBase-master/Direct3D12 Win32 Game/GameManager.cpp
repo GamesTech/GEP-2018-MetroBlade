@@ -90,6 +90,11 @@ void GameManager::resetManager()
 	level_players.clear();
 }
 
+void GameManager::setUILabel(UILabel * new_label)
+{
+	timer_label = new_label;
+}
+
 void GameManager::checkPlayerLifeStatus()
 {
 	for (auto& player : level_players)
@@ -122,7 +127,7 @@ void GameManager::checkPlayerRespawnStatus(float delta_time)
 		{
 			players_to_respawn[i]->setRespawnTime(0.0f);
 			players_to_respawn[i]->isDead(false);
-			players_to_respawn[i]->SetPos(Vector2(800, 500)); // TODO - Add code to respawn the player.
+			players_to_respawn[i]->SetPos(Vector2(800, 200)); // TODO - Add code to respawn the player.
 			players_to_respawn.erase(players_to_respawn.begin() + i);
 			OutputDebugString(L"Ive Respawned Mate");
 		}

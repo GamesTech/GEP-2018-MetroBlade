@@ -22,7 +22,12 @@
 
 #include "Scene.h"
 #include "SceneEvent.h"
+#include "SceneLoader.h"
 #include "GameManager.h"
+#include "MetroBrawlCollisionManager.h"
+#include "AudioManager.h"
+
+#include "UICanvas.h"
 
 namespace DX {
 	class StepTimer;
@@ -32,10 +37,10 @@ struct GameStateData;
 
 class GameObject3D;
 class GameObject2D;
-class Sound;
+class SoundComponent;
 
 /**
-*  Add Class Discription Here.
+*  Manages active scenes and 
 */
 class SceneManager 
 {
@@ -45,7 +50,7 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
-	void Init();
+	void Init(RenderData* _RD);
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
 	bool shouldQuit() const;
@@ -65,17 +70,25 @@ public:
 
 	void startGameManager();
 
+	void instanciateUIObject(UIObject*    new_object);
+
 private:
 	void processSceneEvents();
-
 	void resetRenderState();
+
+	void setupScene2DObjects(GameObject2D* object);
 
 	std::unique_ptr<Scene>			current_scene;
 	Camera*							main_camera = nullptr;
 	RenderData*						render_data = nullptr;
+	UICanvas						game_ui;
 
 	bool							quit = false;
 	std::shared_ptr<SceneEvent>		scene_event_listener = std::make_shared<SceneEvent>();
 	
 	GameManager						game_manager;
+	MetroBrawlCollisionManager		collision_manager;
+	SceneLoader						scene_loader;
+
+	AudioManager					scene_audio;
 };

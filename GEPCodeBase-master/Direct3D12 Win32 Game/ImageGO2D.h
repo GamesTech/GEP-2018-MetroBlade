@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-
 #include "GameObject2D.h"
 #include "Collider.h"
 using std::string;
@@ -18,9 +17,9 @@ public:
 	ImageGO2D(RenderData* _RD, string _filename);
 	virtual ~ImageGO2D();
 
-	void Tick(GameStateData *_GSD) override;
+	void Tick(GameStateData* _GSD) override;
 	void Render(RenderData* _RD) override;
-	virtual void ChangeRectPos(int pos1, int pos2, int pos3, int pos4);
+
 	void CentreOrigin();
 
 protected:

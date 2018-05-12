@@ -6,7 +6,7 @@
 //https://github.com/Microsoft/DirectXTK/wiki/Adding-audio-to-your-project
 
 class Loop :
-	public Sound
+	public SoundComponent
 {
 public:
 	Loop(AudioEngine* _audEngine, string _filename);

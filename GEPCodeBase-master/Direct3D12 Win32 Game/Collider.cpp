@@ -8,7 +8,7 @@ Collider::Collider(Vector2 &origin, Vector2 dimensions, bool trigger)
 	box_dimensions(dimensions),
 	is_trigger(trigger)
 {
-	
+
 }
 
 int Collider::getTag()
@@ -45,9 +45,78 @@ void Collider::setBoxOrigin(Vector2 box_origin)
 {
 	this->box_origin = box_origin;
 }
+
+Vector2 Collider::getBoxMidpoint()
+{
+	return getBoxOrigin() / 0.5f;
+}
+
+Vector2 Collider::getBoxDimenstions()
+{
+	return box_dimensions;
+}
+
+void Collider::setBoxDimensions(Vector2 new_dimensions)
+{
+	box_dimensions = new_dimensions;
+}
+
 Vector2 Collider::getMaxValues()
 {
 	max_values = box_origin + box_dimensions;
 	return max_values;
+}
+
+void Collider::isColliderActive(bool is_active)
+{
+	is_collider_active = is_active;
+}
+
+bool Collider::isColliderActive() const
+{
+	return is_collider_active;
+}
+
+void Collider::isColliderImmediate(bool is_immediate)
+{
+	is_collider_immediate = is_immediate;
+}
+
+bool Collider::isColliderImmediate() const
+{
+	return is_collider_immediate;
+}
+
+void Collider::addParentObjectRefrence(GameObject2D * gameobject)
+{
+	parent_object = gameobject;
+}
+
+void Collider::assignCollisionEvent(std::function<void(MetroBrawlCollisionData)> func_delegate)
+{
+	collision_event_deligate = func_delegate;
+}
+
+void Collider::OnCollision(MetroBrawlCollisionData col_data)
+{
+	if (collision_event_deligate) 
+	{
+		collision_event_deligate(col_data);
+	}
+}
+
+GameObject2D* Collider::getCollidersParent()
+{
+	return  parent_object;
+}
+
+void Collider::tickComponent(GameStateData * _GSD)
+{
+	return;
+}
+
+void Collider::renderComponent(RenderData * _RD)
+{
+	return;
 }
 
