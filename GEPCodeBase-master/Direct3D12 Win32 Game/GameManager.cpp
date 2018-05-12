@@ -1,8 +1,15 @@
 #include "pch.h"
+
+#include <random>
+
 #include "GameManager.h"
 #include "GameStateData.h"
+
 #include "Player2D.h"
+#include "SpawnPoint.h"
+
 #include "PlayerStatus.h"
+#include "LobbySystem.h"
 
 constexpr int MAX_PLAYERS = 8;
 
@@ -41,6 +48,7 @@ void GameManager::registerPlayerInstance(Player2D* new_player)
 {
 	// Setup player stats according to game mode and then register the player for checking every frame.
 	// TODO - Move [layer setup to when the game starts. 
+	new_player->getComponentManager()->getComponentByType<LobbySystemComponent>()->addLobbyReference(&lobby);
 	player_instances.push_back(new_player);
 }
 
@@ -89,11 +97,32 @@ void GameManager::startGame()
 void GameManager::resetManager()
 {
 	player_instances.clear();
+	scene_spawns.clear();
 }
 
 void GameManager::setUILabel(UILabel * new_label)
 {
 	timer_label = new_label;
+}
+
+void GameManager::registerSpawnPoint(GameObject2D* spawn_point_object)
+{
+	SpawnPoint* new_point = dynamic_cast<SpawnPoint*>(spawn_point_object);
+
+	if (new_point) 
+	{
+		scene_spawns.push_back(new_point);
+	}
+}
+
+Vector2 GameManager::getRespawnPosition()
+{
+	int size = scene_spawns.size() - 1;
+	std::random_device  rd{};
+	std::mt19937  generator(rd());
+	std::uniform_int_distribution<int>  rng{ 0, size };
+	
+	return scene_spawns[rng(generator)]->GetPos();
 }
 
 void GameManager::checkPlayerLifeStatus()
@@ -128,7 +157,7 @@ void GameManager::checkPlayerRespawnStatus(float delta_time)
 		{
 			players_to_respawn[i]->setRespawnTime(0.0f);
 			players_to_respawn[i]->isDead(false);
-			players_to_respawn[i]->SetPos(Vector2(800, 200)); // TODO - Add code to respawn the player.
+			players_to_respawn[i]->SetPos(getRespawnPosition()); // TODO - Add code to respawn the player.
 			players_to_respawn.erase(players_to_respawn.begin() + i);
 			OutputDebugString(L"Ive Respawned Mate");
 		}
@@ -181,7 +210,6 @@ void GameManager::updatePlayerScore()
 {
 	// TODO - Add code to update the players score according to game mode variables.
 	// TODO - Consider making component/event driven. As score changes may very.
-
 }
 
 void GameManager::endCurrentGame()

@@ -238,6 +238,7 @@ void SceneManager::setupScene2DObjects(GameObject2D * object)
 	{
 		game_manager.registerPlayerInstance((Player2D*)object);
 	}
+	game_manager.registerSpawnPoint(object);
 
 	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
 	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());

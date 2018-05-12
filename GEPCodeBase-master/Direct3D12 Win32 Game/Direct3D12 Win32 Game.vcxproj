@@ -374,6 +374,7 @@
     <ClInclude Include="RenderData.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Spawner.h" />
+    <ClInclude Include="SpawnPoint.h" />
     <ClInclude Include="SpriteAnimFileReader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StepTimer.h" />
@@ -433,6 +434,7 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="SpriteAnimFileReader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestPBGO3D.cpp" />

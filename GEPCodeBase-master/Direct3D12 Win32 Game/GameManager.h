@@ -23,8 +23,10 @@
 #include "SceneState.h"
 
 class UILabel;
+class SpawnPoint;
 
 struct GameStateData;
+
 
 class GameManager 
 {
@@ -52,8 +54,11 @@ public:
 
 	void setUILabel(UILabel* new_label);
 
+	void registerSpawnPoint(GameObject2D*  spawn_point_object);
+
 private:
 	// TODO - Add Spawnpoint register for determining locations hwne respawning players.
+	Vector2 getRespawnPosition(); 
 
 	void checkPlayerLifeStatus();
 	void checkPlayerRespawnStatus(float delta_time);
@@ -67,6 +72,7 @@ private:
 
 	std::vector<Player2D*>			player_instances;
 	std::vector<Player2D*>			players_to_respawn; /// < Buffer of players that need to be respawned.
+	std::vector<SpawnPoint*>		scene_spawns;
 
 	std::vector<PlayerData>			lobby;
 

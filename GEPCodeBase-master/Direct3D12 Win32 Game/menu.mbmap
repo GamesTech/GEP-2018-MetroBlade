@@ -4,6 +4,12 @@
 	{
 		"type": "Obstacle2D",
 		"filename": "Platform_Sprite"
+	},
+	
+	"Point1":
+	{
+		"type": "SpawnPoint",
+		"position": [100, 100]
 	}
 
 }

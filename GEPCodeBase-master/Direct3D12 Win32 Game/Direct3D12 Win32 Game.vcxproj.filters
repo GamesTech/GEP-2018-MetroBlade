@@ -200,6 +200,9 @@
     <Filter Include="Core\Game Management\Lobby">
       <UniqueIdentifier>{4e8a5140-4da7-47cd-8464-78a84132d70f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\GameObjects\SpawnPoint">
+      <UniqueIdentifier>{306a117e-0198-40f8-ab42-3474337554ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -383,6 +386,9 @@
     <ClInclude Include="LobbySystem.h">
       <Filter>Core\Game Management\Lobby</Filter>
     </ClInclude>
+    <ClInclude Include="SpawnPoint.h">
+      <Filter>Core\GameObjects\SpawnPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -518,6 +524,9 @@
     </ClCompile>
     <ClCompile Include="ArcadeController.cpp">
       <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnPoint.cpp">
+      <Filter>Core\GameObjects\SpawnPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

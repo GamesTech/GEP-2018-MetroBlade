@@ -96,6 +96,7 @@ bool Scene::isLevel() const
 {
 	return is_level;
 }
+
 GameObject2D* Scene::get2DObjectInScene(int index)
 {
 	GameObject2D*  object = nullptr;

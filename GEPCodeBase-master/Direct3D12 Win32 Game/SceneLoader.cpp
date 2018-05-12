@@ -13,6 +13,7 @@ void SceneLoader::init(RenderData * _RD)
 	using namespace std::placeholders;
 	render_data = _RD;
 	addObjectInitialiser("Obstacle2D", std::bind(&Entities::constructObstacle2D, _1, _2));
+	addObjectInitialiser("SpawnPoint", std::bind(&Entities::constructSpawnPoint, _1, _2));
 }
 
 Scene* SceneLoader::createScene(std::string scene_name)
