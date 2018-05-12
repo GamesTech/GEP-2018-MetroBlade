@@ -32,29 +32,14 @@ Game::Game() :
 
 Game::~Game()
 {
-	if (m_audEngine)
-	{
-		m_audEngine->Suspend();
-	}
-
 	// Ensure that the GPU is no longer referencing resources that are about to be destroyed.
 	WaitForGpu();
 
 	// delete the scene and clear the memory.
 	scene.clearScene();
 
-	//delete the sounds
-	for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-	{
-		delete (*it);
-	}
-	m_sounds.clear();
-
 	delete m_RD;
 	delete m_GSD;
-
-	m_keyboard.reset();
-	m_mouse.reset();
 
 	m_graphicsMemory.reset();
 }
@@ -69,22 +54,14 @@ void Game::Initialize(HWND window, int width, int height)
 	CreateDevice();
 	CreateResources();
 
-	//GEP::init Audio System
-	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
-#ifdef _DEBUG
-	eflags = eflags | AudioEngine_Debug;
-#endif
-	m_audEngine = std::make_unique<AudioEngine>(eflags);
-
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
-	m_inputManager.reset(new InputManager);
-	m_keyboard = std::make_unique<Keyboard>();
-	m_mouse = std::make_unique<Mouse>();
-	m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
-	m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
-	//m_gamePad = std::make_unique<DirectX::GamePad>();
+
+	// Setup the input system. 
+	input_manager.init(window);
+	m_GSD->input = &input_manager;
+
 	m_RD = new RenderData;
 
 	m_RD->m_d3dDevice = m_d3dDevice;
@@ -140,11 +117,7 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect = std::make_unique<BasicEffect>(m_d3dDevice.Get(), EffectFlags::Lighting, pd3);
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
-	scene.assignRenderData(m_RD);
-	scene.Init();
-	//objectList.reserve(20);
-	collider.init();
-
+	scene.Init(m_RD);
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
@@ -152,15 +125,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_timer.SetFixedTimeStep(true);
 	m_timer.SetTargetElapsedSeconds(1.0 / 60);
 	*/
-
-	//GEP::This is where I am creating the test objects
-	Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
-	loop->SetVolume(0.1f);
-	loop->Play();
-	m_sounds.push_back(loop);
-
-	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
-	m_sounds.push_back(TS);*/
 }
 
 //GEP:: Executes the basic game loop.
@@ -182,82 +146,40 @@ void Game::Update(DX::StepTimer const& timer)
 		PostQuitMessage(0);
 	}
 
-	ReadInput();
+	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	//this will update the audio engine but give us chance to do somehting else if that isn't working
-	if (!m_audEngine->Update())
+	if (input_manager.getBindDown("Action"))
 	{
-		if (m_audEngine->IsCriticalError())
-		{
-			// We lost the audio device!
-		}
-	}
-	else
-	{
-		//update sounds playing
-		for (vector<Sound *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-		{
-			(*it)->Tick(m_GSD);
-		}
-	}
-
-	if (m_keyboard->GetState().P)
-	{
-		m_player_objects.clear();
-		m_obstacle_objects.clear();
-		collider.reset();
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
-
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
-		//m_3DObjects.push_back(camera);
 
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
-		testPlay->getCollider(0)->setTag(m_player_objects.size());
-		testPlay->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay->getCollider(0)));
-		collider.addCollider((testPlay->getCollider(1)));
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
-		m_player_objects.push_back(testPlay);
 
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
-		
-		testPlay2->getCollider(0)->setTag(m_player_objects.size());
-		testPlay2->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay2->getCollider(1)));
-		collider.addCollider((testPlay2->getCollider(0)));
 		testPlay2->SetPos(Vector2(800, 200));
 		scene.instanciate2DObject(testPlay2);
-		m_player_objects.push_back(testPlay2);
 
 		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
 		testPlay3->SetDrive(1000.0f);
 		testPlay3->SetDrag(0.5f);
-		testPlay3->getCollider(0)->setTag(m_player_objects.size());
-		testPlay3->getCollider(1)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay3->getCollider(0)));
-		collider.addCollider((testPlay3->getCollider(1)));
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
-		m_player_objects.push_back(testPlay3);
-
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
-		testPlatform->getCollider(0)->setTag(10);
-		collider.addCollider((testPlatform->getCollider(0)));
 		testPlatform->SetPos(Vector2(500, 600));
-		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
-		m_obstacle_objects.push_back(testPlatform);
+		scene.instanciate2DObject(testPlatform);
 
 		scene.startGameManager();
 
@@ -265,71 +187,12 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
+		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
+		test_item->SetPos(Vector2(400, 550));
+		scene.instanciate2DObject(test_item);
+
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
-	}
-
-	if (m_keyboard->GetState().T)
-	{
-		// Instantiation test.
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-
-
-		testPlay->getCollider(1)->setTag(m_player_objects.size());
-		testPlay->getCollider(0)->setTag(m_player_objects.size());
-		collider.addCollider((testPlay->getCollider(0)));
-		collider.addCollider((testPlay->getCollider(1)));
-
-		testPlay->SetPos(Vector2(0, 500));
-
-		scene.instanciate2DObject(testPlay);//m_2DObjects.push_back(testPlay);
-		m_player_objects.push_back(testPlay);
-
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->getCollider(0)->setTag(10);
-		collider.addCollider((testPlatform->getCollider(0)));
-
-		testPlatform->SetPos(Vector2(0,600));
-
-		scene.instanciate2DObject(testPlatform);//m_2DObjects.push_back(testPlay);
-		m_obstacle_objects.push_back(testPlatform);
-
-	}
-	if (!m_player_objects.empty())
-	{
-		for (int i = 0; i < collider.GetSize(); i++)
-		{
-			int collider_tag = collider.checkCollisions(i);
-
-			if (collider_tag != -1)
-			{
-				if (collider_tag != 10)
-				{
-					if (!collider.checkTrigger(i))
-					{
-						m_player_objects[collider_tag]->SetPos(m_player_objects[collider_tag]->GetPos() + collider.colliderOverlap() * 0.01);
-						m_player_objects[collider_tag]->SetVelX(Vector2(0, 0));
-
-						
-					}
-					if (collider.getTarget() == 10)
-					{
-						m_player_objects[collider_tag]->setStateGrounded();
-					}
-					
-				}
-				if (collider.checkTrigger(i) && collider.getTarget() != 10)
-				{
-					if (m_player_objects[collider_tag]->IsAttacking())
-					{
-						m_player_objects[collider.getTarget()]->punched(m_GSD, m_player_objects[collider_tag]->getDirection());
-					}
-					
-				}
-			}
-		}
 	}
 
 	scene.Update(m_GSD);
@@ -770,6 +633,7 @@ void Game::GetAdapter(IDXGIAdapter1** ppAdapter)
 void Game::OnDeviceLost()
 {
 	m_RD->m_states.reset();
+
 	//TODO: SDKMeshGO3D
 	//m_fxFactory.reset();
 	//m_modelResources.reset();
@@ -807,19 +671,4 @@ void Game::OnDeviceLost()
 
 	CreateDevice();
 	CreateResources();
-}
-
-void Game::ReadInput()
-{
-	//GEP:: CHeck out the DirectXTK12 wiki for more information about these systems
-	//https://github.com/Microsoft/DirectXTK/wiki/Mouse-and-keyboard-input
-
-	//You'll also found similar stuff for Game Controllers here:
-	//https://github.com/Microsoft/DirectXTK/wiki/Game-controller-input
-
-	//Note in both cases they are identical to the DirectXTK for DirectX 11
-
-	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState = m_keyboard->GetState();
-	m_GSD->m_mouseState = m_mouse->GetState();
 }
