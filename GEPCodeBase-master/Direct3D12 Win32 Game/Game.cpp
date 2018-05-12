@@ -218,7 +218,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite", Vector2(1152,59));
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
 
@@ -291,7 +291,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetPos(Vector2(0, 500));
 		scene.instanciate2DObject(testPlay);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(300,34));
 		testPlatform->SetPos(Vector2(0, 600));
 		scene.instanciate2DObject(testPlatform);
 	}
