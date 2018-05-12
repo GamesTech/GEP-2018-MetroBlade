@@ -34,7 +34,7 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 
 	//GEP:: Lets go up the inheritance and share our functionality
 
-	if (_GSD->m_keyboardState.IsKeyDown(Keyboard::Tab)) 
+	if (_GSD->input->getBindDown("Music")) 
 	{
 		object_components.getComponentByType<SoundComponent>()->Play();
 	}
