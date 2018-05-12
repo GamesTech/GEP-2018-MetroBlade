@@ -118,11 +118,19 @@ void GameManager::registerSpawnPoint(GameObject2D* spawn_point_object)
 Vector2 GameManager::getRespawnPosition()
 {
 	int size = scene_spawns.size() - 1;
-	std::random_device  rd{};
-	std::mt19937  generator(rd());
-	std::uniform_int_distribution<int>  rng{ 0, size };
-	
-	return scene_spawns[rng(generator)]->GetPos();
+
+
+	if ((size + 1) != 0) 
+	{
+		std::random_device  rd{};
+		std::mt19937  generator(rd());
+		std::uniform_int_distribution<int>  rng{ 0, size };
+		return scene_spawns[rng(generator)]->GetPos();
+	}
+	else 
+	{
+		return Vector2(10, 10);
+	}
 }
 
 void GameManager::checkPlayerLifeStatus()

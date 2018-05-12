@@ -193,8 +193,11 @@ void Game::Update(DX::StepTimer const& timer)
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
 
-		SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
-		scene.instanciate2DObject(test_spawn);
+		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
+		//scene.instanciate2DObject(test_spawn);
+
+		//SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
+		//scene.instanciate2DObject(test_spawn2);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
