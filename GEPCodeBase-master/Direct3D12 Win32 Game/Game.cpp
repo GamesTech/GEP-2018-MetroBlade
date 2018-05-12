@@ -188,8 +188,9 @@ void Game::Update(DX::StepTimer const& timer)
 
 	if (m_keyboard->GetState().P)
 	{
-		player_labels.clear();
 		team_colours.clear();
+		player_labels.clear();
+
 
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -221,6 +222,8 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
 
+		
+
 		scene.startGameManager();
 
 		UILabel* test_label = new UILabel;
@@ -249,11 +252,7 @@ void Game::Update(DX::StepTimer const& timer)
 		yellow_team->setCanvasPosition(Vector2(0.7, 0.7));
 		team_colours.push_back(yellow_team);
 
-		/**Only instanciates team colours based on number of players*/
-		//for (int i = 0; i < m_player_objects.size(); i++)
-		//{
-		//	scene.instanciateUIObject(team_colours[i]);
-		//}
+
 
 		/**All the labels are instanciated but only
 		*the label text is updated based on player numbers
@@ -272,7 +271,15 @@ void Game::Update(DX::StepTimer const& timer)
 		UILabel* player4_damage = new UILabel;
 		createLabel(player4_damage, Vector2(0.725, 0.75));
 
-		
+		/**Only instanciates team colours based on number of players*/
+		for (int i = 0; i < 4; i++)
+		{
+			scene.instanciateUIObject(team_colours[i]);
+			scene.instanciateUIObject(player_labels[i]);
+		}
+
+		//scene.instanciateUIObject(hud);
+
 	}
 
 	if (m_keyboard->GetState().T)
@@ -288,8 +295,9 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->SetPos(Vector2(0, 600));
 		scene.instanciate2DObject(testPlatform);
 	}
-
-		scene.Update(m_GSD);
+	
+	hud->updateLabels(player_labels);
+	scene.Update(m_GSD);
 	//test_damage--;
 }
 
@@ -415,8 +423,7 @@ void Game::GetDefaultSize(int& width, int& height) const
 void Game::createLabel(UILabel * label, Vector2 canvas_pos)
 {
 	label->setCanvasPosition(canvas_pos);
-	scene.instanciateUIObject(label);
-	hud->addLabel(label);
+	player_labels.push_back(label);
 }
 
 // These are the resources that depend on the device.
