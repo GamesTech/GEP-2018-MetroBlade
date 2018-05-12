@@ -125,12 +125,18 @@ void SceneManager::loadScene(Scene* scene_name)
 
 	clearScene();
 
-	if (!scene_name) 
+	if (!scene_name)
 	{
 		return;
 	}
 
 	current_scene.reset(scene_name);
+
+	// TODO - Add object setup here so we can have a better map loader.
+	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++)
+	{
+		setupScene2DObjects(current_scene->get2DObjectInScene(i));
+	}
 
 	// Here we spawn characters according to the game_manager player lobby if a scene as a level flag.
 	if (current_scene->isLevel())
@@ -144,17 +150,11 @@ void SceneManager::loadScene(Scene* scene_name)
 		// Add the Players to the scene according to the game manager.
 		OutputDebugString(L"Its a level mate");
 
-		for (auto& player_object : *(game_manager.getPlayerLobbyData())) 
+		for (auto& player_object : *(game_manager.getPlayerLobbyData()))
 		{
 			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id);
 			instanciate2DObject(player);
 		}
-	}
-
-	// TODO - Add object setup here so we can have a better map loader.
-	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++) 
-	{
-		setupScene2DObjects(current_scene->get2DObjectInScene(i));
 	}
 }
 
@@ -176,15 +176,7 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
-	new_object->assignWorldEventListener(scene_event_listener);
-	new_object->assignSceneManager(this);
-	if (dynamic_cast<Player2D*>(new_object)) 
-	{
-		game_manager.registerPlayerInstance((Player2D*)new_object);
-	}
-	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
-	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
-
+	setupScene2DObjects(new_object);
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
@@ -240,6 +232,7 @@ void SceneManager::resetRenderState()
 void SceneManager::setupScene2DObjects(GameObject2D * object)
 {
 	object->assignWorldEventListener(scene_event_listener);
+	object->assignSceneManager(this);
 
 	if (dynamic_cast<Player2D*>(object))
 	{

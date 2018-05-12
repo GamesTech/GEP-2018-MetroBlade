@@ -40,10 +40,17 @@ void SceneLoader::constructScene(Scene* scene)
 	// Go through the list and construct the corrisponding object.
 	for (auto& entity : file_reader.getFileBuffer().members()) 
 	{
-		auto& loader = object_constructors.find(entity.value()["type"].as_string());
-		if (loader != object_constructors.end()) 
+		if (entity.name() == "level") 
 		{
-			scene->add2DGameObjectToScene(loader->second(render_data, entity));
+			scene->isLevel(entity.value().as_bool());
+		}
+		else 
+		{
+			auto& loader = object_constructors.find(entity.value()["type"].as_string());
+			if (loader != object_constructors.end())
+			{
+				scene->add2DGameObjectToScene(loader->second(render_data, entity));
+			}
 		}
 	}
 }
