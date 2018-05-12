@@ -41,9 +41,6 @@ Game::~Game()
 	delete m_RD;
 	delete m_GSD;
 
-	m_keyboard.reset();
-	m_mouse.reset();
-
 	m_graphicsMemory.reset();
 }
 
@@ -150,7 +147,6 @@ void Game::Update(DX::StepTimer const& timer)
 	}
 
 	input_manager.tick();
-	ReadInput();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
 	if (input_manager.getBindDown("Action"))
@@ -675,19 +671,4 @@ void Game::OnDeviceLost()
 
 	CreateDevice();
 	CreateResources();
-}
-
-void Game::ReadInput()
-{
-	//GEP:: CHeck out the DirectXTK12 wiki for more information about these systems
-	//https://github.com/Microsoft/DirectXTK/wiki/Mouse-and-keyboard-input
-
-	//You'll also found similar stuff for Game Controllers here:
-	//https://github.com/Microsoft/DirectXTK/wiki/Game-controller-input
-
-	//Note in both cases they are identical to the DirectXTK for DirectX 11
-
-	// m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	// m_GSD->m_keyboardState = m_keyboard->GetState();
-	// m_GSD->m_mouseState = m_mouse->GetState();
 }

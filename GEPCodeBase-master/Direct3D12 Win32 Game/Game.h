@@ -103,17 +103,10 @@ private:
 
 	GameStateData* m_GSD;
 
-	//GEP:: Keyboard and Mouse Abstractions for basic input systemGame
-	void ReadInput();
-	std::unique_ptr<DirectX::Keyboard> m_keyboard;
-	std::unique_ptr<DirectX::Mouse> m_mouse;
-	//std::unique_ptr<DirectX::GamePad> m_gamePad;
-
+	// System risponcable for input management.
 	MetroBrawlInputManager		  input_manager;
 
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
-
-
-	SceneManager scene;
+	SceneManager						  scene;
 };
