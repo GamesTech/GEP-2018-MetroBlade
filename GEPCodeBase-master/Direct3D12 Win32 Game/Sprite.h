@@ -14,7 +14,7 @@ public:
 
 	void setSpriteRECT(std::shared_ptr<RECT> rect) { sprite_src_rect = rect; }
 	void setAnimationState(std::string  new_animation_state);
-
+	void setLoop(bool loop_value);
 	void setSpriteAnimationFile(std::string  file_name);
 
 private:

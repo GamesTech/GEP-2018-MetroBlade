@@ -21,7 +21,6 @@
 
 #include "PlayerStatus.h"
 
-
 struct PlayerData 
 {
 	std::string		player_name = "player_null"; // When a player is registered they should have the ability to change there name.

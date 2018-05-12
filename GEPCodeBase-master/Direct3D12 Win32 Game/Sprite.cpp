@@ -66,3 +66,8 @@ void Sprite::setSpriteAnimationFile(std::string file_name)
 #endif
 	assert(!file_reader.parseFile(anim_vector));
 }
+
+void Sprite::setLoop(bool loop_value)
+{
+	loop = loop_value;
+}

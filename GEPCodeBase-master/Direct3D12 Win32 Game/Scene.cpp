@@ -96,9 +96,24 @@ bool Scene::isLevel() const
 {
 	return is_level;
 }
+GameObject2D* Scene::get2DObjectInScene(int index)
+{
+	GameObject2D*  object = nullptr;
+	if (index < m_2DObjects.size()) 
+	{
+		object = m_2DObjects[index];
+	}
+	return object;
+}
 
 void Scene::isLevel(bool level)
 {
 	is_level = level;
+}
+
+
+int Scene::getNumberOf2DObjectsInScene() const
+{
+	return m_2DObjects.size();
 }
 

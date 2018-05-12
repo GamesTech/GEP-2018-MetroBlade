@@ -35,6 +35,9 @@ public:
 	void add2DGameObjectToScene(GameObject2D* new_object);
 	void add3DGameObjectToScene(GameObject3D* new_object);
 
+	GameObject2D*  get2DObjectInScene(int index);
+	int			   getNumberOf2DObjectsInScene() const;
+
 	bool isLevel() const;
 	void isLevel(bool level);
 

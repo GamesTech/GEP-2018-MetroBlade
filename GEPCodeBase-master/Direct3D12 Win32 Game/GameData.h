@@ -24,7 +24,7 @@ constexpr int GAME_INFINITE_TIME = -1;
 struct GameData 
 {
 	// TODO - Add any additional settings to the field here. 
-	float game_length = 60.0f; ///< Game Length In Secounds
+	float game_length = 10.0f; ///< Game Length In Secounds
 	float respawn_time = 2.0f;  ///< time before respawn.
 	int game_speed_multiplier = 1; ///< Speed multiplier
 	int game_knockback_multiplier = 1; ///< Knockback multiplier
