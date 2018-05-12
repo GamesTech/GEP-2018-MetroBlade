@@ -199,20 +199,6 @@ void Game::Update(DX::StepTimer const& timer)
 	//	scene.instanciateUIObject(test_sprite);
 	}
 
-	//if (input_manager.getKeyDown(Keyboard::Keys::T))
-	//{
-	//	// Instantiation test.
-	//	Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
-	//	testPlay->SetDrive(1000.0f);
-	//	testPlay->SetDrag(0.5f);
-	//	testPlay->SetPos(Vector2(0, 500));
-	//	scene.instanciate2DObject(testPlay);
-
-	//	Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-	//	testPlatform->SetPos(Vector2(0,600));
-	//	scene.instanciate2DObject(testPlatform);
-	//}
-
 	scene.Update(m_GSD);
 }
 
