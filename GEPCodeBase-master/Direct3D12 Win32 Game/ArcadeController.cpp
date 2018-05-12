@@ -41,10 +41,10 @@ void ArcadeController::SetStateValues()
 	controller_state.dpad.right = input_values[7];
 	controller_state.buttons.start = input_values[8];
 	controller_state.buttons.back = input_values[9];
-	controller_state.thumbSticks.leftX = input_values[10];
-	controller_state.thumbSticks.leftY = input_values[11];
-	controller_state.thumbSticks.rightX = input_values[12];
-	controller_state.thumbSticks.rightY = input_values[13];
+	controller_state.thumbSticks.leftX = 0;
+	controller_state.thumbSticks.leftY = 0;
+	controller_state.thumbSticks.rightX = 0;
+	controller_state.thumbSticks.rightY = 0;
 	controller_state.buttons.leftShoulder = input_values[14];
 	controller_state.buttons.rightShoulder = input_values[15];
 }

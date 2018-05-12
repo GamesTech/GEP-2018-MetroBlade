@@ -77,6 +77,9 @@ protected:
 	Item*				player_item = nullptr;
 
 private:
+	int getInputDirection(int analog_value, int left_dpad_value, int right_dpad_value);
+	int returnDPadDirectionValue(bool left_bind, bool right_bind);
+
 	void onCollision(MetroBrawlCollisionData  col_data);
 	void onPunchCollision(MetroBrawlCollisionData  col_data);
 };

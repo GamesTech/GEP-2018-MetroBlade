@@ -41,6 +41,7 @@ void ArcadeControllerModule::initModule(std::string bind_file)
 
 }
 
+
 void ArcadeControllerModule::tickDriver()
 {
 	for (auto& controller : controllers) 

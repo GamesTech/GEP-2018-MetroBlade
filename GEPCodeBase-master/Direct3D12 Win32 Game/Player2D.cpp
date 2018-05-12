@@ -75,19 +75,30 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	}
 
 	// TODO - Change this to multiply the 
-	if (_GSD->input->getBindRawValue("Move", controller_id) < 0)
+	if (_GSD->input->getBindRawValue("Move", controller_id) < 0 || _GSD->input->getBindDown("MoveLeft", controller_id))
 	{
 		offset = Vector2(-20, 0);
 		m_effects = SpriteEffects_FlipHorizontally;
 	}
-	else if (_GSD->input->getBindRawValue("Move", controller_id) > 0)
+	else if (_GSD->input->getBindRawValue("Move", controller_id) > 0 || _GSD->input->getBindDown("MoveRight", controller_id))
 	{
 		offset = Vector2(120, 0);
 		m_effects = SpriteEffects_None;
 	}
 
+
 	direction = Vector2(_GSD->input->getBindRawValue("Move", controller_id) * 1, 0);
-	SetInputVel(Vector2(_GSD->input->getBindRawValue("Move", controller_id) * x_speed, 0));
+	SetInputVel
+	(
+		Vector2
+		(
+			getInputDirection(_GSD->input->getBindRawValue("Move", controller_id),
+			_GSD->input->getBindDown("MoveLeft", controller_id),
+			_GSD->input->getBindDown("MoveRight", controller_id))
+			* x_speed
+			,0
+		)
+	);
 
 	if (GetInputVel() != Vector2::Zero) 
 	{
@@ -192,6 +203,23 @@ float Player2D::getRespawnTime() const
 void Player2D::setRespawnTime(float respawn_timer)
 {
 	respawn_time = respawn_timer;
+}
+
+int Player2D::getInputDirection(int analog_value, int left_dpad_value, int right_dpad_value)
+{
+	if (analog_value != 0) 
+	{
+		return analog_value;
+	}
+	else 
+	{
+		return returnDPadDirectionValue(left_dpad_value, right_dpad_value);
+	}
+}
+
+int Player2D::returnDPadDirectionValue(bool left_bind, bool right_bind)
+{
+	return (int)right_bind - (int)left_bind;
 }
 
 void Player2D::onCollision(MetroBrawlCollisionData col_data)
