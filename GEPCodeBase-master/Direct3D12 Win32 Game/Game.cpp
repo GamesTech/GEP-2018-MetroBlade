@@ -200,6 +200,11 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
+		ImageGO2D* background = new ImageGO2D(m_RD, "night_sky");
+		scene.instanciate2DObject(background);
+		
+
+
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
@@ -218,11 +223,9 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite", Vector2(1152,59));
-		testPlatform->SetPos(Vector2(500, 600));
-		scene.instanciate2DObject(testPlatform);
 
-		
+
+
 
 		scene.startGameManager();
 
@@ -279,6 +282,9 @@ void Game::Update(DX::StepTimer const& timer)
 		}
 
 		//scene.instanciateUIObject(hud);
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite2", Vector2(1000, 271));
+		testPlatform->SetPos(Vector2(500, 600));
+		scene.instanciate2DObject(testPlatform);
 
 	}
 
@@ -291,11 +297,11 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetPos(Vector2(0, 500));
 		scene.instanciate2DObject(testPlay);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(300,34));
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(300, 34));
 		testPlatform->SetPos(Vector2(0, 600));
 		scene.instanciate2DObject(testPlatform);
 	}
-	
+
 	hud->updateLabels(player_labels);
 	scene.Update(m_GSD);
 	//test_damage--;
