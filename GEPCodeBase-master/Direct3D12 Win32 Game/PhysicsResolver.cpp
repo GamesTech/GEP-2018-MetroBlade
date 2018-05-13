@@ -17,7 +17,8 @@ void MetroBrawlPhysicsResolver::resolveObjectCollision(Collider& a, Collider& b)
 		// a.getCollidersParent()->SetPos(a.getCollidersParent()->GetPos() + Vector2(physics_object->getDeltaPos().x * -collision_normal.x, physics_object->getDeltaPos().y * -collision_normal.y));
 		// a.getCollidersParent()->SetPos(a.getCollidersParent()->GetPos() - collision_point);
 
-		physics_object->SetVel(Vector2(physics_object->GetVel().x * -collision_normal.x, physics_object->GetVel().y * -collision_normal.y));
+		 physics_object->SetVel(Vector2(-physics_object->GetVel().x * collision_normal.x, -physics_object->GetVel().y * collision_normal.y));
+		//physics_object->AddForce(Vector2(-physics_object->GetVel().x * collision_normal.x, -physics_object->GetVel().y * collision_normal.y));
 	}
 
 	if (dynamic_cast<Player2D*>(a.getCollidersParent())) 
