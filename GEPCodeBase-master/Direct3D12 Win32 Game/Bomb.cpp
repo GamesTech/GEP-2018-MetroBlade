@@ -7,7 +7,7 @@ Bomb::Bomb(RenderData* _RD, string _filename, Vector2 new_direction, Player2D* o
 {
 	using namespace std::placeholders;
 	
-	Vector2 new_pos = original->GetPos();
+	Vector2 new_pos = original->GetPos() - original->getComponentManager()->getComponentByType<Collider>()->getBoxDimenstions();
 	SetPos(new_pos);
 
 	col->isColliderImmediate(true);

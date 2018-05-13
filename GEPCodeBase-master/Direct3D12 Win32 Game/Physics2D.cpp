@@ -36,7 +36,7 @@ void Physics2D::Tick(GameStateData * _GSD)
 	m_acc -= m_drag * m_vel;
 
 	Vector2 newPos = m_pos + _GSD->m_dt * m_vel;
-	Vector2 newVel = m_vel + _GSD->m_dt * m_acc + +(_GSD->m_dt * m_input_vel);
+	Vector2 newVel = m_vel + (_GSD->m_dt * m_acc) +  m_input_vel;
 
 	m_delta_pos = newPos - m_pos;
 	m_pos = newPos;

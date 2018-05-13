@@ -187,7 +187,7 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
-		Item* test_item = new Item(m_RD, "bubble_item", ItemType::BOMB);
+		Item* test_item = new Item(m_RD, "bubble_item", ItemType::HAMMER);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
 

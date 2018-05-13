@@ -8,7 +8,7 @@ Hammer::Hammer(RenderData* _RD, string _filename, Vector2 new_direction, Player2
 	using namespace std::placeholders;
 
 	player_original = original;
-	pos_offset = Vector2(300, 200);
+	pos_offset = original->GetPos() - original->getComponentManager()->getComponentByType<Collider>()->getBoxDimenstions();
 
 	col->isColliderImmediate(true);
 	col->setBoxDimensions(Vector2(50, 50));
@@ -45,9 +45,6 @@ void Hammer::Tick(GameStateData* _GSD)
 		attack(_GSD);
 	}
 
-
-	
-	
 	sprite->tickComponent(_GSD);
 	Physics2D::Tick(_GSD);
 }

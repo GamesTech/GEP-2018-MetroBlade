@@ -182,12 +182,6 @@
     <Filter Include="Core\GameObjects\Item">
       <UniqueIdentifier>{34a91a08-3450-4521-abdf-42162b064d7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\GameObjects\Projectile">
-      <UniqueIdentifier>{7d1a9fc8-7a78-4b53-bf07-347bcc805f0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\GameObjects\Spawner">
-      <UniqueIdentifier>{7608465e-8c31-4773-af94-d463fb637985}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Input\&quot;Drivers&quot;">
       <UniqueIdentifier>{0cd6ed18-bc9b-4374-bd51-c6bfa5b01837}</UniqueIdentifier>
     </Filter>
@@ -196,6 +190,18 @@
     </Filter>
     <Filter Include="Core\Input\&quot;Drivers&quot;\Arcade\Controller">
       <UniqueIdentifier>{2966e6d9-ff19-4f07-93d3-c454a0e64f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Item\Projectile">
+      <UniqueIdentifier>{7d1a9fc8-7a78-4b53-bf07-347bcc805f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Item\Spawner">
+      <UniqueIdentifier>{7608465e-8c31-4773-af94-d463fb637985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Item\Bomb">
+      <UniqueIdentifier>{a03c219c-d29f-401e-b889-2a6e5b28214b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\Item\Hammer">
+      <UniqueIdentifier>{ac66f598-d122-407e-b886-63af52576e34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -366,10 +372,10 @@
       <Filter>Core\GameObjects\Item</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
-      <Filter>Core\GameObjects\Projectile</Filter>
+      <Filter>Core\GameObjects\Item\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="Spawner.h">
-      <Filter>Core\GameObjects\Spawner</Filter>
+      <Filter>Core\GameObjects\Item\Spawner</Filter>
     </ClInclude>
     <ClInclude Include="ArcadeControllerModule.h">
       <Filter>Core\Input\"Drivers"\Arcade</Filter>
@@ -377,8 +383,12 @@
     <ClInclude Include="ArcadeController.h">
       <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Hammer.h" />
-    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Bomb.h">
+      <Filter>Core\GameObjects\Item\Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Hammer.h">
+      <Filter>Core\GameObjects\Item\Hammer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -501,10 +511,10 @@
       <Filter>Core\GameObjects\Item</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>Core\GameObjects\Projectile</Filter>
+      <Filter>Core\GameObjects\Item\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="Spawner.cpp">
-      <Filter>Core\GameObjects\Spawner</Filter>
+      <Filter>Core\GameObjects\Item\Spawner</Filter>
     </ClCompile>
     <ClCompile Include="ArcadeControllerModule.cpp">
       <Filter>Core\Input\"Drivers"\Arcade</Filter>
@@ -512,8 +522,12 @@
     <ClCompile Include="ArcadeController.cpp">
       <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="Hammer.cpp" />
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Core\GameObjects\Item\Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Hammer.cpp">
+      <Filter>Core\GameObjects\Item\Hammer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
