@@ -44,12 +44,25 @@ void GameManager::tickGameManager(GameStateData* _GSD)
 	}
 }
 
-void GameManager::registerPlayerInstance(Player2D* new_player)
+void GameManager::registerPlayerInstance(GameObject2D * new_player)
 {
 	// Setup player stats according to game mode and then register the player for checking every frame.
 	// TODO - Move [layer setup to when the game starts. 
-	new_player->getComponentManager()->getComponentByType<LobbySystemComponent>()->addLobbyReference(&lobby);
-	player_instances.push_back(new_player);
+	if (dynamic_cast<Player2D*>(new_player)) 
+	{
+		new_player->getComponentManager()->getComponentByType<LobbySystemComponent>()->addLobbyReference(&lobby);
+		player_instances.push_back((Player2D*)new_player);
+	}
+}
+
+void GameManager::setupLobbySystemComponent(GameObject2D* object)
+{
+	LobbySystemComponent* component = object->getComponentManager()->getComponentByType<LobbySystemComponent>();
+
+	if (component) 
+	{
+		component->addLobbyRefrence(this);
+	}
 }
 
 void GameManager::addWorldEventListener(std::shared_ptr<SceneEvent> world_event_listener)
@@ -60,6 +73,11 @@ void GameManager::addWorldEventListener(std::shared_ptr<SceneEvent> world_event_
 std::vector<PlayerData>* GameManager::getPlayerLobbyData()
 {
 	return &lobby;
+}
+
+std::vector<SpawnPoint*>* GameManager::getSpawnpointList()
+{
+	return &scene_spawns;
 }
 
 void GameManager::addPlayer(PlayerData new_player_data) // TODO - Consider Removing.
@@ -96,6 +114,7 @@ void GameManager::startGame()
 
 void GameManager::resetManager()
 {
+	game_active = false;
 	player_instances.clear();
 	scene_spawns.clear();
 }
@@ -118,7 +137,6 @@ void GameManager::registerSpawnPoint(GameObject2D* spawn_point_object)
 Vector2 GameManager::getRespawnPosition()
 {
 	int size = scene_spawns.size() - 1;
-
 
 	if ((size + 1) != 0) 
 	{

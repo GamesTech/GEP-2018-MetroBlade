@@ -1,9 +1,17 @@
 #include "pch.h"
+
+#include "GameManager.h"
+
 #include "LobbySystem.h"
 
 void LobbySystemComponent::addLobbyReference(std::vector<PlayerData>* player_lobby)
 {
 	lobby_refrence = player_lobby;
+}
+
+void LobbySystemComponent::addLobbyRefrence(GameManager* game_manager)
+{
+	game_state = game_manager;
 }
 
 void LobbySystemComponent::tickComponent(GameStateData* _GSD)
@@ -19,7 +27,7 @@ void LobbySystemComponent::renderComponent(RenderData* _RD)
 void LobbySystemComponent::addPlayer(PlayerData new_player)
 {
 	// TODO - Consider Adding Error Checking Here.
-	lobby_refrence->push_back(new_player);
+	game_state->getPlayerLobbyData()->push_back(new_player);
 }
 
 bool LobbySystemComponent::isPlayerRegistered(int controller_id)
@@ -38,6 +46,11 @@ bool LobbySystemComponent::isPlayerRegistered(int controller_id)
 void LobbySystemComponent::checkPlayersActivity()
 {
 	return;
+}
+
+void LobbySystemComponent::startGameManager()
+{
+	game_state->startGame();
 }
 
 PlayerData LobbySystemComponent::getPlayerByIndex(int index)

@@ -38,10 +38,12 @@ public:
 
 	void tickGameManager(GameStateData* _GSD);
 
-	void registerPlayerInstance(Player2D*	new_player);
+	void registerPlayerInstance(GameObject2D * new_player);
+	void setupLobbySystemComponent(GameObject2D*  object);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
 	std::vector<PlayerData>* getPlayerLobbyData(); // TODO - Consider returning a refrence to the array instead. 
+	std::vector<SpawnPoint*>*  getSpawnpointList(); 
 	void addPlayer(PlayerData new_player_data);
 
 	GameData* getGameModeData();
