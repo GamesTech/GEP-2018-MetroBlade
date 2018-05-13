@@ -23,8 +23,10 @@
 #include "SceneState.h"
 
 class UILabel;
+class SpawnPoint;
 
 struct GameStateData;
+
 
 class GameManager 
 {
@@ -36,10 +38,12 @@ public:
 
 	void tickGameManager(GameStateData* _GSD);
 
-	void registerPlayerInstance(Player2D*	new_player);
+	void registerPlayerInstance(GameObject2D * new_player);
+	void setupLobbySystemComponent(GameObject2D*  object);
 	void addWorldEventListener(std::shared_ptr<SceneEvent>	world_event_listener);
 	
 	std::vector<PlayerData>* getPlayerLobbyData(); // TODO - Consider returning a refrence to the array instead. 
+	std::vector<SpawnPoint*>*  getSpawnpointList(); 
 	void addPlayer(PlayerData new_player_data);
 
 	GameData* getGameModeData();
@@ -52,8 +56,11 @@ public:
 
 	void setUILabel(UILabel* new_label);
 
+	void registerSpawnPoint(GameObject2D*  spawn_point_object);
+
 private:
 	// TODO - Add Spawnpoint register for determining locations hwne respawning players.
+	Vector2 getRespawnPosition(); 
 
 	void checkPlayerLifeStatus();
 	void checkPlayerRespawnStatus(float delta_time);
@@ -65,8 +72,9 @@ private:
 
 	void endCurrentGame();
 
-	std::vector<Player2D*>			level_players;
+	std::vector<Player2D*>			player_instances;
 	std::vector<Player2D*>			players_to_respawn; /// < Buffer of players that need to be respawned.
+	std::vector<SpawnPoint*>		scene_spawns;
 
 	std::vector<PlayerData>			lobby;
 

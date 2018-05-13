@@ -191,6 +191,12 @@
     <Filter Include="Core\Input\&quot;Drivers&quot;\Arcade\Controller">
       <UniqueIdentifier>{2966e6d9-ff19-4f07-93d3-c454a0e64f10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Game Management\Lobby">
+      <UniqueIdentifier>{4e8a5140-4da7-47cd-8464-78a84132d70f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObjects\SpawnPoint">
+      <UniqueIdentifier>{306a117e-0198-40f8-ab42-3474337554ca}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\GameObjects\Item\Projectile">
       <UniqueIdentifier>{7d1a9fc8-7a78-4b53-bf07-347bcc805f0b}</UniqueIdentifier>
     </Filter>
@@ -383,6 +389,12 @@
     <ClInclude Include="ArcadeController.h">
       <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
     </ClInclude>
+    <ClInclude Include="LobbySystem.h">
+      <Filter>Core\Game Management\Lobby</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnPoint.h">
+      <Filter>Core\GameObjects\SpawnPoint</Filter>
+    </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Core\GameObjects\Item\Bomb</Filter>
     </ClInclude>
@@ -458,6 +470,9 @@
     <ClCompile Include="UISprite.cpp">
       <Filter>Core\UI\UISprite</Filter>
     </ClCompile>
+    <ClCompile Include="LobbySystem.cpp">
+      <Filter>Core\Game Management\Lobby</Filter>
+    </ClCompile>
     <ClCompile Include="MetroBrawlCollisionManager.cpp">
       <Filter>Core\Physics\Collision</Filter>
     </ClCompile>
@@ -521,6 +536,9 @@
     </ClCompile>
     <ClCompile Include="ArcadeController.cpp">
       <Filter>Core\Input\"Drivers"\Arcade\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnPoint.cpp">
+      <Filter>Core\GameObjects\SpawnPoint</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Core\GameObjects\Item\Bomb</Filter>
