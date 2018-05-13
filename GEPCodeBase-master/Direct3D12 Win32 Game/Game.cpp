@@ -183,7 +183,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
 
-//		scene.startGameManager();
+		scene.startGameManager();
 
 		UILabel* test_label = new UILabel;
 		test_label->setText("Kill your opponents.");

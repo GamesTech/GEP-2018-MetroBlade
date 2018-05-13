@@ -41,8 +41,8 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 
 	if (_GSD->input->getBindDown("Music")) 
 	{
-		object_components.getComponentByType<LobbySystemComponent>()->startGameManager();
-		// object_components.getComponentByType<SoundComponent>()->Play();
+		// object_components.getComponentByType<LobbySystemComponent>()->startGameManager();
+		object_components.getComponentByType<SoundComponent>()->Play();
 	}
 }
 
