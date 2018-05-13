@@ -157,9 +157,8 @@ void Game::Update(DX::StepTimer const& timer)
 	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (m_keyboard->GetState().Enter)
+	if (input_manager.getKeyDown(DirectX::Keyboard::Enter))
 	{
-
 		cursors.clear();
 		teamview.clear();
 		teamview_images.clear();
@@ -246,7 +245,6 @@ void Game::Update(DX::StepTimer const& timer)
 
 		scene.startGameManager();
 	}
-	if (m_keyboard->GetState().P)
 	if (input_manager.getBindDown("Action"))
 	{
 		Scene*  newScene = new Scene;

@@ -20,16 +20,15 @@ Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
 
 void Cursor::CheckInput(GameStateData * _GSD)
 {
-	controller_state = _GSD->m_gamePad->GetState(controller_id);
-
-	float stick_x = controller_state.thumbSticks.leftX;
-	float stick_y = controller_state.thumbSticks.leftY;
+	
+	float stick_x = _GSD->input->getBindRawValue("ThumbstickLeftX", controller_id);
+	float stick_y = _GSD->input->getBindRawValue("ThumbstickLeftY", controller_id);
 
 	setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
 
 	sprite->setCanvasPosition(getCanvasPosition());
 
-	if (controller_state.IsAPressed())
+	if (_GSD->input->getBindDown("Jump"))
 	{
 		a_pressed = true;
 	}

@@ -14,7 +14,6 @@ class UISprite : public UIObject
 public:
 	UISprite(std::string filename, RenderData* _RD);
 	void setSprite(std::string filename, std::string fighter);
-	void CheckInput(GameStateData * _GSD);
 	void changeSpriteRect(std::string filename, std::string fighter);
 	~UISprite() = default;
 
