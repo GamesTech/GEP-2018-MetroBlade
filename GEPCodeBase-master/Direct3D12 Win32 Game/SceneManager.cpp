@@ -199,6 +199,18 @@ void SceneManager::instanciateUIObject(UIObject * new_object)
 	game_ui.addUIObject(new_object);
 }
 
+bool SceneManager::canItemsSpawn()
+{
+	if (current_scene->isLevel())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void SceneManager::processSceneEvents()
 {
 	switch (scene_event_listener->event_flag) 

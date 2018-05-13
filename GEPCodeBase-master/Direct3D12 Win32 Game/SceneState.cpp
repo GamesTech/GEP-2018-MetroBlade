@@ -37,3 +37,15 @@ void SceneState::instantiateToScene(GameObject2D* obj)
 {
 	scene_manager->instanciate2DObject(obj);
 }
+
+bool SceneState::sceneCheck()
+{
+	if (scene_manager->canItemsSpawn())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

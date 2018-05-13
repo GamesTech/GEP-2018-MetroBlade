@@ -72,6 +72,7 @@ public:
 
 	void instanciateUIObject(UIObject*    new_object);
 
+	bool canItemsSpawn();
 private:
 	void processSceneEvents();
 	void resetRenderState();
