@@ -8,6 +8,8 @@
 #include "Sprite.h"
 #include "SpriteAnimFileReader.h"
 
+#include "LobbySystem.h"
+
 
 Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
 {
@@ -16,6 +18,7 @@ Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_
 	src_rect.reset(new RECT);
 	CentreOrigin();
 	object_components.addComponent(new PlayerStatus);
+	object_components.addComponent(new LobbySystemComponent);
 	object_components.addComponent(new Sprite(true));
 
 	// Add Colliders to the players.
@@ -109,6 +112,12 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	{
 		action_state = USE;
 	}
+
+	// Test Code
+	//if (_GSD->input->getBindDown("Action", controller_id)) 
+	//{
+	//	object_components.getComponentByType<LobbySystemComponent>()->addPlayer(PlayerData());
+	//}
 	
 }
 

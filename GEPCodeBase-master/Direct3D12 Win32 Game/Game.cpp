@@ -12,6 +12,7 @@
 
 #include "UILabel.h"
 #include "UISprite.h"
+#include "SpawnPoint.h"
 
 extern void ExitGame();
 
@@ -152,6 +153,7 @@ void Game::Update(DX::StepTimer const& timer)
 	if (input_manager.getBindDown("Action"))
 	{
 		Scene*  newScene = new Scene;
+		newScene->isLevel(true);
 		scene.loadScene(newScene);
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -190,6 +192,12 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
+
+		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
+		//scene.instanciate2DObject(test_spawn);
+
+		//SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
+		//scene.instanciate2DObject(test_spawn2);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
