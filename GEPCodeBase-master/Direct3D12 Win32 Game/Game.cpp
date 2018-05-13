@@ -200,7 +200,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
-		ImageGO2D* background = new ImageGO2D(m_RD, "night_sky");
+		ImageGO2D* background = new ImageGO2D(m_RD, "sky");
 		scene.instanciate2DObject(background);
 		
 
@@ -222,9 +222,6 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay3->SetDrag(0.5f);
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
-
-
-
 
 
 		scene.startGameManager();
@@ -257,9 +254,10 @@ void Game::Update(DX::StepTimer const& timer)
 
 
 
-		/**All the labels are instanciated but only
-		*the label text is updated based on player numbers
-		*e.g. 3 players only shows 3 numbers, the 4th one is invisible.
+		/**All the labels are instanciated but 
+		*currently all labels are set as there is no
+		*way to use player numbers to change player ui 
+		*at the moment
 		*/
 
 		UILabel* player1_damage = new UILabel;
@@ -282,7 +280,7 @@ void Game::Update(DX::StepTimer const& timer)
 		}
 
 		//scene.instanciateUIObject(hud);
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite2", Vector2(1000, 271));
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(1000, 113));
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
 
@@ -300,6 +298,11 @@ void Game::Update(DX::StepTimer const& timer)
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(300, 34));
 		testPlatform->SetPos(Vector2(0, 600));
 		scene.instanciate2DObject(testPlatform);
+	}
+	if (m_keyboard->GetState().Escape)
+	{
+		hud->clear();
+		player_labels.clear();
 	}
 
 	hud->updateLabels(player_labels);
