@@ -92,6 +92,11 @@ void Scene::add3DGameObjectToScene(GameObject3D * new_object)
 	m_3DObjects.push_back(new_object);
 }
 
+bool Scene::isLevel() const
+{
+	return is_level;
+}
+
 GameObject2D* Scene::get2DObjectInScene(int index)
 {
 	GameObject2D*  object = nullptr;
@@ -101,6 +106,12 @@ GameObject2D* Scene::get2DObjectInScene(int index)
 	}
 	return object;
 }
+
+void Scene::isLevel(bool level)
+{
+	is_level = level;
+}
+
 
 int Scene::getNumberOf2DObjectsInScene() const
 {

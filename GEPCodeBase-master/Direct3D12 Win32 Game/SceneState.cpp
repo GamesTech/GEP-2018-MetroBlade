@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "SceneState.h"
-
+#include "SceneManager.h"
+#include "GameObject2D.h"
 void SceneState::assignSceneManagerListener(std::shared_ptr<SceneEvent> event_ref)
 {
 	world_event_data = event_ref;
@@ -25,4 +26,14 @@ void SceneState::exitGame()
 void SceneState::panic()
 {
 	world_event_data->event_flag = SceneEventFlags::EVENT_SIGKILL;
+}
+
+void SceneState::assignSceneManager(SceneManager* manager)
+{
+	scene_manager = manager;
+}
+
+void SceneState::instantiateToScene(GameObject2D* obj)
+{
+	scene_manager->instanciate2DObject(obj);
 }

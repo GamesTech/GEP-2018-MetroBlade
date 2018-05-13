@@ -35,7 +35,7 @@ public:
 	virtual void Render(RenderData* _RD) = 0;
 
 	void assignWorldEventListener(std::shared_ptr<SceneEvent>   world_event_listener);
-
+	void assignSceneManager(SceneManager* manager);
 	GameComponentManager* getComponentManager();
 
 	void setTag(int tag) { this->tag = tag; }

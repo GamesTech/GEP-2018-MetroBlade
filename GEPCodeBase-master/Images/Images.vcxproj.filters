@@ -25,6 +25,8 @@
     <ImageContentTask Include="player4_cursor.png" />
     <ImageContentTask Include="player2_cursor.png" />
     <ImageContentTask Include="player3_cursor.png" />
+    <ImageContentTask Include="Health_item.png" />
+    <ImageContentTask Include="projectile_item.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="READ_ME.txt" />

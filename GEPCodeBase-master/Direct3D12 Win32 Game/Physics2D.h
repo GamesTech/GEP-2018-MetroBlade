@@ -17,6 +17,7 @@ public:
 	void SetVelX(Vector2 _vel) { m_vel.x = _vel.x ; }
 	void SetVel(Vector2 _vel) { m_vel = _vel; }
 
+	Vector2 GetInputVel() const;
 	void SetInputVel(Vector2  _input_vel);
 
 	Vector2 GetAcc() { return m_acc; }
