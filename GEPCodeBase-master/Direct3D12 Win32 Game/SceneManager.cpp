@@ -44,7 +44,6 @@ void SceneManager::Init(RenderData* _RD)
 	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
-// 	current_scene.reset(new Scene);
 
 	loadScene(scene_loader.createScene("menu.mbmap"));
 	
@@ -52,14 +51,9 @@ void SceneManager::Init(RenderData* _RD)
 	setMainCamera(camera);
 	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
-
-	//UILabel* label = new UILabel;
-	//label->setCanvasPosition(Vector2(0.4, 0.4));
-	//label->setText("Super Indie Smash. \n Press P to start.");
-	//game_ui.addUIObject(label);
 }
 
-void SceneManager::Update(GameStateData * game_state)
+void SceneManager::Update(GameStateData* game_state)
 {
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
@@ -129,15 +123,13 @@ void SceneManager::loadScene(Scene* scene_name)
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
 
+	clearScene();
 
 	if (!scene_name) 
 	{
-		clearScene();
-		// current_scene.reset(new Scene);
 		return;
 	}
 
-	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
@@ -171,7 +163,6 @@ void SceneManager::instanciate2DObject(GameObject2D* new_object)
 	{
 		game_manager.registerPlayerInstance((Player2D*)new_object);
 	}
-
 	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
 

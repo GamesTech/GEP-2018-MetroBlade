@@ -51,7 +51,6 @@ void Item::SetPosition(Vector2 new_pos)
 
 void Item::Tick(GameStateData* _GSD)
 {
-	
 	col->setBoxOrigin(m_pos);
 	sprite->tickComponent(_GSD);
 }

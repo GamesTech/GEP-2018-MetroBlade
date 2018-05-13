@@ -32,29 +32,14 @@ Game::Game() :
 
 Game::~Game()
 {
-	//if (m_audEngine)
-	//{
-	//	m_audEngine->Suspend();
-	//}
-
 	// Ensure that the GPU is no longer referencing resources that are about to be destroyed.
 	WaitForGpu();
 
 	// delete the scene and clear the memory.
 	scene.clearScene();
 
-	//delete the sounds
-	//for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-	//{
-	//	delete (*it);
-	//}
-	//m_sounds.clear();
-
 	delete m_RD;
 	delete m_GSD;
-
-	m_keyboard.reset();
-	m_mouse.reset();
 
 	m_graphicsMemory.reset();
 }
@@ -69,22 +54,14 @@ void Game::Initialize(HWND window, int width, int height)
 	CreateDevice();
 	CreateResources();
 
-	//GEP::init Audio System
-	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
-#ifdef _DEBUG
-	eflags = eflags | AudioEngine_Debug;
-#endif
-	m_audEngine = std::make_unique<AudioEngine>(eflags);
-
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
-	m_inputManager.reset(new InputManager);
-	m_keyboard = std::make_unique<Keyboard>();
-	m_mouse = std::make_unique<Mouse>();
-	m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
-	m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
-	//m_gamePad = std::make_unique<DirectX::GamePad>();
+
+	// Setup the input system. 
+	input_manager.init(window);
+	m_GSD->input = &input_manager;
+
 	m_RD = new RenderData;
 
 	m_RD->m_d3dDevice = m_d3dDevice;
@@ -141,8 +118,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
 	scene.Init(m_RD);
-	//objectList.reserve(20);
-
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
@@ -150,15 +125,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_timer.SetFixedTimeStep(true);
 	m_timer.SetTargetElapsedSeconds(1.0 / 60);
 	*/
-
-	//GEP::This is where I am creating the test objects
-	//Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
-	//loop->SetVolume(0.1f);
-	//loop->Play();
-	//m_sounds.push_back(loop);
-
-	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
-	m_sounds.push_back(TS);*/
 }
 
 //GEP:: Executes the basic game loop.
@@ -180,12 +146,10 @@ void Game::Update(DX::StepTimer const& timer)
 		PostQuitMessage(0);
 	}
 
-	ReadInput();
+	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	//this will update the audio engine but give us chance to do somehting else if that isn't working
-
-	if (m_keyboard->GetState().P)
+	if (input_manager.getBindDown("Action"))
 	{
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
@@ -226,22 +190,9 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "bubble_item", ItemType::BOMB);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
+
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
-	}
-
-	if (m_keyboard->GetState().T)
-	{
-		// Instantiation test.
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-		testPlay->SetPos(Vector2(0, 500));
-		scene.instanciate2DObject(testPlay);
-
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->SetPos(Vector2(0,600));
-		scene.instanciate2DObject(testPlatform);
 	}
 
 	scene.Update(m_GSD);
@@ -720,19 +671,4 @@ void Game::OnDeviceLost()
 
 	CreateDevice();
 	CreateResources();
-}
-
-void Game::ReadInput()
-{
-	//GEP:: CHeck out the DirectXTK12 wiki for more information about these systems
-	//https://github.com/Microsoft/DirectXTK/wiki/Mouse-and-keyboard-input
-
-	//You'll also found similar stuff for Game Controllers here:
-	//https://github.com/Microsoft/DirectXTK/wiki/Game-controller-input
-
-	//Note in both cases they are identical to the DirectXTK for DirectX 11
-
-	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState = m_keyboard->GetState();
-	m_GSD->m_mouseState = m_mouse->GetState();
 }

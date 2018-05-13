@@ -17,7 +17,8 @@
 #include "Physics2D.h"
 #include "Obstacle2D.h"
 #include "Item.h"
-#include "InputManager.h"
+#include "MetroBrawlInputManager.h"
+
 using std::vector;
 
 struct RenderData;
@@ -28,7 +29,6 @@ struct GameStateData;
 class Game
 {
 public:
-
     Game();
     ~Game();
 
@@ -98,19 +98,15 @@ private:
 
 	std::unique_ptr<DirectX::GraphicsMemory> m_graphicsMemory;
 
-	vector<SoundComponent*> m_sounds;
 	RenderData* m_RD;
 	Camera* m_cam;
 
 	GameStateData* m_GSD;
 
-	//GEP:: Keyboard and Mouse Abstractions for basic input systemGame
-	void ReadInput();
-	std::unique_ptr<DirectX::Keyboard> m_keyboard;
-	std::unique_ptr<DirectX::Mouse> m_mouse;
-	//std::unique_ptr<DirectX::GamePad> m_gamePad;
-	std::unique_ptr<InputManager> m_inputManager;
+	// System risponcable for input management.
+	MetroBrawlInputManager		  input_manager;
+
 	//audio system
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
-	SceneManager scene;
+	SceneManager						  scene;
 };
