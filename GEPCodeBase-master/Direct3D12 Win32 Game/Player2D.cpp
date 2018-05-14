@@ -59,7 +59,8 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		{
 			action_state = JUMPING;
 			sprite->setAnimationState("jump");
-			AddForce(-jump_force * Vector2::UnitY);
+			SetVel(Vector2(GetVel().x, GetVel().y - jump_force));
+			// AddForce(-jump_force * Vector2::UnitY);
 			phys_state = AIR;
 			object_components.getComponentByType<SoundComponent>()->Play();
 		}

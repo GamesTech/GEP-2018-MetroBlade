@@ -62,7 +62,7 @@ protected:
 	float x_speed = 100.0f;
 	int controller_id = 0;
 	Vector2 m_limit = Vector2(800, 500);
-	float jump_force = 1000000.0f;
+	float jump_force = 1000.0f;
 	float gravity = 981.0f;
 	float vertical_velocity;
 	Vector2 direction = Vector2(0, 0);

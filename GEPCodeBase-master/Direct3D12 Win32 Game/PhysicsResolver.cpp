@@ -11,11 +11,14 @@ void MetroBrawlPhysicsResolver::resolveObjectCollision(Collider& a, Collider& b)
 	if (physics_object)
 	{
 		Vector2 collision_normal = calculateCollisionNormal(a, b);
+		Vector2 collision_point = calculateCollisionPoint(a, b);
 
 		// Get the delta of there position.
-		a.getCollidersParent()->SetPos(a.getCollidersParent()->GetPos() - Vector2(physics_object->getDeltaPos().x * collision_normal.x, physics_object->getDeltaPos().y * collision_normal.y));
+		// a.getCollidersParent()->SetPos(a.getCollidersParent()->GetPos() + Vector2(physics_object->getDeltaPos().x * -collision_normal.x, physics_object->getDeltaPos().y * -collision_normal.y));
+		// a.getCollidersParent()->SetPos(a.getCollidersParent()->GetPos() - collision_point);
 
-		physics_object->SetVel(Vector2(physics_object->GetVel().x * -collision_normal.x, physics_object->GetVel().y * -collision_normal.y));
+		 physics_object->SetVel(Vector2(-physics_object->GetVel().x * collision_normal.x, -physics_object->GetVel().y * collision_normal.y));
+		//physics_object->AddForce(Vector2(-physics_object->GetVel().x * collision_normal.x, -physics_object->GetVel().y * collision_normal.y));
 	}
 
 	if (dynamic_cast<Player2D*>(a.getCollidersParent())) 
@@ -46,4 +49,10 @@ Vector2 MetroBrawlPhysicsResolver::calculateCollisionNormal(Collider a, Collider
 	);
 
 	return collision_point;
+}
+
+Vector2 MetroBrawlPhysicsResolver::calculateCollisionPoint(Collider a, Collider b)
+{
+	Vector2  collision_point = (b.getBoxMidpoint() - a.getBoxMidpoint()) - (b.getBoxMidpoint() - b.getBoxOrigin());
+	return  collision_point;
 }
