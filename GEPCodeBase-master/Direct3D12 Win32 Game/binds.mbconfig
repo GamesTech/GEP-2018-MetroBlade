@@ -1,0 +1,15 @@
+{
+	"Action": [80, 267],
+	"Music" : [257, 260],
+	"Jump": [32, 259],
+	"Move": [65, 269],
+	"Attack": [81, 261],
+	"Use": [69, 262],
+	"MoveLeft": [265],
+	"MoveRight": [266],
+        "ThumbstickLeftX" : [269],
+	"ThumbstickLeftY" : [270],
+	"Hello": [265],
+	"Quit": [27, 260]
+
+}

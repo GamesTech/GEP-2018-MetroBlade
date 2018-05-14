@@ -9,9 +9,9 @@
 #include "Scene.h"
 
 #include "SpriteAnimFileReader.h"
-
-#include "UILabel.h"
 #include "UISprite.h"
+#include "SpawnPoint.h"
+#include "HUD.h"
 
 extern void ExitGame();
 
@@ -32,29 +32,14 @@ Game::Game() :
 
 Game::~Game()
 {
-	//if (m_audEngine)
-	//{
-	//	m_audEngine->Suspend();
-	//}
-
 	// Ensure that the GPU is no longer referencing resources that are about to be destroyed.
 	WaitForGpu();
 
 	// delete the scene and clear the memory.
 	scene.clearScene();
 
-	//delete the sounds
-	//for (vector<SoundComponent *>::iterator it = m_sounds.begin(); it != m_sounds.end(); it++)
-	//{
-	//	delete (*it);
-	//}
-	//m_sounds.clear();
-
 	delete m_RD;
 	delete m_GSD;
-
-	m_keyboard.reset();
-	m_mouse.reset();
 
 	m_graphicsMemory.reset();
 }
@@ -62,6 +47,7 @@ Game::~Game()
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
 {
+
 	m_window = window;
 	m_outputWidth = std::max(width, 1);
 	m_outputHeight = std::max(height, 1);
@@ -69,22 +55,14 @@ void Game::Initialize(HWND window, int width, int height)
 	CreateDevice();
 	CreateResources();
 
-	//GEP::init Audio System
-	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
-#ifdef _DEBUG
-	eflags = eflags | AudioEngine_Debug;
-#endif
-	m_audEngine = std::make_unique<AudioEngine>(eflags);
-
 	m_GSD = new GameStateData;
 
 //GEP::set up keyboard & mouse input systems
-	m_inputManager.reset(new InputManager);
-	m_keyboard = std::make_unique<Keyboard>();
-	m_mouse = std::make_unique<Mouse>();
-	m_mouse->SetWindow(window); // mouse device needs to linked to this program's window
-	m_mouse->SetMode(Mouse::Mode::MODE_RELATIVE); // gives a delta postion as opposed to a MODE_ABSOLUTE position in 2-D space
-	//m_gamePad = std::make_unique<DirectX::GamePad>();
+
+	// Setup the input system. 
+	input_manager.init(window);
+	m_GSD->input = &input_manager;
+
 	m_RD = new RenderData;
 
 	m_RD->m_d3dDevice = m_d3dDevice;
@@ -141,7 +119,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
 	scene.Init(m_RD);
-	//objectList.reserve(20);
 
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -150,15 +127,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_timer.SetFixedTimeStep(true);
 	m_timer.SetTargetElapsedSeconds(1.0 / 60);
 	*/
-
-	//GEP::This is where I am creating the test objects
-	//Loop *loop = new Loop(m_audEngine.get(), "NightAmbienceSimple_02");
-	//loop->SetVolume(0.1f);
-	//loop->Play();
-	//m_sounds.push_back(loop);
-
-	/*TestSound* TS = new TestSound(m_audEngine.get(), "Explo1");
-	m_sounds.push_back(TS);*/
 }
 
 //GEP:: Executes the basic game loop.
@@ -180,14 +148,21 @@ void Game::Update(DX::StepTimer const& timer)
 		PostQuitMessage(0);
 	}
 
-	ReadInput();
+	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	//this will update the audio engine but give us chance to do somehting else if that isn't working
-
-	if (m_keyboard->GetState().P)
+	if (input_manager.getBindDown("Action"))
 	{
+		scene.startGameManager();
+
+		
+		//scene.instanciate2DObject(hud);
+
+		team_colours.clear();
+		player_labels.clear();
+
 		Scene*  newScene = new Scene;
+		newScene->isLevel(true);
 		scene.loadScene(newScene);
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
@@ -195,6 +170,9 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
+		ImageGO2D* background = new ImageGO2D(m_RD, "sky");
+		scene.instanciate2DObject(background);
+		
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
@@ -213,11 +191,8 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay3->SetPos(Vector2(1100, 500));
 		scene.instanciate2DObject(testPlay3);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
-		testPlatform->SetPos(Vector2(500, 600));
-		scene.instanciate2DObject(testPlatform);
-
-		scene.startGameManager();
+		hud = new HUD();
+		scene.instanciate2DObject(hud);
 
 		UILabel* test_label = new UILabel;
 		test_label->setText("Kill your opponents.");
@@ -226,26 +201,77 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
+
+		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
+		//scene.instanciate2DObject(test_spawn);
+
+		//SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
+		//scene.instanciate2DObject(test_spawn2);
+
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
-	}
+		//Adds all teams coloured panels to UISprite Vector
+		UISprite* red_team = new UISprite("RedTeamUIPanel", m_RD);
+		red_team->setCanvasPosition(Vector2(0.1, 0.7));
+		team_colours.push_back(red_team);
 
-	if (m_keyboard->GetState().T)
-	{
-		// Instantiation test.
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1_ss", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-		testPlay->SetPos(Vector2(0, 500));
-		scene.instanciate2DObject(testPlay);
+		UISprite* green_team = new UISprite("GreenTeamUIPanel", m_RD);
+		green_team->setCanvasPosition(Vector2(0.3, 0.7));
+		team_colours.push_back(green_team);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Block");
-		testPlatform->SetPos(Vector2(0,600));
+		UISprite* blue_team = new UISprite("BlueTeamUIPanel", m_RD);
+		blue_team->setCanvasPosition(Vector2(0.5, 0.7));
+		team_colours.push_back(blue_team);
+
+		UISprite* yellow_team = new UISprite("YellowTeamUIPanel", m_RD);
+		yellow_team->setCanvasPosition(Vector2(0.7, 0.7));
+		team_colours.push_back(yellow_team);
+
+
+
+		/**All the labels are instanciated but 
+		*currently all labels are set as there is no
+		*way to use player numbers to change player ui 
+		*at the moment
+		*/
+
+		UILabel* player1_damage = new UILabel;
+		createLabel(player1_damage, Vector2(0.125, 0.75));
+
+		UILabel* player2_damage = new UILabel;
+		createLabel(player2_damage, Vector2(0.325, 0.75));
+
+		UILabel* player3_damage = new UILabel;
+		createLabel(player3_damage, Vector2(0.525, 0.75));
+
+		UILabel* player4_damage = new UILabel;
+		createLabel(player4_damage, Vector2(0.725, 0.75));
+
+		/**Only instanciates team colours based on number of players*/
+		for (int i = 0; i < 4; i++)
+		{
+			scene.instanciate2DObject(team_colours[i]);
+			scene.instanciate2DObject(player_labels[i]);
+		}
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(1000, 113));
+		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
+
 	}
 
+	if (m_GSD->input->getBindDown("Quit"))
+	{
+		scene.loadScene("clear");
+		hud->clear();
+		player_labels.clear();
+	}
+	
 	scene.Update(m_GSD);
+	hud->updateLabels(player_labels);
+	//test_damage--;
 }
+
 
 //GEP:: Draws the scene.
 void Game::Render()
@@ -363,6 +389,12 @@ void Game::GetDefaultSize(int& width, int& height) const
 	// TODO: Change to desired default window size (note minimum size is 320x200).
 	width = 1920;
 	height = 1080;
+}
+
+void Game::createLabel(UILabel * label, Vector2 canvas_pos)
+{
+	label->setCanvasPosition(canvas_pos);
+	player_labels.push_back(label);
 }
 
 // These are the resources that depend on the device.
@@ -720,19 +752,4 @@ void Game::OnDeviceLost()
 
 	CreateDevice();
 	CreateResources();
-}
-
-void Game::ReadInput()
-{
-	//GEP:: CHeck out the DirectXTK12 wiki for more information about these systems
-	//https://github.com/Microsoft/DirectXTK/wiki/Mouse-and-keyboard-input
-
-	//You'll also found similar stuff for Game Controllers here:
-	//https://github.com/Microsoft/DirectXTK/wiki/Game-controller-input
-
-	//Note in both cases they are identical to the DirectXTK for DirectX 11
-
-	m_GSD->m_prevKeyboardState = m_GSD->m_keyboardState;
-	m_GSD->m_keyboardState = m_keyboard->GetState();
-	m_GSD->m_mouseState = m_mouse->GetState();
 }

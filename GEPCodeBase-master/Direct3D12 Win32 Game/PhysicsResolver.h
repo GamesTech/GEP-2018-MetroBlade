@@ -30,4 +30,5 @@ public:
 private:
 	// Here we calculate our normals etc and based on this we will then add force to the object etc.
 	Vector2 calculateCollisionNormal(Collider a, Collider b);
+	Vector2 calculateCollisionPoint(Collider a, Collider b);
 };

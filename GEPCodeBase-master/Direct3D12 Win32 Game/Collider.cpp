@@ -48,7 +48,8 @@ void Collider::setBoxOrigin(Vector2 box_origin)
 
 Vector2 Collider::getBoxMidpoint()
 {
-	return getBoxOrigin() / 0.5f;
+	Vector2 midpoint = (box_origin + (box_dimensions * 0.5f));
+	return midpoint;
 }
 
 Vector2 Collider::getBoxDimenstions()

@@ -11,6 +11,14 @@
     <ImageContentTask Include="Fighter_2.png" />
     <ImageContentTask Include="Fighter_3.png" />
     <ImageContentTask Include="Platform_Sprite.png" />
+    <ImageContentTask Include="RedTeamUIPanel.png" />
+    <ImageContentTask Include="GreenTeamUIPanel.png" />
+    <ImageContentTask Include="BlueTeamUIPanel.png" />
+    <ImageContentTask Include="YellowTeamUIPanel.png" />
+    <ImageContentTask Include="sky.png" />
+    <ImageContentTask Include="Platform_Sprite3.png" />
+    <ImageContentTask Include="Platform_Sprite2.png" />
+    <ImageContentTask Include="night_sky.png" />
     <ImageContentTask Include="Health_item.png" />
     <ImageContentTask Include="projectile_item.png" />
   </ItemGroup>

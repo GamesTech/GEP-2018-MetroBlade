@@ -2,9 +2,12 @@
 
 #include "RenderData.h"
 #include "UISprite.h"
+#include "LobbySystem.h"
 
 UISprite::UISprite(std::string filename, RenderData* _RD)
 {
+	//object_components.addComponent(new LobbySystemComponent);
+
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 	string fullpath = "../DDS/" + filename + ".dds";
 	std::wstring wFilename = converter.from_bytes(fullpath.c_str());
@@ -33,5 +36,8 @@ void UISprite::Tick(GameStateData * _GSD)
 
 void UISprite::Render(RenderData * _RD)
 {
-	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), m_pos, src_rect.get());
+	Vector2 viewport = _RD->m_cam->get2DViewport();
+	 render_position = Vector2(canvas_position.x * viewport.x, canvas_position.y * viewport.y);
+
+	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(resource_number), GetTextureSize(texture.Get()), render_position, src_rect.get());
 }

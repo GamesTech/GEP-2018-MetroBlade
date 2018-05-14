@@ -44,7 +44,6 @@ void SceneManager::Init(RenderData* _RD)
 	scene_loader.init(render_data);
 	game_manager.addWorldEventListener(scene_event_listener);
 	game_ui.addWorldEventListener(scene_event_listener);
-// 	current_scene.reset(new Scene);
 
 	loadScene(scene_loader.createScene("menu.mbmap"));
 	
@@ -52,14 +51,9 @@ void SceneManager::Init(RenderData* _RD)
 	setMainCamera(camera);
 	camera->set2DViewport(Vector2(1920, 1080));
 	current_scene->add3DGameObjectToScene(camera);
-
-	//UILabel* label = new UILabel;
-	//label->setCanvasPosition(Vector2(0.4, 0.4));
-	//label->setText("Super Indie Smash. \n Press P to start.");
-	//game_ui.addUIObject(label);
 }
 
-void SceneManager::Update(GameStateData * game_state)
+void SceneManager::Update(GameStateData* game_state)
 {
 	game_manager.tickGameManager(game_state);
 	if (current_scene)
@@ -92,7 +86,7 @@ bool SceneManager::shouldQuit() const
 	return quit;
 }
 
-Scene * SceneManager::getScene()
+Scene* SceneManager::getScene()
 {
 	return current_scene.get();
 }
@@ -129,21 +123,40 @@ void SceneManager::loadScene(Scene* scene_name)
 	game_manager.resetManager();
 	game_ui.clearUICanvas();
 
+	clearScene();
 
-	if (!scene_name) 
+	if (!scene_name)
 	{
-		clearScene();
-		// current_scene.reset(new Scene);
 		return;
 	}
 
-	// clearScene();
 	current_scene.reset(scene_name);
 
 	// TODO - Add object setup here so we can have a better map loader.
-	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++) 
+	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++)
 	{
 		setupScene2DObjects(current_scene->get2DObjectInScene(i));
+	}
+
+	// Here we spawn characters according to the game_manager player lobby if a scene as a level flag.
+	if (current_scene->isLevel())
+	{
+		//PlayerData test;
+		//test.character_name = "Fighter_1";
+		//test.player_name = "P1";
+		//test.input_device_id = 0;
+		//game_manager.addPlayer(test); // Test Object.
+
+		// Add the Players to the scene according to the game manager.
+		OutputDebugString(L"Its a level mate");
+
+		for (auto& player_object : *(game_manager.getPlayerLobbyData()))
+		{
+			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id);
+			instanciate2DObject(player);
+		}
+
+		game_manager.setupGame();
 	}
 }
 
@@ -165,16 +178,7 @@ void SceneManager::setMainCamera(Camera* viewport_camera)
 
 void SceneManager::instanciate2DObject(GameObject2D* new_object)
 {
-	new_object->assignWorldEventListener(scene_event_listener);
-	new_object->assignSceneManager(this);
-	if (dynamic_cast<Player2D*>(new_object)) 
-	{
-		game_manager.registerPlayerInstance((Player2D*)new_object);
-	}
-
-	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
-	scene_audio.registerSoundComponents(new_object->getComponentManager()->getComponentsByType<SoundComponent>());
-
+	setupScene2DObjects(new_object);
 	current_scene->add2DGameObjectToScene(new_object);
 }
 
@@ -192,6 +196,7 @@ void SceneManager::startGameManager()
 
 void SceneManager::instanciateUIObject(UIObject * new_object)
 {
+	setupScene2DObjects((GameObject2D*)new_object);
 	game_ui.addUIObject(new_object);
 }
 
@@ -227,14 +232,15 @@ void SceneManager::resetRenderState()
 	render_data->m_resourceCount = 1;
 }
 
-void SceneManager::setupScene2DObjects(GameObject2D * object)
+void SceneManager::setupScene2DObjects(GameObject2D* object)
 {
 	object->assignWorldEventListener(scene_event_listener);
+	object->assignSceneManager(this);
 
-	if (dynamic_cast<Player2D*>(object))
-	{
-		game_manager.registerPlayerInstance((Player2D*)object);
-	}
+	game_manager.setupLobbySystemComponent(object);
+    game_manager.registerPlayerInstance(object);
+	game_manager.registerSpawnPoint(object);
+
 
 	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
 	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());

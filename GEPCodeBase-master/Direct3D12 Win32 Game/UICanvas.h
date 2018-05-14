@@ -37,6 +37,7 @@ public:
 	void addWorldEventListener(std::shared_ptr<SceneEvent>  world_event_listener);
 
 	void clearUICanvas();
+
 private:
 	std::vector<std::unique_ptr<UIObject>>	ui_objects;
 	std::shared_ptr<SceneEvent>         event_listener;
