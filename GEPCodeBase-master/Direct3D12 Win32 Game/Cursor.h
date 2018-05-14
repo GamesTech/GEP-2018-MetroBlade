@@ -19,7 +19,6 @@
 
 #pragma once
 #include "UIObject.h"
-#include "InputManager.h"
 class UISprite;
 
 class Cursor : public UIObject
@@ -45,10 +44,13 @@ private:
 	bool a_pressed = false;
 	int collider_tag = 0;
 
+	bool is_active = false;
+
 	void Tick(GameStateData * _GSD) override;
 	void Render(RenderData * _RD) override;
 
 	Collider* col = new Collider(Vector2(render_position), Vector2(40, 40), true);
 	Vector2 render_position;
+
 
 };

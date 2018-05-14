@@ -20,27 +20,33 @@ Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
 
 void Cursor::CheckInput(GameStateData * _GSD)
 {
-	
-	float stick_x = _GSD->input->getBindRawValue("ThumbstickLeftX", controller_id);
-	float stick_y = _GSD->input->getBindRawValue("ThumbstickLeftY", controller_id);
-
-	setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
-
-	sprite->setCanvasPosition(getCanvasPosition());
-
-	if (_GSD->input->getBindDown("Jump"))
+	if (is_active) 
 	{
-		a_pressed = true;
+		float stick_x = _GSD->input->getBindRawValue("ThumbstickLeftX", controller_id);
+		float stick_y = _GSD->input->getBindRawValue("ThumbstickLeftY", controller_id);
+
+
+		setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
+
+		sprite->setCanvasPosition(getCanvasPosition());
+
+		if (_GSD->input->getBindDown("Jump"))
+		{
+			a_pressed = true;
+		}
+		else
+		{
+			a_pressed = false;
+		}
 	}
-	else
-	{
-		a_pressed = false;
-	}
+
+	if (_GSD->input->getBindDown("Action", controller_id)) { is_active = true; }
 }
 
 void Cursor::Tick(GameStateData * _GSD)
 {
 	CheckInput(_GSD);
+
 	col->setBoxOrigin(render_position);
 }
 
@@ -53,16 +59,19 @@ void Cursor::Render(RenderData * _RD)
 
 void Cursor::onCollision(MetroBrawlCollisionData col_data)
 {
-	if (a_pressed)
+	if (is_active) 
 	{
-		interact = true;
-	}
-	else
-	{
-		interact = false;
-	}
+		if (a_pressed)
+		{
+			interact = true;
+		}
+		else
+		{
+			interact = false;
+		}
 
-	collider_tag = col_data.collider_object->getCollidersParent()->getTag();
+		collider_tag = col_data.collider_object->getCollidersParent()->getTag();
+	}
 }
 
 

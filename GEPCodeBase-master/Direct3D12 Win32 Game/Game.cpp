@@ -242,11 +242,11 @@ void Game::Update(DX::StepTimer const& timer)
 		Cursor* player4_cursor = new Cursor("player4_cursor", m_RD, 3);
 		scene.instanciateUIObject(player4_cursor);
 		cursors.push_back(player4_cursor);
-
-		scene.startGameManager();
 	}
-	if (input_manager.getBindDown("Action"))
+
+	if (input_manager.getBindDown("Hello"))
 	{
+		
 		Scene*  newScene = new Scene;
 		newScene->isLevel(true);
 		scene.loadScene(newScene);
@@ -261,6 +261,7 @@ void Game::Update(DX::StepTimer const& timer)
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
+
 
 		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
 		testPlay2->SetDrive(1000.0f);
@@ -297,6 +298,7 @@ void Game::Update(DX::StepTimer const& timer)
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
 	}
+
 	teamselect->update(cursors,teamview,teamview_images);
 	scene.Update(m_GSD);
 }
