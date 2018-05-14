@@ -37,3 +37,8 @@ Vector2 Camera::get2DViewport() const
 {
 	return viewport_2D;
 }
+
+float Camera::getScreenAspectRatio()
+{
+	return (viewport_2D.y / viewport_2D.x);
+}

@@ -43,9 +43,11 @@ void ImageGO2D::Tick(GameStateData * _GSD)
 
 void ImageGO2D::Render(RenderData* _RD)
 {
+	float multiplier = (_RD->m_cam->get2DViewport().x + _RD->m_cam->get2DViewport().y) / (1920 + 1080);
+
 	_RD->m_spriteBatch->Draw(_RD->m_resourceDescriptors->GetGpuHandle(m_resourceNum),
 		GetTextureSize(m_texture.Get()),
-		m_pos, src_rect.get(), m_colour, m_orientation, m_origin, m_scale, m_effects);
+		m_pos * multiplier, src_rect.get(), m_colour, m_orientation, m_origin, m_scale * multiplier, m_effects);
 	
 	//TODO::add sprite effects & layer Depth
 	//TODO::example stuff for sprite sheet
