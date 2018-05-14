@@ -38,9 +38,13 @@ public:
 	GameObject2D*  get2DObjectInScene(int index);
 	int			   getNumberOf2DObjectsInScene() const;
 
+	bool isLevel() const;
+	void isLevel(bool level);
+
 private:
 	/* Metadata */
 	std::string scene_name = "NULL";
+	bool		is_level = false;
 
 	/* Object Buffers */
 	std::vector<GameObject3D*> m_3DObjects; 

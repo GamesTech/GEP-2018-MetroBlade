@@ -9,7 +9,7 @@
 class UILabel : public UIObject 
 {
 public:
-	UILabel() = default;
+	UILabel();
 	~UILabel() = default;
 
 	void setText(std::string new_text);

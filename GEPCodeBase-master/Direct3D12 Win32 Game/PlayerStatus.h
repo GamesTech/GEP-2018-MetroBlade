@@ -44,6 +44,12 @@ public:
 	void setHealth(int value);
 	void addHealth(int value_to_add);
 	void takeHealth(int value_to_subtract);
+
+	PlayerStatus operator=(const PlayerStatus& val) 
+	{
+		return val;
+	}
+
 private: 
 
 	// TODO - Consider using an array for these variables.

@@ -2,9 +2,12 @@
 
 #include "RenderData.h"
 #include "UISprite.h"
+#include "LobbySystem.h"
 
 UISprite::UISprite(std::string filename, RenderData* _RD)
 {
+	//object_components.addComponent(new LobbySystemComponent);
+
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 	string fullpath = "../DDS/" + filename + ".dds";
 	std::wstring wFilename = converter.from_bytes(fullpath.c_str());

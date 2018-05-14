@@ -19,8 +19,6 @@ Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _f
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	sprite->setAnimationState("idle");
-
-	
 }
 
 Item::~Item()
@@ -34,7 +32,6 @@ void Item::SetPosition(Vector2 new_pos)
 
 void Item::Tick(GameStateData* _GSD)
 {
-	
 	col->setBoxOrigin(m_pos);
 	sprite->tickComponent(_GSD);
 }

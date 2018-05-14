@@ -2,8 +2,14 @@
 
 #include "GameStateData.h"
 #include "RenderData.h"
-
+#include "LobbySystem.h"
 #include "UILabel.h"
+
+
+UILabel::UILabel()
+{
+	//object_components.addComponent(new LobbySystemComponent);
+}
 
 void UILabel::Tick(GameStateData* _GSD)
 {
@@ -21,6 +27,8 @@ void UILabel::setTextColour(Vector4 new_colour)
 {
 	colour = new_colour;
 }
+
+
 
 void UILabel::setText(std::string new_text)
 {

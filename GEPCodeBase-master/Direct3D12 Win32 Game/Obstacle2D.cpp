@@ -8,6 +8,8 @@
 #include "Sprite.h"
 #include "SpriteAnimFileReader.h"
 
+#include "LobbySystem.h"
+
 
 Obstacle2D::Obstacle2D(RenderData* _RD, string _filename, Vector2 dimensions): ImageGO2D(_RD, _filename)
 {
@@ -15,6 +17,9 @@ Obstacle2D::Obstacle2D(RenderData* _RD, string _filename, Vector2 dimensions): I
 	col->isColliderActive(true);
 	col->addParentObjectRefrence(this);
 	object_components.addComponent(col);
+
+	object_components.addComponent(new LobbySystemComponent);
+
 
 	// Testing the sound system.
 	SoundComponent*	  test_sound = new SoundComponent("across-the-border");
@@ -35,8 +40,9 @@ void Obstacle2D::Tick(GameStateData* _GSD)
 
 	//GEP:: Lets go up the inheritance and share our functionality
 
-	if (_GSD->m_keyboardState.IsKeyDown(Keyboard::Tab)) 
+	if (_GSD->input->getBindDown("Music")) 
 	{
+		// object_components.getComponentByType<LobbySystemComponent>()->startGameManager();
 		object_components.getComponentByType<SoundComponent>()->Play();
 	}
 }
