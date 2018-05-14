@@ -1,3 +1,20 @@
+/**
+*  @file    Spawner.h
+*  @author  Elliot Martin (GitHub - Elliotmartin97)
+*  @date    14/05/2018
+*  @version v1.0
+*
+*  @section GameObject Item ItemSpawner
+*
+*
+*  @brief A Spawner to add items to the scene
+*
+*  @section Description
+*
+*  A Spawner can create the pickup items in the scene
+*  
+*/
+
 #pragma once
 #include "pch.h"
 #include "GameObject2D.h"
@@ -7,6 +24,9 @@ class Spawner : public GameObject2D
 public:
 	Spawner(RenderData* _RD, string filename, Vector2 position, int item_count);
 	~Spawner();
+
+	void initObject() override;
+
 	void SpawnObject();
 	void StartSpawnTimer();
 	void SetOffset(Vector2 new_offset);

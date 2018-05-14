@@ -51,6 +51,7 @@ void SceneLoader::constructScene(Scene* scene)
 			auto& loader = object_constructors.find(entity.value()["type"].as_string());
 			if (loader != object_constructors.end())
 			{
+				
 				scene->add2DGameObjectToScene(loader->second(render_data, entity));
 			}
 		}

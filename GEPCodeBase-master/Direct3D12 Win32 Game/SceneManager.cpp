@@ -113,6 +113,7 @@ void SceneManager::loadScene(string scene_name)
 	else 
 	{
 		// Parse the scene file and load its contents here.
+		loadScene(scene_loader.createScene(scene_name + ".mbmap"));
 	}
 }
 
@@ -136,6 +137,7 @@ void SceneManager::loadScene(Scene* scene_name)
 	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++)
 	{
 		setupScene2DObjects(current_scene->get2DObjectInScene(i));
+		current_scene->get2DObjectInScene(i)->initObject();
 	}
 
 	// Here we spawn characters according to the game_manager player lobby if a scene as a level flag.

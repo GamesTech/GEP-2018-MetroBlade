@@ -155,7 +155,7 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		Scene*  newScene = new Scene;
 		newScene->isLevel(true);
-		scene.loadScene(newScene);
+		scene.loadScene("devtest");
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));

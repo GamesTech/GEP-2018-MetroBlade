@@ -1,3 +1,19 @@
+/**
+*  @file    Item.h
+*  @author  Elliot Martin (GitHub - Elliotmartin97)
+*  @date    14/05/2018
+*  @version v1.0
+*
+*  @section GameObject Item
+*           
+*
+*  @brief Base Item for pickup by players
+*
+*  @section Description
+*
+*  Holds a pickup item and passes that to the player which picks it up
+*  changing the use function depending on item type
+*/
 #pragma once
 #include "ImageGO2D.h"
 #include "Sprite.h"
@@ -35,7 +51,7 @@ public:
 
 private:
 	Sprite* sprite;
-	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), true);
 	Vector2 pos = Vector2::Zero;
 	ItemType item_type = ItemType::HEALTH;
 	ItemState item_state = ItemState::PICKUP;

@@ -91,7 +91,7 @@ void Item::onCollision(MetroBrawlCollisionData  col_data)
 	if (item_state == PICKUP)
 	{
 		Player2D*   player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
-		if (player)
+		if (player && player->hasItem() == false)
 		{
 			player->AddItem(this, 1);
 			item_state = NONE;

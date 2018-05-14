@@ -24,7 +24,7 @@ public:
 	void setStateGrounded();
 	void setStateFalling();
 	void punched(GameStateData* _GFD, Vector2 direction);
-
+	bool hasItem();
 
 	// Game Manager interface
 	bool			isDead() const;

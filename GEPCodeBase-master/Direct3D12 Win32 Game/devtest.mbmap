@@ -1,0 +1,9 @@
+{
+    "level": true,
+	"Spawner":
+	{
+		"type": "ItemSpawner",
+		"position": [100, 100],
+		"item-count": 4
+	}
+}

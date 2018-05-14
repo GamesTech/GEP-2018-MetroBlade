@@ -249,6 +249,18 @@ void Player2D::punched(GameStateData * _GSD, Vector2 direction)
 	AddForce(10000 * direction * Vector2::UnitX);
 }
 
+bool Player2D::hasItem()
+{
+	if (player_item)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void Player2D::setStateGrounded()
 {
 	phys_state = GROUNDED;

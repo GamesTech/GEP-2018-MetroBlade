@@ -1,3 +1,20 @@
+/**
+*  @file    Bomb.h
+*  @author  Elliot Martin (GitHub - Elliotmartin97)
+*  @date    14/05/2018
+*  @version v1.0
+*
+*  @section GameObject Item Bomb
+*
+*
+*  @brief One of the items the players can use
+*
+*  @section Description
+*
+*  A bomb which the player can drop from their postion and will explode after a short delay
+*
+*/
+
 #pragma once
 #include "Physics2D.h"
 

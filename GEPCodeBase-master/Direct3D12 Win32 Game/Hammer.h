@@ -1,3 +1,20 @@
+/**
+*  @file    Hammer.h
+*  @author  Elliot Martin (GitHub - Elliotmartin97)
+*  @date    14/05/2018
+*  @version v1.0
+*
+*  @section GameObject Item Hammer
+*
+*
+*  @brief One of the items the players can use
+*
+*  @section Description
+*
+*  A Hammer that spawns on the players position and damages nearby enemies
+*
+*/
+
 #pragma once
 #include "Physics2D.h"
 #include "Sprite.h"

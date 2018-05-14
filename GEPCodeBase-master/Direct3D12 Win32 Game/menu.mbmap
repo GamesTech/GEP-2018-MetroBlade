@@ -10,13 +10,6 @@
 	{
 		"type": "SpawnPoint",
 		"position": [100, 100]
-	},
-	
-	"Spawner":
-	{
-		"type": "ItemSpawner",
-		"position": [100, 100],
-		"item-count": 4
 	}
-
+	
 }
