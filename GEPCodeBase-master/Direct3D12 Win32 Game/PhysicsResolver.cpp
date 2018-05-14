@@ -8,7 +8,7 @@ void MetroBrawlPhysicsResolver::resolveObjectCollision(Collider& a, Collider& b)
 {
 	Physics2D*   physics_object = dynamic_cast<Physics2D*>(a.getCollidersParent());
 	
-	if (physics_object)
+	if (physics_object && !dynamic_cast<Player2D*>(b.getCollidersParent()))
 	{
 		Vector2 collision_normal = calculateCollisionNormal(a, b);
 		Vector2 collision_point = calculateCollisionPoint(a, b);

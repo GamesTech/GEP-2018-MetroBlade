@@ -173,19 +173,19 @@ void Game::Update(DX::StepTimer const& timer)
 		ImageGO2D* background = new ImageGO2D(m_RD, "sky");
 		scene.instanciate2DObject(background);
 		
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0, Vector2(100,121));
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
+		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1, Vector2(60,104));
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
 		testPlay2->SetPos(Vector2(800, 200));
 		scene.instanciate2DObject(testPlay2);
 
-		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
+		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2, Vector2(96,98));
 		testPlay3->SetDrive(1000.0f);
 		testPlay3->SetDrag(0.5f);
 		testPlay3->SetPos(Vector2(1100, 500));
@@ -198,9 +198,9 @@ void Game::Update(DX::StepTimer const& timer)
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
-		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
+		/*Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
-		scene.instanciate2DObject(test_item);
+		scene.instanciate2DObject(test_item);*/
 
 		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
 		//scene.instanciate2DObject(test_spawn);
@@ -263,7 +263,6 @@ void Game::Update(DX::StepTimer const& timer)
 	if (m_GSD->input->getBindDown("Quit"))
 	{
 		scene.loadScene("clear");
-		hud->clear();
 		player_labels.clear();
 	}
 	

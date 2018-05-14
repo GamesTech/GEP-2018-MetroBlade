@@ -13,7 +13,7 @@
 
 Obstacle2D::Obstacle2D(RenderData* _RD, string _filename, Vector2 dimensions): ImageGO2D(_RD, _filename)
 {
-	col = new Collider(Vector2(m_pos), Vector2(dimensions), true);
+	col = new Collider(Vector2(m_pos), Vector2(dimensions), false);
 	col->isColliderActive(true);
 	col->addParentObjectRefrence(this);
 	object_components.addComponent(col);

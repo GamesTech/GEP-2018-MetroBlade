@@ -152,7 +152,7 @@ void SceneManager::loadScene(Scene* scene_name)
 
 		for (auto& player_object : *(game_manager.getPlayerLobbyData()))
 		{
-			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id);
+			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id, Vector2(0,0));
 			instanciate2DObject(player);
 		}
 

@@ -11,9 +11,12 @@
 #include "LobbySystem.h"
 
 
-Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID) :Physics2D(_RD, _filename)
+Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID, Vector2(dimensions)) :Physics2D(_RD, _filename)
 {
 	using namespace std::placeholders;
+
+	col = new Collider(Vector2(m_pos), Vector2(dimensions), false);
+	punch_collider = new Collider(Vector2(col->getBoxMidpoint().x, m_pos.y), Vector2(col->getBoxDimenstions().x / 2, col->getBoxDimenstions().y), true);
 
 	src_rect.reset(new RECT);
 	CentreOrigin();
@@ -66,14 +69,15 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		}
 	}
 
-	if (_GSD->input->getBindDown("Attack", controller_id))
+	if (_GSD->input->getBindDown("Attack", controller_id) && canAttack)
 	{
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
+
 		}
 	}
-	else
+	else if (attacking == false)
 	{
 		action_state = IDLE;
 	}
@@ -87,7 +91,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	}
 	else if (_GSD->input->getBindRawValue("Move", controller_id) > 0 || _GSD->input->getBindDown("MoveRight", controller_id))
 	{
-		offset = Vector2(120, 0);
+		offset = Vector2(0, 0);
 		m_effects = SpriteEffects_None;
 		direction.x = 1;
 	}
@@ -126,16 +130,37 @@ void Player2D::CheckInput(GameStateData* _GSD)
 
 void Player2D::Tick(GameStateData* _GSD)
 {
-	punch_collider->setBoxOrigin(m_pos + offset);
+	punch_collider->setBoxOrigin(Vector2(col->getBoxMidpoint().x, m_pos.y) + offset);
 	col->setBoxOrigin(m_pos);
 	CheckInput(_GSD);
+
+	if (!canAttack)
+	{
+		current_time -= _GSD->m_dt;
+		if (current_time <= 0)
+		{
+			canAttack = true;
+		}
+	}
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 
 	//action state determines the players action such as attacking, jumping, moving etc
 	attacking = false;
+
 	switch (action_state)
 	{
+	case ATTACKING:
+		if (canAttack)
+		{
+			attacking = true;
+			canAttack = false;
+			sprite->setAnimationState("attack");
+			current_time = max_time;
+		}
+		break;
+		if (!attacking)
+		{
 	case IDLE:
 		sprite->setAnimationState("idle");
 		break;
@@ -150,11 +175,6 @@ void Player2D::Tick(GameStateData* _GSD)
 	case JUMPING:
 		break;
 
-	case ATTACKING:
-		attacking = true;
-		sprite->setAnimationState("attack");
-		break;
-
 	case USE:
 		if (player_item)
 		{
@@ -162,34 +182,36 @@ void Player2D::Tick(GameStateData* _GSD)
 			player_item = nullptr;
 		}
 		break;
+		
 	}
+
 
 	if (phys_state == AIR)
 	{
 		sprite->setAnimationState("jump");
 	}
+}
+//if (_GSD->m_keyboardState.Escape)
+//{
+//	// Testing for error components.
 
-	//if (_GSD->m_keyboardState.Escape)
-	//{
-	//	// Testing for error components.
+//	// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
+//	world.changeScene("clear"); 
+//}
 
-	//	// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
-	//	world.changeScene("clear"); 
-	//}
+//GRAVITY
+m_acc += (gravity * Vector2::UnitY);
 
-	//GRAVITY
-	m_acc += (gravity * Vector2::UnitY);
+//GEP:: Lets go up the inheritence and share our functionality
+Physics2D::Tick(_GSD);
 
-	//GEP:: Lets go up the inheritence and share our functionality
-	Physics2D::Tick(_GSD);
+//Update sprite animation
+sprite->tickComponent(_GSD);
 
-	//Update sprite animation
-	sprite->tickComponent(_GSD);
-
-	if (m_pos.y > 1500) // TODO - Change this to be collision based.
-	{
-		dead = true;
-	}
+if (m_pos.y > 1500) // TODO - Change this to be collision based.
+{
+	dead = true;
+}
 }
 
 bool Player2D::isDead() const
@@ -247,12 +269,15 @@ void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 	Player2D* player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
 	if (player)
 	{
-		int target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
-		if (action_state == ATTACKING)
+		if (player != this)
 		{
-			static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage / 100)) * Vector2::UnitX * direction/* * (target_damage_percentage / 100)*/);
+			double target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
+			if (attacking)
+			{
+				static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage)) * Vector2::UnitX * direction/* * (target_damage_percentage / 100)*/);
 
-			player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage + 1);
+				player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage + 20);
+			}
 		}
 	}
 	/*int target_damage_percentage = col_data.collider_object->*/
