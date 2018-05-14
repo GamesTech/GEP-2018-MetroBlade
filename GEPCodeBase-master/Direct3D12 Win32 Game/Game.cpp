@@ -173,13 +173,13 @@ void Game::Update(DX::StepTimer const& timer)
 		ImageGO2D* background = new ImageGO2D(m_RD, "sky");
 		scene.instanciate2DObject(background);
 		
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0, Vector2(100,121));
+		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 1, Vector2(100,121));
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
 		testPlay->SetPos(Vector2(1500, 200));
 		scene.instanciate2DObject(testPlay);
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1, Vector2(60,104));
+		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 0, Vector2(60,104));
 		testPlay2->SetDrive(1000.0f);
 		testPlay2->SetDrag(0.5f);
 		testPlay2->SetPos(Vector2(800, 200));
@@ -236,16 +236,16 @@ void Game::Update(DX::StepTimer const& timer)
 		*/
 
 		UILabel* player1_damage = new UILabel;
-		createLabel(player1_damage, Vector2(0.125, 0.75));
+		createLabel(player1_damage, Vector2(0.125, 0.25));
 
 		UILabel* player2_damage = new UILabel;
-		createLabel(player2_damage, Vector2(0.325, 0.75));
+		createLabel(player2_damage, Vector2(0.325, 0.25));
 
 		UILabel* player3_damage = new UILabel;
-		createLabel(player3_damage, Vector2(0.525, 0.75));
+		createLabel(player3_damage, Vector2(0.525, 0.25));
 
 		UILabel* player4_damage = new UILabel;
-		createLabel(player4_damage, Vector2(0.725, 0.75));
+		createLabel(player4_damage, Vector2(0.725, 0.25));
 
 		/**Only instanciates team colours based on number of players*/
 		for (int i = 0; i < 4; i++)

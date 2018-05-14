@@ -69,7 +69,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		}
 	}
 
-	if (_GSD->input->getBindDown("Attack", controller_id) && canAttack)
+	if (_GSD->input->getBindDown("Attack", controller_id))
 	{
 		if (phys_state == GROUNDED)
 		{
@@ -77,7 +77,7 @@ void Player2D::CheckInput(GameStateData* _GSD)
 
 		}
 	}
-	else if (attacking == false)
+	else
 	{
 		action_state = IDLE;
 	}
@@ -134,6 +134,9 @@ void Player2D::Tick(GameStateData* _GSD)
 	col->setBoxOrigin(m_pos);
 	CheckInput(_GSD);
 
+
+	attacking = false;
+
 	if (!canAttack)
 	{
 		current_time -= _GSD->m_dt;
@@ -146,7 +149,7 @@ void Player2D::Tick(GameStateData* _GSD)
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 
 	//action state determines the players action such as attacking, jumping, moving etc
-	attacking = false;
+
 
 	switch (action_state)
 	{
@@ -159,8 +162,6 @@ void Player2D::Tick(GameStateData* _GSD)
 			current_time = max_time;
 		}
 		break;
-		if (!attacking)
-		{
 	case IDLE:
 		sprite->setAnimationState("idle");
 		break;
@@ -182,7 +183,7 @@ void Player2D::Tick(GameStateData* _GSD)
 			player_item = nullptr;
 		}
 		break;
-		
+
 	}
 
 
@@ -190,28 +191,28 @@ void Player2D::Tick(GameStateData* _GSD)
 	{
 		sprite->setAnimationState("jump");
 	}
-}
-//if (_GSD->m_keyboardState.Escape)
-//{
-//	// Testing for error components.
 
-//	// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
-//	world.changeScene("clear"); 
-//}
+	//if (_GSD->m_keyboardState.Escape)
+	//{
+	//	// Testing for error components.
 
-//GRAVITY
-m_acc += (gravity * Vector2::UnitY);
+	//	// Clear the scene for now. Later on we should open a pause menu to have the option to exit the game. 
+	//	world.changeScene("clear"); 
+	//}
 
-//GEP:: Lets go up the inheritence and share our functionality
-Physics2D::Tick(_GSD);
+	//GRAVITY
+	m_acc += (gravity * Vector2::UnitY);
 
-//Update sprite animation
-sprite->tickComponent(_GSD);
+	//GEP:: Lets go up the inheritence and share our functionality
+	Physics2D::Tick(_GSD);
 
-if (m_pos.y > 1500) // TODO - Change this to be collision based.
-{
-	dead = true;
-}
+	//Update sprite animation
+	sprite->tickComponent(_GSD);
+
+	if (m_pos.y > 1500) // TODO - Change this to be collision based.
+	{
+		dead = true;
+	}
 }
 
 bool Player2D::isDead() const
@@ -274,7 +275,7 @@ void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 			double target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
 			if (attacking)
 			{
-				static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage)) * Vector2::UnitX * direction/* * (target_damage_percentage / 100)*/);
+				static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage)) * Vector2::UnitX * direction);
 
 				player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage + 20);
 			}

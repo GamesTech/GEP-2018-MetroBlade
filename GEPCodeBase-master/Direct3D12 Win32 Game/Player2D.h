@@ -83,9 +83,9 @@ private:
 	void onCollision(MetroBrawlCollisionData  col_data);
 	void onPunchCollision(MetroBrawlCollisionData  col_data);
 	int player_health = 0;
-	int punch_force = 100;
+	int punch_force = 10000;
 	bool canAttack = true;
-	float max_time = 10.5f;
+	float max_time = 0.5f;
 	float current_time = max_time;
 
 	//	Vector2 m_limit = Vector2(800, 500);
