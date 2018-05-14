@@ -256,24 +256,24 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-		testPlay->SetPos(Vector2(1500, 200));
-		scene.instanciate2DObject(testPlay);
+		//Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
+		//testPlay->SetDrive(1000.0f);
+		//testPlay->SetDrag(0.5f);
+		//testPlay->SetPos(Vector2(1500, 200));
+		//scene.instanciate2DObject(testPlay);
 
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
-		testPlay2->SetDrive(1000.0f);
-		testPlay2->SetDrag(0.5f);
-		testPlay2->SetPos(Vector2(800, 200));
-		scene.instanciate2DObject(testPlay2);
+		//Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
+		//testPlay2->SetDrive(1000.0f);
+		//testPlay2->SetDrag(0.5f);
+		//testPlay2->SetPos(Vector2(800, 200));
+		//scene.instanciate2DObject(testPlay2);
 
-		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
-		testPlay3->SetDrive(1000.0f);
-		testPlay3->SetDrag(0.5f);
-		testPlay3->SetPos(Vector2(1100, 500));
-		scene.instanciate2DObject(testPlay3);
+		//Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
+		//testPlay3->SetDrive(1000.0f);
+		//testPlay3->SetDrag(0.5f);
+		//testPlay3->SetPos(Vector2(1100, 500));
+		//scene.instanciate2DObject(testPlay3);
 
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
 		testPlatform->SetPos(Vector2(500, 600));
@@ -292,8 +292,8 @@ void Game::Update(DX::StepTimer const& timer)
 		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
 		//scene.instanciate2DObject(test_spawn);
 
-		//SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
-		//scene.instanciate2DObject(test_spawn2);
+		SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
+		scene.instanciate2DObject(test_spawn2);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);

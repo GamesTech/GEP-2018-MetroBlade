@@ -8,6 +8,7 @@
 	"MoveLeft": [265],
 	"MoveRight": [266],
         "ThumbstickLeftX" : [269],
-	"ThumbstickLeftY" : [270]
+	"ThumbstickLeftY" : [270],
+	"Hello": [265]
 
 }

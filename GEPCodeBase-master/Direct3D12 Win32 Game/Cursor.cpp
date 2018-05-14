@@ -3,6 +3,7 @@
 #include "UISprite.h"
 #include "RenderData.h"
 #include "GameStateData.h"
+#include "LobbySystem.h"
 
 using namespace std::placeholders;
 Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
@@ -16,6 +17,16 @@ Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
 	object_components.addComponent(col);
 
 	this->controller_id = controller_id;
+
+	object_components.addComponent(new LobbySystemComponent);
+}
+
+Cursor::~Cursor()
+{
+	if (player_data.player_name != "player_null") 
+	{
+		object_components.getComponentByType<LobbySystemComponent>()->addPlayer(player_data);
+	}
 }
 
 void Cursor::CheckInput(GameStateData * _GSD)
@@ -24,7 +35,6 @@ void Cursor::CheckInput(GameStateData * _GSD)
 	{
 		float stick_x = _GSD->input->getBindRawValue("ThumbstickLeftX", controller_id);
 		float stick_y = _GSD->input->getBindRawValue("ThumbstickLeftY", controller_id);
-
 
 		setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
 
@@ -72,6 +82,13 @@ void Cursor::onCollision(MetroBrawlCollisionData col_data)
 
 		collider_tag = col_data.collider_object->getCollidersParent()->getTag();
 	}
+}
+
+void Cursor::setPlayerData(PlayerData player_info)
+{
+	player_info.player_name = "P" + std::to_string(controller_id + 1);
+	player_info.input_device_id = controller_id;
+	player_data = player_info; 
 }
 
 

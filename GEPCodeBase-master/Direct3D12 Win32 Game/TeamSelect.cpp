@@ -17,6 +17,9 @@ void TeamSelect::update(std::vector<Cursor*> cursors, std::vector<UISprite*> tea
 			 tag = cursors[i]->getCollided();
 			if (tag >= 0 && tag < 64) {
 				teamview[i]->changeSpriteRect("fighter_spritesheet", teamview_images[tag]);
+				PlayerData  new_player;
+				new_player.character_name = teamview_images[tag];
+				cursors[i]->setPlayerData(new_player);
 				teamSelection[i] = tag;
 			}
 		}

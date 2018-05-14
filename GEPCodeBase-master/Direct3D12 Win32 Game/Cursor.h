@@ -19,20 +19,23 @@
 
 #pragma once
 #include "UIObject.h"
+#include "PlayerData.h"
+
 class UISprite;
 
 class Cursor : public UIObject
 {
-
 public:
 	Cursor(std::string filename, RenderData* _RD, int controller_id);
-	~Cursor() = default;
+	~Cursor();
 
 	void CheckInput(GameStateData* _GSD);
 	void onCollision(MetroBrawlCollisionData  col_data);
 
 	bool getInteract() { return interact; }
 	int getCollided() { return collider_tag; }
+
+	void setPlayerData(PlayerData player_info);
 
 private:
 	DirectX::GamePad::State controller_state;
@@ -52,5 +55,5 @@ private:
 	Collider* col = new Collider(Vector2(render_position), Vector2(40, 40), true);
 	Vector2 render_position;
 
-
+	PlayerData   player_data;
 };
