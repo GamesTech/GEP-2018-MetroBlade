@@ -20,33 +20,7 @@ void Spawner::initObject()
 
 void Spawner::SpawnObject()
 {
-	for (int i = 0; i < item_counter; i++)
-	{
-		int random = 0;
-		switch (i)
-		{
-		case HEALTH:
-			item_vector[i] = new Item(render_data, "bubble_item", ItemType::HEALTH);
-			item_vector[i]->SetPos(Vector2(400, 550));
-			world.instantiateToScene(item_vector[i]);
-			break;
-		case PROJECTILE:
-			item_vector[i] = new Item(render_data, "bubble_item", ItemType::PROJECTILE);
-			item_vector[i]->SetPos(Vector2(400, 475));
-			world.instantiateToScene(item_vector[i]);
-			break;
-		case HAMMER:
-			item_vector[i] = new Item(render_data, "bubble_item", ItemType::HAMMER);
-			item_vector[i]->SetPos(Vector2(400, 400));
-			world.instantiateToScene(item_vector[i]);
-			break;
-		case BOMB:
-			item_vector[i] = new Item(render_data, "bubble_item", ItemType::BOMB);
-			item_vector[i]->SetPos(Vector2(400, 325));
-			world.instantiateToScene(item_vector[i]);
-			break;
-		}
-	}
+	
 }
 
 void Spawner::StartSpawnTimer()

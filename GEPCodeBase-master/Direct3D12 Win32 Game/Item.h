@@ -36,7 +36,7 @@ enum ItemState {
 class Item : public ImageGO2D
 {
 public:
-	Item(RenderData* _RD, string _filename, ItemType type);
+	Item(RenderData* _RD, string _filename, Vector2 position, int item_num);
 	virtual ~Item();
 
 	Vector2 GetPostion() { return pos; }

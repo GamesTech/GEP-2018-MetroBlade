@@ -14,7 +14,7 @@ void SceneLoader::init(RenderData * _RD)
 	render_data = _RD;
 	addObjectInitialiser("Obstacle2D", std::bind(&Entities::constructObstacle2D, _1, _2));
 	addObjectInitialiser("SpawnPoint", std::bind(&Entities::constructSpawnPoint, _1, _2));
-	addObjectInitialiser("ItemSpawner", std::bind(&Entities::constructItemSpawner, _1, _2));
+	addObjectInitialiser("ItemSpawn", std::bind(&Entities::constructItem, _1, _2));
 }
 
 Scene* SceneLoader::createScene(std::string scene_name)

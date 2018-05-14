@@ -26,7 +26,7 @@
 #include "Obstacle2D.h"
 #include "SpawnPoint.h"
 #include "Spawner.h"
-
+#include "Item.h"
 
 // TODO - Add information into functions to properly setup the objects according to specified parameters.
 
@@ -49,5 +49,10 @@ namespace Entities
 	static GameObject2D* constructItemSpawner(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
 	{
 		return new Spawner(_RD,"",Vector2(key.value()["position"][0].as_double(), key.value()["position"][1].as_double()), (int)key.value()["item-count"].as_int());
+	}
+
+	static GameObject2D* constructItem(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
+	{
+		return new Item(_RD,key.value()["filename"].as_string(), Vector2(key.value()["position"][0].as_double(), key.value()["position"][1].as_double()), (ItemType)key.value()["item-type"].as_int());
 	}
 }

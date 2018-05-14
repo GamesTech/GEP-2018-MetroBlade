@@ -6,22 +6,22 @@
 #include "Hammer.h"
 #include "Bomb.h"
 
-Item::Item(RenderData* _RD, string _filename, ItemType type) : ImageGO2D(_RD, _filename)
+Item::Item(RenderData* _RD, string _filename, Vector2 position, int item_num) : ImageGO2D(_RD, _filename)
 {
 	using namespace std::placeholders;
-	item_type = type;
+	SetPos(position);
 	CentreOrigin();
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Item::onCollision, this, _1));
 	object_components.addComponent(col);
-
+	item_type = (ItemType)item_num;
 	src_rect.reset(new RECT);
 	object_components.addComponent(new Sprite(true));
 	sprite = object_components.getComponentByType<Sprite>();
 	sprite->setSpriteRECT(src_rect);
 	sprite->setSpriteAnimationFile(_filename + "_animations");
 	
-	switch (type)
+	switch (item_type)
 	{
 	case HEALTH:
 		sprite->setAnimationState("health");

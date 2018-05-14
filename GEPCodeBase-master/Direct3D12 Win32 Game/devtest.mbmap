@@ -1,9 +1,27 @@
 {
     "level": true,
-	"Spawner":
+	"ItemSpawn":
 	{
-		"type": "ItemSpawner",
+		"type": "ItemSpawn",
+		"filename": "bubble_item",
 		"position": [100, 100],
-		"item-count": 4
+		"item-type": 0
+	},
+	
+	"ItemSpawn1":
+	{
+		"type": "ItemSpawn",
+		"filename": "bubble_item",
+		"position": [200, 200],
+		"item-type": 1
+	},
+	
+	"ItemSpawn2":
+	{
+		"type": "ItemSpawn",
+		"filename": "bubble_item",
+		"position": [300, 300],
+		"item-type": 2
 	}
+	
 }
