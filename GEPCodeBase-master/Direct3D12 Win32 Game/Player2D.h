@@ -83,5 +83,6 @@ private:
 	void onCollision(MetroBrawlCollisionData  col_data);
 	void onPunchCollision(MetroBrawlCollisionData  col_data);
 	int player_health = 0;
+	int punch_force = 1000000;
 	//	Vector2 m_limit = Vector2(800, 500);
 };

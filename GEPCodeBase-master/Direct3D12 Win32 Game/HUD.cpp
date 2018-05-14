@@ -16,19 +16,8 @@ void HUD::Tick(GameStateData * _GSD)
 
 void HUD::Render(RenderData * _RD)
 {
-	if (!labels.empty())
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			labels[i]->Render(_RD);
-		}
-	}
 }
 
-void HUD::addLabel(UILabel* player_labels)
-{
-	labels.push_back(player_labels);
-}
 
 void HUD::updateLabels(std::vector<UILabel*> labels)
 {
@@ -48,7 +37,3 @@ void HUD::updateLabels(std::vector<UILabel*> labels)
 	}
 }
 
-void HUD::clear()
-{
-	labels.clear();
-}
