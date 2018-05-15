@@ -31,14 +31,39 @@ Cursor::~Cursor()
 
 void Cursor::CheckInput(GameStateData * _GSD)
 {
-	if (is_active) 
+	if (is_active)
 	{
+
+
 		float stick_x = _GSD->input->getBindRawValue("ThumbstickLeftX", controller_id);
 		float stick_y = _GSD->input->getBindRawValue("ThumbstickLeftY", controller_id);
+
+
+		if (_GSD->input->getBindDown("MoveRight", controller_id))
+		{
+			stick_x = 1;
+		}
+		else if (_GSD->input->getBindDown("MoveLeft", controller_id))
+		{
+			stick_x = -1;
+		}
+
+		if (_GSD->input->getBindDown("MoveUp", controller_id))
+		{
+			stick_y = 1;
+		}
+		else if (_GSD->input->getBindDown("MoveDown", controller_id))
+		{
+			stick_y = -1;
+		}
+
 
 		setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
 
 		sprite->setCanvasPosition(getCanvasPosition());
+
+		setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
+		setCanvasPosition(Vector2(getCanvasPosition().x + (stick_x*speed), getCanvasPosition().y - (stick_y*speed)));
 
 		if (_GSD->input->getBindDown("Jump"))
 		{
@@ -69,7 +94,7 @@ void Cursor::Render(RenderData * _RD)
 
 void Cursor::onCollision(MetroBrawlCollisionData col_data)
 {
-	if (is_active) 
+	if (is_active)
 	{
 		if (a_pressed)
 		{
@@ -86,13 +111,13 @@ void Cursor::onCollision(MetroBrawlCollisionData col_data)
 
 void Cursor::setPlayerData(PlayerData player_info)
 {
-	if (!object_components.getComponentByType<LobbySystemComponent>()->isPlayerRegistered(controller_id)) 
+	if (!object_components.getComponentByType<LobbySystemComponent>()->isPlayerRegistered(controller_id))
 	{
 		player_info.player_name = "P" + std::to_string(controller_id + 1);
 		player_info.input_device_id = controller_id;
 		player_data = player_info;
 	}
-	else 
+	else
 	{
 		object_components.getComponentByType<LobbySystemComponent>()->getPlayerByIndex(controller_id)->character_name = player_info.character_name;
 	}
