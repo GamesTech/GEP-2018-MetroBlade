@@ -26,6 +26,7 @@
 #include "Obstacle2D.h"
 #include "SpawnPoint.h"
 #include "Camera.h"
+#include "ImageGO2D.h"
 
 
 // TODO - Add information into functions to properly setup the objects according to specified parameters.
@@ -35,7 +36,7 @@ namespace Entities
 	// TODO - Create class of initialisation routienes.
 	static GameObject2D* constructObstacle2D(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
 	{
-		GameObject2D* test = new Obstacle2D(_RD, key.value()["filename"].as_string());
+		GameObject2D* test = new Obstacle2D(_RD, key.value()["filename"].as_string(), Vector2(0,0));
 		test->SetPos(Vector2(500, 600));
 		return test;
 	}
@@ -51,5 +52,10 @@ namespace Entities
 		Camera*  new_cam = new Camera(1920.0f, 1080.0f, 0.1f, 100.0f);
 		// new_cam->set2DViewport(Vector2(1920, 1080));
 		return new_cam;
+	}
+
+	static GameObject2D* constructBackground(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key) 
+	{
+		return new ImageGO2D(_RD, key.value()["filename"].as_string());
 	}
 }

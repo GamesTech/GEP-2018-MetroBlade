@@ -44,6 +44,7 @@ public:
 	
 	std::vector<PlayerData>* getPlayerLobbyData(); // TODO - Consider returning a refrence to the array instead. 
 	std::vector<SpawnPoint*>*  getSpawnpointList(); 
+	PlayerStatus*  getPlayerInstanceStatus(int index);
 	void addPlayer(PlayerData new_player_data);
 
 	GameData* getGameModeData();
@@ -53,6 +54,7 @@ public:
 	void setupGame();
 	void startGame();
 	void resetManager();
+	void clearGameLobby();
 
 	void setUILabel(UILabel* new_label);
 

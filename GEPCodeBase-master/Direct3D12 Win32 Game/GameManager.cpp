@@ -61,6 +61,7 @@ void GameManager::setupLobbySystemComponent(GameObject2D* object)
 
 	if (component) 
 	{
+		component->addLobbyReference(&lobby);
 		component->addLobbyRefrence(this);
 	}
 }
@@ -78,6 +79,18 @@ std::vector<PlayerData>* GameManager::getPlayerLobbyData()
 std::vector<SpawnPoint*>* GameManager::getSpawnpointList()
 {
 	return &scene_spawns;
+}
+
+PlayerStatus* GameManager::getPlayerInstanceStatus(int index)
+{
+	PlayerStatus*  status = nullptr;
+	
+	if (index < player_instances.size()) 
+	{
+		status = player_instances[index]->getComponentManager()->getComponentByType<PlayerStatus>();
+	}
+
+	return status;
 }
 
 void GameManager::addPlayer(PlayerData new_player_data) // TODO - Consider Removing.
@@ -102,6 +115,7 @@ void GameManager::setupGame()
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLaunchMultiplier(game_mode.game_knockback_multiplier);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(game_mode.number_of_lives);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+		player->SetPos(getRespawnPosition());
 	}
 
 	game_mode_state = game_mode;
@@ -117,6 +131,11 @@ void GameManager::resetManager()
 	game_active = false;
 	player_instances.clear();
 	scene_spawns.clear();
+}
+
+void GameManager::clearGameLobby()
+{
+	lobby.clear();
 }
 
 void GameManager::setUILabel(UILabel * new_label)
@@ -147,7 +166,7 @@ Vector2 GameManager::getRespawnPosition()
 	}
 	else 
 	{
-		return Vector2(10, 10);
+		return Vector2(600, 300);
 	}
 }
 
@@ -183,6 +202,8 @@ void GameManager::checkPlayerRespawnStatus(float delta_time)
 		{
 			players_to_respawn[i]->setRespawnTime(0.0f);
 			players_to_respawn[i]->isDead(false);
+			players_to_respawn[i]->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+			players_to_respawn[i]->SetVel(Vector2(0, 0));
 			players_to_respawn[i]->SetPos(getRespawnPosition()); // TODO - Add code to respawn the player.
 			players_to_respawn.erase(players_to_respawn.begin() + i);
 			OutputDebugString(L"Ive Respawned Mate");

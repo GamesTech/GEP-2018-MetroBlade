@@ -53,7 +53,12 @@ void LobbySystemComponent::startGameManager()
 	game_state->startGame();
 }
 
-PlayerData LobbySystemComponent::getPlayerByIndex(int index)
+PlayerData* LobbySystemComponent::getPlayerByIndex(int index)
 {
-	return (*lobby_refrence)[index];
+	return &(*lobby_refrence)[index];
+}
+
+PlayerStatus* LobbySystemComponent::getPlayerStatusByIndex(int index)
+{
+	return game_state->getPlayerInstanceStatus(index);
 }

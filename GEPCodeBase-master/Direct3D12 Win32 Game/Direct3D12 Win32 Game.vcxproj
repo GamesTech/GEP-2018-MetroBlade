@@ -131,6 +131,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\Libs\jsoncons\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Arcade Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -334,6 +335,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="EntityConstructors.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="FileExtenstionNames.h" />
     <ClInclude Include="FileReaderBase.h" />
     <ClInclude Include="GameComponent.h" />
@@ -343,6 +345,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputBind.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="JSONFileReader.h" />
     <ClInclude Include="MetroBrawlCollisionData.h" />
@@ -378,6 +381,7 @@
     <ClInclude Include="SpriteAnimFileReader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="TeamSelect.h" />
     <ClInclude Include="TestComponent.h" />
     <ClInclude Include="TestPBGO3D.h" />
     <ClInclude Include="Text2D.h" />
@@ -395,10 +399,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="FileReaderBase.cpp" />
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JSONFileReader.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp" />
@@ -437,6 +443,7 @@
     <ClCompile Include="SpawnPoint.cpp" />
     <ClCompile Include="SpriteAnimFileReader.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TeamSelect.cpp" />
     <ClCompile Include="TestPBGO3D.cpp" />
     <ClCompile Include="Text2D.cpp" />
     <ClCompile Include="UICanvas.cpp" />
