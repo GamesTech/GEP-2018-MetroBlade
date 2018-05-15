@@ -49,7 +49,7 @@ namespace Entities
 	static GameObject3D* constructCamera(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key)
 	{
 		Camera*  new_cam = new Camera(1920.0f, 1080.0f, 0.1f, 100.0f);
-		new_cam->set2DViewport(Vector2(1920, 1080));
+		// new_cam->set2DViewport(Vector2(1920, 1080));
 		return new_cam;
 	}
 }
