@@ -156,7 +156,7 @@ void Game::Update(DX::StepTimer const& timer)
 		newScene->isLevel(true);
 		scene.loadScene(newScene);
 
-		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
@@ -320,8 +320,8 @@ void Game::OnWindowSizeChanged(int width, int height)
 void Game::GetDefaultSize(int& width, int& height) const
 {
 	// TODO: Change to desired default window size (note minimum size is 320x200).
-	width = 1920;
-	height = 1080;
+	width = m_outputWidth;
+	height = m_outputHeight;
 }
 
 // These are the resources that depend on the device.
