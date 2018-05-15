@@ -157,7 +157,7 @@ void Game::Update(DX::StepTimer const& timer)
 	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (input_manager.getKeyDown(DirectX::Keyboard::Enter))
+	if (input_manager.getBindDown("Play"))
 	{
 		player_labels.clear();
 		scene.loadScene("clear");
@@ -340,7 +340,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 	}
 	
-		if (m_GSD->input->getBindDown("Quit"))
+	if (m_GSD->input->getBindDown("Quit"))
 	{
 		scene.loadScene("clear");
 		player_labels.clear();
