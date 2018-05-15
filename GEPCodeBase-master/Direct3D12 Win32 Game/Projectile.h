@@ -29,17 +29,19 @@ public:
 	void StartProjectile(Player2D* player);
 	void MoveProjectile(GameStateData* _GSD);
 private:
+	Vector2 new_pos = Vector2::Zero;
 	bool hit_player = false;
 	bool alive = false;
 	bool respawn = false;
 	Sprite* sprite = nullptr;
 	Player2D* player_original = nullptr;
-	Collider* col = new Collider(Vector2(m_pos), Vector2(100, 130), false);
+	Collider* col = new Collider(Vector2(m_pos), Vector2(50, 100), false);
 	const float time_max = 3.0f;
 	float current_time = time_max;
 	const int damage = 25;
 	bool pierce = false;
-	float x_speed = 500.0f;
+	float x_speed = 1000.0f;
+	int punch_force = 10000;
 	Vector2 direction = Vector2::Zero;
 	float y_offset = 50.0f;
 	void onCollision(MetroBrawlCollisionData  col_data);

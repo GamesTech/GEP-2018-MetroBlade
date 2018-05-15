@@ -9,7 +9,6 @@ Projectile::Projectile(RenderData* _RD, string _filename) : Physics2D(_RD, _file
 
 
 	col->isColliderImmediate(true);
-	col->setBoxDimensions(Vector2(50, 50));
 	col->addParentObjectRefrence(this);
 	col->assignCollisionEvent(std::bind(&Projectile::onCollision, this, _1));
 	object_components.addComponent(col);
@@ -28,7 +27,7 @@ Projectile::~Projectile()
 
 void Projectile::StartProjectile(Player2D* player)
 {
-	Vector2 new_pos = player->GetPos();
+	new_pos = player->GetPos();
 	new_pos.y -= y_offset;
 	SetPos(new_pos);
 	player_original = player;
@@ -81,7 +80,7 @@ void Projectile::Render(RenderData* _GSD)
 void Projectile::MoveProjectile(GameStateData* _GSD)
 {
 	Vector2 new_speed = direction;
-	new_speed.x = x_speed * _GSD->m_dt;
+	new_speed.x = direction.x * x_speed;
 	SetInputVel(new_speed);
 }
 
@@ -94,8 +93,14 @@ void Projectile::onCollision(MetroBrawlCollisionData  col_data)
 		{
 			if (player != player_original)
 			{
-				player->getComponentManager()->getComponentByType<PlayerStatus>()->takeHealth(damage_amount);
+				double target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
+				
+				static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage)) * Vector2::UnitX * direction);
+
+				player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage + 20);
+				
 				hit_player = true;
+				alive = false;
 			}
 
 		}

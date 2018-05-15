@@ -146,10 +146,11 @@ void Player2D::Tick(GameStateData* _GSD)
 		}
 	}
 
+
+	
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 
 	//action state determines the players action such as attacking, jumping, moving etc
-
 
 	switch (action_state)
 	{

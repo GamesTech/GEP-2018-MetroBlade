@@ -4,7 +4,7 @@
 	{
 		"type": "ItemSpawn",
 		"filename": "bubble_item",
-		"position": [800, -100],
+		"position": [700, -100],
 		"item-type": 0
 	},
 	
@@ -12,16 +12,8 @@
 	{
 		"type": "ItemSpawn",
 		"filename": "bubble_item",
-		"position": [1100, -200],
+		"position": [1200, -1000],
 		"item-type": 1
-	},
-	
-	"ItemSpawn2":
-	{
-		"type": "ItemSpawn",
-		"filename": "bubble_item",
-		"position": [1400, -450],
-		"item-type": 2
 	}
 	
 }

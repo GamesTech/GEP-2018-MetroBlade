@@ -74,10 +74,19 @@ void Item::Tick(GameStateData* _GSD)
 			item_state = PICKUP;
 			col->isColliderActive(true);
 			respawn_time = max_time;
+			m_vel = Vector2::Zero;
 			m_acc = Vector2::Zero;
 			respawning = false;
 		}
 	}
+
+	if (GetPos().y >= 2000)
+	{
+		SetPos(item_pos);
+		m_vel = Vector2::Zero;
+		m_acc = Vector2::Zero;
+	}
+
 	Physics2D::Tick(_GSD);
 }
 
@@ -94,7 +103,7 @@ void Item::UseItem(RenderData* _RD, Player2D* player, ItemType type)
 	switch (type)
 	{
 	case HEALTH:
-		player->getComponentManager()->getComponentByType<PlayerStatus>()->addHealth(health_amount);
+		
 		break;
 	case PROJECTILE:
 		if (proj)
@@ -142,9 +151,23 @@ void Item::onCollision(MetroBrawlCollisionData  col_data)
 		Player2D*   player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
 		if (player && player->hasItem() == false)
 		{
-			player->AddItem(this, 1);
-			item_state = NONE;
-			col->isColliderActive(false);
+			if (item_type == HEALTH)
+			{
+				double target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
+				if (target_damage_percentage >= 20)
+				{
+					player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage - 20);
+				}
+				item_state = NONE;
+				col->isColliderActive(false);
+				respawning = true;
+			}
+			else
+			{
+				player->AddItem(this, 1);
+				item_state = NONE;
+				col->isColliderActive(false);
+			}
 		}
 	}
 }
