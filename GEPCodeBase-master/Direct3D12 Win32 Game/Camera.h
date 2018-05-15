@@ -21,6 +21,8 @@ public:
 	void	set2DViewport(Vector2  new_viewport);
 	Vector2	get2DViewport() const; 
 
+	float  getScreenAspectRatio();
+
 protected:
 	Vector2		  viewport_2D;
 	GameObject3D* m_targetObject=NULL;

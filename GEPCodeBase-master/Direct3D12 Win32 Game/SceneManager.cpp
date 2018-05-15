@@ -47,9 +47,9 @@ void SceneManager::Init(RenderData* _RD)
 
 	loadScene(scene_loader.createScene("menu.mbmap"));
 	
-	Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
+	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 	setMainCamera(camera);
-	camera->set2DViewport(Vector2(1920, 1080));
+	camera->set2DViewport(Vector2(800, 600));
 	current_scene->add3DGameObjectToScene(camera);
 }
 
