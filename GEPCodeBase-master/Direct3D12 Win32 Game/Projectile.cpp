@@ -3,17 +3,10 @@
 #include "Projectile.h"
 #include "GameStateData.h"
 #include "PlayerStatus.h"
-Projectile::Projectile(RenderData* _RD, string _filename, Vector2 new_direction, Player2D* original) : Physics2D(_RD, _filename)
+Projectile::Projectile(RenderData* _RD, string _filename) : Physics2D(_RD, _filename)
 {
 	using namespace std::placeholders;
 
-	direction = new_direction;
-
-	Vector2 new_pos = original->GetPos();
-	new_pos.y -= y_offset;
-	SetPos(new_pos);
-
-	player_original = original;
 
 	col->isColliderImmediate(true);
 	col->setBoxDimensions(Vector2(50, 50));
@@ -33,48 +26,78 @@ Projectile::~Projectile()
 {
 }
 
+void Projectile::StartProjectile(Player2D* player)
+{
+	Vector2 new_pos = player->GetPos();
+	new_pos.y -= y_offset;
+	SetPos(new_pos);
+	player_original = player;
+	direction = player->getDirection();
+	alive = true;
+}
+
 void Projectile::Tick(GameStateData* _GSD)
 {
-	current_time -= _GSD->m_dt;
-	
-	if (current_time <= 0.0f || !alive)
-	{
-		sprite->setLoop(false);
-		sprite->setAnimationState("hit");
-		col->isColliderActive(false);
+
+	if(alive)
+	{ 
+		current_time -= _GSD->m_dt;
+
+		if (current_time <= 0.0f || hit_player)
+		{
+			sprite->setLoop(false);
+			sprite->setAnimationState("hit");
+			col->isColliderActive(false);
+			alive = false;
+		}
+		else
+		{
+			MoveProjectile(_GSD);
+		}
+		col->setBoxOrigin(m_pos);
+		sprite->tickComponent(_GSD);
+		Physics2D::Tick(_GSD);
 	}
 	else
 	{
-		MoveProjectile(_GSD);
+		current_time = time_max;
+		SetPos(Vector2(-100, -100));
+		sprite->setAnimationState("move");
+		sprite->setLoop(true);
+		hit_player = false;
 	}
-	col->setBoxOrigin(m_pos);
-	sprite->tickComponent(_GSD);
-	Physics2D::Tick(_GSD);
+	
 
 }
 
 void Projectile::Render(RenderData* _GSD)
 {
-	ImageGO2D::Render(_GSD);
+	if (alive)
+	{
+		ImageGO2D::Render(_GSD);
+	}
 }
 
 void Projectile::MoveProjectile(GameStateData* _GSD)
 {
 	Vector2 new_speed = direction;
-	new_speed.x *= x_speed;
+	new_speed.x = x_speed * _GSD->m_dt;
 	SetInputVel(new_speed);
 }
 
 void Projectile::onCollision(MetroBrawlCollisionData  col_data)
 {
-	Player2D*   player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
-	if (player)
+	if (alive)
 	{
-		if (player != player_original)
+		Player2D*   player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
+		if (player)
 		{
-			player->getComponentManager()->getComponentByType<PlayerStatus>()->takeHealth(damage_amount);
-			alive = false;
+			if (player != player_original)
+			{
+				player->getComponentManager()->getComponentByType<PlayerStatus>()->takeHealth(damage_amount);
+				hit_player = true;
+			}
+
 		}
-		
 	}
 }

@@ -9,7 +9,7 @@ Hammer::Hammer(RenderData* _RD, string _filename, Vector2 new_direction, Player2
 
 	player_original = original;
 	pos_offset = original->GetPos() - original->getComponentManager()->getComponentByType<Collider>()->getBoxDimenstions();
-
+	SetPos(pos_offset);
 	col->isColliderImmediate(true);
 	col->setBoxDimensions(Vector2(50, 50));
 	col->addParentObjectRefrence(this);
@@ -56,10 +56,9 @@ void Hammer::Render(RenderData* _RD)
 
 void Hammer::attack(GameStateData* _GSD)
 {
-	col->setBoxOrigin(m_pos - pos_offset);
-	m_pos = player_original->GetPos() - pos_offset;
 	sprite->setLoop(false);
 	sprite->setAnimationState("attack");
+	col->isColliderActive(true);
 }
 
 void Hammer::onCollision(MetroBrawlCollisionData  col_data)
