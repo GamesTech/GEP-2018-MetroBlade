@@ -11,9 +11,12 @@
 #include "LobbySystem.h"
 
 
-Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID):Physics2D(_RD,_filename)
+Player2D::Player2D(RenderData* _RD, string _filename, int gamepadID, Vector2(dimensions)) :Physics2D(_RD, _filename)
 {
 	using namespace std::placeholders;
+
+	col = new Collider(Vector2(m_pos), Vector2(dimensions), false);
+	punch_collider = new Collider(Vector2(col->getBoxMidpoint().x, m_pos.y), Vector2(col->getBoxDimenstions().x / 2, col->getBoxDimenstions().y), true);
 
 	src_rect.reset(new RECT);
 	CentreOrigin();
@@ -53,13 +56,14 @@ Player2D::~Player2D()
 void Player2D::CheckInput(GameStateData* _GSD)
 {
 	// Consider moving these into seperate functions.
-	if (_GSD->input->getBindDown("Jump",controller_id))
+	if (_GSD->input->getBindDown("Jump", controller_id))
 	{
 		if (phys_state == GROUNDED)
 		{
 			action_state = JUMPING;
 			sprite->setAnimationState("jump");
-			AddForce(-jump_force * Vector2::UnitY);
+			SetVel(Vector2(GetVel().x, GetVel().y - jump_force));
+			// AddForce(-jump_force * Vector2::UnitY);
 			phys_state = AIR;
 			object_components.getComponentByType<SoundComponent>()->Play();
 		}
@@ -70,9 +74,10 @@ void Player2D::CheckInput(GameStateData* _GSD)
 		if (phys_state == GROUNDED)
 		{
 			action_state = ATTACKING;
+
 		}
 	}
-	else 
+	else
 	{
 		action_state = IDLE;
 	}
@@ -82,28 +87,30 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	{
 		offset = Vector2(-20, 0);
 		m_effects = SpriteEffects_FlipHorizontally;
+		direction.x = -1;
 	}
 	else if (_GSD->input->getBindRawValue("Move", controller_id) > 0 || _GSD->input->getBindDown("MoveRight", controller_id))
 	{
-		offset = Vector2(120, 0);
+		offset = Vector2(0, 0);
 		m_effects = SpriteEffects_None;
+		direction.x = 1;
 	}
 
 
-	direction = Vector2(_GSD->input->getBindRawValue("Move", controller_id) * 1, 0);
+	//direction = Vector2(_GSD->input->getBindRawValue("Move", controller_id) * 1, controller_id);
 	SetInputVel
 	(
 		Vector2
 		(
 			getInputDirection(_GSD->input->getBindRawValue("Move", controller_id),
-			_GSD->input->getBindDown("MoveLeft", controller_id),
-			_GSD->input->getBindDown("MoveRight", controller_id))
+				_GSD->input->getBindDown("MoveLeft", controller_id),
+				_GSD->input->getBindDown("MoveRight", controller_id))
 			* x_speed
-			,0
+			, 0
 		)
 	);
 
-	if (GetInputVel() != Vector2::Zero) 
+	if (GetInputVel() != Vector2::Zero)
 	{
 		action_state = MOVING;
 	}
@@ -118,50 +125,69 @@ void Player2D::CheckInput(GameStateData* _GSD)
 	//{
 	//	object_components.getComponentByType<LobbySystemComponent>()->addPlayer(PlayerData());
 	//}
-	
+
 }
 
 void Player2D::Tick(GameStateData* _GSD)
 {
-	punch_collider->setBoxOrigin(m_pos + offset);
+	punch_collider->setBoxOrigin(Vector2(col->getBoxMidpoint().x, m_pos.y) + offset);
 	col->setBoxOrigin(m_pos);
 	CheckInput(_GSD);
+
+
+	attacking = false;
+
+	if (!canAttack)
+	{
+		current_time -= _GSD->m_dt;
+		if (current_time <= 0)
+		{
+			canAttack = true;
+		}
+	}
 
 	//physical state determines stuff like if they are colliding with ground, or walls or in the air
 
 	//action state determines the players action such as attacking, jumping, moving etc
-	attacking = false;
+
+
 	switch (action_state)
 	{
-		case IDLE:
-			sprite->setAnimationState("idle");
-			break;
-
-		case MOVING:
-			if (phys_state == GROUNDED)
-			{
-				sprite->setAnimationState("move");
-			}
-			break;
-
-		case JUMPING:
-			break;
-
-		case ATTACKING:
+	case ATTACKING:
+		if (canAttack)
+		{
 			attacking = true;
+			canAttack = false;
 			sprite->setAnimationState("attack");
-			break;
-	
-		case USE:
-			if (player_item)
-			{
-				player_item->UseItem(_playerRD, this, player_item->GetType());
-				player_item = nullptr;
-			}
-			break;
+			current_time = max_time;
+		}
+		break;
+	case IDLE:
+		sprite->setAnimationState("idle");
+		break;
+
+	case MOVING:
+		if (phys_state == GROUNDED)
+		{
+			sprite->setAnimationState("move");
+		}
+		break;
+
+	case JUMPING:
+		break;
+
+	case USE:
+		if (player_item)
+		{
+			player_item->UseItem(_playerRD, this, player_item->GetType());
+			player_item = nullptr;
+		}
+		break;
+
 	}
 
-	if (phys_state == AIR) 
+
+	if (phys_state == AIR)
 	{
 		sprite->setAnimationState("jump");
 	}
@@ -216,11 +242,11 @@ void Player2D::setRespawnTime(float respawn_timer)
 
 int Player2D::getInputDirection(int analog_value, int left_dpad_value, int right_dpad_value)
 {
-	if (analog_value != 0) 
+	if (analog_value != 0)
 	{
 		return analog_value;
 	}
-	else 
+	else
 	{
 		return returnDPadDirectionValue(left_dpad_value, right_dpad_value);
 	}
@@ -241,12 +267,24 @@ void Player2D::onCollision(MetroBrawlCollisionData col_data)
 
 void Player2D::onPunchCollision(MetroBrawlCollisionData col_data)
 {
-	printf("We can now detect punches.");
-}
+	Player2D* player = dynamic_cast<Player2D*>(col_data.collider_object->getCollidersParent());
+	if (player)
+	{
+		if (player != this)
+		{
+			double target_damage_percentage = player->getComponentManager()->getComponentByType<PlayerStatus>()->getDamagePercentage();
+			if (attacking)
+			{
+				static_cast<Physics2D*>(col_data.collider_object->getCollidersParent())->AddForce((punch_force + (punch_force*target_damage_percentage)) * Vector2::UnitX * direction);
 
-void Player2D::punched(GameStateData * _GSD, Vector2 direction)
-{
-	AddForce(10000 * direction * Vector2::UnitX);
+				player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(target_damage_percentage + 20);
+			}
+		}
+	}
+	/*int target_damage_percentage = col_data.collider_object->*/
+
+	printf("We can now detect punches.");
+
 }
 
 bool Player2D::hasItem()

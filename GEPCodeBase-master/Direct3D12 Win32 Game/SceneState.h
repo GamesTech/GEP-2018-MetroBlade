@@ -14,7 +14,7 @@ public:
 	void assignSceneManagerListener(std::shared_ptr<SceneEvent>   event_ref);
 	void assignSceneManager(SceneManager* manager);
 	void instantiateToScene(GameObject2D* obj);
-	bool sceneCheck();
+
 	// Interface
 	void changeScene(std::string   new_scene_name);
 	void pauseGame();

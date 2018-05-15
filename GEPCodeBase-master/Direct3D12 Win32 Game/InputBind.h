@@ -253,8 +253,8 @@ struct InputBind
 {
 	std::string								  binding_name;
 	MetroBrawlInputActions					key_identifier;  
-	int									   input_value = 0;
-	int								  prev_input_value = 0;
+	float								   input_value = 0.0f;
+	float							  prev_input_value = 0.0f;
 	int				 device_id = DEVICE_KEYBOARD_AND_MOUSE;
 };
 

@@ -84,13 +84,13 @@ int MetroBrawlInputManager::getMouseScrollWheelValue() const
 	return mouse_input->GetState().scrollWheelValue;
 }
 
-int MetroBrawlInputManager::getControllerKeyValue(MetroBrawlInputActions controller_button, int device_id)
+float MetroBrawlInputManager::getControllerKeyValue(MetroBrawlInputActions controller_button, int device_id)
 {
 	// Check button keys. Values can be cast according to data needs. 
-	int key_value = 0;
+	float key_value = 0.0f;
 	const int key_bind = ((int)controller_button - 259);
 
-	int key_values[DEVICE_CONTROLLER_BUTTONS_COUNT] = // Map of the key values used to retrieve the correct number.
+	float key_values[DEVICE_CONTROLLER_BUTTONS_COUNT] = // Map of the key values used to retrieve the correct number.
 	{
 		gamepad_state[device_id].state.buttons.a,
 		gamepad_state[device_id].state.buttons.b,
@@ -111,7 +111,7 @@ int MetroBrawlInputManager::getControllerKeyValue(MetroBrawlInputActions control
 	};
 	
 	key_value = key_values[key_bind];
-
+	
 	return key_value;
 }
 
@@ -133,7 +133,7 @@ bool MetroBrawlInputManager::getBindDown(std::string bind)
 		bind_ptr = findControllerBind(bind, i);
 		if (bind_ptr)
 		{
-			isDown |= abs(bind_ptr->input_value);
+			isDown |= abs((int)bind_ptr->input_value);
 		}
 	}
 

@@ -43,7 +43,8 @@ public:
 
 	void startGameManager();
 
-	PlayerData getPlayerByIndex(int index);
+	PlayerData* getPlayerByIndex(int index);
+	PlayerStatus* getPlayerStatusByIndex(int index);
 
 private:
 	GameManager*						game_state;

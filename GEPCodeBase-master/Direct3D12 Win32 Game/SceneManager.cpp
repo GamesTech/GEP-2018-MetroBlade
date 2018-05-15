@@ -154,7 +154,7 @@ void SceneManager::loadScene(Scene* scene_name)
 
 		for (auto& player_object : *(game_manager.getPlayerLobbyData()))
 		{
-			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id);
+			Player2D* player = new Player2D(render_data, player_object.character_name, player_object.input_device_id, Vector2(100,100));
 			instanciate2DObject(player);
 		}
 
@@ -198,7 +198,10 @@ void SceneManager::startGameManager()
 
 void SceneManager::instanciateUIObject(UIObject * new_object)
 {
+	setupScene2DObjects((GameObject2D*)new_object);
 	game_ui.addUIObject(new_object);
+
+	collision_manager.registerObjectColliders(new_object->getComponentManager()->getComponentsByType<Collider>());
 }
 
 bool SceneManager::canItemsSpawn()

@@ -49,7 +49,10 @@ void MetroBrawlCollisionManager::checkColliders(Collider& col)
 				MetroBrawlCollisionData   col_event;
 				// Here we send the events to the player objects. 
 
-				if (!col.getTrigger()) 
+				if (!col.getTrigger() &&
+					!object_colliders[i]->getTrigger() &&
+					((col.getCollidersParent() != object_colliders[i]->getCollidersParent()))
+					) 
 				{
 					physics_manager.resolveObjectCollision(col, *object_colliders[i]);
 				}

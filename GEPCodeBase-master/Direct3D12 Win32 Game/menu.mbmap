@@ -1,5 +1,11 @@
 {	
 	"level": false, 
+	"Background":
+	{
+		"type": "Background2D",
+		"filename": "sky"
+	},
+	
 	"ObsticleTest":
 	{
 		"type": "Obstacle2D",
@@ -9,7 +15,24 @@
 	"Point1":
 	{
 		"type": "SpawnPoint",
-		"position": [100, 100]
-	}
+		"position": [500, 100]
+	},
 	
+	"Point2":
+	{
+		"type": "SpawnPoint",
+		"position": [600, 100]
+	},
+	
+	"Point3":
+	{
+		"type": "SpawnPoint",
+		"position": [700, 100]
+	},
+	
+	"Point4":
+	{
+		"type": "SpawnPoint",
+		"position": [800, 100]
+	}
 }

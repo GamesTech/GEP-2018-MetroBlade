@@ -125,6 +125,12 @@
     <Filter Include="Core\Physics\Collision\Data">
       <UniqueIdentifier>{61c4f99f-3727-4aa9-bdb3-279c15190fa0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\Cursor">
+      <UniqueIdentifier>{9c0ebe47-7981-4795-a7b9-5c762b203d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\TeamSelect">
+      <UniqueIdentifier>{9ffc375c-e87e-4622-97e1-b120429d3a41}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\Physics\Resolver">
       <UniqueIdentifier>{f809afd7-1627-4f69-a928-e23ecd4e2a80}</UniqueIdentifier>
     </Filter>
@@ -196,6 +202,9 @@
     </Filter>
     <Filter Include="Core\GameObjects\SpawnPoint">
       <UniqueIdentifier>{306a117e-0198-40f8-ab42-3474337554ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\HUD">
+      <UniqueIdentifier>{a18570a6-ce7c-4f1a-8dd0-ad26a5409077}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\GameObjects\Item\Projectile">
       <UniqueIdentifier>{7d1a9fc8-7a78-4b53-bf07-347bcc805f0b}</UniqueIdentifier>
@@ -326,6 +335,12 @@
     <ClInclude Include="MetroBrawlCollisionData.h">
       <Filter>Core\Physics\Collision\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Core\UI\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamSelect.h">
+      <Filter>Core\UI\TeamSelect</Filter>
+    </ClInclude>
     <ClInclude Include="PhysicsResolver.h">
       <Filter>Core\Physics\Resolver</Filter>
     </ClInclude>
@@ -400,6 +415,10 @@
     </ClInclude>
     <ClInclude Include="Hammer.h">
       <Filter>Core\GameObjects\Item\Hammer</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle2D.h" />
+    <ClInclude Include="HUD.h">
+      <Filter>Core\UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -479,6 +498,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics\Collision\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Core\UI\Cursor</Filter>
+    </ClCompile>
     <ClCompile Include="Physics2D.cpp">
       <Filter>Core\Physics\RigidBody</Filter>
     </ClCompile>
@@ -519,6 +541,9 @@
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Core\GameObjects\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="TeamSelect.cpp">
+      <Filter>Core\UI\TeamSelect</Filter>
+    </ClCompile>
     <ClCompile Include="MetroBrawlInputManager.cpp">
       <Filter>Core\Input</Filter>
     </ClCompile>
@@ -539,6 +564,9 @@
     </ClCompile>
     <ClCompile Include="SpawnPoint.cpp">
       <Filter>Core\GameObjects\SpawnPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Core\UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Core\GameObjects\Item\Bomb</Filter>

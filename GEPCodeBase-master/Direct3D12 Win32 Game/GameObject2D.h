@@ -40,6 +40,9 @@ public:
 	void assignSceneManager(SceneManager* manager);
 	GameComponentManager* getComponentManager();
 
+	void setTag(int tag) { this->tag = tag; }
+	int getTag() { return tag; }
+
 protected:
 	SceneState					world; 
 
@@ -51,4 +54,5 @@ protected:
 	Color m_colour = Colors::White;
 	Vector2 m_scale = Vector2::One;
 	SpriteEffects m_effects = SpriteEffects_None;
+	int tag = -1;
 };

@@ -10,10 +10,11 @@
 #include "Spawner.h"
 
 #include "SpriteAnimFileReader.h"
-
-#include "UILabel.h"
 #include "UISprite.h"
+#include "Cursor.h"
+#include "TeamSelect.h"
 #include "SpawnPoint.h"
+#include "HUD.h"
 
 extern void ExitGame();
 
@@ -44,11 +45,16 @@ Game::~Game()
 	delete m_GSD;
 
 	m_graphicsMemory.reset();
+	delete teamselect;
+	teamselect = nullptr;
 }
 
 // Initialize the Direct3D resources required to run.
 void Game::Initialize(HWND window, int width, int height)
 {
+
+	teamselect = new TeamSelect();
+
 	m_window = window;
 	m_outputWidth = std::max(width, 1);
 	m_outputHeight = std::max(height, 1);
@@ -121,6 +127,7 @@ void Game::Initialize(HWND window, int width, int height)
 
 	scene.Init(m_RD);
 
+
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
 	/*
@@ -151,8 +158,14 @@ void Game::Update(DX::StepTimer const& timer)
 	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (input_manager.getBindDown("Action"))
+	if (input_manager.getKeyDown(DirectX::Keyboard::Enter))
 	{
+		cursors.clear();
+		teamview.clear();
+		teamview_images.clear();
+		profile_pics.clear();
+
+
 		Scene*  newScene = new Scene;
 		newScene->isLevel(true);
 		scene.loadScene("devtest");
@@ -162,50 +175,183 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-		testPlay->SetPos(Vector2(1500, 200));
-		scene.instanciate2DObject(testPlay);
+		teamview_images.push_back("fighter_1");
+		teamview_images.push_back("fighter_2");
+		teamview_images.push_back("fighter_3");
+		teamview_images.push_back("fighter_4");
 
-		Player2D* testPlay2 = new Player2D(m_RD, "Fighter_2", 1);
-		testPlay2->SetDrive(1000.0f);
-		testPlay2->SetDrag(0.5f);
-		testPlay2->SetPos(Vector2(800, 200));
-		scene.instanciate2DObject(testPlay2);
+		//= new UISprite("Fighter_1_teamview", m_RD);
 
-		Player2D* testPlay3 = new Player2D(m_RD, "Fighter_3", 2);
-		testPlay3->SetDrive(1000.0f);
-		testPlay3->SetDrag(0.5f);
-		testPlay3->SetPos(Vector2(1100, 500));
-		scene.instanciate2DObject(testPlay3);
+		UISprite* fighter_1_panel = new UISprite("teamview_spritesheet", m_RD);
+		fighter_1_panel->setCanvasPosition(Vector2(0.1, 0.7));
+		fighter_1_panel->setSprite("fighter_spritesheet", "fighter_1");
+		scene.instanciateUIObject(fighter_1_panel);
+		teamview.push_back(fighter_1_panel);
 
-		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite");
-		testPlatform->SetPos(Vector2(500, 600));
-		scene.instanciate2DObject(testPlatform);
+		UISprite* fighter_2_panel = new UISprite("teamview_spritesheet", m_RD);
+		fighter_2_panel->setCanvasPosition(Vector2(0.3, 0.7));
+		fighter_2_panel->setSprite("fighter_spritesheet", "fighter_2");
+		scene.instanciateUIObject(fighter_2_panel);
+		teamview.push_back(fighter_2_panel);
 
-		scene.startGameManager();
+		UISprite* fighter_3_panel = new UISprite("teamview_spritesheet", m_RD);
+		fighter_3_panel->setCanvasPosition(Vector2(0.5, 0.7));
+		fighter_3_panel->setSprite("fighter_spritesheet", "fighter_3");
+		scene.instanciateUIObject(fighter_3_panel);
+		teamview.push_back(fighter_3_panel);
+
+		UISprite* fighter_4_panel = new UISprite("teamview_spritesheet", m_RD);
+		fighter_4_panel->setCanvasPosition(Vector2(0.7, 0.7));
+		fighter_4_panel->setSprite("fighter_spritesheet", "fighter_4");
+		scene.instanciateUIObject(fighter_4_panel);
+		teamview.push_back(fighter_4_panel);
+
+		UISprite* fighter_1 = new UISprite("Fighter_1_profile", m_RD);
+		fighter_1->setCanvasPosition(Vector2(0.3, 0.2));
+		fighter_1->setTag(0);
+		scene.instanciateUIObject(fighter_1);
+		profile_pics.push_back(fighter_1);
+
+		UISprite* fighter_2 = new UISprite("Fighter_2_profile", m_RD);
+		fighter_2->setCanvasPosition(Vector2(0.4, 0.2));
+		fighter_2->setTag(1);
+		scene.instanciateUIObject(fighter_2);
+		profile_pics.push_back(fighter_2);
+
+		UISprite* fighter_3 = new UISprite("Fighter_3_profile", m_RD);
+		fighter_3->setCanvasPosition(Vector2(0.5, 0.2));
+		fighter_3->setTag(2);
+		scene.instanciateUIObject(fighter_3);
+		profile_pics.push_back(fighter_3);
+
+		UISprite* fighter_4 = new UISprite("Fighter_4_profile", m_RD);
+		fighter_4->setCanvasPosition(Vector2(0.6, 0.2));
+		fighter_4->setTag(3);
+		scene.instanciateUIObject(fighter_4);
+		profile_pics.push_back(fighter_4);
+
+		Cursor* player1_cursor = new Cursor("player1_cursor", m_RD , 0);
+		scene.instanciateUIObject(player1_cursor);
+		cursors.push_back(player1_cursor);
+
+		Cursor* player2_cursor = new Cursor("player2_cursor", m_RD, 1);
+		scene.instanciateUIObject(player2_cursor);
+		cursors.push_back(player2_cursor);
+
+		Cursor* player3_cursor = new Cursor("player3_cursor", m_RD, 2);
+		scene.instanciateUIObject(player3_cursor);
+		cursors.push_back(player3_cursor);
+
+		Cursor* player4_cursor = new Cursor("player4_cursor", m_RD, 3);
+		scene.instanciateUIObject(player4_cursor);
+		cursors.push_back(player4_cursor);
+	}
+
+	if (input_manager.getBindDown("Hello"))
+	{
+		
+		Scene*  newScene = new Scene;
+		newScene->isLevel(true);
+		scene.loadScene(newScene);
+
+		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
+		scene.setMainCamera(camera);
+		scene.instanciate3DObject(camera);
+		
+		team_colours.clear();
+		player_labels.clear();
+
+		//ImageGO2D* background = new ImageGO2D(m_RD, "sky");
+		//scene.instanciate2DObject(background);
 
 		UILabel* test_label = new UILabel;
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
-		/*Item* test_item = new Item(m_RD, "bubble_item", ItemType::HAMMER);
+
+		hud = new HUD();
+		scene.instanciateUIObject(hud);
+
+
+		/*Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);*/
 
-		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
-		//scene.instanciate2DObject(test_spawn);
+		SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
+		scene.instanciate2DObject(test_spawn);
 
-		//SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
-		//scene.instanciate2DObject(test_spawn2);
+		SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
+		scene.instanciate2DObject(test_spawn2);
 
 		//UISprite* test_sprite = new UISprite("twist", m_RD);
 	//	scene.instanciateUIObject(test_sprite);
+		//Adds all teams coloured panels to UISprite Vector
+		UISprite* red_team = new UISprite("RedTeamUIPanel", m_RD);
+		red_team->setCanvasPosition(Vector2(0.1, 0.7));
+		team_colours.push_back(red_team);
+
+		UISprite* green_team = new UISprite("GreenTeamUIPanel", m_RD);
+		green_team->setCanvasPosition(Vector2(0.3, 0.7));
+		team_colours.push_back(green_team);
+
+		UISprite* blue_team = new UISprite("BlueTeamUIPanel", m_RD);
+		blue_team->setCanvasPosition(Vector2(0.5, 0.7));
+		team_colours.push_back(blue_team);
+
+		UISprite* yellow_team = new UISprite("YellowTeamUIPanel", m_RD);
+		yellow_team->setCanvasPosition(Vector2(0.7, 0.7));
+		team_colours.push_back(yellow_team);
+
+
+
+		/**All the labels are instanciated but 
+		*currently all labels are set as there is no
+		*way to use player numbers to change player ui 
+		*at the moment
+		*/
+
+		UILabel* player1_damage = new UILabel;
+		createLabel(player1_damage, Vector2(0.1, 0.75));
+
+		UILabel* player2_damage = new UILabel;
+		createLabel(player2_damage, Vector2(0.3, 0.75));
+
+		UILabel* player3_damage = new UILabel;
+		createLabel(player3_damage, Vector2(0.5, 0.75));
+
+		UILabel* player4_damage = new UILabel;
+		createLabel(player4_damage, Vector2(0.7, 0.75));
+
+		/**Only instanciates team colours based on number of players*/
+		for (int i = 0; i < 4; i++)
+		{
+			scene.instanciate2DObject(team_colours[i]);
+			scene.instanciate2DObject(player_labels[i]);
+		}
+
+		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(1000, 113));
+		testPlatform->SetPos(Vector2(500, 600));
+		scene.instanciate2DObject(testPlatform);
+
+		scene.startGameManager();
+
+	}
+	
+		if (m_GSD->input->getBindDown("Quit"))
+	{
+		scene.loadScene("clear");
+		player_labels.clear();
 	}
 
+	teamselect->update(cursors,teamview,teamview_images);
+
+	
 	scene.Update(m_GSD);
+	hud->updateLabels(player_labels);
+	//test_damage--;
 }
+
 
 //GEP:: Draws the scene.
 void Game::Render()
@@ -323,6 +469,12 @@ void Game::GetDefaultSize(int& width, int& height) const
 	// TODO: Change to desired default window size (note minimum size is 320x200).
 	width = 1920;
 	height = 1080;
+}
+
+void Game::createLabel(UILabel * label, Vector2 canvas_pos)
+{
+	label->setCanvasPosition(canvas_pos);
+	player_labels.push_back(label);
 }
 
 // These are the resources that depend on the device.
