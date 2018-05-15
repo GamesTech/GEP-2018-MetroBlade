@@ -34,5 +34,11 @@
 	{
 		"type": "SpawnPoint",
 		"position": [800, 100]
+	},
+
+	"SceneCamera":
+	{
+		"type": "Camera"
 	}
+	
 }

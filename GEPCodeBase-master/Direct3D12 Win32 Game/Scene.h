@@ -38,6 +38,8 @@ public:
 	GameObject2D*  get2DObjectInScene(int index);
 	int			   getNumberOf2DObjectsInScene() const;
 
+	Camera*		  getSceneCamera();
+
 	bool isLevel() const;
 	void isLevel(bool level);
 

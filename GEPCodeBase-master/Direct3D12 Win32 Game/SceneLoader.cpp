@@ -46,6 +46,10 @@ void SceneLoader::constructScene(Scene* scene)
 		{
 			scene->isLevel(entity.value().as_bool());
 		}
+		else if (entity.value()["type"] == "Camera") 
+		{
+			scene->add3DGameObjectToScene(Entities::constructCamera(render_data, entity));
+		}
 		else 
 		{
 			auto& loader = object_constructors.find(entity.value()["type"].as_string());

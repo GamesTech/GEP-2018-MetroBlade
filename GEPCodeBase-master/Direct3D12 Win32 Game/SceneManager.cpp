@@ -27,7 +27,7 @@
 SceneManager::SceneManager(RenderData* render_structure)
 	:render_data(render_structure)
 {
-	Init(render_data);
+	Init(render_data, Vector2(1020,1080));
 }
 
 void SceneManager::assignRenderData(RenderData* render_structure)
@@ -35,10 +35,11 @@ void SceneManager::assignRenderData(RenderData* render_structure)
 	render_data = render_structure;
 }
 
-void SceneManager::Init(RenderData* _RD)
+void SceneManager::Init(RenderData* _RD, Vector2 viewport)
 {
 	// Create a basic scene and set up all of the scene manager systems.
 	// In future the scene manager should just intialise the first scene we want to enter
+	this->viewport = viewport;
 	render_data = _RD;
 	game_manager.init();
 	scene_loader.init(render_data);
@@ -47,10 +48,10 @@ void SceneManager::Init(RenderData* _RD)
 
 	loadScene(scene_loader.createScene("menu.mbmap"));
 	
-	Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
-	setMainCamera(camera);
-	camera->set2DViewport(Vector2(800, 600));
-	current_scene->add3DGameObjectToScene(camera);
+	//Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+	//setMainCamera(camera);
+	//camera->set2DViewport(Vector2(800, 600));
+	//current_scene->add3DGameObjectToScene(camera);
 }
 
 void SceneManager::Update(GameStateData* game_state)
@@ -98,12 +99,12 @@ void SceneManager::loadScene(string scene_name)
 	// This way we can create loads of diffrent scenes at the same time.
 	if (scene_name == "clear") 
 	{
-		loadScene(new Scene);
+		Scene* new_scene = new Scene;
 
 		Camera* camera = new Camera(static_cast<float>(1920), static_cast<float>(1080), 1.0f, 1000.0f);
-		setMainCamera(camera);
-		camera->set2DViewport(Vector2(1920, 1080));
-		current_scene->add3DGameObjectToScene(camera);
+		new_scene->add3DGameObjectToScene(camera);
+
+		loadScene(new_scene);
 
 		UILabel* label = new UILabel;
 		label->setCanvasPosition(Vector2(0.4, 0.4));
@@ -133,6 +134,9 @@ void SceneManager::loadScene(Scene* scene_name)
 	}
 
 	current_scene.reset(scene_name);
+
+	setMainCamera(current_scene->getSceneCamera());
+	render_data->m_cam->set2DViewport(viewport);
 
 	// TODO - Add object setup here so we can have a better map loader.
 	for (int i = 0; i < current_scene->getNumberOf2DObjectsInScene(); i++)
@@ -244,7 +248,6 @@ void SceneManager::setupScene2DObjects(GameObject2D* object)
 	game_manager.setupLobbySystemComponent(object);
     game_manager.registerPlayerInstance(object);
 	game_manager.registerSpawnPoint(object);
-
 
 	collision_manager.registerObjectColliders(object->getComponentManager()->getComponentsByType<Collider>());
 	scene_audio.registerSoundComponents(object->getComponentManager()->getComponentsByType<SoundComponent>());
