@@ -23,8 +23,13 @@ using Microsoft::WRL::ComPtr;
 
 Game::Game() :
 	m_window(nullptr),
+#ifdef ARCADE
+	m_outputWidth(800),
+	m_outputHeight(600),
+#else 
 	m_outputWidth(1920),
 	m_outputHeight(1080),
+#endif
 	m_featureLevel(D3D_FEATURE_LEVEL_11_0),
 	m_backBufferIndex(0),
 	m_fenceValues{}
@@ -118,7 +123,7 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect = std::make_unique<BasicEffect>(m_d3dDevice.Get(), EffectFlags::Lighting, pd3);
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
-	scene.Init(m_RD);
+	scene.Init(m_RD, Vector2(m_outputWidth, m_outputHeight));
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:
@@ -154,12 +159,11 @@ void Game::Update(DX::StepTimer const& timer)
 	{
 		Scene*  newScene = new Scene;
 		newScene->isLevel(true);
-		scene.loadScene(newScene);
-
 		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
-		scene.setMainCamera(camera);
-		scene.instanciate3DObject(camera);
+		newScene->add3DGameObjectToScene(camera);
+
+		scene.loadScene(newScene);
 
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
