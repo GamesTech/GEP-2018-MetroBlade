@@ -182,25 +182,25 @@ void Game::Update(DX::StepTimer const& timer)
 
 		UISprite* fighter_1_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_1_panel->setCanvasPosition(Vector2(0.1, 0.7));
-		fighter_1_panel->setSprite("fighter_spritesheet", "fighter_1");
+		fighter_1_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_1_panel);
 		teamview.push_back(fighter_1_panel);
 
 		UISprite* fighter_2_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_2_panel->setCanvasPosition(Vector2(0.3, 0.7));
-		fighter_2_panel->setSprite("fighter_spritesheet", "fighter_2");
+		fighter_2_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_2_panel);
 		teamview.push_back(fighter_2_panel);
 
 		UISprite* fighter_3_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_3_panel->setCanvasPosition(Vector2(0.5, 0.7));
-		fighter_3_panel->setSprite("fighter_spritesheet", "fighter_3");
+		fighter_3_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_3_panel);
 		teamview.push_back(fighter_3_panel);
 
 		UISprite* fighter_4_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_4_panel->setCanvasPosition(Vector2(0.7, 0.7));
-		fighter_4_panel->setSprite("fighter_spritesheet", "fighter_4");
+		fighter_4_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_4_panel);
 		teamview.push_back(fighter_4_panel);
 
