@@ -25,6 +25,7 @@
 // Object Entity Headers - (Additional Constructors should be added here).
 #include "Obstacle2D.h"
 #include "SpawnPoint.h"
+#include "ImageGO2D.h"
 
 
 // TODO - Add information into functions to properly setup the objects according to specified parameters.
@@ -45,4 +46,8 @@ namespace Entities
 		return new SpawnPoint(Vector2(key.value()["position"][0].as_double(), key.value()["position"][1].as_double()));
 	}
 
+	static GameObject2D* constructBackground(RenderData* _RD, jsoncons::key_value_pair<std::string, jsoncons::json> key) 
+	{
+		return new ImageGO2D(_RD, key.value()["filename"].as_string());
+	}
 }

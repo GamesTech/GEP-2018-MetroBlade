@@ -115,6 +115,7 @@ void GameManager::setupGame()
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLaunchMultiplier(game_mode.game_knockback_multiplier);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setLives(game_mode.number_of_lives);
 		player->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+		player->SetPos(getRespawnPosition());
 	}
 
 	game_mode_state = game_mode;
@@ -160,7 +161,7 @@ Vector2 GameManager::getRespawnPosition()
 	}
 	else 
 	{
-		return Vector2(10, 10);
+		return Vector2(600, 300);
 	}
 }
 

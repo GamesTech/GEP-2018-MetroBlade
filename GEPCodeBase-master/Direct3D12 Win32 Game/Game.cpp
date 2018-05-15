@@ -257,29 +257,27 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.setMainCamera(camera);
 		scene.instanciate3DObject(camera);
 		
-				team_colours.clear();
+		team_colours.clear();
 		player_labels.clear();
-		scene.startGameManager();
 
-		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
-		testPlay->SetDrive(1000.0f);
-		testPlay->SetDrag(0.5f);
-		testPlay->SetPos(Vector2(1500, 200));
-		scene.instanciate2DObject(testPlay);
-
-		hud = new HUD();
-		scene.instanciate2DObject(hud);
+		//ImageGO2D* background = new ImageGO2D(m_RD, "sky");
+		//scene.instanciate2DObject(background);
 
 		UILabel* test_label = new UILabel;
 		test_label->setText("Kill your opponents.");
 		scene.instanciateUIObject(test_label);
 
+
+		hud = new HUD();
+		scene.instanciateUIObject(hud);
+
+
 		/*Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);*/
 
-		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
-		//scene.instanciate2DObject(test_spawn);
+		SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
+		scene.instanciate2DObject(test_spawn);
 
 		SpawnPoint* test_spawn2 = new SpawnPoint(Vector2(600, 100));
 		scene.instanciate2DObject(test_spawn2);
@@ -312,16 +310,16 @@ void Game::Update(DX::StepTimer const& timer)
 		*/
 
 		UILabel* player1_damage = new UILabel;
-		createLabel(player1_damage, Vector2(0.125, 0.25));
+		createLabel(player1_damage, Vector2(0.1, 0.75));
 
 		UILabel* player2_damage = new UILabel;
-		createLabel(player2_damage, Vector2(0.325, 0.25));
+		createLabel(player2_damage, Vector2(0.3, 0.75));
 
 		UILabel* player3_damage = new UILabel;
-		createLabel(player3_damage, Vector2(0.525, 0.25));
+		createLabel(player3_damage, Vector2(0.5, 0.75));
 
 		UILabel* player4_damage = new UILabel;
-		createLabel(player4_damage, Vector2(0.725, 0.25));
+		createLabel(player4_damage, Vector2(0.7, 0.75));
 
 		/**Only instanciates team colours based on number of players*/
 		for (int i = 0; i < 4; i++)
@@ -333,6 +331,8 @@ void Game::Update(DX::StepTimer const& timer)
 		Obstacle2D* testPlatform = new Obstacle2D(m_RD, "Platform_Sprite3", Vector2(1000, 113));
 		testPlatform->SetPos(Vector2(500, 600));
 		scene.instanciate2DObject(testPlatform);
+
+		scene.startGameManager();
 
 	}
 	
