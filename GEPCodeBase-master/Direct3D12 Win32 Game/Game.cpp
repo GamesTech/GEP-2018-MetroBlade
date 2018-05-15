@@ -156,11 +156,6 @@ void Game::Update(DX::StepTimer const& timer)
 		newScene->isLevel(true);
 		scene.loadScene(newScene);
 
-		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
-		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
-		scene.setMainCamera(camera);
-		scene.instanciate3DObject(camera);
-
 		Player2D* testPlay = new Player2D(m_RD, "Fighter_1", 0);
 		testPlay->SetDrive(1000.0f);
 		testPlay->SetDrag(0.5f);
@@ -192,6 +187,11 @@ void Game::Update(DX::StepTimer const& timer)
 		Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
 		test_item->SetPos(Vector2(400, 550));
 		scene.instanciate2DObject(test_item);
+
+		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
+		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
+		scene.setMainCamera(camera);
+		scene.instanciate3DObject(camera);
 
 		//SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
 		//scene.instanciate2DObject(test_spawn);

@@ -118,3 +118,20 @@ int Scene::getNumberOf2DObjectsInScene() const
 	return m_2DObjects.size();
 }
 
+Camera* Scene::getSceneCamera()
+{
+	Camera* cam = nullptr;
+
+	for (auto* objects : m_3DObjects) 
+	{
+		cam = dynamic_cast<Camera*>(objects);
+
+		if (cam) 
+		{
+			break;
+		}
+	}
+
+	return cam;
+}
+

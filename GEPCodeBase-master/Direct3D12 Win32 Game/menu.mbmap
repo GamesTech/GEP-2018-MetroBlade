@@ -1,5 +1,6 @@
 {	
 	"level": false, 
+	
 	"ObsticleTest":
 	{
 		"type": "Obstacle2D",
@@ -10,6 +11,11 @@
 	{
 		"type": "SpawnPoint",
 		"position": [100, 100]
+	},
+	
+	"SceneCamera":
+	{
+		"type": "Camera"
 	}
 
 }
