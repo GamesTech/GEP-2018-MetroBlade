@@ -54,6 +54,7 @@ public:
 	void setupGame();
 	void startGame();
 	void resetManager();
+	void clearGameLobby();
 
 	void setUILabel(UILabel* new_label);
 

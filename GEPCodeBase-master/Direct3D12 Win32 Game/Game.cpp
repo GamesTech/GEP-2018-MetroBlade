@@ -159,10 +159,14 @@ void Game::Update(DX::StepTimer const& timer)
 
 	if (input_manager.getKeyDown(DirectX::Keyboard::Enter))
 	{
+		player_labels.clear();
+		scene.loadScene("clear");
+
 		cursors.clear();
 		teamview.clear();
 		teamview_images.clear();
 		profile_pics.clear();
+
 
 
 		Scene*  newScene = new Scene;

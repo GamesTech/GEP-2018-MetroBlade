@@ -133,6 +133,11 @@ void GameManager::resetManager()
 	scene_spawns.clear();
 }
 
+void GameManager::clearGameLobby()
+{
+	lobby.clear();
+}
+
 void GameManager::setUILabel(UILabel * new_label)
 {
 	timer_label = new_label;

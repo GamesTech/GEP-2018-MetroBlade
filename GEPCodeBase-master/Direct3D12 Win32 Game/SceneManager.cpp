@@ -109,6 +109,8 @@ void SceneManager::loadScene(string scene_name)
 		label->setCanvasPosition(Vector2(0.4, 0.4));
 		label->setText("Super Indie Smash. \n Press P to start.");
 		game_ui.addUIObject(label);
+		 
+		game_manager.clearGameLobby();
 	}
 	else 
 	{
