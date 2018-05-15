@@ -12,6 +12,8 @@
 #include "StepTimer.h"
 #include "Audio.h"
 
+#include "UILabel.h"
+
 #include "SceneManager.h"
 #include "CollisionManager.h"
 #include "Physics2D.h"
@@ -19,7 +21,6 @@
 #include "Item.h"
 #include "MetroBrawlInputManager.h"
 #include "TeamSelect.h"
-
 using std::vector;
 
 class TeamSelect;
@@ -27,6 +28,8 @@ class Cursor;
 class UISprite;
 struct RenderData;
 struct GameStateData;
+class UISprite;
+class HUD;
 
 // A basic game implementation that creates a D3D12 device and
 // provides a game loop.
@@ -51,6 +54,9 @@ public:
 
     // Properties
     void GetDefaultSize( int& width, int& height ) const;
+
+
+	void createLabel(UILabel* label, Vector2 canvas_pos);
 
 private:
 
@@ -120,4 +126,7 @@ private:
 	std::vector<std::string> teamview_images;
 
 	TeamSelect* teamselect = nullptr;
+	std::vector<UISprite*> team_colours;
+	std::vector<UILabel*> player_labels;
+	HUD* hud = nullptr;
 };

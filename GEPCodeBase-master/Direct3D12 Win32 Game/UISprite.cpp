@@ -3,6 +3,7 @@
 #include <functional>
 #include "RenderData.h"
 #include "UISprite.h"
+#include "LobbySystem.h"
 
 UISprite::UISprite(std::string filename, RenderData* _RD)
 {

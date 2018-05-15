@@ -345,6 +345,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GPUCommand.h" />
     <ClInclude Include="InputBind.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="JSONFileReader.h" />
     <ClInclude Include="MetroBrawlCollisionData.h" />
@@ -403,6 +404,7 @@
     <ClCompile Include="GameComponent.cpp" />
     <ClCompile Include="GameComponentManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JSONFileReader.cpp" />
     <ClCompile Include="MetroBrawlCollisionManager.cpp" />

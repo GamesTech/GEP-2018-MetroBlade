@@ -25,6 +25,14 @@
     <ImageContentTask Include="player4_cursor.png" />
     <ImageContentTask Include="player2_cursor.png" />
     <ImageContentTask Include="player3_cursor.png" />
+    <ImageContentTask Include="RedTeamUIPanel.png" />
+    <ImageContentTask Include="GreenTeamUIPanel.png" />
+    <ImageContentTask Include="BlueTeamUIPanel.png" />
+    <ImageContentTask Include="YellowTeamUIPanel.png" />
+    <ImageContentTask Include="sky.png" />
+    <ImageContentTask Include="Platform_Sprite3.png" />
+    <ImageContentTask Include="Platform_Sprite2.png" />
+    <ImageContentTask Include="night_sky.png" />
     <ImageContentTask Include="Health_item.png" />
     <ImageContentTask Include="projectile_item.png" />
   </ItemGroup>

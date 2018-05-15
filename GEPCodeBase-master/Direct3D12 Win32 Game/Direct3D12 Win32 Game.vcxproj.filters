@@ -209,6 +209,9 @@
     <Filter Include="Core\GameObjects\SpawnPoint">
       <UniqueIdentifier>{306a117e-0198-40f8-ab42-3474337554ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\HUD">
+      <UniqueIdentifier>{a18570a6-ce7c-4f1a-8dd0-ad26a5409077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h">
@@ -401,6 +404,12 @@
     <ClInclude Include="SpawnPoint.h">
       <Filter>Core\GameObjects\SpawnPoint</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Obstacle2D.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="HUD.h">
+      <Filter>Core\UI\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PBGO3D.cpp">
@@ -545,6 +554,11 @@
     </ClCompile>
     <ClCompile Include="SpawnPoint.cpp">
       <Filter>Core\GameObjects\SpawnPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="HUD.cpp">
+      <Filter>Core\UI\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

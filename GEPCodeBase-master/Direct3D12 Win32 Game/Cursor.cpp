@@ -23,7 +23,7 @@ Cursor::Cursor(std::string filename, RenderData * _RD, int controller_id)
 
 Cursor::~Cursor()
 {
-	if (player_data.player_name != "player_null") 
+	if (player_data.player_name != "player_null")
 	{
 		object_components.getComponentByType<LobbySystemComponent>()->addPlayer(player_data);
 	}
@@ -86,9 +86,16 @@ void Cursor::onCollision(MetroBrawlCollisionData col_data)
 
 void Cursor::setPlayerData(PlayerData player_info)
 {
-	player_info.player_name = "P" + std::to_string(controller_id + 1);
-	player_info.input_device_id = controller_id;
-	player_data = player_info; 
+	if (!object_components.getComponentByType<LobbySystemComponent>()->isPlayerRegistered(controller_id)) 
+	{
+		player_info.player_name = "P" + std::to_string(controller_id + 1);
+		player_info.input_device_id = controller_id;
+		player_data = player_info;
+	}
+	else 
+	{
+		object_components.getComponentByType<LobbySystemComponent>()->getPlayerByIndex(controller_id)->character_name = player_info.character_name;
+	}
 }
 
 

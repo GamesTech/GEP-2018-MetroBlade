@@ -61,6 +61,7 @@ void GameManager::setupLobbySystemComponent(GameObject2D* object)
 
 	if (component) 
 	{
+		component->addLobbyReference(&lobby);
 		component->addLobbyRefrence(this);
 	}
 }
@@ -78,6 +79,18 @@ std::vector<PlayerData>* GameManager::getPlayerLobbyData()
 std::vector<SpawnPoint*>* GameManager::getSpawnpointList()
 {
 	return &scene_spawns;
+}
+
+PlayerStatus* GameManager::getPlayerInstanceStatus(int index)
+{
+	PlayerStatus*  status = nullptr;
+	
+	if (index < player_instances.size()) 
+	{
+		status = player_instances[index]->getComponentManager()->getComponentByType<PlayerStatus>();
+	}
+
+	return status;
 }
 
 void GameManager::addPlayer(PlayerData new_player_data) // TODO - Consider Removing.

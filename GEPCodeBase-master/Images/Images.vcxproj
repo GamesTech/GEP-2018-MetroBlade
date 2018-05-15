@@ -254,6 +254,20 @@
     <ImageContentTask Include="Platform_Sprite.png" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="RedTeamUIPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="BlueTeamUIPanel.png" />
+    <ImageContentTask Include="GreenTeamUIPanel.png" />
+    <ImageContentTask Include="YellowTeamUIPanel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="night_sky.png" />
+    <ImageContentTask Include="Platform_Sprite2.png" />
+    <ImageContentTask Include="Platform_Sprite3.png" />
+    <ImageContentTask Include="sky.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ImageContentTask Include="Health_item.png" />
   </ItemGroup>
   <ItemGroup>
