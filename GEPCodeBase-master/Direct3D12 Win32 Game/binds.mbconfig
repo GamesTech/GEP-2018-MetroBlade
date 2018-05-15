@@ -7,9 +7,12 @@
 	"Use": [69, 262],
 	"MoveLeft": [265],
 	"MoveRight": [266],
+	"MoveUp": [263],
+	"MoveDown": [264],
         "ThumbstickLeftX" : [269],
 	"ThumbstickLeftY" : [270],
-	"Hello": [265],
-	"Quit": [27, 260]
+	"Hello": [268],
+	"Quit": [27, 260],
+	"Play": [273]
 
 }

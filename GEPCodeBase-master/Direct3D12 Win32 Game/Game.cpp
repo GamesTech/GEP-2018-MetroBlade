@@ -25,8 +25,13 @@ using Microsoft::WRL::ComPtr;
 
 Game::Game() :
 	m_window(nullptr),
+#ifdef ARCADE
+	m_outputWidth(800),
+	m_outputHeight(600),
+#else 
 	m_outputWidth(1920),
 	m_outputHeight(1080),
+#endif
 	m_featureLevel(D3D_FEATURE_LEVEL_11_0),
 	m_backBufferIndex(0),
 	m_fenceValues{}
@@ -125,7 +130,7 @@ void Game::Initialize(HWND window, int width, int height)
 	m_RD->m_GPeffect = std::make_unique<BasicEffect>(m_d3dDevice.Get(), EffectFlags::Lighting, pd3);
 	m_RD->m_GPeffect->EnableDefaultLighting();
 
-	scene.Init(m_RD);
+	scene.Init(m_RD, Vector2(m_outputWidth, m_outputHeight));
 
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -158,51 +163,53 @@ void Game::Update(DX::StepTimer const& timer)
 	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (input_manager.getKeyDown(DirectX::Keyboard::Enter))
+	if (input_manager.getBindDown("Hello"))
 	{
+		player_labels.clear();
+		scene.loadScene("clear");
+
 		cursors.clear();
 		teamview.clear();
 		teamview_images.clear();
 		profile_pics.clear();
 
 
+		
 		Scene*  newScene = new Scene;
 		newScene->isLevel(true);
-		scene.loadScene(newScene);
-
-		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
+		Camera* camera = new Camera(static_cast<float>(m_outputWidth), static_cast<float>(m_outputHeight), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
-		scene.setMainCamera(camera);
-		scene.instanciate3DObject(camera);
+		newScene->add3DGameObjectToScene(camera);
 
 		teamview_images.push_back("fighter_1");
 		teamview_images.push_back("fighter_2");
 		teamview_images.push_back("fighter_3");
 		teamview_images.push_back("fighter_4");
+		scene.loadScene(newScene);
 
 		//= new UISprite("Fighter_1_teamview", m_RD);
 
 		UISprite* fighter_1_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_1_panel->setCanvasPosition(Vector2(0.1, 0.7));
-		fighter_1_panel->setSprite("fighter_spritesheet", "fighter_1");
+		fighter_1_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_1_panel);
 		teamview.push_back(fighter_1_panel);
 
 		UISprite* fighter_2_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_2_panel->setCanvasPosition(Vector2(0.3, 0.7));
-		fighter_2_panel->setSprite("fighter_spritesheet", "fighter_2");
+		fighter_2_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_2_panel);
 		teamview.push_back(fighter_2_panel);
 
 		UISprite* fighter_3_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_3_panel->setCanvasPosition(Vector2(0.5, 0.7));
-		fighter_3_panel->setSprite("fighter_spritesheet", "fighter_3");
+		fighter_3_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_3_panel);
 		teamview.push_back(fighter_3_panel);
 
 		UISprite* fighter_4_panel = new UISprite("teamview_spritesheet", m_RD);
 		fighter_4_panel->setCanvasPosition(Vector2(0.7, 0.7));
-		fighter_4_panel->setSprite("fighter_spritesheet", "fighter_4");
+		fighter_4_panel->setSprite("fighter_spritesheet", "blank");
 		scene.instanciateUIObject(fighter_4_panel);
 		teamview.push_back(fighter_4_panel);
 
@@ -246,8 +253,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciateUIObject(player4_cursor);
 		cursors.push_back(player4_cursor);
 	}
-
-	if (input_manager.getBindDown("Hello"))
+	else if (input_manager.getBindDown("Play"))
 	{
 		
 		Scene*  newScene = new Scene;
@@ -256,9 +262,10 @@ void Game::Update(DX::StepTimer const& timer)
 
 		Camera* camera = new Camera(static_cast<float>(800), static_cast<float>(600), 1.0f, 1000.0f);
 		camera->set2DViewport(Vector2(m_outputWidth, m_outputHeight));
-		scene.setMainCamera(camera);
-		scene.instanciate3DObject(camera);
-		
+		newScene->add3DGameObjectToScene(camera);
+	//	scene.loadScene(newScene);
+
+
 		team_colours.clear();
 		player_labels.clear();
 
@@ -274,9 +281,9 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciateUIObject(hud);
 
 
-		/*Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
-		test_item->SetPos(Vector2(400, 550));
-		scene.instanciate2DObject(test_item);*/
+		//Item* test_item = new Item(m_RD, "Health_item", ItemType::PROJECTILE);
+		//test_item->SetPos(Vector2(400, 550));
+		//scene.instanciate2DObject(test_item);
 
 		SpawnPoint* test_spawn = new SpawnPoint(Vector2(200, 100));
 		scene.instanciate2DObject(test_spawn);
@@ -338,7 +345,7 @@ void Game::Update(DX::StepTimer const& timer)
 
 	}
 	
-		if (m_GSD->input->getBindDown("Quit"))
+	if (m_GSD->input->getBindDown("Quit"))
 	{
 		scene.loadScene("clear");
 		player_labels.clear();
@@ -467,8 +474,8 @@ void Game::OnWindowSizeChanged(int width, int height)
 void Game::GetDefaultSize(int& width, int& height) const
 {
 	// TODO: Change to desired default window size (note minimum size is 320x200).
-	width = 1920;
-	height = 1080;
+	width = m_outputWidth;
+	height = m_outputHeight;
 }
 
 void Game::createLabel(UILabel * label, Vector2 canvas_pos)

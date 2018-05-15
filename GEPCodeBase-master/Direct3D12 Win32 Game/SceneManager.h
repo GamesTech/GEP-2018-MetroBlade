@@ -50,7 +50,7 @@ public:
 
 	void assignRenderData(RenderData* render_structure);
 
-	void Init(RenderData* _RD);
+	void Init(RenderData* _RD, Vector2 viewport);
 	void Update(GameStateData* game_state);
 	void Render(ID3D12GraphicsCommandList* command_list);
 	bool shouldQuit() const;
@@ -78,6 +78,9 @@ private:
 	void resetRenderState();
 
 	void setupScene2DObjects(GameObject2D* object);
+
+
+	Vector2							viewport;
 
 	std::unique_ptr<Scene>			current_scene;
 	Camera*							main_camera = nullptr;

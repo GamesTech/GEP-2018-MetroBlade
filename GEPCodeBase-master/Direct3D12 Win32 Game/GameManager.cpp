@@ -133,6 +133,11 @@ void GameManager::resetManager()
 	scene_spawns.clear();
 }
 
+void GameManager::clearGameLobby()
+{
+	lobby.clear();
+}
+
 void GameManager::setUILabel(UILabel * new_label)
 {
 	timer_label = new_label;
@@ -197,6 +202,8 @@ void GameManager::checkPlayerRespawnStatus(float delta_time)
 		{
 			players_to_respawn[i]->setRespawnTime(0.0f);
 			players_to_respawn[i]->isDead(false);
+			players_to_respawn[i]->getComponentManager()->getComponentByType<PlayerStatus>()->setDamagePercentage(0);
+			players_to_respawn[i]->SetVel(Vector2(0, 0));
 			players_to_respawn[i]->SetPos(getRespawnPosition()); // TODO - Add code to respawn the player.
 			players_to_respawn.erase(players_to_respawn.begin() + i);
 			OutputDebugString(L"Ive Respawned Mate");
