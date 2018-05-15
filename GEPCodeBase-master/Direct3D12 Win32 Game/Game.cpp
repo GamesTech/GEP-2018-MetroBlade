@@ -157,7 +157,7 @@ void Game::Update(DX::StepTimer const& timer)
 	input_manager.tick();
 	m_GSD->m_dt = float(timer.GetElapsedSeconds());
 
-	if (input_manager.getBindDown("Play"))
+	if (input_manager.getBindDown("Hello"))
 	{
 		player_labels.clear();
 		scene.loadScene("clear");
@@ -168,7 +168,7 @@ void Game::Update(DX::StepTimer const& timer)
 		profile_pics.clear();
 
 
-
+		
 		Scene*  newScene = new Scene;
 		scene.loadScene(newScene);
 
@@ -248,8 +248,7 @@ void Game::Update(DX::StepTimer const& timer)
 		scene.instanciateUIObject(player4_cursor);
 		cursors.push_back(player4_cursor);
 	}
-
-	if (input_manager.getBindDown("Hello"))
+	else if (input_manager.getBindDown("Play"))
 	{
 		
 		Scene*  newScene = new Scene;

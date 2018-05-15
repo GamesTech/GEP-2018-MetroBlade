@@ -25,6 +25,7 @@ void ArcadeControllerModule::initModule(std::string bind_file)
 	key_map.emplace(DirectX::Keyboard::Keys::Right, MetroBrawlInputActions::KEY_CONTROLLER_DPAD_RIGHT);
 	key_map.emplace(DirectX::Keyboard::Keys::D1, MetroBrawlInputActions::KEY_CONTROLLER_START);
 	key_map.emplace(DirectX::Keyboard::Keys::Space, MetroBrawlInputActions::KEY_CONTROLLER_BACK);
+	key_map.emplace(DirectX::Keyboard::Keys::X, MetroBrawlInputActions::KEY_CONTROLLER_LEFT_SHOLDER);
 	controllers[0].loadMap(key_map);
 
 	key_map.clear();
@@ -39,6 +40,7 @@ void ArcadeControllerModule::initModule(std::string bind_file)
 	key_map.emplace(DirectX::Keyboard::Keys::G, MetroBrawlInputActions::KEY_CONTROLLER_DPAD_RIGHT);
 	key_map.emplace(DirectX::Keyboard::Keys::D2, MetroBrawlInputActions::KEY_CONTROLLER_START);
 	key_map.emplace(DirectX::Keyboard::Keys::Q, MetroBrawlInputActions::KEY_CONTROLLER_BACK);
+	key_map.emplace(DirectX::Keyboard::Keys::K, MetroBrawlInputActions::KEY_CONTROLLER_LEFT_SHOLDER);
 	controllers[1].loadMap(key_map);
 
 }

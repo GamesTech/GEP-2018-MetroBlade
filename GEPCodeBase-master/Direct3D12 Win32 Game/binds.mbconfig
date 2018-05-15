@@ -11,8 +11,8 @@
 	"MoveDown": [264],
         "ThumbstickLeftX" : [269],
 	"ThumbstickLeftY" : [270],
-	"Hello": [265],
+	"Hello": [268],
 	"Quit": [27, 260],
-	"Play": [268]
+	"Play": [273]
 
 }
